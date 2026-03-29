@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "name": "Jessica Williams",
+    "email": "jessica@example.com",
+    "phone": "0123456789",
+    "message": "Hi team, I'd love to explore a partnership between our companies. We're a growing SaaS startup looking for a design agency.",
+    "createdAt": "2026-03-27T10:30:00Z",
+    "read": false
+  },
+  {
+    "id": "2",
+    "name": "Marcus Chen",
+    "email": "marcus@techcorp.io",
+    "phone": "0123456789",
+    "message": "We need a complete redesign of our corporate website. Budget is flexible. Can we schedule a call this week?",
+    "createdAt": "2026-03-26T14:15:00Z",
+    "read": false
+  },
+  {
+    "id": "3",
+    "name": "Sophia Turner",
+    "email": "sophia@startup.co",
+    "phone": "0123456789",
+    "message": "Looking for a team to build our MVP. React Native preferred. Timeline is 3 months.",
+    "createdAt": "2026-03-25T09:00:00Z",
+    "read": true
+  },
+  {
+    "id": "4",
+    "name": "David Park",
+    "email": "david@enterprise.com",
+    "phone": "0123456789",
+    "message": "Our company needs to migrate from on-premise to AWS. Need consultation and implementation support.",
+    "createdAt": "2026-03-24T16:45:00Z",
+    "read": true
+  },
+  {
+    "id": "5",
+    "name": "Emma Rodriguez",
+    "email": "emma@designstudio.io",
+    "phone": "0123456789",
+    "message": "I'm a freelance illustrator and would love to collaborate on some upcoming projects.",
+    "createdAt": "2026-03-23T11:20:00Z",
+    "read": false
+  }
+]

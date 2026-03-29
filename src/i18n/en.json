@@ -1,0 +1,215 @@
+{
+  "site_name": "Sri Sri Ri Doyamoyee Temple",
+
+  "nav_home": "Home",
+  "nav_history": "History",
+  "nav_events": "Puja",
+
+  "nav_media": "Media",
+  "nav_gallery": "Gallery",
+  "nav_video": "Video",
+
+  "nav_management": "Management",
+  "nav_purohit": "Purohit",
+  "nav_committee": "Committee",
+  "nav_members": "Members",
+  "nav_advisor": "Advisor",
+
+  "nav_posts": "Posts",
+  "nav_notice": "Notice",
+  "nav_contact": "Contact",
+  "nav_donation": "Donation",
+  
+  "nav_temple_title": "Temple",
+  
+  "auth_signin": "Signin",
+  "auth_signup": "Signup",
+  "auth_dashboard": "Dashboard",
+  "auth_profile": "Profile",
+  "auth_logout": "Logout",
+
+  "nav_bangla": "Bangla",
+  "nav_english": "English",
+
+
+
+  "hero_title": "Sri Sri Ri Doyamoyee Temple",
+  "hero_subtitle": "A historic and spiritual sacred place in Jamalpur",
+  "hero_cta_events": "Puja Schedule",
+  "hero_cta_history": "Temple History",
+
+  
+  "about_title": "About Temple",
+  "about_text": "Doyamoyee Temple, located at Zero Point in Jamalpur, is a historic Hindu temple established in 1698 (1104 Bengali Era) during the reign of Nawab Murshid Quli Khan. Founded by Jagirdar Sri Krishna Roy Chowdhury, the temple complex includes shrines dedicated to Shiva, Kali, Nat Mandir, and Manasa Devi. It is renowned for its centuries-old murals and traditional architectural heritage.",
+
+  "history_text": "For over 328 years, the temple has remained a center of daily worship and spiritual devotion. During the annual Ashtami Fair, devotees from across the country gather in large numbers. The Debottor Estate was established by Rani Shrimati Narayani Roy Chowdhury, and the temple’s structural development was later enhanced by Raja Jogendra Kishore Roy Chowdhury. The temple remains open daily from 6:00 AM to 10:00 PM.",
+  "establishment_title": "Establishment & Contribution",
+  "established": "Established: 1104 Bengali Era (1698 AD)",
+  "founder": "Founder: Jagirdar Sri Krishna Roy Chowdhury",
+  "estate_founder": "Debottor Estate Founder: Rani Shrimati Narayani Roy Chowdhury",
+  "development": "Infrastructure Development: Raja Jogendra Kishore Roy Chowdhury",
+
+
+  "latest_notices": "Latest Notices",
+  "upcoming_festivals": "Upcoming Festivals",
+  "blogs": "Blogs",
+  "read_more": "Read More",
+  "view_all": "View All",
+  
+  
+  
+  
+  "history_title": "Temple History",
+  "history_desc": "Information about the heritage, ancient architecture, and religious activities of Doyamoyee Temple.",
+  "history_shortdesc": "For centuries, the temple has enriched the community spiritually and socially.",
+
+  
+   "back_to_all_events": "Back to all events",
+  "events_title": "Puja and Religious Festivals of Doyamoyee Temple",
+  "events_desc": "Information about various pujas, religious ceremonies, and festivals held throughout the year at Sri Sri Doyamoyee Temple.",
+  "events_shortdesc": "Devotees can easily find upcoming puja dates, festival schedules, and detailed information here.",
+  
+  "gallery_title": "Gallery",
+  "gallery_desc": "A photo gallery showcasing the beauty of the temple and its centuries-old artworks.",
+  "gallery_shortdesc": "Explore moments from temple festivals, rituals, and historic memories through our photo collection.",
+  
+  "videos_title": "Videos of Sri Sri Doyamoyee Temple",
+  "videos_desc": "A collection of videos from pujas, festivals, cultural events, and special moments of the temple.",
+  "videos_shortdesc": "Devotees can easily watch videos of temple events and special occasions here.",
+  
+  
+  "purohit_title": "Priests",
+  "purohit_desc": "Experienced priests regularly perform pujas and religious rituals at our temple.",
+  "purohit_shortdesc": "They conduct daily worship, special festivals, and provide spiritual guidance to devotees.",
+  
+  "committee_title": "Executive Committee 1430–1431 Bangabda",
+  "committee_desc": "Sri Sri Doyamoyee Temple Management Committee",
+  "committee_shortdesc": "Members elected to manage and oversee temple activities.",
+  
+  "member_title": "Sri Sri Doyamoyee Temple Management Committee",
+  "member_desc": "List of Lifetime Members",
+  "member_shortdesc": "Total Members: {{count}}",
+  
+  "advisors_title": "Honorable Advisors of 1430–1431",
+  "advisors_desc": "Sri Sri Doyamoyee Temple Management Committee",
+  "advisors_shortdesc": "Jamalpur",
+  
+  
+  
+  
+
+  "back_to_all_notices": "Back to all notices",
+  "notice_title": "Notices of Sri Sri Doyamoyee Temple",
+  "notice_desc": "View all important announcements, puja schedules, and special notices of the temple here.",
+  "notice_shortdesc": "Stay updated with the latest temple announcements, schedules, and important updates.",
+  "important_notice": "Important Notice",
+  "no_notice": "No notices at the moment.",
+  
+
+
+  "back_to_all_posts": "Back to all posts",
+  "blogs_title": "Blogs and Articles of Sri Sri Doyamoyee Temple",
+  "blogs_desc": "All writings and publications related to the history, traditions, festivals, and recent activities of Sri Sri Doyamoyee Temple.",
+  "blogs_shortdesc": "Read inspiring articles about temple history, culture, traditions, and spiritual insights.",
+  "recent_posts": "Recent Posts",
+  "comments": "Comments",
+  "leave_comment": "Leave a Comment",
+  "enter_comment": "Enter your comment",
+  "post_comment": "Post Comment",
+  "search": "Search",
+  "search_placeholder": "Search blog posts...",
+  "views": "Views",
+  "login_to_comment": "Please login to leave a comment.",
+
+  
+
+  "contact_title": "Contact",
+  "contact_desc": "Use the address below for information or to contact our temple.",
+  "contact_shortdesc": "You can reach us by phone, email, or by visiting the temple directly.",
+  "contact_address": "Address",
+  "contact_phone": "Phone",
+  "phone_placeholder": "Enter your phone number",
+  "contact_email": "Email",
+
+  "contact_social": "Social Media",
+  "send_message": "Send Message",
+  
+
+  "email": "Email",
+  "email_placeholder": "Enter your email",
+  
+  "message": "Message",
+  "message_placeholder": "Enter your message",
+  "submit": "Submit",
+
+
+  
+  "supportTemple_title": "Support the Temple",
+  "supportTemple_description": "Your generous donations help maintain the temple, organize religious festivals, and support community services. Together we can preserve this sacred heritage for future generations.",
+  "supportTemple_button": "Make a Donation",
+  
+  "donation_title": "Donation",
+  "donation_desc": "Your contribution helps Maa Doyamoyee Temple maintain its services, pujas, and spiritual activities.",
+  "donation_shortdesc": "Use any of the bank accounts or mobile banking options below to donate.",
+ 
+
+
+
+
+  "bank_accounts": "Bank Accounts",
+  "mobile_banking": "Mobile Banking",
+  "copy": "Copy",
+  "number_copied": "Number Copied!",
+  "submit_donation_proof": "Submit Donation Proof",
+  
+  "name": "Name",
+  "enter_name": "Enter your name",
+  
+  "phone": "Phone Number",
+  "enter_phone": "Enter your phone number",
+  
+  "payment_method": "Payment Method",
+  "bank_transfer": "Bank Transfer",
+  "mobile_banking_option": "Mobile Banking",
+  
+  "bank_name": "Bank Name",
+  "account_number": "Account Number",
+  "branch_name": "Branch Name",
+  
+  "mobile_banking_name": "Mobile Banking Name",
+  "select_mobile_banking": "Select Mobile Banking",
+  "nagad": "Nagad",
+  "bkash": "bKash",
+  "rocket": "Rocket",
+
+
+
+  "donation_amount": "Donation Amount",
+  "enter_amount": "Enter amount",
+  
+  "transaction_id": "Transaction ID / Reference",
+ 
+  "upload_screenshot": "Upload Screenshot",
+  "upload_hint": "Click to upload or drag and drop",
+  
+  "remove_change": "Remove / Change",
+  "optional_message": "Optional Message",
+  "submit_donation": "Submit Donation Proof",
+  
+
+  
+  
+  
+  
+  "footer_about_text": "Sri Sri Ri Doyamoyee Temple is a sacred place of worship, devotion and spiritual peace located in Jamalpur. Devotees gather here for puja, festivals and community service.",
+  "footer_contact": "Contact Us",
+  "footer_contact_phone": "+880 1234-567890",
+  "footer_contact_email": "madoyamoyee@gmail.com",
+  "footer_contact_address": "Medical Rd, Jamalpur",
+
+  
+  "footer_location_title": "Location Map",
+  "footer_rights": "All Rights Reserved.",
+  "footer_developed": "Developed ",
+  "footer_by": "by"
+}

@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap");
+
+@import "tailwindcss";
+
+/* Light Mode Variables */
+:root {
+  --bg-shared-primary: #ffffff;
+  --text-shared-color-primary: #101828;
+
+  --bg-primary: #fff8e7;
+  --bg-secondary: #f3e2c7;
+
+  --text-primary: #4b2e2e;
+  --text-secondary: #6d4c41;
+
+  --btn-bg-primary: #101828;
+  --btn-text-primary: #f3e2c7;
+
+  --btn-bg-secondary: #6d4c41;
+  --btn-text-secondary: #fff8e7;
+
+  --text-gradient-primary: linear-gradient(to bottom, #ffcc70, #ff7b00);
+}
+
+body.dark {
+  --bg-shared-primary: #101828;
+  --text-shared-color-primary: #ffffff;
+
+  --bg-primary: #3a1f1f;
+  --bg-secondary: #3a1f1f;
+
+  --text-gradient-primary: linear-gradient(to bottom, #fff, #894b00);
+
+  --text-primary: #fff8e7;
+  --text-secondary: #f3e2c7;
+
+  --btn-bg-primary: #f3e2c7;
+  --btn-text-primary: #4b2e2e;
+
+  --btn-bg-secondary: #4b2e2e;
+  --btn-text-secondary: #f3e2c7;
+}
+
+.text-gradient {
+  background: var(--text-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-shared-primary {
+  background-color: var(--bg-shared-primary);
+}
+.text-shared-color-primary {
+  color: var(--text-shared-color-primary);
+}
+
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.text-color-primary {
+  color: var(--text-primary);
+}
+
+.text-color-secondary {
+  color: var(--text-secondary);
+}
+
+.btn-bg-primary {
+  background-color: var(--btn-bg-primary);
+}
+.btn-text-primary {
+  color: var(--btn-text-primary);
+}
+
+.btn-bg-secondary {
+  background-color: var(--btn-bg-secondary);
+}
+.btn-text-secondary {
+  color: var(--btn-text-secondary);
+}
+
+.lang-bn-BD {
+  font-family: "Hind Siliguri", sans-serif;
+}
+.lang-bn-BD h1,
+.lang-bn-BD h2,
+.lang-bn-BD .heading-style {
+  font-family: "Hind Siliguri", sans-serif;
+  line-height: 1.4;
+}
+
+.lang-en-US {
+  font-family: "Inter", sans-serif;
+}
+
+.lang-en-US h1,
+.lang-en-US h2,
+.lang-en-US .heading-style {
+  font-family: "Space Grotesk", sans-serif;
+  line-height: 1.2;
+}
+
+p,
+span,
+div {
+  line-height: 1.6;
+}
+
+/* bg-linear-to-b from-[#fffaf3] via-[#f7e6d3] to-[#f1dcc6] */
+
+.btn-primary {
+  @apply bg-[#7a0c0c] text-white md:text-[16px] text-sm md:px-6 px-4 py-2 md:py-3 rounded-md hover:bg-white hover:text-[#4B1E2F] border border-transparent hover:border-zinc-300 active:scale-95 transition-all cursor-pointer;
+}
+
+.btn-signin {
+  @apply bg-[#7a0c0c] text-white px-8 py-2 rounded-md hover:bg-white hover:text-[#4B1E2F] border border-transparent hover:border-black active:scale-95 transition-all cursor-pointer;
+}
+
+.custom-container {
+  @apply container mx-auto px-3 md:px-10 xl:px-0 py-10 md:py-20;
+}
+
+.btn-bg-greadient {
+  @apply bg-linear-to-br from-yellow-500 via-orange-500 to-red-600;
+}
