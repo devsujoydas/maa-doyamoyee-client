@@ -17,7 +17,7 @@ const withSuspense = (Component, Loader = LoadingPage) => (
 
 /* ---------------- Lazy Pages ---------------- */
 const Home = lazy(() => import("../pages/Home/Home"));
-const TempleHistory = lazy(() => import("../pages/TempleHistory/TempleHistory"));
+const HistoryPage = lazy(() => import("../pages/HistoryPage/HistoryPage"));
 const EventsPage = lazy(() => import("../pages/EventsPage/EventsPage"));
 const EventDetailsPage = lazy(() => import("../pages/EventsPage/EventDetailsPage"));
 const ContactPage = lazy(() => import("../pages/ContactPage/ContactPage"));
@@ -79,7 +79,7 @@ export const router = createBrowserRouter([
     errorElement: withSuspense(ErrorPage),
     children: [
       { path: "/", element: withSuspense(Home) },
-      { path: "/history", element: withSuspense(TempleHistory) },
+      { path: "/history", element: withSuspense(HistoryPage) },
       { path: "/gallery", element: withSuspense(GalleryPage) },
       { path: "/videos", element: withSuspense(VideoPage) },
       { path: "/purohit", element: withSuspense(PurohitPage) },
