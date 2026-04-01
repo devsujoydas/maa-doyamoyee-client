@@ -8,12 +8,9 @@ export default defineConfig({
   base: "/",
 
   build: {
-    outDir: "dist",
-
-    // Warning limit কমানো (performance aware)
+    outDir: "dist", 
     chunkSizeWarningLimit: 1500,
-
-    // Minify explicitly
+ 
     minify: "esbuild",
 
     rollupOptions: {
