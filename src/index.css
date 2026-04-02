@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap");
 @import "tailwindcss";
 
 /* Light Mode Variables */
@@ -80,7 +80,7 @@ body.dark {
 }
 
 .lang-bn-BD {
-   font-family: "Anek Bangla", sans-serif;
+  font-family: "Anek Bangla", sans-serif;
 }
 .lang-bn-BD h1,
 .lang-bn-BD h2,
@@ -122,4 +122,17 @@ div {
 
 .btn-bg-greadient {
   @apply bg-linear-to-br from-yellow-500 via-orange-500 to-red-600;
+}
+
+
+.input-field {
+  @apply w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-gray-200;
+}
+
+.upload-area {
+  @apply flex items-center justify-center h-40 border border-dashed rounded-lg cursor-pointer text-gray-500 bg-white/50;
+}
+
+.btn {
+  @apply bg-black text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition;
 }

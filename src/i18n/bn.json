@@ -105,6 +105,32 @@
   },
 
 
+
+"donation": {
+ "submit_donation_proof": "ডোনেশন প্রমাণ জমা দিন",
+    "name": "নাম",
+    "email": "ইমেইল",
+    "phone": "ফোন নম্বর",
+    "payment_method": "পেমেন্ট পদ্ধতি",
+    "bank_transfer": "ব্যাংক ট্রান্সফার",
+    "mobile_banking_option": "মোবাইল ব্যাংকিং",
+    "bank_name": "ব্যাংকের নাম",
+    "account_number": "অ্যাকাউন্ট নম্বর",
+    "branch_name": "শাখার নাম",
+    "routing_number": "রাউটিং নাম্বার",
+    "sender_account": "প্রেরকের অ্যাকাউন্ট নম্বর",
+    "select_mobile_banking": "মোবাইল ব্যাংকিং নির্বাচন করুন",
+    "sender_mobile": "প্রেরকের মোবাইল নম্বর",
+    "donation_amount": "ডোনেশন পরিমাণ",
+    "transaction_id": "ট্রানজেকশন আইডি",
+    "upload_screenshot": "স্ক্রিনশট আপলোড করুন",
+    "upload_hint": "ক্লিক করুন বা ড্র্যাগ করে প্রমাণ আপলোড করুন",
+    "message": "বার্তা (ঐচ্ছিক)",
+    "message_placeholder": "ঐচ্ছিক বার্তা লিখুন...",
+    "submit_donation": "ডোনেশন সাবমিট করুন",
+    "donation_success": "ডোনেশন সফলভাবে জমা হয়েছে!"
+},
+
   "latest_notices": "সর্বশেষ বিজ্ঞপ্তি",
   "upcoming_festivals": "আসন্ন উৎসবসমূহ",
   "blogs": "ব্লগ সমূহ",
@@ -195,7 +221,7 @@
 
   "supportTemple_title": "মন্দিরকে সহায়তা করুন",
   "supportTemple_description": "আপনার অনুদান মন্দিরের রক্ষণাবেক্ষণ, ধর্মীয় উৎসব আয়োজন এবং সমাজসেবামূলক কার্যক্রম পরিচালনায় সহায়তা করে। একসাথে আমরা এই পবিত্র ঐতিহ্য ভবিষ্যৎ প্রজন্মের জন্য সংরক্ষণ করতে পারি।",
-  "supportTemple_button": "অনুদান করুন",
+  "supportTemple_button": "অনুদান দিন",
 
   "donation_title": "অনুদান",
   "donation_desc": "আপনার অনুদান মা দয়াময়ী মন্দিরের সেবা, পূজা এবং আধ্যাত্মিক কার্যক্রম পরিচালনায় সহায়তা করে।",

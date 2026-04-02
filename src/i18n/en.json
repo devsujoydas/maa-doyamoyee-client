@@ -103,6 +103,32 @@
     ]
   },
 
+"donation": {
+    "submit_donation_proof": "Submit Donation Proof",
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "payment_method": "Payment Method",
+    "bank_transfer": "Bank Transfer",
+    "mobile_banking_option": "Mobile Banking",
+    "bank_name": "Bank Name",
+    "account_number": "Account Number",
+    "branch_name": "Branch Name",
+    "routing_number": "Routing Number",
+    "sender_account": "Sender Account Number",
+    "select_mobile_banking": "Select Mobile Banking",
+    "sender_mobile": "Sender Mobile Number",
+    "donation_amount": "Donation Amount",
+    "transaction_id": "Transaction ID",
+    "upload_screenshot": "Upload Payment Screenshot",
+    "upload_hint": "Click to upload or drag & drop",
+    "message": "Message (Optional)",
+    "message_placeholder": "Optional message...",
+    "submit_donation": "Submit Donation",
+    "donation_success": "Donation proof submitted successfully!"
+  },
+
+
 
   "latest_notices": "Latest Notices",
   "upcoming_festivals": "Upcoming Festivals",
