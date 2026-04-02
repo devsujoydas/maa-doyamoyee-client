@@ -174,56 +174,8 @@ export const advisorsData = [
   { id: 15, name: "শ্রী নারায়ণ চন্দ্র দেব", address: "বোষপাড়া" },
 ];
 
-export const purohitsData = [
-  {
-    id: 1,
-    name: "শ্রী সজল চক্রবর্তী",
-    designation: "প্রধান পুরোহিত",
-    experience: "১৫ বছর",
-    phone: "017XXXXXXXX",
-    email: "sajal@gmail.com",
-    speciality: "দুর্গাপূজা ও কালীপূজা",
-    availableDays: "প্রতিদিন সকাল ৮টা - দুপুর ১টা",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?_=20170328184010",
-  },
-  {
-    id: 2,
-    name: "শ্রী নিরঞ্জন ভাদুড়ি",
-    designation: "প্রধান পুরোহিত",
-    experience: "১৫ বছর",
-    phone: "018XXXXXXXX",
-    email: "niranjan@gmail.com",
-    speciality: "দুর্গাপূজা ও কালীপূজা",
-    availableDays: "শুক্র ও শনিবার",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?_=20170328184010",
-  },
-  {
-    id: 3,
-    name: "শ্রী অমিতাভ বন্দ্যোপাধ্যায়",
-    designation: "বৈদিক পুরোহিত",
-    experience: "১২ বছর",
-    phone: "019XXXXXXXX",
-    email: "amitabh.pandit@example.com",
-    speciality: "বিবাহ ও উপনয়ন অনুষ্ঠান",
-    availableDays: "সোম - বৃহস্পতি",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?_=20170328184010",
-  },
-  {
-    id: 4,
-    name: "শ্রী দেবাশিস ভট্টাচার্য",
-    designation: "যজ্ঞ ও হোম বিশেষজ্ঞ",
-    experience: "১৮ বছর",
-    phone: "016XXXXXXXX",
-    email: "",
-    speciality: "যজ্ঞ, গৃহশান্তি ও বিশেষ পূজা",
-    availableDays: "শনিবার ও রবিবার",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?_=20170328184010",
-  },
-];
+
+
 
 export const gallerySEO = {
   title: "Maa Doyamoyee Mandir Photo Gallery",

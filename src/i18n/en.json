@@ -68,6 +68,41 @@
   },
   
 
+  "purohit": {
+    "title": "Our Priests",
+    "experience": "Experience",
+    "speciality": "Speciality",
+    "availability": "Availability",
+    "phone": "Phone",
+    "email": "Email",
+    "call": "Call Now",
+    "mail": "Send Email",
+    "data": [
+      {
+        "id": 1,
+        "name": "Shri Niranjan Bhaduri",
+        "designation": "Head Priest",
+        "experience": "15 Years",
+        "speciality": "Durga Puja & Kali Puja",
+        "availableDays": "Daily 8 AM - 1 PM",
+        "phone": "017XXXXXXXX",
+        "email": "niranjan@gmail.com",
+        "image": "/purohit/nironjon.webp"
+      },
+      {
+        "id": 2,
+        "name": "Shri Sajal Chakraborty",
+        "designation": "Head Priest",
+        "experience": "15 Years",
+        "speciality": "Durga Puja & Kali Puja",
+        "availableDays": "Friday & Saturday",
+        "phone": "018XXXXXXXX",
+        "email": "sajal@gmail.com",
+        "image": "/purohit/sajal.webp"
+      }
+    ]
+  },
+
 
   "latest_notices": "Latest Notices",
   "upcoming_festivals": "Upcoming Festivals",

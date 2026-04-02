@@ -68,6 +68,41 @@
   },
 
 
+  "purohit": {
+    "title": "পুরোহিতবৃন্দ",
+    "experience": "অভিজ্ঞতা",
+    "speciality": "বিশেষ দক্ষতা",
+    "availability": "উপস্থিতি",
+    "phone": "ফোন",
+    "email": "ইমেইল",
+    "call": "কল করুন",
+    "mail": "ইমেইল করুন",
+    "data": [
+      {
+        "id": 1,
+        "name": "শ্রী নিরঞ্জন ভাদুড়ী",
+        "designation": "প্রধান পুরোহিত",
+        "experience": "১৫ বছর",
+        "speciality": "দুর্গাপূজা ও কালীপূজা",
+        "availableDays": "প্রতিদিন সকাল ৮টা - দুপুর ১টা",
+        "phone": "017XXXXXXXX",
+        "email": "niranjan@gmail.com",
+        "image": "/purohit/nironjon.webp"
+      },
+      {
+        "id": 2,
+        "name": "শ্রী সজল চক্রবর্তী",
+        "designation": "প্রধান পুরোহিত",
+        "experience": "১৫ বছর",
+        "speciality": "দুর্গাপূজা ও কালীপূজা",
+        "availableDays": "শুক্র ও শনিবার",
+        "phone": "018XXXXXXXX",
+        "email": "sajal@gmail.com",
+        "image": "/purohit/sajal.webp"
+      }
+    ]
+  },
+
 
   "latest_notices": "সর্বশেষ বিজ্ঞপ্তি",
   "upcoming_festivals": "আসন্ন উৎসবসমূহ",
@@ -158,18 +193,18 @@
 
 
   "supportTemple_title": "মন্দিরকে সহায়তা করুন",
-  "supportTemple_description": "আপনার দান মন্দিরের রক্ষণাবেক্ষণ, ধর্মীয় উৎসব আয়োজন এবং সমাজসেবামূলক কার্যক্রম পরিচালনায় সহায়তা করে। একসাথে আমরা এই পবিত্র ঐতিহ্য ভবিষ্যৎ প্রজন্মের জন্য সংরক্ষণ করতে পারি।",
-  "supportTemple_button": "দান করুন",
+  "supportTemple_description": "আপনার অনুদান মন্দিরের রক্ষণাবেক্ষণ, ধর্মীয় উৎসব আয়োজন এবং সমাজসেবামূলক কার্যক্রম পরিচালনায় সহায়তা করে। একসাথে আমরা এই পবিত্র ঐতিহ্য ভবিষ্যৎ প্রজন্মের জন্য সংরক্ষণ করতে পারি।",
+  "supportTemple_button": "অনুদান করুন",
 
-  "donation_title": "দান",
-  "donation_desc": "আপনার দান মা দয়াময়ী মন্দিরের সেবা, পূজা এবং আধ্যাত্মিক কার্যক্রম পরিচালনায় সহায়তা করে।",
-  "donation_shortdesc": "দান করার জন্য নিচে দেওয়া ব্যাংক অ্যাকাউন্ট বা মোবাইল ব্যাংকিং মাধ্যম ব্যবহার করুন।",
+  "donation_title": "অনুদান",
+  "donation_desc": "আপনার অনুদান মা দয়াময়ী মন্দিরের সেবা, পূজা এবং আধ্যাত্মিক কার্যক্রম পরিচালনায় সহায়তা করে।",
+  "donation_shortdesc": "অনুদান করার জন্য নিচে দেওয়া ব্যাংক অ্যাকাউন্ট বা মোবাইল ব্যাংকিং মাধ্যম ব্যবহার করুন।",
   
   "bank_accounts": "ব্যাংক অ্যাকাউন্ট",
   "mobile_banking": "মোবাইল ব্যাংকিং",
   "copy": "কপি",
   "number_copied": "নম্বর কপি হয়েছে!",
-  "submit_donation_proof": "দান প্রমাণ জমা দিন",
+  "submit_donation_proof": "অনুদান প্রমাণ জমা দিন",
   
   "name": "নাম",
   "enter_name": "আপনার নাম লিখুন",
@@ -191,7 +226,7 @@
   "bkash": "বিকাশ",
   "rocket": "রকেট",
 
-  "donation_amount": "দান এর পরিমাণ",
+  "donation_amount": "অনুদান এর পরিমাণ",
   "enter_amount": "পরিমাণ লিখুন",
 
   "transaction_id": "ট্রানজেকশন আইডি / রেফারেন্স",
@@ -201,7 +236,7 @@
 
   "remove_change": "মুছুন / পরিবর্তন করুন",
   "optional_message": "ঐচ্ছিক বার্তা",
-  "submit_donation": "দান প্রমাণ জমা দিন",
+  "submit_donation": "অনুদান প্রমাণ জমা দিন",
  
  
 
