@@ -25,7 +25,7 @@ export const committeeData = [
   { id: 23, name: "শ্রী সুশান্ত তালুকদার রবি", designation: "সদস্য" },
   { id: 24, name: "শ্রী পার্থ প্রতিম দে", designation: "সদস্য" },
   { id: 25, name: "শ্রী বিমল কুমার আর্য্য", designation: "সদস্য" },
-  { id: 26, name: "শ্রী রনজিত কুমার পোদ্দার", designation: "সদস্য" },
+  { id: 26, name: "শ্রী রঞ্জিত কুমার পোদ্দার", designation: "সদস্য" },
   { id: 27, name: "শ্রী সুবল চন্দ্র দাস", designation: "সদস্য" },
   { id: 28, name: "শ্রী প্রদীপ কুমার বসু কাজল", designation: "সদস্য" },
   { id: 29, name: "শ্রী জীবন কুমার সাহা", designation: "সদস্য" },

@@ -77,7 +77,7 @@ const Hero = () => {
                     <div className=" flex gap-2 sm:gap-4">
                       <LinkButton
                         path={"/events"}
-                        title={"hero_cta_events"}
+                        title={"hero_cta_donation"}
                         isArrow={true}
                       />
                       <LinkButton
@@ -140,7 +140,7 @@ const Hero = () => {
                     <div className=" flex gap-2 sm:gap-4">
                       <LinkButton
                         path={"/events"}
-                        title={"hero_cta_events"}
+                        title={"hero_cta_donation"}
                         isArrow={true}
                       />
                       <LinkButton

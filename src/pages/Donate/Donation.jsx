@@ -100,7 +100,7 @@ const Donation = () => {
   };
 
   return (
-    <section className="relative">
+    <div className="relative">
       <div className="absolute top-10 left-4 w-32 h-32 sm:w-40 sm:h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full animate-pulse"></div>
       <div className="absolute bottom-10 right-4 w-40 h-40 sm:w-52 sm:h-52 bg-red-600 blur-3xl opacity-20 rounded-full animate-pulse"></div>
       <div className="custom-container">
@@ -383,7 +383,7 @@ const Donation = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

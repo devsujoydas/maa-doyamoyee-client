@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap');
 @import "tailwindcss";
 
 /* Light Mode Variables */
@@ -81,7 +80,7 @@ body.dark {
 }
 
 .lang-bn-BD {
-  font-family: "Hind Siliguri", sans-serif;
+   font-family: "Anek Bangla", sans-serif;
 }
 .lang-bn-BD h1,
 .lang-bn-BD h2,
