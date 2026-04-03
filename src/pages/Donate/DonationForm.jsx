@@ -31,8 +31,7 @@ const DonationForm = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData); // backend verification
+    e.preventDefault(); 
     toast.success(t("donation.donation_success"));
   };
 

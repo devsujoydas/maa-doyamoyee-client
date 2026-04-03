@@ -6,11 +6,13 @@ import api from "../../utils/api";
 import { useTranslation } from "react-i18next";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { useAuth } from "../../AuthProvider/authProvider";
 
 const Signin = () => {
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const logInHandler = async (e) => {
     e.preventDefault();
@@ -20,6 +22,8 @@ const Signin = () => {
     try {
       const res = await api.post("/auth/signin", { email, password });
       localStorage.setItem("accessToken", res.data.accessToken);
+
+      setUser(res.data.user);
       toast.success(res.data.message || "Login successful!");
       navigate("/profile");
     } catch (err) {
@@ -29,7 +33,6 @@ const Signin = () => {
 
   return (
     <div className="custom-container flex items-center justify-center">
-
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
@@ -46,7 +49,6 @@ const Signin = () => {
 
         {/* Form */}
         <div className="px-6 sm:px-10 md:px-14 py-8 sm:py-10 flex flex-col justify-center">
-
           {/* Back */}
           <button onClick={() => navigate(-1)} className="mb-6 w-fit">
             <ArrowLeft />
@@ -66,18 +68,15 @@ const Signin = () => {
 
           {/* Form */}
           <form onSubmit={logInHandler} className="mt-6 grid gap-5">
-
             {/* Email */}
             <div>
-              <label className="text-sm font-medium">
-                {t("auth.email")}
-              </label>
+              <label className="text-sm font-medium">{t("auth.email")}</label>
               <input
                 name="email"
                 required
                 type="email"
                 placeholder={t("auth.email_placeholder")}
-                className="w-full mt-1 border border-zinc-300 rounded-full px-4 py-3 outline-none focus:border-zinc-400"
+                className="w-full mt-1 border border-zinc-300 rounded-full px-4 py-2.5 md:px-4 md:py-3 outline-none focus:border-zinc-400"
               />
             </div>
 
@@ -86,7 +85,7 @@ const Signin = () => {
               <label className="text-sm font-medium">
                 {t("auth.password")}
               </label>
-              <div className="relative mt-1 border border-zinc-300 rounded-full px-4 py-3 flex items-center focus-within:border-zinc-400">
+              <div className="relative mt-1 border border-zinc-300 rounded-full px-4 py-2.5 md:px-4 md:py-3 flex items-center focus-within:border-zinc-400">
                 <input
                   name="password"
                   required
@@ -109,9 +108,7 @@ const Signin = () => {
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" className="w-4 h-4" />
                 {t("auth.agree_terms")}{" "}
-                <span className="font-semibold">
-                  {t("auth.terms")}
-                </span>
+                <span className="font-semibold">{t("auth.terms")}</span>
               </label>
 
               <Link to="/forgot-password" className="hover:underline">
@@ -120,10 +117,9 @@ const Signin = () => {
             </div>
 
             {/* Button */}
-            <button className="bg-black text-white py-3 rounded-full hover:bg-zinc-700">
+            <button className="bg-black text-white py-2 md:py-2  rounded-full hover:bg-zinc-700">
               {t("auth.login_btn")}
             </button>
-
           </form>
         </div>
       </motion.div>

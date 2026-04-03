@@ -97,7 +97,7 @@ export const router = createBrowserRouter([
       { path: "/notices", element: withSuspense(NoticePage) }, 
 
       { path: "/blogs", element: withSuspense(BlogsPage) },
-      { path: "/blogs/:slug", element: withSuspense(BlogsDetails) },
+      { path: "/blogs/:id", element: withSuspense(BlogsDetails), },
     
       
 

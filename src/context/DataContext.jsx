@@ -23,15 +23,17 @@ export const DataProvider = ({ children }) => {
           messagesRes,
         ] = await Promise.all([
           fetch("/json/users.json").then((res) => res.json()),
-          fetch("/json/blogs.json").then((res) => res.json()),
-          fetch("http://localhost:5000/api/v1/notices").then((res) => res.json()),
+          fetch("http://localhost:5000/api/v1/posts").then((res) => res.json()),
+          fetch("http://localhost:5000/api/v1/notices").then((res) =>
+            res.json(),
+          ),
           fetch("/json/events.json").then((res) => res.json()),
           fetch("/json/donation.json").then((res) => res.json()),
           fetch("/json/messages.json").then((res) => res.json()),
         ]);
 
         setUsers(usersRes);
-        setBlogs(blogsRes);
+        setBlogs(blogsRes.posts);
         setNotices(noticesRes);
         setEvents(eventsRes);
         setDonations(donationsRes);

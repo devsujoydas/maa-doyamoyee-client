@@ -17,8 +17,7 @@ const Uploads = () => {
   const fetchImages = async () => {
     try {
       const res = await axios.get(`${API}/images`);
-      setImages(res.data);
-      // console.log(res.data)
+      setImages(res.data); 
     } catch (error) {
       console.error(error);
     }
@@ -66,8 +65,7 @@ const Uploads = () => {
         fetchImages();
       }
 
-    } catch (error) {
-      // console.log(error)
+    } catch (error) { 
       toast.error("Upload Failed");
 
     } finally {
@@ -87,8 +85,7 @@ const Uploads = () => {
       toast.success("Image Deleted");
       fetchImages();
 
-    } catch (error) {
-      console.log(error)
+    } catch (error) { 
       toast.error("Delete failed");
 
     }

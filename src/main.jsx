@@ -10,13 +10,11 @@ import "../src/i18n/i18n";
 import { AuthProvider } from "./AuthProvider/authProvider";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <HelmetProvider>
+  <HelmetProvider>
+    <DataProvider>
       <AuthProvider>
-        <DataProvider>
-          <RouterProvider router={router} />
-        </DataProvider>
+        <RouterProvider router={router} />
       </AuthProvider>
-    </HelmetProvider>
-  </StrictMode>,
+    </DataProvider>
+  </HelmetProvider>
 );

@@ -4,12 +4,16 @@ import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import toast from "react-hot-toast";
 import api from "../../utils/api";
 import { useTranslation } from "react-i18next";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { useAuth } from "../../AuthProvider/authProvider";
 
 const Signup = () => {
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+
+  const { setUser } = useAuth();
 
   const signUpHandler = async (e) => {
     e.preventDefault();
@@ -26,6 +30,8 @@ const Signup = () => {
         password,
       });
 
+      setUser(res.data.user);
+
       localStorage.setItem("accessToken", res.data.accessToken);
       toast.success(res.data.message || "Signup successful!");
       navigate("/");
@@ -36,7 +42,6 @@ const Signup = () => {
 
   return (
     <div className="custom-container flex items-center justify-center">
-
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
@@ -53,7 +58,6 @@ const Signup = () => {
 
         {/* Form */}
         <div className="px-5 sm:px-8 md:px-10 py-8 sm:py-10 flex flex-col justify-center">
-
           {/* Back */}
           <button onClick={() => navigate(-1)} className="mb-6 w-fit">
             <ArrowLeft />
@@ -73,7 +77,6 @@ const Signup = () => {
 
           {/* Form */}
           <form onSubmit={signUpHandler} className="mt-6 grid gap-5">
-
             {/* Full Name */}
             <div>
               <label className="text-sm font-medium">
@@ -83,34 +86,30 @@ const Signup = () => {
                 name="fullname"
                 required
                 placeholder={t("auth.fullname_placeholder")}
-                className="w-full mt-1 border border-zinc-300 rounded-full px-4 py-3"
+                className="w-full mt-1 border border-zinc-300 rounded-full  px-4 py-2.5 md:px-4 md:py-3"
               />
             </div>
 
             {/* Phone */}
             <div>
-              <label className="text-sm font-medium">
-                {t("auth.phone")}
-              </label>
+              <label className="text-sm font-medium">{t("auth.phone")}</label>
               <input
                 name="phone"
                 required
                 placeholder={t("auth.phone_placeholder")}
-                className="w-full mt-1 border border-zinc-300 rounded-full px-4 py-3"
+                className="w-full mt-1 border border-zinc-300 rounded-full  px-4 py-2.5 md:px-4 md:py-3"
               />
             </div>
 
             {/* Email */}
             <div>
-              <label className="text-sm font-medium">
-                {t("auth.email")}
-              </label>
+              <label className="text-sm font-medium">{t("auth.email")}</label>
               <input
                 name="email"
                 required
                 type="email"
                 placeholder={t("auth.email_placeholder")}
-                className="w-full mt-1 border border-zinc-300 rounded-full px-4 py-3"
+                className="w-full mt-1 border border-zinc-300 rounded-full  px-4 py-2.5 md:px-4 md:py-3"
               />
             </div>
 
@@ -119,7 +118,7 @@ const Signup = () => {
               <label className="text-sm font-medium">
                 {t("auth.password")}
               </label>
-              <div className="relative mt-1 border border-zinc-300 rounded-full px-4 py-3 flex items-center">
+              <div className="relative mt-1 border border-zinc-300 rounded-full  px-4 py-2.5 md:px-4 md:py-3 flex items-center">
                 <input
                   name="password"
                   required
@@ -141,16 +140,13 @@ const Signup = () => {
             <label className="flex items-center gap-2 text-sm">
               <input type="checkbox" required />
               {t("auth.agree_terms")}{" "}
-              <span className="font-semibold">
-                {t("auth.terms")}
-              </span>
+              <span className="font-semibold">{t("auth.terms")}</span>
             </label>
 
             {/* Button */}
             <button className="bg-black text-white py-3 rounded-full hover:bg-zinc-700">
               {t("auth.signup_btn")}
             </button>
-
           </form>
         </div>
       </motion.div>

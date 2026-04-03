@@ -3,8 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Link, NavLink } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, User, ChevronDown } from "lucide-react";
+import { Menu, X, User, ChevronDown, CloudLightning } from "lucide-react";
 import DarkModeToggler from "./DarkModeToggler";
+import { useAuth } from "../AuthProvider/authProvider";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -13,7 +14,7 @@ const Header = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(null);
-  const [user, setUser] = useState(false);
+  const { user, setUser, logout } = useAuth();
 
   const changeLang = (lang) => {
     i18n.changeLanguage(lang);
@@ -150,12 +151,24 @@ const Header = () => {
 
           {/* User Menu */}
           <div className="relative">
-            <button
-              onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="ml-2 w-10 h-10 bg-yellow-600 cursor-pointer  text-white rounded-full flex items-center justify-center"
-            >
-              <User size={18} />
-            </button>
+            <div onClick={() => setUserMenuOpen(!userMenuOpen)}>
+              {user ? (
+                <div className=" h-10 w-10 rounded-full overflow-hidden cursor-pointer shadow-lg">
+                  <img
+                    className="h-full object-cover w-full"
+                    src={user?.profileImage}
+                    alt=""
+                  />
+                </div>
+              ) : (
+                <button
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="ml-2 w-10 h-10 bg-yellow-600 cursor-pointer  text-white rounded-full flex items-center justify-center"
+                >
+                  <User size={18} />
+                </button>
+              )}
+            </div>
             <AnimatePresence>
               {userMenuOpen && (
                 <motion.div
@@ -167,12 +180,14 @@ const Header = () => {
                 >
                   {user ? (
                     <>
-                      <Link
-                        to="/admin"
-                        className="block px-4 py-2 hover:bg-yellow-100 hover:text-black transition-colors"
-                      >
-                        {t("auth_dashboard")}
-                      </Link>
+                      {user.role == "admin" && (
+                        <Link
+                          to="/admin"
+                          className="block px-4 py-2 hover:bg-yellow-100 hover:text-black transition-colors"
+                        >
+                          {t("auth_dashboard")}
+                        </Link>
+                      )}
                       <Link
                         to="/profile"
                         onClick={() => setUserMenuOpen(!userMenuOpen)}
@@ -181,7 +196,7 @@ const Header = () => {
                         {t("auth_profile")}
                       </Link>
                       <button
-                        onClick={() => setUser(null)}
+                        onClick={() => logout()}
                         className="w-full text-left px-4 py-2 hover:bg-yellow-100 hover:text-black transition-colors"
                       >
                         {t("auth_logout")}
@@ -189,7 +204,7 @@ const Header = () => {
                     </>
                   ) : (
                     <>
-                      <Link 
+                      <Link
                         to="/signin"
                         className="block px-4 py-2  hover:bg-yellow-100 hover:text-black  transition-colors"
                       >
@@ -368,13 +383,15 @@ const Header = () => {
                   </>
                 ) : (
                   <>
-                    <Link  onClick={() => setMenuOpen(!menuOpen)}
+                    <Link
+                      onClick={() => setMenuOpen(!menuOpen)}
                       to="/signin"
                       className="px-3 py-2 border border-zinc-500 rounded-md text-center"
                     >
                       {t("auth_signin")}
                     </Link>
-                    <Link  onClick={() => setMenuOpen(!menuOpen)}
+                    <Link
+                      onClick={() => setMenuOpen(!menuOpen)}
                       to="/signup"
                       className="px-3 py-2 border border-zinc-500 rounded-md text-center"
                     >
