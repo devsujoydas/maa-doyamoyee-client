@@ -1,16 +1,36 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import api from "../../utils/api";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+
+    try {
+      setLoading(true);
+
+      const res = await api.post("/password/request-reset", { email });
+     
+      toast.success(res.data?.message);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="custom-container flex items-center justify-center">
-
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
@@ -28,12 +48,8 @@ const ForgotPassword = () => {
 
         {/* Form Section */}
         <div className="px-6 sm:px-10 md:px-14 py-8 sm:py-10 flex flex-col justify-center">
-          
           {/* Back */}
-          <button
-            onClick={() => navigate(-1)}
-            className="mb-6 w-fit"
-          >
+          <button onClick={() => navigate(-1)} className="mb-6 w-fit">
             <ArrowLeft className="active:scale-95" />
           </button>
 
@@ -47,17 +63,13 @@ const ForgotPassword = () => {
           </p>
 
           {/* Form */}
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="mt-8 grid gap-5"
-          >
+          <form onSubmit={handleSubmit} className="mt-8 grid gap-5">
             {/* Email */}
             <div>
-              <label className="text-sm font-medium">
-                {t("forgot.email")}
-              </label>
+              <label className="text-sm font-medium">{t("forgot.email")}</label>
               <input
                 type="email"
+                name="email"
                 required
                 placeholder={t("forgot.email_placeholder")}
                 className="w-full mt-1 border border-zinc-300 rounded-full px-4 py-3 outline-none focus:border-zinc-400"
@@ -65,18 +77,18 @@ const ForgotPassword = () => {
             </div>
 
             {/* Button */}
-            <button className="mt-2 bg-black text-white py-3 sm:py-4 rounded-full hover:bg-zinc-700 transition">
-              {t("forgot.button")}
+            <button
+              disabled={loading}
+              className="mt-2 bg-black text-white py-3 sm:py-4 rounded-full hover:bg-zinc-700 transition"
+            >
+              {loading ? "Sending..." : t("forgot.button")}
             </button>
           </form>
 
           {/* Back to login */}
           <div className="mt-6 text-sm flex justify-center gap-1">
             {t("forgot.back")}
-            <Link
-              to="/signin"
-              className="font-semibold hover:underline"
-            >
+            <Link to="/signin" className="font-semibold hover:underline">
               {t("forgot.login")}
             </Link>
           </div>

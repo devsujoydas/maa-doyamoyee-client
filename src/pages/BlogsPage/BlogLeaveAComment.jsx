@@ -37,10 +37,8 @@ const BlogLeaveAComment = ({ postId, comments, setComments }) => {
 
       const res = await api.post(`/posts/${postId}/comments`, text);
 
-      console.log(res.data);
       const newComment = res.data;
 
-      // ✅ update state properly (no stale state issue)
       setComments((prev) => [newComment, ...prev]);
 
       toast.success("Comment added!");

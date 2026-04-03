@@ -54,12 +54,10 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // ✅ IMPORTANT: correct URL
         const { data } = await axios.get(
           "http://localhost:5000/api/v1/auth/refresh",
           { withCredentials: true },
         );
-        console.log("refresh token called");
         const newToken = data.accessToken;
 
         // save token
