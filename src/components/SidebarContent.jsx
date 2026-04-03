@@ -34,9 +34,14 @@ const SidebarContent = ({ collapsed, toggleCollapsed, admin, logout }) => {
     >
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-zinc-500">
-        {!collapsed && <h2 className="text-lg font-bold text-nowrap">Admin Dashboard</h2>}
+        {!collapsed && (
+          <h2 className="text-lg font-bold text-nowrap">Admin Dashboard</h2>
+        )}
 
-        <button onClick={toggleCollapsed} className="hover:bg-white/10 cursor-pointer rounded-sm">
+        <button
+          onClick={toggleCollapsed}
+          className="hover:bg-white/10 cursor-pointer rounded-sm p-1"
+        >
           {collapsed ? <ChevronRight /> : <ChevronLeft />}
         </button>
       </div>
@@ -60,16 +65,14 @@ const SidebarContent = ({ collapsed, toggleCollapsed, admin, logout }) => {
         ))}
       </nav>
 
-      {/* 🔥 Bottom Section */}
+      {/* Bottom Section */}
       <div className="mt-auto p-3 border-t border-white/10 space-y-2">
-        {/* Admin Email */}
         {!collapsed && admin && (
           <p className="text-xs text-white/40 truncate px-2">
             {"admin@maa-doyamoyee.com"}
           </p>
         )}
 
-        {/* Logout Button */}
         <button
           onClick={logout}
           className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-red-400 hover:bg-red-500/10 transition ${

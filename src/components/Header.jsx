@@ -13,7 +13,7 @@ const Header = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(null);
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
 
   const changeLang = (lang) => {
     i18n.changeLanguage(lang);
@@ -189,15 +189,15 @@ const Header = () => {
                     </>
                   ) : (
                     <>
-                      <Link
-                        to="/auth/signin"
-                        className="block px-4 py-2 text-gray-800  hover:bg-yellow-100  transition-colors"
+                      <Link 
+                        to="/signin"
+                        className="block px-4 py-2  hover:bg-yellow-100 hover:text-black  transition-colors"
                       >
                         {t("auth_signin")}
                       </Link>
                       <Link
-                        to="/auth/signup"
-                        className="block px-4 py-2 text-gray-800  hover:bg-yellow-100  transition-colors"
+                        to="/signup"
+                        className="block px-4 py-2  hover:bg-yellow-100 hover:text-black  transition-colors"
                       >
                         {t("auth_signup")}
                       </Link>
@@ -368,14 +368,14 @@ const Header = () => {
                   </>
                 ) : (
                   <>
-                    <Link
-                      to="/auth/signin"
+                    <Link  onClick={() => setMenuOpen(!menuOpen)}
+                      to="/signin"
                       className="px-3 py-2 border border-zinc-500 rounded-md text-center"
                     >
                       {t("auth_signin")}
                     </Link>
-                    <Link
-                      to="/auth/signup"
+                    <Link  onClick={() => setMenuOpen(!menuOpen)}
+                      to="/signup"
                       className="px-3 py-2 border border-zinc-500 rounded-md text-center"
                     >
                       {t("auth_signup")}

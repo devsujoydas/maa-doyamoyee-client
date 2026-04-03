@@ -1,80 +1,80 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import placeholder from "/placeholder.png";
-import LazyImage from "../../components/LazyImage";
 import { formatDateDynamic } from "../../utils/formatDateDynamic";
+import { motion } from "framer-motion";
+import { FileText, Download, Eye, MapPin, Pin, Calendar } from "lucide-react";
 
-const NoticeCard = ({ notice }) => {
-  const {
-    id,
-    title,
-    shortDescription,
-    thumbnail,
-    publishDate,
-    eventDate,
-    isImportant,
-    isPinned,
-    category,
-  } = notice;
-
-  const displayDate = eventDate || publishDate;
-
+const NoticeCard = ({ notice, onPreview }) => {
   return (
     <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.3 }}
-      className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all overflow-hidden group relative"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="border border-zinc-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition bg-white  lang-bn-BD"
     >
-      {/* IMAGE */}
-      <Link to={`/notices/${id}`} className="relative block w-full h-70">
-        <LazyImage
-          src={thumbnail || placeholder}
-          alt={title}
-          className="w-full 70 object-cover group-hover:scale-105 transition-all duration-300"
-          placeholder={placeholder}
-        />
+      {/* Title + Pinned */}
+      <div className="flex justify-between items-start mb-3">
+        <div className="flex items-center gap-2">
+          <FileText className="text-amber-600" />
+          <h3 className="text-lg font-semibold text-amber-900  ">
+            {notice.title}
+          </h3>
+        </div>
+        {notice.isPinned && <Pin className="text-red-500" size={18} />}
+      </div>
 
-        {isImportant && (
-          <span className="absolute top-4 left-4 bg-red-600 text-white text-xs px-3 py-1 rounded-full shadow">
-            গুরুত্বপূর্ণ
+      {/* Category + Event Date + Event Time */}
+      <div className="flex flex-wrap gap-2 mb-2">
+        <span className="text-xs bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">
+          {notice.category}
+        </span>
+
+        {notice.eventDate && (
+          <span className="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full flex items-center gap-1">
+            <Calendar size={12} /> {formatDateDynamic(notice.eventDate)}
           </span>
         )}
-        {isPinned && (
-          <span className="absolute top-4 right-4 bg-yellow-500 text-white text-xs px-3 py-1 rounded-full shadow">
-            📌 পিন করা
+
+        {notice.eventTime && (
+          <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full">
+            ⏰ {notice.eventTime}
           </span>
         )}
-      </Link>
+      </div>
 
-      {/* CONTENT */}
-      <div className="p-5 lang-bn-BD">
-        <p className="text-sm text-gray-500 mb-2">
-          {displayDate && formatDateDynamic(displayDate)}
+      {/* Description */}
+      <p className="text-sm text-gray-700 my-3  ">{notice.description}</p>
+
+      {/* Venue + IssuedBy */}
+      {notice.venue && (
+        <p className="text-xs flex items-center gap-1 text-gray-500 mb-1  ">
+          <MapPin size={14} /> {notice.venue}
         </p>
+      )}
+      {notice.issuedBy && (
+        <p className="text-xs text-gray-500 mb-2 ">📝 {notice.issuedBy}</p>
+      )}
 
-        <h3 className="text-lg font-semibold mb-2 line-clamp-2">{title}</h3>
+      {/* Footer: Publish Date + Buttons */}
+      <div className="flex justify-between items-center">
+        <span className="text-xs text-gray-500  ">
+          📅 প্রকাশিত: {formatDateDynamic(notice.createdAt)}
+        </span>
 
-        <p className="text-gray-600 text-sm line-clamp-3">{shortDescription}</p>
-
-
-
-        <div className="flex items-center gap-2 mt-4">
-
-          {category && (
-            <span className="inline-block text-xs bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full capitalize">
-              {category}
-            </span>
-          )}
-
-          <Link
-            to={`/notices/${id}`}
-            className="inline-block text-indigo-600 font-medium hover:underline"
+        <div className="flex gap-2">
+          <button
+            onClick={() => onPreview(notice)}
+            className="flex items-center gap-1 text-sm bg-amber-100 px-3 py-1 rounded-lg hover:bg-amber-200 cursor-pointer"
           >
-            বিস্তারিত দেখুন →
-          </Link>
+            <Eye size={16} /> View
+          </button>
+
+          <a
+            href={notice.pdfUrl.replace("/view", "/preview")}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1 text-sm bg-green-100 px-3 py-1 rounded-lg hover:bg-green-200 cursor-pointer"
+          >
+            <Download size={16} /> PDF
+          </a>
         </div>
       </div>
     </motion.div>

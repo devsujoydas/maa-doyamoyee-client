@@ -57,7 +57,7 @@ const HistoryPage = () => {
   ];
 
   return (
-    <div className="custom-container text-gray-800 space-y-20">
+    <div className="custom-container text-gray-800 ">
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
       <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
 
@@ -65,24 +65,19 @@ const HistoryPage = () => {
 
       {/* Sections */}
       {sections.map((section, idx) => (
-        <motion.section
+        <motion.div
           key={idx}
-          className="space-y-6 border-b border-gray-300 pb-8 last:border-b-0"
+          className="mb-9 last:mb-0"
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <div className="flex items-center space-x-3 mb-3">
-            <div className="text-gray-700">{section.icon}</div>
-            <h2 className="text-2xl font-semibold tracking-wide">
-              {section.title}
-            </h2>
-          </div>
+  
           <p className="text-justify leading-relaxed whitespace-pre-line text-lg">
             {section.content}
           </p>
-        </motion.section>
+        </motion.div>
       ))}
     </div>
   );

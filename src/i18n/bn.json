@@ -197,7 +197,7 @@
   "post_comment": "মন্তব্য পোস্ট করুন",
   "recent_posts": "সাম্প্রতিক পোস্টসমূহ",
   "views": "দেখা হয়েছে",
-  "login_to_comment": "মন্তব্য করার জন্য অনুগ্রহ করে লগইন করুন।",
+  "login_to_comment": "মন্তব্য করার জন্য অনুগ্রহ করে সাইন ইন করুন।",
 
   
   "contact_title": "যোগাযোগ",
@@ -278,5 +278,58 @@
   "footer_location_title": "অবস্থান মানচিত্র",
   "footer_rights": "সর্বস্বত্ব সংরক্ষিত।",
   "footer_developed": "তৈরি করেছেন",
-  "footer_by": ""
+  "footer_by": "",
+
+
+  
+
+
+  "auth": {
+    "login_title": "সাইন ইন করুন",
+    "signup_title": "সাইন আপ করুন",
+
+    "email": "ইমেইল ঠিকানা",
+    "email_placeholder": "আপনার ইমেইল লিখুন",
+
+    "password": "পাসওয়ার্ড",
+    "password_placeholder": "আপনার পাসওয়ার্ড লিখুন",
+
+    "fullname": "পূর্ণ নাম",
+    "fullname_placeholder": "আপনার পূর্ণ নাম লিখুন",
+
+    "phone": "ফোন নম্বর",
+    "phone_placeholder": "আপনার ফোন নম্বর লিখুন",
+
+    "login_btn": "সাইন ইন",
+    "signup_btn": "সাইন আপ করুন",
+
+    "no_account": "আপনার কি অ্যাকাউন্ট নেই?",
+    "have_account": "আপনার কি আগে থেকেই অ্যাকাউন্ট আছে?",
+
+    "create_account": "সাইন আপ করুন",
+    "login_here": "সাইন ইন করুন",
+
+    "forgot_password": "পাসওয়ার্ড ভুলে গেছেন?",
+    "agree_terms": "আমি সম্মত",
+    "terms": "শর্তাবলী"
+  },
+
+  "forgot": {
+    "title": "পাসওয়ার্ড ভুলে গেছেন",
+    "subtitle": "আমরা আপনার ইমেইলে একটি যাচাইকরণ লিংক পাঠাবো",
+    "email": "ইমেইল ঠিকানা",
+    "email_placeholder": "আপনার ইমেইল লিখুন",
+    "button": "যাচাইকরণ লিংক পাঠান",
+    "back": "ফিরে যান",
+    "login": "সাইন ইন করুন"
+  },
+  "reset": {
+    "title": "পাসওয়ার্ড রিসেট করুন",
+    "subtitle": "নতুন পাসওয়ার্ড অবশ্যই আগের পাসওয়ার্ড থেকে আলাদা হতে হবে।",
+    "new_password": "নতুন পাসওয়ার্ড",
+    "new_password_placeholder": "নতুন পাসওয়ার্ড লিখুন",
+    "confirm_password": "পাসওয়ার্ড নিশ্চিত করুন",
+    "confirm_password_placeholder": "পাসওয়ার্ড আবার লিখুন",
+    "button": "পাসওয়ার্ড রিসেট করুন"
+  }
 }

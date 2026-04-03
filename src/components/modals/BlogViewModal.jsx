@@ -52,7 +52,7 @@ const BlogViewModal = ({
             💬 {selectedBlog.comments?.length || 0} Comments
           </span>
           <span className="flex items-center gap-1 px-3 py-1 bg-yellow-50 rounded-full">
-            📅 {formatDateDynamic(selectedBlog.date)}
+            📅 {formatDateDynamic(selectedBlog.createdAt)}
           </span>
         </div>
 

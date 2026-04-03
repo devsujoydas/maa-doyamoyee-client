@@ -1,17 +1,19 @@
-import  { useMemo } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination' 
-import { Autoplay } from 'swiper/modules';
-import { useEffect, useState } from "react";
-import NoticeCard from '../NoticePage/NoticeCard';
-import SectionHeading from '../../shared/SectionHeading';
+import { useState, useEffect, useMemo } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Autoplay } from "swiper/modules"; 
+import SectionHeading from "../../shared/SectionHeading";
 import { useTranslation } from "react-i18next";
+import PreviewModal from "../NoticePage/PreviewModal"; 
+import NoticeCard from "../NoticePage/NoticeCard";
 
 const LatestNotice = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   const [notices, setNotices] = useState([]);
+  const [selectedNotice, setSelectedNotice] = useState(null);
 
+  // Fetch notices
   useEffect(() => {
     fetch("/json/notice.json")
       .then((res) => res.json())
@@ -19,30 +21,23 @@ const LatestNotice = () => {
       .catch(console.error);
   }, []);
 
-  const today = new Date();
-
+  // Filter active notices and sort pinned first, then createdAt desc
   const activeNotices = useMemo(() => {
-    return notices.filter((n) => {
-      if (n.status !== "active") return false;
-
-      if (n.expiryDate) return new Date(n.expiryDate) >= today;
-      if (n.eventDate) return new Date(n.eventDate) >= today;
-
-      return true;
-    });
+    return notices
+      .filter((n) => n.status === "active")
+      .sort((a, b) => {
+        // pinned first
+        if (b.isPinned && !a.isPinned) return 1;
+        if (a.isPinned && !b.isPinned) return -1;
+        // then sort by createdAt descending
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
   }, [notices]);
 
-  const importantNotices = useMemo(
-    () => activeNotices.filter((n) => n.isImportant),
-    [activeNotices]
-  );
-
-
   return (
-    <div className=''>
-      <div className='custom-container'>
-
-
+    <div className="">
+      <div className="custom-container">
+        {/* Section Heading */}
         <SectionHeading
           title={t("latest_notices")}
           pathname={t("view_all")}
@@ -50,35 +45,41 @@ const LatestNotice = () => {
           textcolor={"text-black"}
         />
 
-
+        {/* Swiper Carousel */}
         <Swiper
           slidesPerView={1}
-          spaceBetween={20}
+          spaceBetween={16}
           modules={[Autoplay]}
           autoplay={{
-            delay: 1000,
+            delay: 3500,
             disableOnInteraction: false,
           }}
           loop={true}
           breakpoints={{
-            500: { slidesPerView: 1, spaceBetween: 10 },
-            765: { slidesPerView: 2, spaceBetween: 10 },
-            1024: { slidesPerView: 3, spaceBetween: 16 },
+            500: { slidesPerView: 1, spaceBetween: 12 },
+            765: { slidesPerView: 2, spaceBetween: 16 },
+            1024: { slidesPerView: 3, spaceBetween: 20 },
           }}
-
-          className=" rounded-md "
+          className="rounded-md "
         >
-          {importantNotices.map((notice, idx) => (
-            <SwiperSlide key={idx}>
-              <NoticeCard key={notice.id} notice={notice} />
+          {activeNotices.map((notice) => (
+            <SwiperSlide key={notice.slug} className="my-4">
+              <NoticeCard
+                notice={notice}
+                onPreview={setSelectedNotice} 
+              />
             </SwiperSlide>
           ))}
         </Swiper>
-
-
       </div>
-    </div>
-  )
-}
 
-export default LatestNotice
+      {/* Preview Modal */}
+      <PreviewModal
+        selected={selectedNotice}
+        onClose={() => setSelectedNotice(null)}
+      />
+    </div>
+  );
+};
+
+export default LatestNotice;

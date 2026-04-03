@@ -20,7 +20,7 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
       <Toaster position="top-right" />
 
       {/* Desktop Sidebar */}
@@ -42,27 +42,31 @@ const AdminLayout = () => {
             transition={{ duration: 0.25 }}
             className="relative w-64 h-full bg-white shadow-xl"
           >
-            <SidebarContent collapsed={false} toggleCollapsed={() => setSidebarOpen(false)} />
+            <SidebarContent
+              collapsed={false}
+              toggleCollapsed={() => setSidebarOpen(false)}
+            />
           </motion.aside>
         </div>
       )}
 
-      <div className="flex-1 flex flex-col h-screen">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
         <header className="h-14 bg-white border-b flex items-center px-4 sticky top-0 z-40">
-          <button className="lg:hidden mr-3" onClick={() => setSidebarOpen(true)}>
+          <button
+            className="lg:hidden mr-3"
+            onClick={() => setSidebarOpen(true)}
+          >
             <HiMenu size={22} />
           </button>
-          <h1 className="text-lg font-semibold text-gray-800">Maa Doyamoyee Admin</h1>
+          <h1 className="text-lg font-semibold text-gray-800">
+            Maa Doyamoyee Admin
+          </h1>
         </header>
 
-        <motion.main
-          className="flex-1 overflow-y-auto p-4 md:p-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-        >
+        <main className="flex-1 overflow-y-auto p-4 md:p-8">
           <Outlet />
-        </motion.main>
+        </main>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { lazy, Suspense, useEffect } from "react";
 import LoadingPage from "../components/LoadingPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import { HelmetProvider } from "react-helmet-async";
+import UserTable from "../pages/UserTable/UserTable";
 
 /**
  * 🔥 Smart Suspense Wrapper
@@ -23,10 +24,10 @@ const EventDetailsPage = lazy(() => import("../pages/EventsPage/EventDetailsPage
 const ContactPage = lazy(() => import("../pages/ContactPage/ContactPage"));
 const Donation = lazy(() => import("../pages/Donate/Donation"));
 
-const AuthLayout = lazy(() => import("../layouts/AuthLayout"));
-const Signup = lazy(() => import("../pages/Auth/Signup"));
-const Signin = lazy(() => import("../pages/Auth/Signin"));
-const ResetPassword = lazy(() => import("../pages/Auth/ResetPassword"));
+const Signup = lazy(() => import("../pages/Authentication/Signup"));
+const Signin = lazy(() => import("../pages/Authentication/Signin"));
+const ResetPassword = lazy(() => import("../pages/Authentication/ResetPassword"));
+const ForgotPassword = lazy(() => import("../pages/Authentication/ForgotPassword"));
 
 const DashboardLayout = lazy(() => import("../layouts/AdminLayout"));
 const MainLayout = lazy(() => import("../layouts/MainLayout"));
@@ -39,8 +40,7 @@ const AdminUsers = lazy(() => import("../pages/Admin/AdminUsers"));
 const AdminMessages = lazy(() => import("../pages/Admin/AdminMessages"));
 const AdminBlogs = lazy(() => import("../pages/Admin/AdminBlogs"));
 
-const NoticePage = lazy(() => import("../pages/NoticePage/NoticePage"));
-const NoticeDetails = lazy(() => import("../pages/NoticePage/NoticeDetails"));
+const NoticePage = lazy(() => import("../pages/NoticePage/NoticePage")); 
 
 const BlogsPage = lazy(() => import("../pages/BlogsPage/BlogsPage"));
 const BlogsDetails = lazy(() => import("../pages/BlogsPage/BlogsDetails"));
@@ -79,6 +79,7 @@ export const router = createBrowserRouter([
     errorElement: withSuspense(ErrorPage),
     children: [
       { path: "/", element: withSuspense(Home) },
+      { path: "/usertable", element: withSuspense(AdminNotices) },
       { path: "/history", element: withSuspense(HistoryPage) },
       { path: "/gallery", element: withSuspense(GalleryPage) },
       { path: "/videos", element: withSuspense(VideoPage) },
@@ -93,22 +94,21 @@ export const router = createBrowserRouter([
       { path: "/events", element: withSuspense(EventsPage) },
       { path: "/events/:slug", element: withSuspense(EventDetailsPage) },
 
-      { path: "/notices", element: withSuspense(NoticePage) },
-      { path: "/notices/:id", element: withSuspense(NoticeDetails) },
+      { path: "/notices", element: withSuspense(NoticePage) }, 
 
       { path: "/blogs", element: withSuspense(BlogsPage) },
       { path: "/blogs/:slug", element: withSuspense(BlogsDetails) },
-    ],
-  },
-  {
-    path: "/auth",
-    element: withSuspense(AuthLayout),
-    children: [
+    
+      
+
+
       { path: "signup", element: withSuspense(Signup) },
       { path: "signin", element: withSuspense(Signin) },
+      { path: "forgot-password", element: withSuspense(ForgotPassword) },
       { path: "reset-password", element: withSuspense(ResetPassword) },
     ],
   },
+
   {
     path: "/admin",
     element: withSuspense(DashboardLayout),

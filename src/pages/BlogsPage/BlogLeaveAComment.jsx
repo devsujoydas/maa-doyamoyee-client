@@ -50,7 +50,7 @@ const BlogLeaveAComment = ({ user }) => {
         <div className="text-center text-gray-700">
           <p className="mb-3 text-sm sm:text-base">{t("login_to_comment")}</p>
           <button
-            onClick={() => navigate("/auth/signin")}
+            onClick={() => navigate("/signin")}
             className="bg-[#7E4555] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:bg-[#B5697E] transition text-sm sm:text-base cursor-pointer"
           >
             {t("auth_signin")}

@@ -24,7 +24,7 @@ export const DataProvider = ({ children }) => {
         ] = await Promise.all([
           fetch("/json/users.json").then((res) => res.json()),
           fetch("/json/blogs.json").then((res) => res.json()),
-          fetch("/json/notice.json").then((res) => res.json()),
+          fetch("http://localhost:5000/api/v1/notices").then((res) => res.json()),
           fetch("/json/events.json").then((res) => res.json()),
           fetch("/json/donation.json").then((res) => res.json()),
           fetch("/json/messages.json").then((res) => res.json()),

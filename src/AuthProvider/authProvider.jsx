@@ -1,70 +1,77 @@
-import  { createContext, useContext, useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import api from "../utils/api";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import api from "../utils/api"; // jeita tumi age interceptor setup korecho
 
 const AuthContext = createContext();
 
-const fetchProfile = async () => {
-  try {
-    const { data } = await api.get("/users/profile");
-    return data;
-  } catch (err) {
-    if (err.response?.status === 401) return null;
-    throw err;
-  }
-};
-
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const {
-    data,
-    isLoading,
-    isError,
-    isFetching,
-  } = useQuery({
-    queryKey: ["profile"],
-    queryFn: fetchProfile,
-    staleTime: 5 * 1000,
-    retry: 1,
-    refetchOnWindowFocus: false,
-  });
-
-  useEffect(() => {
-    if (data !== undefined) {
-      setUser(data); 
-      if (data) {
-        localStorage.setItem("user", JSON.stringify(data));
-      } else {
-        localStorage.removeItem("user");
-      }
+  // fetch logged-in user profile
+  const fetchUser = async () => {
+    setLoading(true);
+    try {
+      const { data } = await api.get("/users/profile");
+      setUser(data.user || null);
+      console.log(data)
+      setError(null);
+    } catch (err) {
+      console.error("Failed to fetch user:", err);
+      setUser(null);
+      setError(err);
+    } finally {
+      setLoading(false);
     }
-  }, [data]);
+  };
 
+  // run once on mount
   useEffect(() => {
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
-    } else {
-      localStorage.removeItem("user");
+    fetchUser();
+  }, []);
+
+  // login function (optional)
+  const login = async (credentials) => {
+    try {
+      const { data } = await api.post("/auth/login", credentials, { withCredentials: true });
+      localStorage.setItem("accessToken", data.accessToken);
+      await fetchUser();
+      return data;
+    } catch (err) {
+      console.error("Login error:", err);
+      throw err;
     }
-  }, [user]);
+  };
 
-  const value = { user, setUser, isLoading, isError, isFetching };
-
-  if (isFetching && !user) {
-    return (
-      <div className="h-screen flex justify-center items-center">
-        <div className="h-10 w-10 border-y-2 rounded-full animate-spin"></div>
-      </div>
-    );
-  }
+  // logout function
+  const logout = async () => {
+    try {
+      await api.post("/auth/logout", {}, { withCredentials: true });
+    } catch (err) {
+      console.error("Logout failed:", err);
+    } finally {
+      localStorage.removeItem("accessToken");
+      setUser(null);
+    }
+  };
 
   return (
-    <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        error,
+        login,
+        logout,
+        refreshUser: fetchUser, // manually refresh user
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+// custom hook
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
