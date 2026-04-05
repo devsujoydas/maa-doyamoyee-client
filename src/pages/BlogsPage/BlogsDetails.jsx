@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import BlogDetailsLeft from "./BlogDetailsLeft";
 import BlogDetailsRight from "./BlogDetailsRight";
 import { useNavigate, useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useData } from "../../context/DataContext";
+import { useTranslation } from "react-i18next"; 
 import api from "../../utils/api";
 import toast from "react-hot-toast";
+import { useData } from "../../context/useData";
 
 const BlogsDetails = () => {
   const { t } = useTranslation();

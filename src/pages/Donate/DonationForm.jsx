@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { FaUpload } from "react-icons/fa";
 
 const DonationForm = () => {
   const { t } = useTranslation();
@@ -31,7 +32,7 @@ const DonationForm = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     toast.success(t("donation.donation_success"));
   };
 
@@ -95,7 +96,9 @@ const DonationForm = () => {
 
           {/* Payment Method */}
           <div>
-            <label className="font-medium">{t("donation.payment_method")}</label>
+            <label className="font-medium">
+              {t("donation.payment_method")}
+            </label>
             <select
               name="paymentMethod"
               value={formData.paymentMethod}
@@ -103,7 +106,9 @@ const DonationForm = () => {
               className="input-field"
             >
               <option value="bank">{t("donation.bank_transfer")}</option>
-              <option value="mobile">{t("donation.mobile_banking_option")}</option>
+              <option value="mobile">
+                {t("donation.mobile_banking_option")}
+              </option>
             </select>
           </div>
 
@@ -124,7 +129,9 @@ const DonationForm = () => {
               </div>
 
               <div>
-                <label className="font-medium">{t("donation.account_number")}</label>
+                <label className="font-medium">
+                  {t("donation.account_number")}
+                </label>
                 <input
                   type="text"
                   name="accountNumber"
@@ -137,7 +144,9 @@ const DonationForm = () => {
               </div>
 
               <div>
-                <label className="font-medium">{t("donation.branch_name")}</label>
+                <label className="font-medium">
+                  {t("donation.branch_name")}
+                </label>
                 <input
                   type="text"
                   name="branchName"
@@ -150,7 +159,9 @@ const DonationForm = () => {
               </div>
 
               <div>
-                <label className="font-medium">{t("donation.routing_number")}</label>
+                <label className="font-medium">
+                  {t("donation.routing_number")}
+                </label>
                 <input
                   type="text"
                   name="routingNumber"
@@ -163,7 +174,9 @@ const DonationForm = () => {
               </div>
 
               <div className="sm:col-span-2">
-                <label className="font-medium">{t("donation.sender_account")}</label>
+                <label className="font-medium">
+                  {t("donation.sender_account")}
+                </label>
                 <input
                   type="text"
                   name="senderAccount"
@@ -181,7 +194,9 @@ const DonationForm = () => {
           {formData.paymentMethod === "mobile" && (
             <>
               <div>
-                <label className="font-medium">{t("donation.select_mobile_banking")}</label>
+                <label className="font-medium">
+                  {t("donation.select_mobile_banking")}
+                </label>
                 <select
                   name="mobileBankName"
                   value={formData.mobileBankName}
@@ -189,7 +204,9 @@ const DonationForm = () => {
                   required
                   className="input-field"
                 >
-                  <option value="">{t("donation.select_mobile_banking")}</option>
+                  <option value="">
+                    {t("donation.select_mobile_banking")}
+                  </option>
                   <option value="bkash">bKash</option>
                   <option value="nagad">Nagad</option>
                   <option value="rocket">Rocket</option>
@@ -198,7 +215,9 @@ const DonationForm = () => {
               </div>
 
               <div>
-                <label className="font-medium">{t("donation.sender_mobile")}</label>
+                <label className="font-medium">
+                  {t("donation.sender_mobile")}
+                </label>
                 <input
                   type="text"
                   name="senderMobile"
@@ -214,7 +233,9 @@ const DonationForm = () => {
 
           {/* Amount */}
           <div>
-            <label className="font-medium">{t("donation.donation_amount")}</label>
+            <label className="font-medium">
+              {t("donation.donation_amount")}
+            </label>
             <input
               type="number"
               name="amount"
@@ -228,7 +249,9 @@ const DonationForm = () => {
 
           {/* Transaction ID */}
           <div>
-            <label className="font-medium">{t("donation.transaction_id")}</label>
+            <label className="font-medium">
+              {t("donation.transaction_id")}
+            </label>
             <input
               type="text"
               name="transactionID"
@@ -242,7 +265,9 @@ const DonationForm = () => {
 
           {/* Screenshot */}
           <div className="sm:col-span-2">
-            <label className="font-medium">{t("donation.upload_screenshot")}</label>
+            <label className="font-medium">
+              {t("donation.upload_screenshot")}
+            </label>
             <label className="upload-area">
               {formData.screenshot ? (
                 <img
@@ -251,7 +276,20 @@ const DonationForm = () => {
                   alt="proof"
                 />
               ) : (
-                <p>{t("donation.upload_hint")}</p>
+                <div className="flex flex-col items-center">
+                  <div className="w-14 h-14 bg-[#EDE9EA] flex items-center justify-center rounded-lg mb-4">
+                    <FaUpload className="text-2xl text-[#4b1e2f]" />
+                  </div>
+                  <p className="text-gray-600">
+                    Drop your image here, or{" "}
+                    <span className="text-[#4b1e2f] cursor-pointer font-medium">
+                      browse
+                    </span>
+                  </p>
+                  <p className="text-sm text-gray-400 mt-1">
+                    Supports: PNG, JPG, JPEG, WEBP
+                  </p>
+                </div>
               )}
               <input
                 type="file"

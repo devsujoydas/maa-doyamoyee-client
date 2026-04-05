@@ -34,6 +34,7 @@ const SupporttheTemple = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
+          className="flex justify-center items-center"
         >
           <Link to="/donate">
             <button className="btn-primary">

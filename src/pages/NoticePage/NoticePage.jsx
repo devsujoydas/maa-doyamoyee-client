@@ -3,8 +3,8 @@ import PageHeading from "../../shared/PageHeading";
 import { useTranslation } from "react-i18next";
 
 import PreviewModal from "./PreviewModal";
-import NoticeCard from "./NoticeCard";
-import { useData } from "../../context/DataContext";
+import NoticeCard from "./NoticeCard"; 
+import { useData } from "../../context/useData";
 
 /* -------------------- Main Page -------------------- */
 const NoticePage = () => {

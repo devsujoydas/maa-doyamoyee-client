@@ -180,7 +180,7 @@ const Header = () => {
                 >
                   {user ? (
                     <>
-                      {user.role == "admin" && (
+                      {user?.role == "admin" && (
                         <Link
                           to="/admin"
                           className="block px-4 py-2 hover:bg-yellow-100 hover:text-black transition-colors"

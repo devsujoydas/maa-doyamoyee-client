@@ -4,9 +4,10 @@ import { Outlet } from "react-router-dom";
 import SidebarContent from "../components/SidebarContent";
 import { motion } from "framer-motion";
 import { HiMenu } from "react-icons/hi";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast"; 
 
 const AdminLayout = () => {
+ 
   const [collapsed, setCollapsed] = useState(
     localStorage.getItem("sidebar-collapsed") === "true"
   );
@@ -18,6 +19,7 @@ const AdminLayout = () => {
       return !prev;
     });
   };
+
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
@@ -52,7 +54,7 @@ const AdminLayout = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-14 bg-white border-b flex items-center px-4 sticky top-0 z-40">
+        <header className=" bg-white border-b border-zinc-200 flex items-center p-4 sticky top-0 z-40">
           <button
             className="lg:hidden mr-3"
             onClick={() => setSidebarOpen(true)}

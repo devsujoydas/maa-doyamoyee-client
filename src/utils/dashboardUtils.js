@@ -1,5 +1,6 @@
 export const filterByYear = (data, field, year) => {
-  return data.filter((item) => {
+  console.log(data);
+  return data?.filter((item) => {
     const d = new Date(item[field]);
     return d.getFullYear() === year;
   });
@@ -25,7 +26,7 @@ export const generateMonthlyData = (data, dateField, valueField = null) => {
 
 export const calculateGrowth = (data, dateField) => {
   const sorted = [...data].sort(
-    (a, b) => new Date(a[dateField]) - new Date(b[dateField])
+    (a, b) => new Date(a[dateField]) - new Date(b[dateField]),
   );
 
   const mid = Math.floor(sorted.length / 2);

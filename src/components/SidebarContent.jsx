@@ -12,9 +12,11 @@ import {
   Mail,
   Users,
 } from "lucide-react";
+import { useAuth } from "../AuthProvider/authProvider";
 
-const SidebarContent = ({ collapsed, toggleCollapsed, admin, logout }) => {
+const SidebarContent = ({ collapsed, toggleCollapsed, logout }) => {
   const location = useLocation();
+  const { user } = useAuth();
 
   const adminLinks = [
     { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
@@ -30,17 +32,17 @@ const SidebarContent = ({ collapsed, toggleCollapsed, admin, logout }) => {
   return (
     <motion.aside
       animate={{ width: collapsed ? 72 : 256 }}
-      className="flex flex-col h-full bg-[#2C2421] text-[#F9F7F5]"
+      className="flex flex-col h-full border border-zinc-100 shadow-lg bg-white"
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-zinc-500">
+      <div className="flex items-center justify-between p-3.5 border-b border-zinc-200">
         {!collapsed && (
           <h2 className="text-lg font-bold text-nowrap">Admin Dashboard</h2>
         )}
 
         <button
           onClick={toggleCollapsed}
-          className="hover:bg-white/10 cursor-pointer rounded-sm p-1"
+          className="hover:bg-black/10 cursor-pointer rounded-sm p-1"
         >
           {collapsed ? <ChevronRight /> : <ChevronLeft />}
         </button>
@@ -55,8 +57,8 @@ const SidebarContent = ({ collapsed, toggleCollapsed, admin, logout }) => {
             title={link.label}
             className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
               location.pathname === link.path
-                ? "bg-[#CF4517] text-white"
-                : "text-zinc-300 hover:bg-white/10"
+                ? "bg-black text-white"
+                : " hover:bg-black/10"
             } ${collapsed ? "justify-center" : ""}`}
           >
             <link.icon size={18} />
@@ -66,16 +68,13 @@ const SidebarContent = ({ collapsed, toggleCollapsed, admin, logout }) => {
       </nav>
 
       {/* Bottom Section */}
-      <div className="mt-auto p-3 border-t border-white/10 space-y-2">
-        {!collapsed && admin && (
-          <p className="text-xs text-white/40 truncate px-2">
-            {"admin@maa-doyamoyee.com"}
-          </p>
+      <div className="mt-auto p-3 border-t border-black/10 space-y-2">
+        {!collapsed && (
+          <p className="text-xs text-black truncate px-2">{user.email}</p>
         )}
-
         <button
           onClick={logout}
-          className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-red-400 hover:bg-red-500/10 transition ${
+          className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm cursor-pointer font-medium text-red-400 hover:bg-red-500/10 transition ${
             collapsed ? "justify-center" : ""
           }`}
         >

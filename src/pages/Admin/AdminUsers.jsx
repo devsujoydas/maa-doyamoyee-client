@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import { Trash2, Eye, UserCheck, User } from "lucide-react";
 import toast from "react-hot-toast";
 import UserViewModal from "../../components/modals/UserViewModal";
-import DeleteModal from "../../components/modals/DeleteModal";
-import { useData } from "../../context/DataContext";
+import DeleteModal from "../../components/modals/DeleteModal"; 
+import { MdVerified } from "react-icons/md";
+import { useData } from "../../context/useData";
 
 const AdminUsers = () => {
   const { users, refetchUsers } = useData();
@@ -27,7 +28,7 @@ const AdminUsers = () => {
 
   // Confirm delete
   const confirmDelete = () => {
-    const updatedUsers = users.filter((u) => u._id !== selectedUser._id);
+    const updatedUsers = users?.filter((u) => u._id !== selectedUser._id);
 
     // Update React Query cache manually
     refetchUsers({ queryKey: ["users"], queryFn: () => updatedUsers });
@@ -78,25 +79,39 @@ const AdminUsers = () => {
 
           <tbody className="divide-y divide-gray-200">
             {users.map((user) => (
-              <tr key={user._id} className="hover:bg-gray-50">
+              <tr key={user?._id} className="hover:bg-gray-50">
                 <td className="px-6 py-3 flex items-center space-x-3">
-                  <img loading="lazy"
-                    className="h-10 w-10 rounded-full object-cover"
-                    src={user.profileImage}
-                    alt={user.name}
-                  />
+                  <div className="h-10 w-10 rounded-full object-cover overflow-hidden object-center">
+                    <img
+                      loading="lazy"
+                      className=" rounded-full object-center "
+                      src={user?.profileImage}
+                      alt={user?.name}
+                    />
+                  </div>
                   <div>
-                    <div className="text-sm font-medium text-gray-900">
-                      {user.name}
+                    <div className="text-sm font-medium text-gray-900 text-nowrap flex justify-start items-center gap-1">
+                      {user?.name}
+                      {user?.isVerified && (
+                        <MdVerified
+                          size={14}
+                          className="text-blue-500"
+                          title="Verified"
+                        />
+                      )}
                     </div>
-                    <div className="text-sm text-gray-500">@{user.username}</div>
+                    <div className="text-sm text-gray-500 -mt-1">
+                      @{user?.username}
+                    </div>
                   </div>
                 </td>
 
-                <td className="px-6 py-3 text-sm text-gray-500">{user.email}</td>
+                <td className="px-6 py-3 text-sm text-gray-500">
+                  {user?.email}
+                </td>
 
                 <td className="px-6 py-3 text-sm">
-                  {user.role === "admin" ? (
+                  {user?.role === "admin" ? (
                     <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
                       <UserCheck className="mr-1 w-3 h-3" /> Admin
                     </span>
@@ -108,13 +123,13 @@ const AdminUsers = () => {
                 </td>
 
                 <td className="px-6 py-3 text-sm text-gray-500">
-                  {new Date(user.createdAt).toLocaleDateString()}
+                  {new Date(user?.createdAt).toLocaleDateString()}
                 </td>
 
                 <td className="px-6 py-3 text-center space-x-3">
                   <motion.button
                     whileHover={{ scale: 1.2 }}
-                    className="text-blue-600 hover:text-blue-800"
+                    className="text-blue-600 hover:text-blue-800 cursor-pointer"
                     onClick={() => handleView(user)}
                   >
                     <Eye size={18} />
@@ -123,7 +138,7 @@ const AdminUsers = () => {
                   {user.role !== "admin" && (
                     <motion.button
                       whileHover={{ scale: 1.2 }}
-                      className="text-red-600 hover:text-red-800"
+                      className="text-red-600 hover:text-red-800  cursor-pointer"
                       onClick={() => handleDelete(user)}
                     >
                       <Trash2 size={18} />
@@ -139,10 +154,9 @@ const AdminUsers = () => {
       {/* Modals */}
       {selectedUser && (
         <UserViewModal
-          actionModalOpen={viewModalOpen}
-          setActionModalOpen={setViewModalOpen}
-          selectedUser={selectedUser}
-          setDeleteModalOpen={setDeleteModalOpen}
+          isOpen={viewModalOpen}
+          setOpen={setViewModalOpen}
+          user={selectedUser}
         />
       )}
 

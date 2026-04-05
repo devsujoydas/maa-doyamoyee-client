@@ -5,13 +5,13 @@ import toast from "react-hot-toast";
 import { HiTrash } from "react-icons/hi";
 import { Eye, Plus, Edit2 } from "lucide-react";
 
-import SEOHead from "../../components/SEOHead";
-import { useData } from "../../context/DataContext";
+import SEOHead from "../../components/SEOHead"; 
 import { formatDateDynamic } from "../../utils/formatDateDynamic";
 
 import BlogViewModal from "../../components/modals/BlogViewModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import BlogFormModal from "../../components/modals/BlogFormModal";
+import { useData } from "../../context/useData";
 
 const AdminBlogs = () => {
   const { blogs, setBlogs } = useData();
@@ -79,7 +79,7 @@ const AdminBlogs = () => {
         </h1>
 
         <button
-          className="flex items-center gap-1 sm:gap-2 bg-[#CF4517] hover:bg-[#e24e1c] active:scale-95 transition-all text-white cursor-pointer px-2 sm:px-4 py-2 rounded-md sm:text-base text-sm sm:rounded-lg"
+          className="btn-primary"
           onClick={() => openFormModal(null)}
         >
           <Plus size={16} /> Add Blog

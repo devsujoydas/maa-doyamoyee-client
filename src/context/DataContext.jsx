@@ -1,6 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useEffect, useState } from "react";
+import api from "../utils/api"; // api should be Axios instance
+import axios from "axios";
 
-const DataContext = createContext();
+export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
@@ -22,22 +25,20 @@ export const DataProvider = ({ children }) => {
           donationsRes,
           messagesRes,
         ] = await Promise.all([
-          fetch("/json/users.json").then((res) => res.json()),
-          fetch("http://localhost:5000/api/v1/posts").then((res) => res.json()),
-          fetch("http://localhost:5000/api/v1/notices").then((res) =>
-            res.json(),
-          ),
-          fetch("/json/events.json").then((res) => res.json()),
-          fetch("/json/donation.json").then((res) => res.json()),
-          fetch("/json/messages.json").then((res) => res.json()),
+          api.get("/users"),
+          api.get("/posts"),
+          api.get("/notices"),
+          axios.get("/json/events.json"),
+          axios.get("/json/donation.json"),
+          axios.get("/json/messages.json"), 
         ]);
-
-        setUsers(usersRes);
-        setBlogs(blogsRes.posts);
-        setNotices(noticesRes);
-        setEvents(eventsRes);
-        setDonations(donationsRes);
-        setMessages(messagesRes);
+ 
+        setUsers(usersRes.data);
+        setBlogs(blogsRes.data);
+        setNotices(noticesRes.data);
+        setEvents(eventsRes.data);
+        setDonations(donationsRes.data);
+        setMessages(messagesRes.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -65,9 +66,4 @@ export const DataProvider = ({ children }) => {
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
-};
-
-// Custom hook for easy access
-export const useData = () => {
-  return useContext(DataContext);
 };

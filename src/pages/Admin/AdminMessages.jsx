@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
-import Textarea from "../../components/ui/Textarea";
-import { useData } from "../../context/DataContext";
+import Textarea from "../../components/ui/Textarea"; 
+import { useData } from "../../context/useData";
 
 const AdminMessages = () => {
   const {messages, setMessages} = useData();

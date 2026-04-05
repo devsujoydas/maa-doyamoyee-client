@@ -15,7 +15,7 @@ api.interceptors.request.use((config) => {
 });
 
 // 🔁 Refresh logic
-let isRefreshing = false;
+let isRefreshing = true;
 let subscribers = [];
 
 // queue resolve
@@ -79,7 +79,7 @@ api.interceptors.response.use(
         localStorage.removeItem("accessToken");
         delete api.defaults.headers.common["Authorization"];
 
-        window.location.href = "/auth/signin";
+        window.location.href = "/signin";
 
         return Promise.reject(refreshError);
       } finally {

@@ -7,8 +7,8 @@ import toast from "react-hot-toast";
 
 import EventViewModal from "../../components/modals/EventViewModal";
 import EventAddModal from "../../components/modals/EventAddModal"; 
-import DeleteModal from "../../components/modals/DeleteModal";
-import { useData } from "../../context/DataContext";
+import DeleteModal from "../../components/modals/DeleteModal"; 
+import { useData } from "../../context/useData";
 
 const AdminEvents = () => {
   const { events, setEvents } = useData();

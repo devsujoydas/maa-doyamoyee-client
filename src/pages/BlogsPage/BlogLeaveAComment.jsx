@@ -53,7 +53,7 @@ const BlogLeaveAComment = ({ postId, setComments }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
+    <div className="bg-white rounded-2xl border border-zinc-200 shadow-lg p-4 sm:p-6">
       <h2 className="text-xl sm:text-2xl md:text-2xl font-semibold mb-5 text-gray-900">
         {t("leave_comment")}
       </h2>
@@ -79,7 +79,7 @@ const BlogLeaveAComment = ({ postId, setComments }) => {
           </button>
         </form>
       ) : (
-        <div className="text-center text-gray-700">
+        <div className="text-center text-gray-700 flex flex-col justify-center items-center gap-2">
           <p className="mb-3 text-sm sm:text-base">{t("login_to_comment")}</p>
           <button
             onClick={() => navigate("/signin")}

@@ -1,10 +1,10 @@
 import BlogPostCard from "./BlogPostCard";
 import BlogPostComment from "./BlogPostComment";
 import BlogLeaveAComment from "./BlogLeaveAComment";
-import { useTranslation } from "react-i18next"; 
+import { useTranslation } from "react-i18next";
 
 const BlogDetailsLeft = ({ blog, comments, setComments }) => {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   return (
     <div className="w-full sm:w-full lg:w-2/3 2xl:w-2/3 space-y-8 rounded-xl">
@@ -16,16 +16,7 @@ const BlogDetailsLeft = ({ blog, comments, setComments }) => {
         <h2 className="text-xl sm:text-2xl md:text-2xl font-semibold mb-5 text-gray-900">
           {t("comments")}
         </h2>
-
-        {comments?.length > 0 ? (
-          comments.map((comment) => (
-            <BlogPostComment key={comment._id} comment={comment} />
-          ))
-        ) : (
-          <p className="text-gray-500">
-            No comments yet. Be the first to comment!
-          </p>
-        )}
+        <BlogPostComment comments={comments} setComments={setComments} />
       </div>
 
       {/* Leave a Comment */}

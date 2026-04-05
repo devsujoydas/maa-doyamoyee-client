@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
+
     if (token) {
       fetchUser(token);
     } else {
@@ -37,7 +38,8 @@ export const AuthProvider = ({ children }) => {
     }
 
     const handleAuthUpdate = () => {
-      fetchUser();
+      const token = localStorage.getItem("accessToken"); // ✅ FIX
+      fetchUser(token);
     };
 
     window.addEventListener("authUpdated", handleAuthUpdate);

@@ -177,7 +177,7 @@ const UploadPhotoModal = ({ isOpen, onClose, onUpload, type }) => {
         <button
           onClick={handleUpload}
           disabled={loading}
-          className="mt-6 w-full bg-[#4b1e2f] text-white py-3 rounded-lg hover:bg-[#6b0527] transition flex justify-center items-center gap-2 disabled:opacity-50"
+          className="btn-primary w-full mt-5"
         >
           {loading ? "Uploading..." : "Upload"}
         </button>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PageHeading from "../../shared/PageHeading";
-import BlogCard from "../../components/BlogCard";
-import { useData } from "../../context/DataContext";
+import BlogCard from "../../components/BlogCard"; 
+import { useData } from "../../context/useData";
 
 const BlogsPage = () => {
   const {blogs, setBlogs} = useData();
