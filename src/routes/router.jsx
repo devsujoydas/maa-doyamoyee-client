@@ -1,33 +1,34 @@
 // src/router/router.jsx
 /* eslint-disable react-refresh/only-export-components */
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import LoadingPage from "../components/LoadingPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import { HelmetProvider } from "react-helmet-async";
-import UserTable from "../pages/UserTable/UserTable";
 
-/**
- * 🔥 Smart Suspense Wrapper
- */
-const withSuspense = (Component, Loader = LoadingPage) => (
-  <Suspense fallback={<Loader />}>
-    <Component />
-  </Suspense>
-);
+// Auth Guards
+import PrivateRoutes from "./PrivateRoutes";
+import AuthPrivateRoutes from "./AuthPrivateRoutes";
+import AdminPrivateRoutes from "./AdminPrivateRoutes";
 
 /* ---------------- Lazy Pages ---------------- */
 const Home = lazy(() => import("../pages/Home/Home"));
 const HistoryPage = lazy(() => import("../pages/HistoryPage/HistoryPage"));
 const EventsPage = lazy(() => import("../pages/EventsPage/EventsPage"));
-const EventDetailsPage = lazy(() => import("../pages/EventsPage/EventDetailsPage"));
+const EventDetailsPage = lazy(
+  () => import("../pages/EventsPage/EventDetailsPage"),
+);
 const ContactPage = lazy(() => import("../pages/ContactPage/ContactPage"));
 const Donation = lazy(() => import("../pages/Donate/Donation"));
 
 const Signup = lazy(() => import("../pages/Authentication/Signup"));
 const Signin = lazy(() => import("../pages/Authentication/Signin"));
-const ResetPassword = lazy(() => import("../pages/Authentication/ResetPassword"));
-const ForgotPassword = lazy(() => import("../pages/Authentication/ForgotPassword"));
+const ResetPassword = lazy(
+  () => import("../pages/Authentication/ResetPassword"),
+);
+const ForgotPassword = lazy(
+  () => import("../pages/Authentication/ForgotPassword"),
+);
 
 const DashboardLayout = lazy(() => import("../layouts/AdminLayout"));
 const MainLayout = lazy(() => import("../layouts/MainLayout"));
@@ -40,8 +41,7 @@ const AdminUsers = lazy(() => import("../pages/Admin/AdminUsers"));
 const AdminMessages = lazy(() => import("../pages/Admin/AdminMessages"));
 const AdminBlogs = lazy(() => import("../pages/Admin/AdminBlogs"));
 
-const NoticePage = lazy(() => import("../pages/NoticePage/NoticePage")); 
-
+const NoticePage = lazy(() => import("../pages/NoticePage/NoticePage"));
 const BlogsPage = lazy(() => import("../pages/BlogsPage/BlogsPage"));
 const BlogsDetails = lazy(() => import("../pages/BlogsPage/BlogsDetails"));
 
@@ -54,15 +54,18 @@ const ProfilePage = lazy(() => import("../pages/ProfilePage/ProfilePage"));
 const VideoPage = lazy(() => import("../pages/MediaPage/VideoPage"));
 const GalleryPage = lazy(() => import("../pages/MediaPage/GalleryPage"));
 
-/* ---------------- 🔥 Preload Important Pages ---------------- */
+/* ---------------- Suspense Wrapper ---------------- */
+const withSuspense = (Component) => (
+  <Suspense fallback={<LoadingPage />}>{Component}</Suspense>
+);
+
+/* ---------------- Preload Critical Pages ---------------- */
 const PreloadCritical = () => {
   useEffect(() => {
-    // 👇 preload high traffic pages
     import("../pages/EventsPage/EventsPage");
     import("../pages/BlogsPage/BlogsPage");
     import("../pages/NoticePage/NoticePage");
   }, []);
-
   return null;
 };
 
@@ -70,56 +73,81 @@ const PreloadCritical = () => {
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: (
+    element: withSuspense(
       <HelmetProvider>
-        <PreloadCritical /> {/* 🔥 preload added */}
-        {withSuspense(MainLayout)}
-      </HelmetProvider>
+        <PreloadCritical />
+        <MainLayout />
+      </HelmetProvider>,
     ),
-    errorElement: withSuspense(ErrorPage),
+    errorElement: withSuspense(<ErrorPage />),
     children: [
-      { path: "/", element: withSuspense(Home) },
-      { path: "/usertable", element: withSuspense(AdminNotices) },
-      { path: "/history", element: withSuspense(HistoryPage) },
-      { path: "/gallery", element: withSuspense(GalleryPage) },
-      { path: "/videos", element: withSuspense(VideoPage) },
-      { path: "/purohit", element: withSuspense(PurohitPage) },
-      { path: "/committee", element: withSuspense(CommitteePage) },
-      { path: "/advisors", element: withSuspense(AdvisorsPage) },
-      { path: "/members", element: withSuspense(MembersPage) },
-      { path: "/contact", element: withSuspense(ContactPage) },
-      { path: "/donate", element: withSuspense(Donation) },
-      { path: "/profile", element: withSuspense(ProfilePage) },
+      { path: "/", element: withSuspense(<Home />) },
+      { path: "/history", element: withSuspense(<HistoryPage />) },
+      { path: "/gallery", element: withSuspense(<GalleryPage />) },
+      { path: "/videos", element: withSuspense(<VideoPage />) },
+      { path: "/purohit", element: withSuspense(<PurohitPage />) },
+      { path: "/committee", element: withSuspense(<CommitteePage />) },
+      { path: "/advisors", element: withSuspense(<AdvisorsPage />) },
+      { path: "/members", element: withSuspense(<MembersPage />) },
+      { path: "/contact", element: withSuspense(<ContactPage />) },
+      { path: "/donate", element: withSuspense(<Donation />) },
 
-      { path: "/events", element: withSuspense(EventsPage) },
-      { path: "/events/:slug", element: withSuspense(EventDetailsPage) },
+      { path: "/events", element: withSuspense(<EventsPage />) },
+      { path: "/events/:slug", element: withSuspense(<EventDetailsPage />) },
 
-      { path: "/notices", element: withSuspense(NoticePage) }, 
+      { path: "/notices", element: withSuspense(<NoticePage />) },
 
-      { path: "/blogs", element: withSuspense(BlogsPage) },
-      { path: "/blogs/:id", element: withSuspense(BlogsDetails), },
-    
-      
+      { path: "/blogs", element: withSuspense(<BlogsPage />) },
+      { path: "/blogs/:id", element: withSuspense(<BlogsDetails />) },
 
+      // 🔒 Protected User Profile
+      {
+        path: "/profile",
+        element: withSuspense(
+          <PrivateRoutes>
+            <ProfilePage />
+          </PrivateRoutes>,
+        ),
+      },
 
-      { path: "signup", element: withSuspense(Signup) },
-      { path: "signin", element: withSuspense(Signin) },
-      { path: "forgot-password", element: withSuspense(ForgotPassword) },
-      { path: "reset-password", element: withSuspense(ResetPassword) },
+      // 🔑 Auth pages (redirect if already logged in)
+      {
+        path: "signin",
+        element: withSuspense(
+          <AuthPrivateRoutes>
+            <Signin />
+          </AuthPrivateRoutes>,
+        ),
+      },
+      {
+        path: "signup",
+        element: withSuspense(
+          <AuthPrivateRoutes>
+            <Signup />
+          </AuthPrivateRoutes>,
+        ),
+      },
+      { path: "forgot-password", element: withSuspense(<ForgotPassword />) },
+      { path: "reset-password", element: withSuspense(<ResetPassword />) },
     ],
   },
 
+  // 🔒 Admin Routes (Protected via PrivateRoutes)
   {
     path: "/admin",
-    element: withSuspense(DashboardLayout),
+    element: withSuspense(
+      <AdminPrivateRoutes>
+        <DashboardLayout />
+      </AdminPrivateRoutes>,
+    ),
     children: [
-      { path: "", element: withSuspense(AdminOverview) },
-      { path: "users", element: withSuspense(AdminUsers) },
-      { path: "messages", element: withSuspense(AdminMessages) },
-      { path: "blogs", element: withSuspense(AdminBlogs) },
-      { path: "notices", element: withSuspense(AdminNotices) },
-      { path: "events", element: withSuspense(AdminEvents) },
-      { path: "donations", element: withSuspense(AdminDonations) },
+      { path: "", element: withSuspense(<AdminOverview />) },
+      { path: "users", element: withSuspense(<AdminUsers />) },
+      { path: "messages", element: withSuspense(<AdminMessages />) },
+      { path: "blogs", element: withSuspense(<AdminBlogs />) },
+      { path: "notices", element: withSuspense(<AdminNotices />) },
+      { path: "events", element: withSuspense(<AdminEvents />) },
+      { path: "donations", element: withSuspense(<AdminDonations />) },
     ],
   },
 ]);

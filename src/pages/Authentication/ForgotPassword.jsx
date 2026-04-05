@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";

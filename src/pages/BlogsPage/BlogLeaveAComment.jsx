@@ -4,10 +4,9 @@ import { IoIosSend } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthProvider/authProvider";
 import api from "../../utils/api";
-import toast from "react-hot-toast";
-import { ChevronsLeftRightEllipsis } from "lucide-react";
+import toast from "react-hot-toast"; 
 
-const BlogLeaveAComment = ({ postId, comments, setComments }) => {
+const BlogLeaveAComment = ({ postId, setComments }) => {
   const { user } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();

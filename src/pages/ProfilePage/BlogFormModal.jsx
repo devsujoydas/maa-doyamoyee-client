@@ -3,14 +3,19 @@ import Modal from "../../components/ui/Modal";
 import { FaTimes, FaUpload } from "react-icons/fa";
 import toast from "react-hot-toast";
 import api from "../../utils/api";
+import imageCompression from "browser-image-compression";
 
 const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
+  const [form, setForm] = useState({
+    title: "",
+    content: "",
+    category: "",
+  });
+
   const [postImg, setPostImg] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const fileInputRef = useRef();
 
   const categories = [
@@ -22,46 +27,112 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
     "Announcements",
   ];
 
-  // Preview image
+  // ✅ Preview Image
   useEffect(() => {
-    if (!postImg) return setPreviewUrl(null);
+    if (!postImg) {
+      setPreviewUrl(null);
+      return;
+    }
+
     const objectUrl = URL.createObjectURL(postImg);
     setPreviewUrl(objectUrl);
+
     return () => URL.revokeObjectURL(objectUrl);
   }, [postImg]);
 
   if (!isOpen) return null;
 
-  const handleFileSelect = (e) => {
-    const file = e.target.files[0];
-    if (file) setPostImg(file);
+  // ✅ handle input change
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleDrop = (e) => {
+  // ✅ compress image
+  const compressImage = async (file) => {
+    try {
+      const compressed = await imageCompression(file, {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1024,
+        useWebWorker: true,
+      });
+
+      return compressed;
+    } catch (err) {
+      console.error(err);
+      return file;
+    }
+  };
+
+  // ✅ validate file
+  const validateFile = (file) => {
+    if (!file.type.startsWith("image/")) {
+      toast.error("Only image allowed");
+      return false;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Max 5MB allowed");
+      return false;
+    }
+
+    return true;
+  };
+
+  // ✅ file select
+  const handleFileSelect = async (e) => {
+    const file = e.target.files[0];
+    if (!file || !validateFile(file)) return;
+
+    const compressed = await compressImage(file);
+    setPostImg(compressed);
+  };
+
+  // ✅ drag & drop
+  const handleDrop = async (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
-    if (file) setPostImg(file);
+    if (!file || !validateFile(file)) return;
+
+    const compressed = await compressImage(file);
+    setPostImg(compressed);
   };
 
   const handleDragOver = (e) => e.preventDefault();
 
+  // ✅ remove image
+  const handleRemoveImage = () => {
+    setPostImg(null);
+    setPreviewUrl(null);
+  };
+
+  // ✅ submit
   const handleSubmit = async () => {
-    if (!title || !content || !category) return toast.error("All fields required");
+    const { title, content, category } = form;
+
+    if (!title || !content || !category) {
+      return toast.error("All fields required");
+    }
 
     try {
       setLoading(true);
+
       const formData = new FormData();
       formData.append("title", title);
       formData.append("content", content);
       formData.append("category", category);
-      if (postImg) formData.append("image", postImg);
+
+      if (postImg) {
+        formData.append("image", postImg);
+      }
 
       const res = await api.post("/posts", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
-      onAdd(res.data); // res.data is the post object directly
-      toast.success("Blog created!");
+      onAdd(res.data);
+      toast.success("Blog created successfully 🚀");
       handleClose();
     } catch (err) {
       console.error(err);
@@ -71,10 +142,13 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
     }
   };
 
+  // ✅ reset + close
   const handleClose = () => {
-    setTitle("");
-    setContent("");
-    setCategory("");
+    setForm({
+      title: "",
+      content: "",
+      category: "",
+    });
     setPostImg(null);
     setPreviewUrl(null);
     onClose();
@@ -83,6 +157,7 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
   return (
     <Modal isOpen={isOpen} onClose={handleClose} wClass="max-w-lg">
       <div className="bg-white rounded-xl p-5 relative">
+        {/* Close */}
         <button
           onClick={handleClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
@@ -90,7 +165,9 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
           <FaTimes size={18} />
         </button>
 
-        <h2 className="text-2xl font-semibold mb-4 text-center">Add New Blog</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-center">
+          Add New Blog
+        </h2>
 
         {/* Image Upload */}
         <div
@@ -100,17 +177,31 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
           onClick={() => fileInputRef.current.click()}
         >
           {previewUrl ? (
-            <img
-              src={previewUrl}
-              alt="preview"
-              className="h-full w-full object-contain rounded-lg"
-            />
+            <>
+              <img
+                src={previewUrl}
+                alt="preview"
+                className="h-full w-full object-contain rounded-lg"
+              />
+
+              {/* ❌ remove button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleRemoveImage();
+                }}
+                className="absolute top-2 right-2 bg-black/60 text-white p-1 rounded-full"
+              >
+                <FaTimes size={12} />
+              </button>
+            </>
           ) : (
             <div className="flex flex-col items-center text-gray-400">
               <FaUpload className="text-3xl mb-2" />
               <span>Drag & Drop or Click to select image</span>
             </div>
           )}
+
           <input
             type="file"
             accept="image/*"
@@ -123,25 +214,28 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
         {/* Title */}
         <input
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          name="title"
+          value={form.title}
+          onChange={handleChange}
           placeholder="Title"
           className="w-full border border-zinc-300 rounded-full outline-none px-4 py-2.5 mb-3"
         />
 
         {/* Content */}
         <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
+          name="content"
+          value={form.content}
+          onChange={handleChange}
           placeholder="Content"
-          className="w-full border border-zinc-300 rounded-lg outline-none px-4 py-2.5 mb-3"
           rows={5}
+          className="w-full border border-zinc-300 rounded-lg outline-none px-4 py-2.5 mb-3"
         />
 
         {/* Category */}
         <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          name="category"
+          value={form.category}
+          onChange={handleChange}
           className="w-full border border-zinc-300 rounded-full outline-none px-4 py-2.5 mb-4"
         >
           <option value="">Select Category</option>
@@ -152,6 +246,7 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
           ))}
         </select>
 
+        {/* Submit */}
         <button
           onClick={handleSubmit}
           disabled={loading}
