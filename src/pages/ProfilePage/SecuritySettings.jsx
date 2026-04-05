@@ -1,145 +1,177 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
 import { Lock, Eye, EyeClosed } from "lucide-react";
 import toast from "react-hot-toast";
 import api from "../../utils/api";
+import { motion } from "framer-motion";
 
 
 const SecuritySettings = () => {
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [form, setForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmNewPassword: "",
+  });
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm();
+  const [show, setShow] = useState({
+    current: false,
+    new: false,
+    confirm: false,
+  });
 
-  const newPassword = watch("newPassword");
+  const [errors, setErrors] = useState({});
 
-  const onSubmitPassword = async (data) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!form.currentPassword)
+      newErrors.currentPassword = "Current password is required";
+    if (!form.newPassword) newErrors.newPassword = "New password is required";
+    else if (form.newPassword.length < 8)
+      newErrors.newPassword = "At least 8 characters required";
+    else if (!form.newPassword.match(/^(?=.*[A-Z])(?=.*\d).+$/))
+      newErrors.newPassword = "Must include uppercase & number";
+
+    if (!form.confirmNewPassword)
+      newErrors.confirmNewPassword = "Confirm password is required";
+    else if (form.confirmNewPassword !== form.newPassword)
+      newErrors.confirmNewPassword = "Passwords do not match";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
     try {
-      await api.post("/auth/change-password", {
-        oldPassword: data.currentPassword,
-        newPassword: data.newPassword,
-      });
+      const payload = {
+        currentPassword: form.currentPassword.trim(),
+        newPassword: form.newPassword.trim(),
+        confirmNewPassword: form.confirmNewPassword.trim(),
+      };
+
+      await api.put("/password/change-password", payload);
       toast.success("Password updated successfully!");
-      reset();
+      setForm({ currentPassword: "", newPassword: "", confirmNewPassword: "" });
+      setErrors({});
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to update password");
     }
   };
 
+  const inputWrapper =
+    "input-field flex justify-center items-center gap-2 mt-1 ";
+  const labelClass = "font-light text-sm text-[#4B1E2F] uppercase";
+
   return (
-    <form onSubmit={handleSubmit(onSubmitPassword)} className="flex flex-col gap-4">
-      <div className="bg-[#F5F5F5] px-5 py-6">
+    <form onSubmit={handleSubmit}>
+      {/* Header */}
+      <div className="flex justify-between items-center p-6  bg-[#F9F9F9] rounded-t-xl">
         <h3 className="font-semibold text-lg">Security Settings</h3>
       </div>
 
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
+        className="p-6 space-y-5"
       >
-        <div className="px-5 pt-5 grid gap-5 text-[14px]">
-          {/* Current Password */}
-          <div>
-            <label className="font-light text-[#4B1E2F] uppercase">
-              Current Password
-            </label>
-            <div className="flex items-center gap-2 w-full border-2 border-zinc-300 rounded-md p-2.5 md:p-3.5 mt-2">
-              <Lock className="text-zinc-400 w-5" />
-              <input
-                type={showCurrentPassword ? "text" : "password"}
-                placeholder="Enter current password"
-                {...register("currentPassword", {
-                  required: "Current password is required",
-                })}
-                className="w-full outline-none"
-              />
-              <span
-                onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                className="cursor-pointer"
-              >
-                {showCurrentPassword ? <Eye size={18} /> : <EyeClosed size={18} />}
-              </span>
-            </div>
-            {errors.currentPassword && (
-              <p className="text-red-600 text-sm mt-1">{errors.currentPassword.message}</p>
-            )}
+        {/* Current Password */}
+        <div>
+          <label className={labelClass}>Current Password</label>
+          <div className={inputWrapper}>
+            <Lock className="text-zinc-400 w-4.5  " />
+            <input
+              type={show.current ? "text" : "password"}
+              name="currentPassword"
+              placeholder="Enter current password"
+              value={form.currentPassword}
+              onChange={handleChange}
+              className="w-full outline-none"
+            />
+            <span
+              onClick={() =>
+                setShow((prev) => ({ ...prev, current: !prev.current }))
+              }
+              className="cursor-pointer"
+            >
+              {show.current ? <Eye size={18} /> : <EyeClosed size={18} />}
+            </span>
           </div>
-
-          {/* New Password */}
-          <div>
-            <label className="font-light text-[#4B1E2F] uppercase">
-              New Password
-            </label>
-            <div className="flex items-center gap-2 w-full border-2 border-zinc-300 rounded-md p-2.5 md:p-3.5 mt-2">
-              <Lock className="text-zinc-400 w-5" />
-              <input
-                type={showNewPassword ? "text" : "password"}
-                placeholder="Enter new password"
-                {...register("newPassword", {
-                  required: "New password is required",
-                  minLength: {
-                    value: 8,
-                    message: "Password must be at least 8 characters",
-                  },
-                })}
-                className="w-full outline-none"
-              />
-              <span
-                onClick={() => setShowNewPassword(!showNewPassword)}
-                className="cursor-pointer"
-              >
-                {showNewPassword ? <Eye size={18} /> : <EyeClosed size={18} />}
-              </span>
-            </div>
-            {errors.newPassword && (
-              <p className="text-red-600 text-sm mt-1">{errors.newPassword.message}</p>
-            )}
-          </div>
-
-          {/* Confirm Password */}
-          <div>
-            <label className="font-light text-[#4B1E2F] uppercase">
-              Confirm Password
-            </label>
-            <div className="flex items-center gap-2 w-full border-2 border-zinc-300 rounded-md p-2.5 md:p-3.5 mt-2">
-              <Lock className="text-zinc-400 w-5" />
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                placeholder="Confirm new password"
-                {...register("confirmPassword", {
-                  required: "Confirm password is required",
-                  validate: (value) => value === newPassword || "Passwords do not match",
-                })}
-                className="w-full outline-none"
-              />
-              <span
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="cursor-pointer"
-              >
-                {showConfirmPassword ? <Eye size={18} /> : <EyeClosed size={18} />}
-              </span>
-            </div>
-            {errors.confirmPassword && (
-              <p className="text-red-600 text-sm mt-1">{errors.confirmPassword.message}</p>
-            )}
-          </div>
+          {errors.currentPassword && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.currentPassword}
+            </p>
+          )}
         </div>
 
-        <div className="flex justify-center py-5">
+        {/* New Password */}
+        <div>
+          <label className={labelClass}>New Password</label>
+          <div className={inputWrapper}>
+            <Lock className="text-zinc-400  w-4.5  " />
+            <input
+              type={show.new ? "text" : "password"}
+              name="newPassword"
+              placeholder="Enter new password"
+              value={form.newPassword}
+              onChange={handleChange}
+              className="w-full outline-none"
+            />
+            <span
+              onClick={() => setShow((prev) => ({ ...prev, new: !prev.new }))}
+              className="cursor-pointer"
+            >
+              {show.new ? <Eye size={18} /> : <EyeClosed size={18} />}
+            </span>
+          </div>
+
+         
+          {errors.newPassword && (
+            <p className="text-red-600 text-sm mt-1">{errors.newPassword}</p>
+          )}
+        </div>
+
+        {/* Confirm Password */}
+        <div>
+          <label className={labelClass}>Confirm Password</label>
+          <div className={inputWrapper}>
+            <Lock className="text-zinc-400  w-4.5  " />
+            <input
+              type={show.confirm ? "text" : "password"}
+              name="confirmNewPassword"
+              placeholder="Confirm new password"
+              value={form.confirmNewPassword}
+              onChange={handleChange}
+              className="w-full outline-none"
+            />
+            <span
+              onClick={() =>
+                setShow((prev) => ({ ...prev, confirm: !prev.confirm }))
+              }
+              className="cursor-pointer"
+            >
+              {show.confirm ? <Eye size={18} /> : <EyeClosed size={18} />}
+            </span>
+          </div>
+
+          {errors.confirmNewPassword && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.confirmNewPassword}
+            </p>
+          )}
+        </div>
+
+        {/* Submit */}
+        <div className="flex justify-center pt-3">
           <button
             type="submit"
-            disabled={isSubmitting}
             className="btn-primary"
           >
-            {isSubmitting ? "Saving..." : "Save Changes"}
+            Save Changes
           </button>
         </div>
       </motion.div>

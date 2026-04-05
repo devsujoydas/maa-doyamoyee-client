@@ -125,7 +125,7 @@ const BlogDetailsRight = ({ blog, recentPosts = [] }) => {
             placeholder={t("search_placeholder")}
             className="border border-gray-300 rounded-l-xl p-2 sm:p-3 w-full text-sm sm:text-base focus:ring-2 focus:ring-[#7E4555] focus:outline-none"
           />
-          <button className="bg-[#7E4555] text-white px-3 sm:px-4 py-2 sm:py-3 rounded-r-xl hover:bg-[#B5697E] text-sm sm:text-base cursor-pointer active:scale-95 transition-all">
+          <button className="btn-primary">
             {t("search")}
           </button>
         </div>

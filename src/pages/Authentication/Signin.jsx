@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Eye, EyeClosed, EyeOff } from "lucide-react";
 import toast from "react-hot-toast";
 import api from "../../utils/api";
 import { useTranslation } from "react-i18next";
@@ -76,7 +76,7 @@ const Signin = () => {
                 required
                 type="email"
                 placeholder={t("auth.email_placeholder")}
-                className="w-full mt-1 border border-zinc-300 rounded-full px-4 py-2.5 md:px-4 md:py-3 outline-none focus:border-zinc-400"
+                className="input-field"
               />
             </div>
 
@@ -85,7 +85,7 @@ const Signin = () => {
               <label className="text-sm font-medium">
                 {t("auth.password")}
               </label>
-              <div className="relative mt-1 border border-zinc-300 rounded-full px-4 py-2.5 md:px-4 md:py-3 flex items-center focus-within:border-zinc-400">
+              <div className="relative mt-1 input-field">
                 <input
                   name="password"
                   required
@@ -96,9 +96,9 @@ const Signin = () => {
                 <button
                   type="button"
                   onClick={() => setShow(!show)}
-                  className="absolute right-4"
+                  className="absolute right-4 top-3.5 cursor-pointer "
                 >
-                  {show ? <EyeOff size={20} /> : <Eye size={20} />}
+                  {show? <Eye size={18} /> : <EyeClosed size={18} />}
                 </button>
               </div>
             </div>
@@ -117,7 +117,7 @@ const Signin = () => {
             </div>
 
             {/* Button */}
-            <button className="bg-black text-white py-2 md:py-2  rounded-full hover:bg-zinc-700">
+            <button className="btn-primary">
               {t("auth.login_btn")}
             </button>
           </form>

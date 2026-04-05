@@ -1,37 +1,36 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Eye, EyeClosed } from "lucide-react";
 import toast from "react-hot-toast";
 import api from "../../utils/api";
 import { useTranslation } from "react-i18next";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useAuth } from "../../AuthProvider/authProvider";
 
 const Signup = () => {
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
   const { setUser } = useAuth();
+  const [error, setError] = useState("");
 
   const signUpHandler = async (e) => {
     e.preventDefault();
     const name = e.target.fullname.value;
     const phone = e.target.phone.value;
     const email = e.target.email.value;
-    const password = e.target.password.value;
+    const pwd = e.target.password.value;
 
     try {
       const res = await api.post("/auth/signup", {
         name,
         phone,
         email,
-        password,
+        password: pwd,
       });
 
       setUser(res.data.user);
-
       localStorage.setItem("accessToken", res.data.accessToken);
       toast.success(res.data.message || "Signup successful!");
       navigate("/");
@@ -86,7 +85,7 @@ const Signup = () => {
                 name="fullname"
                 required
                 placeholder={t("auth.fullname_placeholder")}
-                className="w-full mt-1 border border-zinc-300 rounded-full  px-4 py-2.5 md:px-4 md:py-3"
+                className="mt-1 input-field"
               />
             </div>
 
@@ -97,7 +96,7 @@ const Signup = () => {
                 name="phone"
                 required
                 placeholder={t("auth.phone_placeholder")}
-                className="w-full mt-1 border border-zinc-300 rounded-full  px-4 py-2.5 md:px-4 md:py-3"
+                className="mt-1 input-field"
               />
             </div>
 
@@ -109,7 +108,7 @@ const Signup = () => {
                 required
                 type="email"
                 placeholder={t("auth.email_placeholder")}
-                className="w-full mt-1 border border-zinc-300 rounded-full  px-4 py-2.5 md:px-4 md:py-3"
+                className="mt-1 input-field"
               />
             </div>
 
@@ -118,22 +117,29 @@ const Signup = () => {
               <label className="text-sm font-medium">
                 {t("auth.password")}
               </label>
-              <div className="relative mt-1 border border-zinc-300 rounded-full  px-4 py-2.5 md:px-4 md:py-3 flex items-center">
+              <div className="relative mt-1 input-field">
                 <input
                   name="password"
                   required
                   type={show ? "text" : "password"}
                   placeholder={t("auth.password_placeholder")}
                   className="w-full outline-none"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setError(""); // clear error on change
+                  }}
                 />
                 <button
                   type="button"
                   onClick={() => setShow(!show)}
-                  className="absolute right-4"
+                  className="absolute right-4 cursor-pointer"
                 >
-                  {show ? <EyeOff size={20} /> : <Eye size={20} />}
+                  {show ? <Eye size={18} /> : <EyeClosed size={18} />}
                 </button>
               </div>
+
+              {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
             </div>
 
             {/* Terms */}
@@ -144,7 +150,7 @@ const Signup = () => {
             </label>
 
             {/* Button */}
-            <button className="bg-black text-white py-3 rounded-full hover:bg-zinc-700">
+            <button className="btn-primary">
               {t("auth.signup_btn")}
             </button>
           </form>

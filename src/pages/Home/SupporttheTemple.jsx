@@ -36,7 +36,7 @@ const SupporttheTemple = () => {
           transition={{ delay: 0.3 }}
         >
           <Link to="/donate">
-            <button className="px-10 py-4 rounded-full bg-white text-orange-600 font-semibold text-lg shadow-lg transition duration-300 cursor-pointer">
+            <button className="btn-primary">
               {t("supportTemple_button")}
             </button>
           </Link>

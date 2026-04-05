@@ -72,7 +72,7 @@ const BlogLeaveAComment = ({ postId, setComments }) => {
           <button
             type="submit"
             disabled={loading}
-            className="border border-zinc-400 px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:scale-105 transition transform flex items-center gap-2 font-semibold justify-center w-full text-sm sm:text-base disabled:opacity-50"
+            className="btn-primary w-full flex justify-center items-center"
           >
             {loading ? "Posting..." : t("post_comment")}
             <IoIosSend className="text-base sm:text-lg" />
@@ -83,7 +83,7 @@ const BlogLeaveAComment = ({ postId, setComments }) => {
           <p className="mb-3 text-sm sm:text-base">{t("login_to_comment")}</p>
           <button
             onClick={() => navigate("/signin")}
-            className="bg-[#7E4555] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:bg-[#B5697E] transition text-sm sm:text-base cursor-pointer"
+            className="btn-primary"
           >
             {t("auth_signin")}
           </button>

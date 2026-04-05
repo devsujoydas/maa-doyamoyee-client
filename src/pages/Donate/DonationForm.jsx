@@ -276,7 +276,7 @@ const DonationForm = () => {
           </div>
 
           {/* Submit Button */}
-          <button className="btn sm:col-span-2">
+          <button className="btn-primary sm:col-span-2">
             {t("donation.submit_donation")}
           </button>
         </form>

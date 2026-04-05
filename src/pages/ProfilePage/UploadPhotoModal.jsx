@@ -17,46 +17,37 @@ const UploadPhotoModal = ({ isOpen, onClose, onUpload, type }) => {
   const title =
     type === "profile" ? "Upload Profile Photo" : "Upload Cover Photo";
 
-  // ✅ reset + preview safe
   useEffect(() => {
     if (!isOpen) return;
-
     setSelectedFile(null);
     setPreviewUrl(null);
     setLoading(false);
   }, [isOpen]);
 
-  // ✅ preview তৈরি (memory safe)
   useEffect(() => {
     if (!selectedFile) {
       setPreviewUrl(null);
       return;
     }
-
-    const url = URL.createObjectURL(selectedFile);
-    setPreviewUrl(url);
-
-    return () => URL.revokeObjectURL(url);
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreviewUrl(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
 
   if (!isOpen) return null;
 
-  // ✅ validate file
   const validateFile = (file) => {
     if (!file.type.startsWith("image/")) {
       toast.error("Only image files allowed");
       return false;
     }
-
     if (file.size > 5 * 1024 * 1024) {
       toast.error("Max 5MB allowed");
       return false;
     }
-
     return true;
   };
 
-  // ✅ compress image
   const compressImage = async (file) => {
     try {
       const compressed = await imageCompression(file, {
@@ -71,60 +62,46 @@ const UploadPhotoModal = ({ isOpen, onClose, onUpload, type }) => {
     }
   };
 
-  // ✅ file select
   const handleFileSelect = async (e) => {
     const file = e.target.files[0];
     if (!file || !validateFile(file)) return;
-
     const compressed = await compressImage(file);
     setSelectedFile(compressed);
   };
 
-  // ✅ drag & drop
   const handleDrop = async (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
     if (!file || !validateFile(file)) return;
-
     const compressed = await compressImage(file);
     setSelectedFile(compressed);
   };
 
   const handleDragOver = (e) => e.preventDefault();
 
-  // ✅ remove image
   const handleRemoveImage = (e) => {
     e.stopPropagation();
     setSelectedFile(null);
     setPreviewUrl(null);
   };
 
-  // ✅ upload
   const handleUpload = async () => {
-    if (!selectedFile) {
-      return toast.error("Please select an image");
-    }
-
+    if (!selectedFile) return toast.error("Please select an image");
     try {
       setLoading(true);
-
       const formData = new FormData();
       formData.append("image", selectedFile);
-
       const route =
         type === "profile" ? "/users/profile-photo" : "/users/cover-photo";
-
       const res = await api.put(route, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-
       const updatedUser = res.data.user;
       setUser(updatedUser);
       toast.success(res.data.message);
-
-      const field = type === "profile" ? "profileImage" : "coverImage";
-      onUpload(updatedUser[field]);
-
+      onUpload(
+        type === "profile" ? updatedUser.profileImage : updatedUser.coverImage,
+      );
       onClose();
     } catch (err) {
       console.error(err);
@@ -136,25 +113,25 @@ const UploadPhotoModal = ({ isOpen, onClose, onUpload, type }) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} wClass="max-w-md">
-      <div className=" rounded-2xl p-3 relative ">
+      <div className="relative">
         {/* Close */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
-        >
-          <FaTimes size={20} />
-        </button>
 
-        {/* Title */}
-        <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">
-          {title}
-        </h2>
+        <div className="flex justify-between items-start  mb-5">
+          <h2 className="text-lg font-medium text-gray-800 ">{title}</h2>
+          <button
+            onClick={onClose}
+            className=" text-gray-400 hover:text-gray-600 text-xl"
+          >
+            ×
+          </button>
+        </div>
+        {/* Header */}
 
-        {/* Upload Area */}
+        {/* Drag & Drop Area */}
         <div
-          className="border-2 border-dashed border-gray-300 rounded-xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-orange-400 transition bg-gray-50 overflow-hidden relative"
           onDrop={handleDrop}
           onDragOver={handleDragOver}
+          className="border-2 border-dashed border-gray-300 rounded-xl p-10 text-center cursor-pointer hover:border-[#4b1e2f] transition relative"
           onClick={() => fileInputRef.current.click()}
         >
           {previewUrl ? (
@@ -162,10 +139,8 @@ const UploadPhotoModal = ({ isOpen, onClose, onUpload, type }) => {
               <img
                 src={previewUrl}
                 alt="preview"
-                className="h-full w-full object-contain p-2 rounded-xl"
+                className="mx-auto max-h-40 rounded-lg object-contain"
               />
-
-              {/* ❌ remove button */}
               <button
                 onClick={handleRemoveImage}
                 className="absolute top-2 right-2 bg-black/60 text-white p-1 rounded-full"
@@ -174,14 +149,21 @@ const UploadPhotoModal = ({ isOpen, onClose, onUpload, type }) => {
               </button>
             </>
           ) : (
-            <div className="flex flex-col items-center text-gray-400">
-              <FaUpload className="text-4xl mb-3 text-orange-400" />
-              <span className="text-gray-500 font-medium text-sm text-center">
-                Drag & Drop an image here <br /> or click to select
-              </span>
+            <div className="flex flex-col items-center">
+              <div className="w-14 h-14 bg-[#EDE9EA] flex items-center justify-center rounded-lg mb-4">
+                <FaUpload className="text-2xl text-[#4b1e2f]" />
+              </div>
+              <p className="text-gray-600">
+                Drop your image here, or{" "}
+                <span className="text-[#4b1e2f] cursor-pointer font-medium">
+                  browse
+                </span>
+              </p>
+              <p className="text-sm text-gray-400 mt-1">
+                Supports: PNG, JPG, JPEG, WEBP
+              </p>
             </div>
           )}
-
           <input
             type="file"
             accept="image/*"
@@ -195,15 +177,9 @@ const UploadPhotoModal = ({ isOpen, onClose, onUpload, type }) => {
         <button
           onClick={handleUpload}
           disabled={loading}
-          className="mt-6 w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition flex justify-center items-center gap-2 disabled:opacity-50"
+          className="mt-6 w-full bg-[#4b1e2f] text-white py-3 rounded-lg hover:bg-[#6b0527] transition flex justify-center items-center gap-2 disabled:opacity-50"
         >
-          {loading ? (
-            <span className="animate-pulse">Uploading...</span>
-          ) : (
-            <>
-              <FaUpload /> Upload
-            </>
-          )}
+          {loading ? "Uploading..." : "Upload"}
         </button>
       </div>
     </Modal>

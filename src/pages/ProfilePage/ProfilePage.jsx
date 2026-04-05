@@ -1,29 +1,24 @@
 // ======================= FULL REFACTORED PROFILE PAGE =======================
 
-import React, { useEffect, useState } from "react";
+import   {  useState } from "react";
 import { motion } from "framer-motion";
-import { useAuth } from "../../AuthProvider/authProvider";
-import UpdateProfileModal from "./UpdateProfileModal";
-import UploadPhotoModal from "./UploadPhotoModal";
+import { useAuth } from "../../AuthProvider/authProvider";  
 import ProfilePageLeft from "./ProfilePageLeft"; 
 import PersonalInfo from "./PersonalInfo";
 import SecuritySettings from "./SecuritySettings";
 
 const ProfilePage = () => {
   const { user, setUser } = useAuth();
-  const [photoType, setPhotoType] = useState("profile");
-  const [profileModalOpen, setProfileModalOpen] = useState(false);
-  const [photoModalOpen, setPhotoModalOpen] = useState(false);
 
   const [activeTab, setActiveTab] = useState("personal");
 
-  const handlePhotoUpload = (img) => {
-    const field = photoType === "profile" ? "profileImage" : "coverImage";
-    setUser((prev) => ({ ...prev, [field]: img }));
-  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="relative bg-gray-50">
+
+      <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
+      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+
       <div className="custom-container">
         <div className="flex flex-col xl:flex-row gap-6 ">
           {/* ================= LEFT ================= */}
@@ -31,10 +26,7 @@ const ProfilePage = () => {
             user={user}
             setUser={setUser}
             activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            setPhotoType={setPhotoType}
-            setPhotoModalOpen={setPhotoModalOpen}
-            setProfileModalOpen={setProfileModalOpen}
+            setActiveTab={setActiveTab} 
           />
 
           {/* ================= RIGHT ================= */}
@@ -51,18 +43,7 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      {/* Modals */}
-      <UpdateProfileModal
-        isOpen={profileModalOpen}
-        onClose={() => setProfileModalOpen(false)}
-      />
-
-      <UploadPhotoModal
-        isOpen={photoModalOpen}
-        type={photoType}
-        onClose={() => setPhotoModalOpen(false)}
-        onUpload={handlePhotoUpload}
-      />
+      
     </div>
   );
 };

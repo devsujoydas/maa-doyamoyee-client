@@ -73,14 +73,14 @@ const ForgotPassword = () => {
                 name="email"
                 required
                 placeholder={t("forgot.email_placeholder")}
-                className="w-full mt-1 border border-zinc-300 rounded-full px-4 py-3 outline-none focus:border-zinc-400"
+                className="mt-1 input-field"
               />
             </div>
 
             {/* Button */}
             <button
               disabled={loading}
-              className="mt-2 bg-black text-white py-3 sm:py-4 rounded-full hover:bg-zinc-700 transition"
+              className="btn-primary"
             >
               {loading ? "Sending..." : t("forgot.button")}
             </button>

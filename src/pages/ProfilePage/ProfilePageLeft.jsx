@@ -7,33 +7,37 @@ import {
   FaGlobe,
   FaGithub,
 } from "react-icons/fa";
-import { Camera, DollarSign, LockIcon, LogOut, User } from "lucide-react";
+import { Camera, LockIcon, LogOut, User, CheckCircle } from "lucide-react";
 import api from "../../utils/api";
+import UploadPhotoModal from "./UploadPhotoModal";
+import { useAuth } from "../../AuthProvider/authProvider";
+import { MdVerified } from "react-icons/md";
 
-const ProfilePageLeft = ({
-  user,
-  setUser,
-  activeTab,
-  setActiveTab,
-  setPhotoType,
-  setPhotoModalOpen,
-  setProfileModalOpen,
-}) => {
+
+const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
   const [verifying, setVerifying] = useState(false);
+  const [photoType, setPhotoType] = useState("profile");
+  const [photoModalOpen, setPhotoModalOpen] = useState(false);
+  const { logout } = useAuth();
 
+  const handlePhotoUpload = (img) => {
+    const field = photoType === "profile" ? "profileImage" : "coverImage";
+    setUser((prev) => ({ ...prev, [field]: img }));
+  };
+ 
   const sendVerificationEmail = async () => {
     try {
       setVerifying(true);
-      const res = await api.post("/api/verify-email/request", {
-        email: user.email,
-      });
+      const res = await api.post("/auth/send-verification");
       toast.success(res.data.message);
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed");
+      toast.error(err.response?.data?.message || "Failed to send verification");
     } finally {
       setVerifying(false);
     }
   };
+
+  
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -42,14 +46,12 @@ const ProfilePageLeft = ({
 
     const verifyToken = async () => {
       try {
-        const res = await api.get(`/api/verify-email/verify?token=${token}`);
+        const res = await api.get(`/auth/verify-email?token=${token}`);
         toast.success(res.data.message);
+        // Update user state immediately
         setUser((prev) => ({ ...prev, isVerified: true }));
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname,
-        );
+        // Remove token from URL
+        window.history.replaceState({}, document.title, window.location.pathname);
       } catch (err) {
         toast.error(err.response?.data?.message || "Email verification failed");
       }
@@ -68,13 +70,13 @@ const ProfilePageLeft = ({
             setPhotoType("cover");
             setPhotoModalOpen(true);
           }}
-          className="absolute top-2 right-2 bg-gray-200 p-2 rounded-full"
+          className="absolute top-2 right-2 cursor-pointer bg-white shadow-lg p-2 rounded-full"
         >
           <Camera size={18} />
         </button>
       </div>
 
-      {/* Info */}
+      {/* Profile Info */}
       <div className="p-6 flex flex-col items-center">
         <div className="relative -mt-20">
           <img
@@ -86,13 +88,18 @@ const ProfilePageLeft = ({
               setPhotoType("profile");
               setPhotoModalOpen(true);
             }}
-            className="absolute bottom-0 right-0 bg-gray-200 p-2 rounded-full"
+            className="absolute bottom-0 right-0 cursor-pointer bg-white shadow-lg p-2 rounded-full"
           >
             <Camera size={16} />
           </button>
         </div>
 
-        <h2 className="mt-4 text-2xl font-bold">{user?.name}</h2>
+        <h2 className="mt-4 text-2xl font-bold flex items-center gap-1">
+          {user?.name}
+          {user?.isVerified && (
+            <MdVerified size={18} className="text-blue-500" title="Verified" />
+          )}
+        </h2>
         <p className="text-gray-500">@{user?.username}</p>
 
         {/* Role + Verify */}
@@ -107,16 +114,13 @@ const ProfilePageLeft = ({
             {user?.role}
           </span>
 
-          {user?.isVerified ? (
-            <span className="px-3 py-1 rounded-full text-sm bg-green-100 text-green-600">
-              Verified
-            </span>
-          ) : (
+          {!user?.isVerified && (
             <button
               onClick={sendVerificationEmail}
-              className="px-3 py-1 text-sm bg-yellow-100 text-yellow-700 rounded"
+              disabled={verifying}
+              className="px-3 py-1 text-sm bg-yellow-100 text-yellow-700 rounded-lg cursor-pointer hover:bg-yellow-200 transition"
             >
-              {verifying ? "Sending..." : "Verify"}
+              {verifying ? "Sending..." : "Verify your email"}
             </button>
           )}
         </div>
@@ -135,7 +139,7 @@ const ProfilePageLeft = ({
           </div>
         )}
 
-        {/* Social */}
+        {/* Social Links */}
         <div className="mt-4 w-full space-y-2">
           {user?.contactDetails &&
             Object.entries(user.contactDetails)
@@ -182,21 +186,13 @@ const ProfilePageLeft = ({
               })}
         </div>
 
-        {/* Update Button */}
-        <button
-          onClick={() => setProfileModalOpen(true)}
-          className="mt-6 w-full bg-orange-500 text-white py-2 rounded"
-        >
-          Update Profile
-        </button>
-
-        <div className="w-full flex flex-col space-y-2 my-5 border-t border-zinc-200">
+        {/* Tabs & Logout */}
+        <div className="w-full flex flex-col space-y-2 mt-5 border-zinc-200">
+          <hr className="text-zinc-200" />
           <button
             onClick={() => setActiveTab("personal")}
-            className={`md:px-4 px-3 py-2 md:py-3 rounded-md text-left flex items-center gap-2 border-2 transition-all cursor-pointer ${
-              activeTab === "personal"
-                ? "bg-[#EDE9EA] border-[#bebebe]"
-                : "hover:bg-zinc-100 border-transparent"
+            className={`md:px-4 px-3 py-2 md:py-3 rounded-md text-left flex items-center gap-2 transition-all cursor-pointer ${
+              activeTab === "personal" ? "bg-[#EDE9EA]" : "hover:bg-zinc-100"
             }`}
           >
             <User /> Personal Information
@@ -204,10 +200,8 @@ const ProfilePageLeft = ({
 
           <button
             onClick={() => setActiveTab("security")}
-            className={`md:px-4 px-3 py-2 md:py-3 rounded-md text-left flex items-center gap-2 border-2 transition-all cursor-pointer ${
-              activeTab === "security"
-                ? "bg-[#EDE9EA] border-[#bebebe]"
-                : "hover:bg-zinc-100 border-transparent"
+            className={`md:px-4 px-3 py-2 md:py-3 rounded-md text-left flex items-center gap-2  transition-all cursor-pointer ${
+              activeTab === "security" ? "bg-[#EDE9EA]" : "hover:bg-zinc-100"
             }`}
           >
             <LockIcon /> Security
@@ -216,13 +210,21 @@ const ProfilePageLeft = ({
           <hr className="text-zinc-200" />
 
           <button
-            // onClick={signOut}
-            className="md:px-4 px-3 py-2 md:py-3 rounded text-left text-red-500 hover:bg-red-100 flex items-center gap-2 transition-all cursor-pointer"
+            onClick={() => logout()}
+            className="md:px-4 px-3 py-2 md:py-3 rounded-lg text-left text-red-500 hover:bg-red-100 flex items-center gap-2 transition-all cursor-pointer"
           >
             <LogOut /> Sign Out
           </button>
         </div>
       </div>
+
+      {/* Upload Modal */}
+      <UploadPhotoModal
+        isOpen={photoModalOpen}
+        type={photoType}
+        onClose={() => setPhotoModalOpen(false)}
+        onUpload={handlePhotoUpload}
+      />
     </div>
   );
 };

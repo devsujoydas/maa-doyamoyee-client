@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Eye, EyeClosed, EyeOff } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
@@ -21,7 +21,6 @@ const ResetPassword = () => {
     confirmPassword: "",
   });
 
-  // ✅ Extract token (single source of truth)
   const token = searchParams.get("token");
 
   // ✅ Verify token on load
@@ -81,7 +80,7 @@ const ResetPassword = () => {
       });
 
       toast.success(res.data.message);
-     
+
       // small delay for better UX
       setTimeout(() => {
         navigate("/signin");
@@ -142,7 +141,7 @@ const ResetPassword = () => {
               <label className="text-sm font-medium">
                 {t("reset.new_password")}
               </label>
-              <div className="relative mt-1 border border-zinc-300 rounded-full px-4 py-3 flex items-center focus-within:border-zinc-400">
+              <div className="relative mt-1 input-field">
                 <input
                   type={show ? "text" : "password"}
                   name="newPassword"
@@ -154,9 +153,9 @@ const ResetPassword = () => {
                 <button
                   type="button"
                   onClick={() => setShow(!show)}
-                  className="absolute right-4 text-zinc-500"
+                  className="absolute right-4 top-3.5 cursor-pointer text-zinc-500"
                 >
-                  {show ? <EyeOff size={20} /> : <Eye size={20} />}
+                  {show ? <Eye size={18} /> : <EyeClosed size={18} />}
                 </button>
               </div>
             </div>
@@ -166,21 +165,21 @@ const ResetPassword = () => {
               <label className="text-sm font-medium">
                 {t("reset.confirm_password")}
               </label>
-              <div className="relative mt-1 border border-zinc-300 rounded-full px-4 py-3 flex items-center focus-within:border-zinc-400">
+              <div className="relative mt-1 input-field">
                 <input
                   type={show ? "text" : "password"}
                   name="confirmPassword"
                   required
                   onChange={handleChange}
                   placeholder={t("reset.confirm_password_placeholder")}
-                  className="w-full outline-none"
+                  className="w-full outline-none  "
                 />
                 <button
                   type="button"
                   onClick={() => setShow(!show)}
-                  className="absolute right-4 text-zinc-500"
+                  className="absolute right-4 top-3.5 cursor-pointer text-zinc-500"
                 >
-                  {show ? <EyeOff size={20} /> : <Eye size={20} />}
+                  {show ? <Eye size={18} /> : <EyeClosed size={18} />}
                 </button>
               </div>
             </div>

@@ -85,7 +85,7 @@ const Contact = () => {
                 <input
                   type="text"
                   placeholder={t("enter_name")}
-                  className="w-full bg-white/40 border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
+                  className="input-field"
                 />
               </div>
 
@@ -97,7 +97,7 @@ const Contact = () => {
                 <input
                   type="email"
                   placeholder={t("email_placeholder")}
-                  className="w-full bg-white/40 border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
+                  className="input-field"
                 />
               </div>
               
@@ -109,7 +109,7 @@ const Contact = () => {
                 <input
                   type="number"
                   placeholder={t("phone_placeholder")}
-                  className="w-full bg-white/40 border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
+                  className="input-field"
                 />
               </div>
 
@@ -121,14 +121,14 @@ const Contact = () => {
                 <textarea
                   rows={5}
                   placeholder={t("message_placeholder")}
-                  className="w-full bg-white/40 border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
+                  className="input-field"
                 ></textarea>
               </div>
 
               {/* Button */}
               <button
                 type="submit"
-                className="w-full py-3 rounded-full bg-yellow-600 text-white font-semibold hover:bg-yellow-700 transition transform hover:scale-[1.02]"
+                className="btn-primary w-full"
               >
                 {t("submit")}
               </button>
