@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import api from "../../utils/api";
 import imageCompression from "browser-image-compression";
 
-const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
+const BlogFormModal = ({ isOpen, onClose, }) => {
   const [form, setForm] = useState({
     title: "",
     content: "",
@@ -26,8 +26,7 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
     "Cultural",
     "Announcements",
   ];
-
-  // ✅ Preview Image
+ 
   useEffect(() => {
     if (!postImg) {
       setPreviewUrl(null);
@@ -61,7 +60,7 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
     }
   };
 
-  // ✅ validate file
+ 
   const validateFile = (file) => {
     if (!file.type.startsWith("image/")) {
       toast.error("Only image allowed");
@@ -76,7 +75,7 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
     return true;
   };
 
-  // ✅ file select
+ 
   const handleFileSelect = async (e) => {
     const file = e.target.files[0];
     if (!file || !validateFile(file)) return;
@@ -85,7 +84,7 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
     setPostImg(compressed);
   };
 
-  // ✅ drag & drop
+ 
   const handleDrop = async (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
@@ -129,7 +128,7 @@ const BlogFormModal = ({ isOpen, onClose, onAdd }) => {
         },
       });
 
-      onAdd(res.data);
+      console.log(res)
       toast.success("Blog created successfully 🚀");
       handleClose();
     } catch (err) {

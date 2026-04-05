@@ -53,7 +53,7 @@ const BlogLeaveAComment = ({ postId, setComments }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-zinc-200 shadow-lg p-4 sm:p-6">
+    <div className="bg-white rounded-2xl border border-zinc-200 shadow-lg p-3 sm:p-4">
       <h2 className="text-xl sm:text-2xl md:text-2xl font-semibold mb-5 text-gray-900">
         {t("leave_comment")}
       </h2>

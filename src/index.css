@@ -90,13 +90,15 @@ body.dark {
 }
 
 .lang-en-US {
-  font-family: "Inter", sans-serif;
+  /* font-family: "Inter", sans-serif; */
+  font-family: "Anek Bangla", sans-serif;
 }
 
 .lang-en-US h1,
 .lang-en-US h2,
 .lang-en-US .heading-style {
-  font-family: "Space Grotesk", sans-serif;
+  /* font-family: "Space Grotesk", sans-serif; */
+  font-family: "Anek Bangla", sans-serif;
   line-height: 1.2;
 }
 

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { formatDateDynamic } from "../../utils/formatDateDynamic";
+import { formatDateDynamic, formatDynamicDate } from "../../utils/formatDateDynamic";
 import { useAuth } from "../../AuthProvider/authProvider";
 import toast from "react-hot-toast";
 import api from "../../utils/api";
@@ -71,7 +71,7 @@ const BlogPostComment = ({ comments, setComments }) => {
     );
 
   return (
-    <div className="max-h-154 border border-zinc-200 shadow-lg overflow-y-auto overflow-x-hidden rounded-md p-2">
+    <div className="md:max-h-162 max-h-100  overflow-y-auto overflow-x-hidden ">
       {comments.map((comment) => {
         const isOwner = user?._id === comment?.author?._id;
         const isEditing = editingCommentId === comment._id;
@@ -83,10 +83,10 @@ const BlogPostComment = ({ comments, setComments }) => {
         return (
           <div
             key={comment._id}
-            className="flex gap-4 p-4 sm:p-5 bg-white rounded-xl shadow-md border border-gray-100 mb-4 lang-bn-BD relative"
+            className="flex items-center gap-2.5 p-2 sm:p-3 bg-white rounded-lg shadow-md border border-gray-100 mb-4 lang-bn-BD relative"
           >
             {/* Author Photo */}
-            <div className="w-16 h-16 rounded-full border border-zinc-100 overflow-hidden shadow-inner shrink-0">
+            <div className="w-10 h-10  rounded-full border border-zinc-100 overflow-hidden shadow-inner shrink-0">
               {comment.author.profileImage && (
                 <img
                   loading="lazy"
@@ -99,20 +99,20 @@ const BlogPostComment = ({ comments, setComments }) => {
 
             {/* Comment Content */}
             <div className="flex-1">
-              <div className="flex items-center justify-between mb-1">
+              <div className="flex items-center justify-between">
                 <h4 className="font-semibold text-gray-800 text-sm sm:text-base">
                   {comment?.author?.name}
                 </h4>
                 <div className="flex items-center gap-2 relative">
-                  <span className="text-gray-400 text-xs sm:text-sm">
-                    {formatDateDynamic(comment?.createdAt)}
+                  <span className="text-gray-400 text-sm">
+                    {formatDynamicDate(comment?.createdAt)}
                   </span>
 
                   {/* 3-dot menu for owner: show on hover */}
                   {isOwner && !isEditing && (
                     <div ref={menuRef} className="relative group">
                       <button
-                        className="text-gray-400 hover:text-gray-600 px-1  transition-opacity"
+                        className="text-black hover:text-gray-600 px-1  cursor-pointer"
                         title="Options"
                         onClick={() =>
                           setMenuOpenId(
@@ -176,7 +176,7 @@ const BlogPostComment = ({ comments, setComments }) => {
                       onClick={() => handleUpdate(comment)}
                       disabled={loading}
                       className="btn-primary"
-                      style={{ paddingTop: "5px", paddingBottom:"5px" }}
+                      style={{ paddingTop: "5px", paddingBottom: "5px" }}
                     >
                       {loading ? "Saving..." : "Save"}
                     </button>
@@ -189,7 +189,7 @@ const BlogPostComment = ({ comments, setComments }) => {
                   </div>
                 </div>
               ) : (
-                <p className="text-gray-700 leading-relaxed text-sm sm:text-base mt-1">
+                <p className="text-gray-700 leading-relaxed text-sm sm:text-base ">
                   {comment.text}
                 </p>
               )}

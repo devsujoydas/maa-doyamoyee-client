@@ -21,6 +21,7 @@ const PersonalInfo = () => {
     name: "",
     username: "",
     bio: "",
+    phone: "",
     addressInfo: {
       address: "",
       city: "",
@@ -44,6 +45,7 @@ const PersonalInfo = () => {
         name: user.name || "",
         username: user.username || "",
         bio: user.bio || "",
+        phone: user.phone || "",
         addressInfo: {
           address: user.addressInfo?.address || "",
           city: user.addressInfo?.city || "",
@@ -93,7 +95,6 @@ const PersonalInfo = () => {
 
   return (
     <div className="">
-      
       {/* Header */}
       <div className="flex justify-between items-center p-6  bg-[#F9F9F9] rounded-t-xl">
         <h3 className="font-semibold text-lg">Personal Information</h3>
@@ -112,10 +113,8 @@ const PersonalInfo = () => {
         className="p-6 space-y-6"
       >
         <form onSubmit={handleUpdateProfile} className="space-y-6">
-
           {/* 🔹 Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-
             <div>
               <label className={labelClass}>NAME</label>
               <input
@@ -162,6 +161,7 @@ const PersonalInfo = () => {
               <div>
                 <label className={labelClass}>ADDRESS</label>
                 <input
+                  name="address"
                   value={formData.addressInfo.address}
                   onChange={(e) =>
                     handleNestedChange("addressInfo", "address", e.target.value)
@@ -174,6 +174,7 @@ const PersonalInfo = () => {
               <div>
                 <label className={labelClass}>CITY</label>
                 <input
+                  name="city"
                   value={formData.addressInfo.city}
                   onChange={(e) =>
                     handleNestedChange("addressInfo", "city", e.target.value)
@@ -186,6 +187,7 @@ const PersonalInfo = () => {
               <div>
                 <label className={labelClass}>STATE</label>
                 <input
+                  name="state"
                   value={formData.addressInfo.state}
                   onChange={(e) =>
                     handleNestedChange("addressInfo", "state", e.target.value)
@@ -201,6 +203,7 @@ const PersonalInfo = () => {
               <div>
                 <label className={labelClass}>COUNTRY</label>
                 <input
+                  name="country"
                   value={formData.addressInfo.country}
                   onChange={(e) =>
                     handleNestedChange("addressInfo", "country", e.target.value)
@@ -213,9 +216,14 @@ const PersonalInfo = () => {
               <div>
                 <label className={labelClass}>POSTAL CODE</label>
                 <input
+                  name="postalCode"
                   value={formData.addressInfo.postalCode}
                   onChange={(e) =>
-                    handleNestedChange("addressInfo", "postalCode", e.target.value)
+                    handleNestedChange(
+                      "addressInfo",
+                      "postalCode",
+                      e.target.value,
+                    )
                   }
                   disabled={!editing}
                   className={inputClass}
@@ -224,18 +232,33 @@ const PersonalInfo = () => {
             </div>
           </div>
 
-          {/* 🔹 Social */}
+          {/* 🔹 contacts */}
           <div>
-            <h2 className={sectionTitle}>Social Links</h2>
+            <h2 className={sectionTitle}>Contacts </h2>
 
             {/* top 3 */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-4">
               <div>
+                <label className={labelClass}>PHONE</label>
+                <input
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  disabled={!editing}
+                  className={inputClass}
+                />
+              </div>
+              <div>
                 <label className={labelClass}>WEBSITE</label>
                 <input
+                  name="website"
                   value={formData.contactDetails.website}
                   onChange={(e) =>
-                    handleNestedChange("contactDetails", "website", e.target.value)
+                    handleNestedChange(
+                      "contactDetails",
+                      "website",
+                      e.target.value,
+                    )
                   }
                   disabled={!editing}
                   className={inputClass}
@@ -245,21 +268,14 @@ const PersonalInfo = () => {
               <div>
                 <label className={labelClass}>FACEBOOK</label>
                 <input
+                  name="facebook"
                   value={formData.contactDetails.facebook}
                   onChange={(e) =>
-                    handleNestedChange("contactDetails", "facebook", e.target.value)
-                  }
-                  disabled={!editing}
-                  className={inputClass}
-                />
-              </div>
-
-              <div>
-                <label className={labelClass}>INSTAGRAM</label>
-                <input
-                  value={formData.contactDetails.instagram}
-                  onChange={(e) =>
-                    handleNestedChange("contactDetails", "instagram", e.target.value)
+                    handleNestedChange(
+                      "contactDetails",
+                      "facebook",
+                      e.target.value,
+                    )
                   }
                   disabled={!editing}
                   className={inputClass}
@@ -268,13 +284,34 @@ const PersonalInfo = () => {
             </div>
 
             {/* bottom 2 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
+              <div>
+                <label className={labelClass}>INSTAGRAM</label>
+                <input
+                  name="instagram"
+                  value={formData.contactDetails.instagram}
+                  onChange={(e) =>
+                    handleNestedChange(
+                      "contactDetails",
+                      "instagram",
+                      e.target.value,
+                    )
+                  }
+                  disabled={!editing}
+                  className={inputClass}
+                />
+              </div>
               <div>
                 <label className={labelClass}>YOUTUBE</label>
                 <input
+                  name="youtube"
                   value={formData.contactDetails.youtube}
                   onChange={(e) =>
-                    handleNestedChange("contactDetails", "youtube", e.target.value)
+                    handleNestedChange(
+                      "contactDetails",
+                      "youtube",
+                      e.target.value,
+                    )
                   }
                   disabled={!editing}
                   className={inputClass}
@@ -284,9 +321,14 @@ const PersonalInfo = () => {
               <div>
                 <label className={labelClass}>GITHUB</label>
                 <input
+                  name="github"
                   value={formData.contactDetails.github}
                   onChange={(e) =>
-                    handleNestedChange("contactDetails", "github", e.target.value)
+                    handleNestedChange(
+                      "contactDetails",
+                      "github",
+                      e.target.value,
+                    )
                   }
                   disabled={!editing}
                   className={inputClass}

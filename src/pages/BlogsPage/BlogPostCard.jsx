@@ -27,9 +27,7 @@ const BlogPostCard = ({ blog, profile }) => {
   }, [blog]);
 
   const shareUrl = `${window.location.origin}/blogs/${blog?._id}`;
-  const isLiked = reacts?.some(
-    (id) => id === user?._id || id?._id === user?._id,
-  );
+  const isLiked = reacts?.some((id) => id === user?._id);
 
   const handleReact = async () => {
     if (!user) return toast.error("Login required");
@@ -57,15 +55,15 @@ const BlogPostCard = ({ blog, profile }) => {
   };
 
   const handleShare = () => {
-    setShareOpen(true); 
+    setShareOpen(true);
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-3 border border-zinc-200">
+    <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-3 border border-zinc-200">
       {/* IMAGE */}
 
       {blog?.postImg && (
-        <div className="rounded-2xl overflow-hidden">
+        <div className="rounded-xl overflow-hidden">
           <a
             href={blog.postImg}
             data-fancybox="blog-image"
@@ -82,7 +80,7 @@ const BlogPostCard = ({ blog, profile }) => {
       )}
 
       {/* CONTENT */}
-      <div className="p-4 sm:p-6">
+      <div className="px-3 py-4 sm:py-5 sm:px-5">
         <h2 className="text-xl sm:text-2xl font-bold mb-2 text-gray-900">
           {blog?.title}
         </h2>
@@ -108,19 +106,28 @@ const BlogPostCard = ({ blog, profile }) => {
             }`}
           >
             <ThumbsUp size={18} fill={isLiked ? "currentColor" : "none"} />
-            <span>{reacts?.length || 0}</span>
+            <span className="flex justify-center items-center gap-1">
+              {reacts?.length || 0}{" "}
+              <span className="sm:block hidden">  {t("likes")}</span>
+            </span>
           </button>
 
           {/* Comment */}
           <div className="flex items-center gap-1 text-gray-600 text-sm hover:text-blue-600 cursor-pointer">
             <MessageCircle size={18} />
-            <span>{blog?.commentCount || 0}</span>
+            <span className="flex justify-center items-center gap-1">
+              {blog?.commentCount || 0}
+              <span className="sm:block hidden">{t("comments")}</span>
+            </span>
           </div>
 
           {/* Views */}
           <div className="flex items-center gap-1 text-gray-600 text-sm">
             <Eye size={18} />
-            <span>{blog?.views || 0}</span>
+            <span className="flex justify-center items-center gap-1">
+              {blog?.views?.length || 0}{" "}
+              <span className="sm:block hidden">{t("views")}</span>
+            </span>
           </div>
         </div>
 
@@ -130,7 +137,7 @@ const BlogPostCard = ({ blog, profile }) => {
           className="flex items-center gap-1 text-gray-600 hover:text-blue-600 text-sm font-medium"
         >
           <Share2 size={18} />
-          <span>Share</span>
+          <span>{t("share")}</span>
         </button>
       </div>
 

@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
-import BlogDetailsLeft from "./BlogDetailsLeft";
-import BlogDetailsRight from "./BlogDetailsRight";
+import { useState, useEffect } from "react"; 
 import { useNavigate, useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next"; 
+import { useTranslation } from "react-i18next";
 import api from "../../utils/api";
 import toast from "react-hot-toast";
 import { useData } from "../../context/useData";
+import BlogPostComment from "./BlogPostComment";
+import BlogLeaveAComment from "./BlogLeaveAComment";
+import BlogPostCard from "./BlogPostCard";
 
 const BlogsDetails = () => {
   const { t } = useTranslation();
@@ -29,7 +30,6 @@ const BlogsDetails = () => {
 
         setBlog(blogRes.data);
         setComments(commentRes.data);
- 
       } catch (err) {
         console.error(err);
         toast.error("Failed to load blog details");
@@ -61,9 +61,29 @@ const BlogsDetails = () => {
           ← {t("back_to_all_posts")}
         </button>
 
-        <div className="flex md:flex-row flex-col gap-5">
-          <BlogDetailsLeft blog={blog} comments={comments} setComments={setComments}/>
-          <BlogDetailsRight blog={blog} recentPosts={blogs} />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+          {/* left side */}
+          <div className="md:col-span-2">
+              <BlogPostCard blog={blog} />
+          </div>
+
+
+          {/* right side */}
+          <div className=" md:col-span-1 ">
+            <div className="p-3 sm:p-4 bg-white border border-zinc-200 rounded-xl mb-5">
+              <h2 className="text-xl sm:text-2xl md:text-2xl font-semibold mb-3 text-gray-900 ">
+                {t("comments")}
+              </h2>
+              <BlogPostComment comments={comments} setComments={setComments} />
+            </div>
+            <BlogLeaveAComment
+              comments={comments}
+              setComments={setComments}
+              postId={blog._id}
+            />
+          </div>
+        
         </div>
       </div>
     </div>

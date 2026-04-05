@@ -13,7 +13,6 @@ import UploadPhotoModal from "./UploadPhotoModal";
 import { useAuth } from "../../AuthProvider/authProvider";
 import { MdVerified } from "react-icons/md";
 
-
 const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
   const [verifying, setVerifying] = useState(false);
   const [photoType, setPhotoType] = useState("profile");
@@ -24,7 +23,7 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
     const field = photoType === "profile" ? "profileImage" : "coverImage";
     setUser((prev) => ({ ...prev, [field]: img }));
   };
- 
+
   const sendVerificationEmail = async () => {
     try {
       setVerifying(true);
@@ -36,8 +35,6 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
       setVerifying(false);
     }
   };
-
-  
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -51,7 +48,11 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
         // Update user state immediately
         setUser((prev) => ({ ...prev, isVerified: true }));
         // Remove token from URL
-        window.history.replaceState({}, document.title, window.location.pathname);
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname,
+        );
       } catch (err) {
         toast.error(err.response?.data?.message || "Email verification failed");
       }
@@ -94,18 +95,26 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
           </button>
         </div>
 
-        <h2 className="mt-4 text-2xl font-bold flex items-center gap-1">
+        <h2 className="mt-4 text-xl sm:text-2xl font-bold flex items-center gap-1 text-center">
           {user?.name}
           {user?.isVerified && (
             <MdVerified size={18} className="text-blue-500" title="Verified" />
           )}
         </h2>
-        <p className="text-gray-500">@{user?.username}</p>
+
+        <p className="text-gray-500 text-sm sm:text-base">@{user?.username}</p>
+
+        {/* 📞 Phone Number */}
+        {user?.phone && (
+          <p className="text-gray-600 text-sm sm:text-base mt-1">
+            📞 {user.phone}
+          </p>
+        )}
 
         {/* Role + Verify */}
-        <div className="flex gap-2 mt-2">
+        <div className="flex gap-2 mt-2 flex-wrap justify-center">
           <span
-            className={`px-3 py-1 rounded-full text-sm ${
+            className={`px-3 py-1 rounded-full text-xs sm:text-sm ${
               user?.role === "admin"
                 ? "bg-red-100 text-red-600"
                 : "bg-blue-100 text-blue-600"
@@ -118,17 +127,21 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
             <button
               onClick={sendVerificationEmail}
               disabled={verifying}
-              className="px-3 py-1 text-sm bg-yellow-100 text-yellow-700 rounded-lg cursor-pointer hover:bg-yellow-200 transition"
+              className="px-3 py-1 text-xs sm:text-sm bg-yellow-100 text-yellow-700 rounded-lg cursor-pointer hover:bg-yellow-200 transition"
             >
               {verifying ? "Sending..." : "Verify your email"}
             </button>
           )}
         </div>
 
-        <p className="mt-4 text-gray-600 text-center">{user?.bio}</p>
+        {/* Bio */}
+        <p className="mt-4 text-gray-600 text-sm sm:text-base text-center leading-relaxed px-2">
+          {user?.bio}
+        </p>
 
+        {/* Address */}
         {user?.addressInfo && (
-          <div className="mt-4 text-gray-700 text-sm w-full text-center">
+          <div className=" text-gray-700 text-xs sm:text-sm w-full text-center px-2 leading-relaxed">
             {user?.addressInfo.address && (
               <p>
                 <strong>Address:</strong> {user?.addressInfo?.address},{" "}

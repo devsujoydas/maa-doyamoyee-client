@@ -200,6 +200,14 @@
   "search_placeholder": "Search blog posts...",
   "views": "Views",
   "login_to_comment": "Please login to leave a comment.",
+   "likes": "Likes",
+  "share": "Share",
+  "edit": "Edit",
+  "delete": "Delete",
+  "save": "Save",
+  "cancel": "Cancel",
+  "no_comments_yet": "No comments yet. Be the first to comment!",
+  
 
   
 
