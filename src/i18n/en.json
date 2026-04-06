@@ -349,6 +349,12 @@
     "confirm_password": "Confirm Password",
     "confirm_password_placeholder": "Confirm your password",
     "button": "Reset Password"
+  },
+
+  
+  "noBlogs": {
+    "title": "No Blogs Found",
+    "subtitle": "There are no blogs available at the moment. Please check back later."
   }
 
 

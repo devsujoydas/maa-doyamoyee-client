@@ -1,42 +1,16 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import PageHeading from "../../shared/PageHeading";
 import { useTranslation } from "react-i18next";
 
 import PreviewModal from "./PreviewModal";
-import NoticeCard from "./NoticeCard"; 
-import { useData } from "../../context/useData";
+import NoticeCard from "./NoticeCard";
+import useNotices from "../../hooks/useNotices";
 
-/* -------------------- Main Page -------------------- */
 const NoticePage = () => {
   const { t } = useTranslation();
-
-  const {notices} = useData()
-  const [filter, setFilter] = useState("all");
-  const [selectedNotice, setSelectedNotice] = useState(null);
-
-  const today = new Date();
-
-  /* -------- Active Notices -------- */
-  const activeNotices = useMemo(() => {
-    return notices.filter((n) => {
-      if (n.status && n.status !== "active") return false;
-
-      if (n.expiryDate) return new Date(n.expiryDate) >= today;
-      if (n.eventDate) return new Date(n.eventDate) >= today;
-
-      return true;
-    });
-  }, [notices]);
-
-  /* -------- Important First -------- */
-  
-  /* -------- Filter -------- */
-
-  /* -------- Categories -------- */
-  const categories = useMemo(() => {
-    const unique = ["all", ...new Set(notices.map((n) => n.category))];
-    return unique;
-  }, [notices]);
+  const { notices } = useNotices(); 
+  const [previewNotice, setPreviewNotice] = useState(null);
+ 
 
   return (
     <div className="relative min-h-screen">
@@ -47,32 +21,14 @@ const NoticePage = () => {
       <div className="custom-container">
         <PageHeading section="notice" />
 
-        {/* -------- Filter Buttons -------- */}
-        <div className="flex justify-center gap-3 flex-wrap mb-10">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`px-4 py-2 rounded-full text-sm capitalize transition
-                ${
-                  filter === cat
-                    ? "bg-amber-600 text-white"
-                    : "bg-white text-gray-700 hover:bg-amber-100"
-                }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* -------- Notices -------- */}
+        {/* -------- Notices Grid -------- */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {notices.length > 0 ? (
-            notices.map((notice, idx) => (
+            notices.map((notice) => (
               <NoticeCard
-                key={idx}
+                key={notice._id}
                 notice={notice}
-                onPreview={setSelectedNotice}
+                onPreview={(n) => setPreviewNotice(n)}
               />
             ))
           ) : (
@@ -83,10 +39,10 @@ const NoticePage = () => {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Preview Modal */}
       <PreviewModal
-        selected={selectedNotice}
-        onClose={() => setSelectedNotice(null)}
+        selected={previewNotice}
+        onClose={() => setPreviewNotice(null)}
       />
     </div>
   );

@@ -5,22 +5,25 @@ import { Trash2, Eye, UserCheck, User } from "lucide-react";
 import toast from "react-hot-toast";
 import UserViewModal from "../../components/modals/UserViewModal";
 import DeleteModal from "../../components/modals/DeleteModal"; 
-import { MdVerified } from "react-icons/md";
-import { useData } from "../../context/useData";
+import { MdVerified } from "react-icons/md"; 
+import useUsers from "../../hooks/useUsers";
+import { formatDynamicDate } from "../../utils/formatDateDynamic";
 
 const AdminUsers = () => {
-  const { users, refetchUsers } = useData();
+    const { data: users = [] } = useUsers();
+
+
   const [selectedUser, setSelectedUser] = useState(null);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  // Open view modal
+
   const handleView = (user) => {
     setSelectedUser(user);
     setViewModalOpen(true);
   };
 
-  // Open delete modal
+
   const handleDelete = (user) => {
     setSelectedUser(user);
     setDeleteModalOpen(true);
@@ -28,10 +31,7 @@ const AdminUsers = () => {
 
   // Confirm delete
   const confirmDelete = () => {
-    const updatedUsers = users?.filter((u) => u._id !== selectedUser._id);
-
-    // Update React Query cache manually
-    refetchUsers({ queryKey: ["users"], queryFn: () => updatedUsers });
+   
 
     toast.success("User deleted successfully");
     setDeleteModalOpen(false);
@@ -77,7 +77,7 @@ const AdminUsers = () => {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-200 lang-bn-BD">
             {users.map((user) => (
               <tr key={user?._id} className="hover:bg-gray-50">
                 <td className="px-6 py-3 flex items-center space-x-3">
@@ -123,7 +123,7 @@ const AdminUsers = () => {
                 </td>
 
                 <td className="px-6 py-3 text-sm text-gray-500">
-                  {new Date(user?.createdAt).toLocaleDateString()}
+                  {formatDynamicDate(user?.createdAt)}
                 </td>
 
                 <td className="px-6 py-3 text-center space-x-3">

@@ -20,7 +20,7 @@ const EventAddModal = ({ addModalOpen, setAddModalOpen, setEvents, events }) => 
       ...form,
     };
 
-    setEvents([...events, newEvent]);
+ 
     toast.success("Event added");
     setAddModalOpen(false);
   };

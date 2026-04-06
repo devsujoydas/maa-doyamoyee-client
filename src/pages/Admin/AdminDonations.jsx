@@ -8,6 +8,7 @@ import {
   HiClock,
   HiXCircle,
 } from "react-icons/hi2";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -15,11 +16,11 @@ import { Link } from "react-router-dom";
 import DeleteModal from "../../components/modals/DeleteModal";
 import DonationViewModal from "../../components/modals/DonationViewModal";
 import { formatDateDynamic } from "../../utils/formatDateDynamic";
-import SectionReveal from "../../components/SectionReveal";
-import { useData } from "../../context/useData";
+import SectionReveal from "../../components/SectionReveal"; 
+import useDonations from "../../hooks/useDonations";
 
-const AdminDonations = () => {
-  const { donations, setDonations } = useData();
+const AdminDonations = () => { 
+   const { data: donations = [] } = useDonations();
   const [selectedDonation, setSelectedDonation] = useState(null);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -29,7 +30,6 @@ const AdminDonations = () => {
     const updated = donations.map((d) =>
       d._id === id ? { ...d, status: newStatus } : d
     );
-    setDonations(updated);
     if (selectedDonation?._id === id) {
       setSelectedDonation({ ...selectedDonation, status: newStatus });
     }
@@ -45,7 +45,6 @@ const AdminDonations = () => {
   };
 
   const confirmDelete = () => {
-    setDonations(donations.filter((d) => d._id !== selectedDonation._id));
     toast.success("Donation deleted successfully");
     setDeleteModalOpen(false);
     setViewModalOpen(false);

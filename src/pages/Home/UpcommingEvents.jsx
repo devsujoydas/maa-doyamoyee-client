@@ -53,7 +53,7 @@ const UpcommingEvents = () => {
                 className="relative group rounded-xl overflow-hidden shadow-xl cursor-pointer lang-bn-BD "
               >
 
-                <Link to={`/events/${item.slug}`}>
+                <Link to={`/events/${item._id}`}>
                   <img loading="lazy"
                     src={item.image}
                     alt={item.title}

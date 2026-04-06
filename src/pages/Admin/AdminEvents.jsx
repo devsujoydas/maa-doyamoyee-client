@@ -7,11 +7,11 @@ import toast from "react-hot-toast";
 
 import EventViewModal from "../../components/modals/EventViewModal";
 import EventAddModal from "../../components/modals/EventAddModal"; 
-import DeleteModal from "../../components/modals/DeleteModal"; 
-import { useData } from "../../context/useData";
+import DeleteModal from "../../components/modals/DeleteModal";  
+import useEvents from "../../hooks/useEvents";
 
-const AdminEvents = () => {
-  const { events, setEvents } = useData();
+const AdminEvents = () => { 
+   const { data: events = [] } = useEvents();
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const [viewModalOpen, setViewModalOpen] = useState(false);
@@ -28,8 +28,7 @@ const AdminEvents = () => {
     setDeleteModalOpen(true);
   };
 
-  const confirmDelete = () => {
-    setEvents(events.filter((e) => e.id !== selectedEvent.id));
+  const confirmDelete = () => { 
     toast.success("Event deleted");
     setDeleteModalOpen(false);
   };
@@ -148,8 +147,7 @@ const AdminEvents = () => {
 
       <EventAddModal
         addModalOpen={addModalOpen}
-        setAddModalOpen={setAddModalOpen}
-        setEvents={setEvents}
+        setAddModalOpen={setAddModalOpen} 
         events={events}
       />
     </div>

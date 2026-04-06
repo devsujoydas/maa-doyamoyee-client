@@ -63,7 +63,7 @@ const BlogPostCard = ({ blog, profile }) => {
       {/* IMAGE */}
 
       {blog?.postImg && (
-        <div className="rounded-xl overflow-hidden">
+        <div className="rounded-xl overflow-hidden max-h-150 ">
           <a
             href={blog.postImg}
             data-fancybox="blog-image"
@@ -73,7 +73,7 @@ const BlogPostCard = ({ blog, profile }) => {
             <img
               src={blog.postImg}
               alt={blog.title}
-              className="w-full h-full object-cover transition duration-300 hover:scale-105"
+              className="w-full h-full object-center object-cover transition duration-300 hover:scale-105"
             />
           </a>
         </div>
@@ -122,13 +122,13 @@ const BlogPostCard = ({ blog, profile }) => {
           </div>
 
           {/* Views */}
-          <div className="flex items-center gap-1 text-gray-600 text-sm">
+          {/* <div className="flex items-center gap-1 text-gray-600 text-sm">
             <Eye size={18} />
             <span className="flex justify-center items-center gap-1">
               {blog?.views?.length || 0}{" "}
               <span className="sm:block hidden">{t("views")}</span>
             </span>
-          </div>
+          </div> */}
         </div>
 
         {/* Right side: Share */}

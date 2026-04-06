@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from "react";
-import SEOHead from "../../components/SEOHead"; 
+import SEOHead from "../../components/SEOHead";
 import { Bell, Calendar, FileText, HandCoins, Mail, Users } from "lucide-react";
 import {
   generateMonthlyData,
@@ -7,9 +7,13 @@ import {
 } from "../../utils/dashboardUtils";
 import SectionReveal from "../../components/SectionReveal";
 import { Link } from "react-router-dom";
-import { useData } from "../../context/useData";
+import useBlogs from "../../hooks/useBlogs";
+import useUsers from "../../hooks/useUsers";
+import useEvents from "../../hooks/useEvents";
+import useNotices from "../../hooks/useNotices";
+import useMessages from "../../hooks/useMessages";
+import useDonations from "../../hooks/useDonations";
 
-// Lazy load chart components
 const ChartCard = lazy(() => import("../../components/admin/ChartCard"));
 const PieChartCard = lazy(() => import("../../components/admin/PieChartCard"));
 const TopDonors = lazy(() => import("../../components/admin/TopDonors"));
@@ -18,15 +22,19 @@ const RecentActivity = lazy(
 );
 
 const AdminOverview = () => {
-  const { users, blogs, notices, events, messages, donations = [] } = useData();
-  const [year, setYear] = useState(2026);
+  const { data: users = [] } = useUsers();
+  const { blogs = [] } = useBlogs();
+  const { data: events = [] } = useEvents();
+  const { data: notices = [] } = useNotices();
+  const { data: messages = [] } = useMessages();
+  const { data: donations = [] } = useDonations();
 
+  const [year, setYear] = useState(2026);
 
   const userChart = generateMonthlyData(users, "createdAt");
   const blogChart = generateMonthlyData(blogs, "createdAt");
   const eventChart = generateMonthlyData(events, "createdAt");
   const noticeChart = generateMonthlyData(notices, "publishDate");
-
 
   const userGrowth = calculateGrowth(users, "createdAt");
 

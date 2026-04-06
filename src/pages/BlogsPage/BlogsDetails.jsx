@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import api from "../../utils/api";
-import toast from "react-hot-toast";
-import { useData } from "../../context/useData";
+import toast from "react-hot-toast"; 
 import BlogPostComment from "./BlogPostComment";
 import BlogLeaveAComment from "./BlogLeaveAComment";
 import BlogPostCard from "./BlogPostCard";
@@ -12,8 +11,7 @@ const BlogsDetails = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams();
-  const { blogs } = useData();
-
+ 
   const [blog, setBlog] = useState(null);
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);

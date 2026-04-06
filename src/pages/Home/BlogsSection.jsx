@@ -1,29 +1,21 @@
 import BlogCard from "../../components/BlogCard";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination'
-import { Autoplay } from 'swiper/modules';
-import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Autoplay } from "swiper/modules";
 import SectionHeading from "../../shared/SectionHeading";
 import { useTranslation } from "react-i18next";
-
+import useBlogs from "../../hooks/useBlogs";
 
 const BlogsSection = () => {
-    const { t } = useTranslation();
-  const [blogsData, setBlogsData] = useState([]);
+  const { t } = useTranslation();
+  const { blogs = [] } = useBlogs();
 
-  useEffect(() => {
-    fetch("/json/blogs.json")
-      .then((res) => res.json())
-      .then(setBlogsData)
-      .catch(console.error);
-  }, []);
+  // ✅ FIXED typo
+  const approvedBlogs = blogs.filter((b) => b.status === "approved");
 
   return (
-    <section id="blogs" className="relative  w-full bg-section-secondary " >
-
+    <section id="blogs" className="w-full bg-section-secondary">
       <div className="custom-container">
-
         <SectionHeading
           title={t("blogs")}
           pathname={t("view_all")}
@@ -31,36 +23,46 @@ const BlogsSection = () => {
           textcolor={"text-black"}
         />
 
-
-        <div className="mt-10 ">
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={20}
-            modules={[Autoplay]}
-            autoplay={{
-              delay: 1000,
-              disableOnInteraction: false,
-            }}
-            loop={true}
-            breakpoints={{
-              500: { slidesPerView: 1, spaceBetween: 10 },
-              765: { slidesPerView: 2, spaceBetween: 10 },
-              1024: { slidesPerView: 3, spaceBetween: 16 },
-            }}
-
-            className=" rounded-md "
-          >
-            {blogsData.map((blog, idx) => (
-              <SwiperSlide key={idx}>
-                <BlogCard blog={blog} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+        <div className="mt-10">
+          {approvedBlogs.length === 0 ? (
+            // ✅ Empty state
+            <div className="flex flex-col items-center justify-center text-center py-10">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-700">
+                {t("noBlogs.title")}
+              </h2>
+              <p className="text-gray-500 mt-2 text-sm sm:text-base">
+                {t("noBlogs.subtitle")}
+              </p>
+            </div>
+          ) : (
+            // ✅ Swiper only when blogs exist
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={20}
+              modules={[Autoplay]}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              loop={approvedBlogs.length > 3} 
+              breakpoints={{
+                500: { slidesPerView: 1, spaceBetween: 10 },
+                765: { slidesPerView: 2, spaceBetween: 10 },
+                1024: { slidesPerView: 3, spaceBetween: 16 },
+              }}
+              className="rounded-md"
+            >
+              {approvedBlogs.map((blog, idx) => (
+                <SwiperSlide key={idx}>
+                  <BlogCard type={"blog-section"} blog={blog} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
         </div>
-
       </div>
-    </section >
+    </section>
   );
 };
 
-export default BlogsSection
+export default BlogsSection;

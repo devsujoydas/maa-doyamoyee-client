@@ -93,7 +93,7 @@ export const router = createBrowserRouter([
       { path: "/donate", element: withSuspense(<Donation />) },
 
       { path: "/events", element: withSuspense(<EventsPage />) },
-      { path: "/events/:slug", element: withSuspense(<EventDetailsPage />) },
+      { path: "/events/:id", element: withSuspense(<EventDetailsPage />) },
 
       { path: "/notices", element: withSuspense(<NoticePage />) },
 

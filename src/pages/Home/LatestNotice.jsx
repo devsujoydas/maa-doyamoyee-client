@@ -2,37 +2,18 @@ import { useState, useEffect, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Autoplay } from "swiper/modules"; 
+import { Autoplay } from "swiper/modules";
 import SectionHeading from "../../shared/SectionHeading";
 import { useTranslation } from "react-i18next";
-import PreviewModal from "../NoticePage/PreviewModal"; 
+
+import PreviewModal from "../NoticePage/PreviewModal";
 import NoticeCard from "../NoticePage/NoticeCard";
+import useNotices from "../../hooks/useNotices";
 
 const LatestNotice = () => {
   const { t } = useTranslation();
-  const [notices, setNotices] = useState([]);
-  const [selectedNotice, setSelectedNotice] = useState(null);
-
-  // Fetch notices
-  useEffect(() => {
-    fetch("/json/notice.json")
-      .then((res) => res.json())
-      .then(setNotices)
-      .catch(console.error);
-  }, []);
-
-  // Filter active notices and sort pinned first, then createdAt desc
-  const activeNotices = useMemo(() => {
-    return notices
-      .filter((n) => n.status === "active")
-      .sort((a, b) => {
-        // pinned first
-        if (b.isPinned && !a.isPinned) return 1;
-        if (a.isPinned && !b.isPinned) return -1;
-        // then sort by createdAt descending
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      });
-  }, [notices]);
+  const { notices } = useNotices();
+  const [previewNotice, setPreviewNotice] = useState(null);
 
   return (
     <div className="">
@@ -60,13 +41,13 @@ const LatestNotice = () => {
             765: { slidesPerView: 2, spaceBetween: 16 },
             1024: { slidesPerView: 3, spaceBetween: 20 },
           }}
-          className="rounded-md "
+          className="rounded-md"
         >
-          {activeNotices.map((notice) => (
-            <SwiperSlide key={notice.slug} className="my-4">
+          {notices.map((notice) => (
+            <SwiperSlide key={notice._id} className="my-4">
               <NoticeCard
                 notice={notice}
-                onPreview={setSelectedNotice} 
+                onPreview={(n) => setPreviewNotice(n)} // separate state
               />
             </SwiperSlide>
           ))}
@@ -75,8 +56,8 @@ const LatestNotice = () => {
 
       {/* Preview Modal */}
       <PreviewModal
-        selected={selectedNotice}
-        onClose={() => setSelectedNotice(null)}
+        selected={previewNotice}
+        onClose={() => setPreviewNotice(null)}
       />
     </div>
   );

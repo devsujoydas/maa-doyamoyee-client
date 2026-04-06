@@ -15,7 +15,7 @@ api.interceptors.request.use((config) => {
 });
 
 // 🔁 Refresh logic
-let isRefreshing = true;
+let isRefreshing = false;
 let subscribers = [];
 
 // queue resolve

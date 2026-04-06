@@ -11,11 +11,11 @@ import {
 } from "lucide-react";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
-import Textarea from "../../components/ui/Textarea"; 
-import { useData } from "../../context/useData";
+import Textarea from "../../components/ui/Textarea";  
+import useMessages from "../../hooks/useMessages";
 
-const AdminMessages = () => {
-  const {messages, setMessages} = useData();
+const AdminMessages = () => { 
+   const { data: messages = [] } = useMessages();
 
 
   const [search, setSearch] = useState("");
@@ -34,13 +34,11 @@ const AdminMessages = () => {
     );
 
   const markRead = (id) => {
-    setMessages((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, read: true } : m)),
-    );
+    
   };
 
   const deleteMsg = (id) => {
-    setMessages((prev) => prev.filter((m) => m.id !== id));
+   
   };
 
   const sendReply = (id) => {

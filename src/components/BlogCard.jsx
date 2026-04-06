@@ -11,7 +11,7 @@ import { Eye, MessageCircle, Share2, ThumbsUp } from "lucide-react";
 import toast from "react-hot-toast";
 import ShareModal from "../pages/BlogsPage/ShareModal";
 
-const BlogCard = ({ blog }) => {
+const BlogCard = ({ blog, type }) => {
   const { t } = useTranslation();
 
   const [viewModalOpen, setViewModalOpen] = useState(false);
@@ -69,14 +69,16 @@ const BlogCard = ({ blog }) => {
     }
   };
 
-  const handleShare = () => {
+  const shareUrl = `${window.location.origin}/blogs/${blog?._id}`;
+
+  const handleShare = async () => {
+    await navigator.clipboard.writeText(shareUrl);
+    toast.success("Link copied! Share it anywhere 🚀");
     setShareOpen(true);
   };
- const shareUrl = `${window.location.origin}/blogs/${blog?._id}`;
-
 
   return (
-    <div className="shadow-lg border border-zinc-200 rounded-lg overflow-hidden">
+    <div className="shadow-lg hover:shadow-xl transition-all border border-zinc-200 rounded-lg overflow-hidden">
       <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl p-3 transition-all duration-300 flex flex-col lang-bn-BD">
         {/* 🔹 Blog Image */}
         <div className="h-70 w-full overflow-hidden rounded-lg">
@@ -91,7 +93,7 @@ const BlogCard = ({ blog }) => {
         </div>
 
         {/* 🔹 Blog Content */}
-        <div className="px-4 py-5 flex flex-col flex-1">
+        <div className="px-3 pt-4 pb-2 flex flex-col flex-1">
           {/* Category + Date */}
           <div className="flex items-center gap-5 mb-3">
             <div className="flex gap-1 items-center">
@@ -147,19 +149,19 @@ const BlogCard = ({ blog }) => {
                 </div>
               </Link>
 
-              {/* Views */}
+              {/* Views
               <div className="flex items-center gap-1 text-gray-600 text-sm">
                 <Eye size={16} />
                 <span className="flex justify-center items-center gap-1">
                   {blog?.views?.length || 0}
                   <span className="sm:block hidden"> {t("views")}</span>
                 </span>
-              </div>
+              </div> */}
             </div>
 
             <button
               onClick={handleShare}
-              className="flex items-center gap-1 text-gray-600 hover:text-blue-600 text-sm font-medium"
+              className="flex items-center gap-1 text-gray-600 hover:text-blue-600 text-sm font-medium cursor-pointer"
             >
               <Share2 size={18} />
               <span className="sm:block hidden"> {t("share")}</span>
@@ -168,7 +170,7 @@ const BlogCard = ({ blog }) => {
 
           {/* Author */}
           {user?.role === "admin" && (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 mt-4">
               <img
                 src={blog?.author?.profileImage}
                 alt={blog?.author?.name}
@@ -178,12 +180,20 @@ const BlogCard = ({ blog }) => {
               <div className="text-[16px] text-gray-600">
                 <p>
                   by{" "}
-                  <span
-                    onClick={handleView}
-                    className="text-[#DB4242] hover:text-[#44233B] transition-all cursor-pointer font-medium"
-                  >
-                    {blog?.author?.name}
-                  </span>
+                  {type == "blog-page" ? (
+                    <span
+                      onClick={handleView}
+                      className="text-[#DB4242] hover:text-[#44233B] transition-all cursor-pointer font-medium"
+                    >
+                      {blog?.author?.name}
+                    </span>
+                  ) : (
+                    <span
+                      className="text-[#DB4242] hover:text-[#44233B] transition-all cursor-pointer font-medium"
+                    >
+                      {blog?.author?.name}
+                    </span>
+                  )}
                 </p>
 
                 {/* Loading text */}
@@ -205,12 +215,12 @@ const BlogCard = ({ blog }) => {
         user={author}
       />
 
-       <ShareModal
+      {/* <ShareModal
         isOpen={shareOpen}
         onClose={() => setShareOpen(false)}
         url={shareUrl}
         title={blog?.title}
-      />
+      /> */}
     </div>
   );
 };

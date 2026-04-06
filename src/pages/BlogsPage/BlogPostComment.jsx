@@ -1,17 +1,18 @@
 import { useEffect, useState, useRef } from "react";
-import { formatDateDynamic, formatDynamicDate } from "../../utils/formatDateDynamic";
+import { formatDynamicDate } from "../../utils/formatDateDynamic";
 import { useAuth } from "../../AuthProvider/authProvider";
 import toast from "react-hot-toast";
 import api from "../../utils/api";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const BlogPostComment = ({ comments, setComments }) => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [menuOpenId, setMenuOpenId] = useState(null);
   const [textMap, setTextMap] = useState({});
   const [loading, setLoading] = useState(false);
-
   const menuRef = useRef(null);
 
   // Close menu if clicked outside
@@ -64,11 +65,7 @@ const BlogPostComment = ({ comments, setComments }) => {
   };
 
   if (!comments || comments.length === 0)
-    return (
-      <p className="text-gray-500 p-4">
-        No comments yet. Be the first to comment!
-      </p>
-    );
+    return <p className="text-gray-500 pt-4 pb-8 text-center">{t("no_comments_yet")}</p>;
 
   return (
     <div className="md:max-h-162 max-h-100  overflow-y-auto overflow-x-hidden ">
