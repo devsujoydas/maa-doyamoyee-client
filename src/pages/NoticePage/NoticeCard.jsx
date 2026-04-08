@@ -8,7 +8,7 @@ const NoticeCard = ({ notice, onPreview }) => {
       initial={{ opacity: 0, y: 5 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="border border-zinc-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition bg-white lang-bn-BD"
+      className="border border-zinc-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition bg-white lang-bn-BD h-full"
     >
       {/* Title + Pinned */}
       <div className="flex justify-between items-start mb-3">

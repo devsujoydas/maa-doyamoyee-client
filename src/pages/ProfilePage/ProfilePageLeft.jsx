@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {
   FaFacebook,
-  FaInstagram,
   FaYoutube,
   FaGlobe,
   FaGithub,
 } from "react-icons/fa";
+import { FaSquareInstagram } from "react-icons/fa6";
 import { Camera, LockIcon, LogOut, User, CheckCircle } from "lucide-react";
 import api from "../../utils/api";
 import UploadPhotoModal from "./UploadPhotoModal";
 import { useAuth } from "../../AuthProvider/authProvider";
-import { MdVerified } from "react-icons/md";
+import { MdEmail, MdVerified } from "react-icons/md";
 
 const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
   const [verifying, setVerifying] = useState(false);
@@ -153,7 +153,17 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
         )}
 
         {/* Social Links */}
-        <div className="mt-4 w-full space-y-2">
+
+        <div className="w-full mb-2">
+          <a
+            href={`mailto:${user?.email}`}
+            className="flex mt-4 items-center justify-baseline w-full gap-2 text-gray-600 transition text-sm hover:text-red-500"
+          >
+            <MdEmail className="text-lg" />
+            <span className="truncate max-w-xs underline">{user?.email}</span>
+          </a>
+        </div>
+        <div className=" w-full space-y-2">
           {user?.contactDetails &&
             Object.entries(user.contactDetails)
               .filter(([_, val]) => val)
@@ -165,7 +175,7 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
                     colorClass = "hover:text-blue-600";
                     break;
                   case "instagram":
-                    Icon = FaInstagram;
+                    Icon = FaSquareInstagram;
                     colorClass = "hover:text-pink-500";
                     break;
                   case "youtube":

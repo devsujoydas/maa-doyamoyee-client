@@ -22,7 +22,7 @@ const AdminLayout = () => {
 
 
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden">
+    <div className="flex h-screen bg-gray-50 overflow-hidden lang-bn-BD">
       <Toaster position="top-right" />
 
       {/* Desktop Sidebar */}

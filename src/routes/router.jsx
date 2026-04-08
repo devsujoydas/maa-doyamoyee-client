@@ -9,7 +9,7 @@ import { HelmetProvider } from "react-helmet-async";
 // Auth Guards
 import PrivateRoutes from "./PrivateRoutes";
 import AuthPrivateRoutes from "./AuthPrivateRoutes";
-import AdminPrivateRoutes from "./AdminPrivateRoutes";
+import AdminPrivateRoutes from "./AdminPrivateRoutes"; 
 
 /* ---------------- Lazy Pages ---------------- */
 const Home = lazy(() => import("../pages/Home/Home"));
@@ -40,6 +40,7 @@ const AdminDonations = lazy(() => import("../pages/Admin/AdminDonations"));
 const AdminUsers = lazy(() => import("../pages/Admin/AdminUsers"));
 const AdminMessages = lazy(() => import("../pages/Admin/AdminMessages"));
 const AdminBlogs = lazy(() => import("../pages/Admin/AdminBlogs"));
+const AdminGallary = lazy(() => import("../pages/Admin/AdminGallary"));
 
 const NoticePage = lazy(() => import("../pages/NoticePage/NoticePage"));
 const BlogsPage = lazy(() => import("../pages/BlogsPage/BlogsPage"));
@@ -144,6 +145,7 @@ export const router = createBrowserRouter([
       { path: "", element: withSuspense(<AdminOverview />) },
       { path: "users", element: withSuspense(<AdminUsers />) },
       { path: "messages", element: withSuspense(<AdminMessages />) },
+      { path: "gallery", element: withSuspense(<AdminGallary />) },
       { path: "blogs", element: withSuspense(<AdminBlogs />) },
       { path: "notices", element: withSuspense(<AdminNotices />) },
       { path: "events", element: withSuspense(<AdminEvents />) },

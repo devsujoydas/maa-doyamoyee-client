@@ -46,13 +46,9 @@ const BlogViewModal = ({
             {selectedBlog.author.name}
           </span>
         </p>
-        <div className="h-100 overflow-hidden rounded-md object-cover my-3">
-          {selectedBlog.postImg && (
-            <img
-              src={selectedBlog.postImg}
-              alt={selectedBlog.title}
-              className="w-full mb-2"
-            />
+        <div className="max-h-100 overflow-hidden rounded-lg object-cover my-3">
+          {selectedBlog.postImg?.url && (
+            <img src={selectedBlog.postImg.url} loading="lazy" alt="" className="w-full" />
           )}
         </div>
         <p className="mb-4 whitespace-pre-line">{selectedBlog.content}</p>
@@ -60,21 +56,21 @@ const BlogViewModal = ({
         <div className="flex items-center justify-between mt-4">
           <div className="flex space-x-2">
             <button
-              className={`px-3 py-1 rounded ${selectedBlog.status === "pending" ? "bg-yellow-400 text-white" : "bg-gray-200 text-gray-700"}`}
+              className={`px-3 py-1 rounded ${selectedBlog.status === "pending" ? "bg-yellow-400 text-white" : "bg-gray-200 text-gray-700"} cursor-pointer`}
               onClick={() => handleStatusChange("pending")}
               disabled={loading}
             >
               Pending
             </button>
             <button
-              className={`px-3 py-1 rounded ${selectedBlog.status === "approved" ? "bg-green-400 text-white" : "bg-gray-200 text-gray-700"}`}
+              className={`px-3 py-1 rounded ${selectedBlog.status === "approved" ? "bg-green-400 text-white" : "bg-gray-200 text-gray-700"} cursor-pointer`}
               onClick={() => handleStatusChange("approved")}
               disabled={loading}
             >
               Approved
             </button>
             <button
-              className={`px-3 py-1 rounded ${selectedBlog.status === "rejected" ? "bg-red-400 text-white" : "bg-gray-200 text-gray-700"}`}
+              className={`px-3 py-1 rounded ${selectedBlog.status === "rejected" ? "bg-red-400 text-white" : "bg-gray-200 text-gray-700"} cursor-pointer`}
               onClick={() => handleStatusChange("rejected")}
               disabled={loading}
             >

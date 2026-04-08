@@ -4,29 +4,33 @@ import * as noticeService from "../services/noticeService";
 const useNotices = () => {
   const queryClient = useQueryClient();
 
-  const { data: notices = [], isLoading } = useQuery({
+  // Fetch notices
+  const { data, isLoading } = useQuery({
     queryKey: ["notices"],
-    queryFn: noticeService.getNotices,
+    queryFn: noticeService.fetchNotices,
   });
 
+  console.log(data)
+  // Create or update
   const createOrUpdate = useMutation({
-    mutationFn: async ({ id, data }) => {
-      if (id) return noticeService.updateNotice(id, data);
-      return noticeService.createNotice(data);
+    mutationFn: async ({ id, formData }) => {
+      if (id) return noticeService.updateNotice(id, formData);
+      return noticeService.createNotice(formData);
     },
     onSuccess: () => queryClient.invalidateQueries(["notices"]),
   });
 
-  const deleteMutation = useMutation({
+  // Delete
+  const deleteNotice = useMutation({
     mutationFn: noticeService.deleteNotice,
     onSuccess: () => queryClient.invalidateQueries(["notices"]),
   });
 
   return {
-    notices,
+    notices: Array.isArray(data) ? data : [], // ensure always array
     isLoading,
     createOrUpdate,
-    deleteNotice: deleteMutation.mutateAsync,
+    deleteNotice: deleteNotice.mutateAsync,
   };
 };
 

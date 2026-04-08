@@ -27,20 +27,20 @@ const BlogPostComment = ({ comments, setComments }) => {
   }, []);
 
   const handleUpdate = async (comment) => {
-    if (!textMap[comment._id]?.trim())
+    if (!textMap[comment?._id]?.trim())
       return toast.error("Comment cannot be empty");
 
     try {
       setLoading(true);
       const { data } = await api.put(
-        `/posts/${comment.post}/comments/${comment._id}`,
+        `/posts/${comment?.post}/comments/${comment?._id}`,
         { text: textMap[comment._id] },
       );
       toast.success(data.message);
       setEditingCommentId(null);
-      setTextMap((prev) => ({ ...prev, [comment._id]: data.comment.text }));
+      setTextMap((prev) => ({ ...prev, [comment?._id]: data.comment?.text }));
       setComments((prev) =>
-        prev.map((c) => (c._id === data.comment._id ? data.comment : c)),
+        prev.map((c) => (c._id === data.comment?._id ? data?.comment : c)),
       );
     } catch (err) {
       toast.error(err.response?.data?.message || err.message);

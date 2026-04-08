@@ -85,7 +85,7 @@ const BlogCard = ({ blog, type }) => {
           <Link to={`/blogs/${blog?._id}`}>
             <img
               loading="lazy"
-              src={blog?.postImg || blog?.images?.[0]}
+              src={blog?.postImg?.url}
               alt={blog?.title}
               className="w-full h-full object-cover transform hover:scale-125 transition duration-500 cursor-pointer"
             />

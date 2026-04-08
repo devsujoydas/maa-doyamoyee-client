@@ -60,7 +60,7 @@ const AdminBlogs = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-6 lang-bn-BD">
+    <div className="flex flex-col space-y-6 ">
       <SEOHead
         title="Blog Management"
         description="Manage blog posts."
@@ -91,6 +91,7 @@ const AdminBlogs = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100 sticky top-0 z-10">
             <tr className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left ">SL: </th>
               <th className="px-6 py-3 text-left ">Title</th>
               <th className="px-6 py-3 text-left">Author</th>
               <th className="px-6 py-3 text-left">Likes</th>
@@ -102,8 +103,9 @@ const AdminBlogs = () => {
           </thead>
 
           <tbody className="divide-y divide-gray-200 text-sm">
-            {blogs.map((post) => (
+            {blogs.map((post, idx) => (
               <tr key={post._id} className="hover:bg-gray-50">
+                <td className="px-6 py-4 text-gray-500">{idx + 1}</td>
                 <td className="px-6 py-4 text-gray-900">
                   <Link
                     to={`/blogs/${post?._id}`}
@@ -112,7 +114,7 @@ const AdminBlogs = () => {
                     {post.title}
                   </Link>
                 </td>
-                <td className="px-6 py-4 text-gray-500">{post.author.name}</td>
+                <td className="px-6 py-4 text-gray-500 text-nowrap">{post.author.name}</td>
                 <td className="px-6 py-4 text-gray-500">
                   {post.reacts?.length || 0}
                 </td>

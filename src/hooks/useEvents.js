@@ -1,11 +1,46 @@
-import { useQuery } from "@tanstack/react-query";
-import { getEvents } from "../services/eventService";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  getEventsService,
+  createEventService,
+  updateEventService,
+  deleteEventService,
+} from "../services/eventService";
 
 const useEvents = () => {
-  return useQuery({
+  const queryClient = useQueryClient();
+
+  // get all events
+  const { data } = useQuery({
     queryKey: ["events"],
-    queryFn: getEvents,
+    queryFn: getEventsService,
+    staleTime: 1000 * 60,
   });
+
+  // add event
+  const addEvent = useMutation({
+    mutationFn: createEventService,
+    onSuccess: () => queryClient.invalidateQueries(["events"]),
+  });
+
+  // edit event
+  const editEvent = useMutation({
+    mutationFn: ({ id, formData }) => updateEventService(id, formData),
+    onSuccess: () => queryClient.invalidateQueries(["events"]),
+  });
+
+  // delete event
+  const deleteEvent = useMutation({
+    mutationFn: deleteEventService,
+    onSuccess: () => queryClient.invalidateQueries(["events"]),
+  });
+
+  return {
+    events: data?.events || [],
+    total: data?.total || 0,
+    addEvent,
+    editEvent,
+    deleteEvent,
+  };
 };
 
 export default useEvents;

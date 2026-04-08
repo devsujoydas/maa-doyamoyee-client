@@ -1,30 +1,56 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, PhoneCall, Mail } from "lucide-react";
 import PageHeading from "../../shared/PageHeading";
 import { useTranslation } from "react-i18next";
+import { createMessage } from "../../services/messageService";
+import toast from "react-hot-toast";
 
 const Contact = () => {
   const { t } = useTranslation();
 
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!form.name || !form.email || !form.message) {
+      return toast.error("Required fields missing");
+    }
+
+    try {
+      await createMessage(form);
+      toast.success("Message sent!");
+
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch {
+      toast.error("Failed to send message");
+    }
+  };
+
   return (
     <section className="relative">
-      {/* Existing Glow */}
-      <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
-      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
-
-      <div className="custom-container ">
+      <div className="custom-container">
         <PageHeading section="contact" />
 
-        {/* 🔥 MAIN GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12 items-start w-7xl mx-auto">
 
-          {/* ================= LEFT SIDE ================= */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            className="space-y-6"
-          >
-            {/* Email */}
+          {/* LEFT SAME */}
+          <motion.div className="space-y-6">
             <div className="flex items-center gap-4 bg-white/20 backdrop-blur-md p-4 rounded-2xl shadow">
               <Mail className="w-6 h-6 text-yellow-600" />
               <div>
@@ -33,7 +59,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Phone */}
             <div className="flex items-center gap-4 bg-white/20 backdrop-blur-md p-4 rounded-2xl shadow">
               <PhoneCall className="w-6 h-6 text-yellow-600" />
               <div>
@@ -42,94 +67,57 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Address */}
             <div className="flex items-center gap-4 bg-white/20 backdrop-blur-md p-4 rounded-2xl shadow">
               <MapPin className="w-6 h-6 text-yellow-600" />
               <div>
                 <h4 className="text-sm text-gray-600">{t("contact_address")}</h4>
-                <p className="text-gray-900 font-medium">
-                  {t("footer_contact_address")}
-                </p>
+                <p className="text-gray-900 font-medium">{t("footer_contact_address")}</p>
               </div>
-            </div>
-
-            {/* Map */}
-            <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d443.1118780753955!2d89.94966128738012!3d24.92327856258347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fd7f6c3dfab4c3%3A0xb69912834310fba9!2sDoyamoyee%20Temple!5e1!3m2!1sbn!2sbd!4v1772283605228!5m2!1sbn!2sbd"
-                width="100%"
-                height="280"
-                style={{ border: 0 }}
-                loading="lazy"
-                title="map"
-              ></iframe>
             </div>
           </motion.div>
 
-          {/* ================= RIGHT SIDE FORM ================= */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            className="bg-white/20 backdrop-blur-md p-8 rounded-3xl shadow-lg hover:shadow-2xl transition"
-          >
-            <h3 className="text-2xl font-bold text-gray-900  text-center mb-2">
+          {/* RIGHT FORM SAME */}
+          <motion.div className="bg-white/20 backdrop-blur-md p-8 rounded-3xl shadow-lg">
+            <h3 className="text-2xl font-bold text-center mb-2">
               {t("send_message")}
-            </h3> 
+            </h3>
 
-            <form className="space-y-5">
-              {/* Name */}
-              <div>
-                <label className="text-sm text-gray-700 mb-1 block">
-                  {t("name")}
-                </label>
-                <input
-                  type="text"
-                  placeholder={t("enter_name")}
-                  className="input-field"
-                />
-              </div>
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              <input
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder={t("enter_name")}
+                className="input-field"
+              />
 
-              {/* Email */}
-              <div>
-                <label className="text-sm text-gray-700 mb-1 block">
-                  {t("email")}
-                </label>
-                <input
-                  type="email"
-                  placeholder={t("email_placeholder")}
-                  className="input-field"
-                />
-              </div>
-              
-              {/* Phone */}
-              <div>
-                <label className="text-sm text-gray-700 mb-1 block">
-                  {t("contact_phone")}
-                </label>
-                <input
-                  type="number"
-                  placeholder={t("phone_placeholder")}
-                  className="input-field"
-                />
-              </div>
+              <input
+                name="email"
+                type="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder={t("email_placeholder")}
+                className="input-field"
+              />
 
-              {/* Message */}
-              <div>
-                <label className="text-sm text-gray-700 mb-1 block">
-                  {t("message")}
-                </label>
-                <textarea
-                  rows={5}
-                  placeholder={t("message_placeholder")}
-                  className="input-field"
-                ></textarea>
-              </div>
+              <input
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+                placeholder={t("phone_placeholder")}
+                className="input-field"
+              />
 
-              {/* Button */}
-              <button
-                type="submit"
-                className="btn-primary w-full"
-              >
+              <textarea
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                placeholder={t("message_placeholder")}
+                rows={5}
+                className="input-field"
+              />
+
+              <button type="submit" className="btn-primary w-full">
                 {t("submit")}
               </button>
             </form>

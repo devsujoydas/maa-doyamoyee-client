@@ -7,6 +7,7 @@ import {
   ChevronRight,
   FileText,
   HandCoins,
+  Image,
   LayoutDashboard,
   LogOut,
   Mail,
@@ -20,10 +21,11 @@ const SidebarContent = ({ collapsed, toggleCollapsed, logout }) => {
 
   const adminLinks = [
     { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
-    { label: "Messages", path: "/admin/messages", icon: Mail },
     { label: "Users", path: "/admin/users", icon: Users },
     { label: "Blog", path: "/admin/blogs", icon: FileText },
     { label: "Notice", path: "/admin/notices", icon: Bell },
+    { label: "Gallery", path: "/admin/gallery", icon: Image },
+    { label: "Messages", path: "/admin/messages", icon: Mail },
     { label: "Event", path: "/admin/events", icon: Calendar },
     { label: "Donations", path: "/admin/donations", icon: HandCoins },
     { label: "Back to Site", path: "/", icon: LogOut },

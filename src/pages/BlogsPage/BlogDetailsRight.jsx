@@ -10,19 +10,17 @@ import {
   FaYoutube,
   FaGlobe,
   FaGithub,
-  FaTrash,
-  FaEdit,
-  FaPlus,
 } from "react-icons/fa";
+import { FaSquareInstagram } from "react-icons/fa6";
 
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { formatDateDynamic } from "../../utils/formatDateDynamic";
+import { MdEmail } from "react-icons/md";
 
 const BlogDetailsRight = ({ blog, recentPosts = [] }) => {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
-  
   useEffect(() => {
     Fancybox.bind("[data-fancybox='author-image']", {});
     return () => Fancybox.unbind("[data-fancybox='author-image']");
@@ -35,7 +33,7 @@ const BlogDetailsRight = ({ blog, recentPosts = [] }) => {
       [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
     }
     return filtered.slice(0, 3);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recentPosts, blog.id]);
 
   return (
@@ -67,6 +65,18 @@ const BlogDetailsRight = ({ blog, recentPosts = [] }) => {
             {blog.author.bio}
           </p>
 
+          <div className="w-full mb-1">
+            <a
+              href={`mailto:${blog?.author?.email}`}
+              className="flex mt-4 items-center justify-baseline w-full gap-2 text-gray-600 transition text-sm hover:text-red-500"
+            >
+              <MdEmail className="text-lg" />
+              <span className="truncate max-w-xs underline">
+                {blog?.author?.email}
+              </span>
+            </a>
+          </div>
+
           <div className="mt-4 w-full flex items-center gap-3 justify-center ">
             {blog?.author?.contactDetails &&
               Object.entries(blog?.author?.contactDetails)
@@ -79,7 +89,7 @@ const BlogDetailsRight = ({ blog, recentPosts = [] }) => {
                       colorClass = "hover:text-blue-600";
                       break;
                     case "instagram":
-                      Icon = FaInstagram;
+                      Icon = FaSquareInstagram;
                       colorClass = "hover:text-pink-500";
                       break;
                     case "youtube":
@@ -125,9 +135,7 @@ const BlogDetailsRight = ({ blog, recentPosts = [] }) => {
             placeholder={t("search_placeholder")}
             className="border border-gray-300 rounded-l-xl p-2 sm:p-3 w-full text-sm sm:text-base focus:ring-2 focus:ring-[#7E4555] focus:outline-none"
           />
-          <button className="btn-primary">
-            {t("search")}
-          </button>
+          <button className="btn-primary">{t("search")}</button>
         </div>
       </div>
 

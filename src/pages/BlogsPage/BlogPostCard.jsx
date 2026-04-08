@@ -56,8 +56,7 @@ const BlogPostCard = ({ blog, profile }) => {
 
   const handleShare = () => {
     setShareOpen(true);
-  };
-
+  }; 
   return (
     <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-3 border border-zinc-200">
       {/* IMAGE */}
@@ -65,13 +64,13 @@ const BlogPostCard = ({ blog, profile }) => {
       {blog?.postImg && (
         <div className="rounded-xl overflow-hidden max-h-150 ">
           <a
-            href={blog.postImg}
+            href={blog.postImg?.url}
             data-fancybox="blog-image"
             data-caption={blog.title}
             className="overflow-hidden"
           >
             <img
-              src={blog.postImg}
+              src={blog.postImg?.url}
               alt={blog.title}
               className="w-full h-full object-center object-cover transition duration-300 hover:scale-105"
             />
@@ -108,7 +107,7 @@ const BlogPostCard = ({ blog, profile }) => {
             <ThumbsUp size={18} fill={isLiked ? "currentColor" : "none"} />
             <span className="flex justify-center items-center gap-1">
               {reacts?.length || 0}{" "}
-              <span className="sm:block hidden">  {t("likes")}</span>
+              <span className="sm:block hidden"> {t("likes")}</span>
             </span>
           </button>
 

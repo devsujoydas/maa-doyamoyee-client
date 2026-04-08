@@ -12,7 +12,7 @@ import useNotices from "../../hooks/useNotices";
 
 const LatestNotice = () => {
   const { t } = useTranslation();
-  const { notices } = useNotices();
+  // const { notices } = useNotices();
   const [previewNotice, setPreviewNotice] = useState(null);
 
   return (
@@ -43,14 +43,14 @@ const LatestNotice = () => {
           }}
           className="rounded-md"
         >
-          {notices.map((notice) => (
+          {/* {notices.map((notice) => (
             <SwiperSlide key={notice._id} className="my-4">
               <NoticeCard
                 notice={notice}
                 onPreview={(n) => setPreviewNotice(n)} // separate state
               />
             </SwiperSlide>
-          ))}
+          ))} */}
         </Swiper>
       </div>
 

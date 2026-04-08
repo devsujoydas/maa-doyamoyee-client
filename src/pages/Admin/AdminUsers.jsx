@@ -77,7 +77,7 @@ const AdminUsers = () => {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-200 lang-bn-BD">
+          <tbody className="divide-y divide-gray-200">
             {users.map((user) => (
               <tr key={user?._id} className="hover:bg-gray-50">
                 <td className="px-6 py-3 flex items-center space-x-3">
