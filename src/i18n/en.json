@@ -152,6 +152,18 @@
   "gallery_title": "Gallery",
   "gallery_desc": "A photo gallery showcasing the beauty of the temple and its centuries-old artworks.",
   "gallery_shortdesc": "Explore moments from temple festivals, rituals, and historic memories through our photo collection.",
+
+
+   "gallery": {
+    "newImages": {
+      "title": "New Images – Shree Shree Ri Doyamoyee Mandir",
+      "description": "The new images of Shree Shree Ri Doyamoyee Mandir offer devotees and visitors a fresh experience. These images showcase recent renovations, mandap, main gate, and modern architectural beauty of the temple. The new visuals reflect the spiritual charm and grandeur of Shree Shree Ri Doyamoyee Mandir."
+    },
+    "oldImages": {
+      "title": "Old Images – Shree Shree Ri Doyamoyee Mandir",
+      "description": "The old images of Shree Shree Ri Doyamoyee Mandir capture its heritage, ancient architecture, and memorable moments of devotees. These images preserve the history and timeless beauty of Shree Shree Ri Doyamoyee Mandir, allowing visitors to experience its spiritual legacy."
+    }
+  },
   
   "videos_title": "Videos of Sri Sri Doyamoyee Temple",
   "videos_desc": "A collection of videos from pujas, festivals, cultural events, and special moments of the temple.",

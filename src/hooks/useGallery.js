@@ -1,35 +1,44 @@
-// src/hooks/useGallery.js
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getGallery, createGallery, updateGallery, deleteGallery } from "../services/galleryService";
+import toast from "react-hot-toast";
+import * as service from "../services/galleryService";
 
-export const useGallery = () => {
-  return useQuery({
+const useGallery = () => {
+  const queryClient = useQueryClient();
+
+  const { data: gallery = [], isLoading } = useQuery({
     queryKey: ["gallery"],
-    queryFn: getGallery,
-    staleTime: 1000 * 60, // 1 min caching
+    queryFn: service.fetchGallery,
   });
+
+  const createOrUpdate = useMutation({
+    mutationFn: async ({ id, formData }) => {
+      if (id) return service.updateGallery(id, formData);
+      return service.createGallery(formData);
+    },
+    onSuccess: (_, variables) => {
+      toast.success(variables.id ? "Updated successfully" : "Created successfully");
+      queryClient.invalidateQueries(["gallery"]);
+    },
+    onError: () => toast.error("Something went wrong"),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: service.deleteGallery,
+    onSuccess: () => {
+      toast.success("Deleted successfully");
+      queryClient.invalidateQueries(["gallery"]);
+    },
+    onError: () => toast.error("Delete failed"),
+  });
+
+  return {
+    gallery,
+    isLoading,
+    createOrUpdate,
+    deleteGallery: deleteMutation.mutateAsync,
+    isSubmitting: createOrUpdate.isPending,
+    isDeleting: deleteMutation.isPending,
+  };
 };
 
-export const useCreateGallery = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: createGallery,
-    onSuccess: () => queryClient.invalidateQueries(["gallery"]),
-  });
-};
-
-export const useUpdateGallery = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: updateGallery,
-    onSuccess: () => queryClient.invalidateQueries(["gallery"]),
-  });
-};
-
-export const useDeleteGallery = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: deleteGallery,
-    onSuccess: () => queryClient.invalidateQueries(["gallery"]),
-  });
-};
+export default useGallery;

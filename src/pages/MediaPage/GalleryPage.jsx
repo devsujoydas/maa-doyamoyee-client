@@ -1,68 +1,52 @@
-import { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import useGallery from "../../hooks/useGallery";
+import PageHeading from "../../shared/PageHeading";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
-
 import GalleryCard from "./GalleryCard";
-import PageHeading from "../../shared/PageHeading";
-import {  galleryImages, gallerySEO } from "../../data/data";
+import { useTranslation } from "react-i18next";
 
-function GalleryPage() {
-  const [filter, setFilter] = useState("all");
-  const [visibleCount, setVisibleCount] = useState(12);
+const GalleryPage = () => {
+  const { gallery, isLoading } = useGallery();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    Fancybox.bind("[data-fancybox='gallery']", {
-      Thumbs: { autoStart: true },
-      Toolbar: { display: ["zoom", "prev", "next", "close"] },
-      animated: true,
-      dragToClose: true,
-    });
-
-    return () => Fancybox.destroy();
+    Fancybox.bind("[data-fancybox='gallery-public']", {});
+    return () => Fancybox.unbind("[data-fancybox='gallery-public']");
   }, []);
 
-  const handleViewMore = () => {
-    setVisibleCount(galleryImages.length);
-  };
+  const newImages = gallery.filter((img) => img.eventDate);
+  const oldImages = gallery.filter((img) => !img.eventDate);
 
-  const filteredImages =
-    filter === "all"
-      ? galleryImages
-      : galleryImages.filter((img) => img.category === filter);
+  if (isLoading) return <p>Loading...</p>;
 
   return (
-    <section className=" relative">
+    <div className="relative">
+      {/* Background blobs */}
+      <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
+      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+
       <div className="custom-container">
         <PageHeading section="gallery" />
 
- 
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-5 md:mt-8">
-          {galleryImages.slice(0, visibleCount).map((img, index) => (
-            <GalleryCard
-              key={img.id}
-              img={img}
-              index={index}
-              gallerySEO={gallerySEO}
-            />
+        {/* New Images */}
+        <h2 className="text-xl font-bold mb-3">{t("gallery.newImages.title")}</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {newImages.map((img) => (
+            <GalleryCard key={img._id} img={img} />
           ))}
         </div>
 
-        {visibleCount < galleryImages.length && (
-          <div className="text-center mt-12">
-            <button
-              onClick={handleViewMore}
-              className="bg-linear-to-r from-yellow-500 to-red-600 
-              text-white px-8 py-3 rounded-full font-semibold 
-              shadow-lg hover:shadow-xl hover:scale-105 
-              transition duration-300"
-            >
-              View More
-            </button>
-          </div>
-        )}
+        {/* Old Images */}
+        <h2 className="text-xl font-bold mt-8 mb-3">{t("gallery.oldImages.title")}</h2>
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
+          {oldImages.map((img) => (
+            <GalleryCard key={img._id} img={img} />
+          ))}
+        </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
 
 export default GalleryPage;

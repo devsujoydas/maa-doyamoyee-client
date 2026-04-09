@@ -133,7 +133,7 @@ div {
 
 /* important class */
 .input-field {
-  @apply w-full border border-gray-300 rounded-lg px-3 py-2.5 outline-none;
+  @apply w-full border border-gray-300 rounded-sm md:rounded-lg px-3 py-2 md:py-2.5 outline-none;
 }
 
 .btn-primary {

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import PageHeading from "../../shared/PageHeading";
 import { useTranslation } from "react-i18next";
 
@@ -10,8 +10,10 @@ const NoticePage = () => {
   const { t } = useTranslation();
   const { notices } = useNotices();
   const [previewNotice, setPreviewNotice] = useState(null);
+  console.log(notices);
 
-  const activeNotice = notices.filter((n) => n.status == "active");
+  // Filter active notices
+  const activeNotices = notices?.filter((n) => n.active === true) || [];
 
   return (
     <div className="relative min-h-[50vh]">
@@ -22,10 +24,10 @@ const NoticePage = () => {
       <div className="custom-container">
         <PageHeading section="notice" />
 
-        {/* -------- Notices Grid -------- */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
-          {activeNotice.length > 0 ? (
-            activeNotice.map((notice) => (
+        {/* Notices Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 h-full">
+          {activeNotices.length > 0 ? (
+            activeNotices.map((notice) => (
               <NoticeCard
                 key={notice._id}
                 notice={notice}
@@ -43,6 +45,7 @@ const NoticePage = () => {
       {/* Preview Modal */}
       <PreviewModal
         selected={previewNotice}
+        isOpen={!!previewNotice}
         onClose={() => setPreviewNotice(null)}
       />
     </div>

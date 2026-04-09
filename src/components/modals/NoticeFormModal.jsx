@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import Modal from "../ui/Modal";
+ 
 import toast from "react-hot-toast";
+import Modal from "../ui/Modal";
 
 const defaultForm = {
   title: "",
   description: "",
   category: "general",
-  status: "active",
   eventDate: "",
   eventTime: "",
   issuedBy: "",
@@ -33,77 +33,56 @@ const NoticeFormModal = ({ isOpen, onClose, initialData, onSubmit }) => {
   };
 
   const handleSubmit = () => {
-    if (!form.title || !form.description) return toast.error("Title & Description required");
+    if (!form.title || !form.description) {
+      return toast.error("Title & Description are required");
+    }
     onSubmit({ ...form, eventDate: form.eventDate || null });
   };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} wClass="max-w-4xl">
       <div className="flex flex-col max-h-[80vh]">
-        <div className="p-4 border-b sticky top-0 bg-white z-10">
-          <h2 className="text-lg sm:text-xl font-semibold text-center">{initialData ? "Edit Notice" : "Add Notice"}</h2>
+        <div className="md:p-4 pb-3 border-b border-zinc-200 bg-white">
+          <h2 className="text-xl font-semibold text-center">
+            {initialData ? "Edit Notice" : "Add Notice"}
+          </h2>
         </div>
-        <div className="p-4 overflow-y-auto flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <div className="md:p-4 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Input label="Title" name="title" value={form.title} onChange={handleChange} />
           <Input label="PDF URL" name="pdfUrl" value={form.pdfUrl} onChange={handleChange} />
           <Textarea label="Description" name="description" value={form.description} onChange={handleChange} />
-          <Input label="Event Date" type="date" name="eventDate" value={form.eventDate} onChange={handleChange} />
-          <Input label="Event Time" type="time" name="eventTime" value={form.eventTime} onChange={handleChange} />
+
+          <Input type="date" label="Event Date" name="eventDate" value={form.eventDate} onChange={handleChange} />
+          <Input type="time" label="Event Time" name="eventTime" value={form.eventTime} onChange={handleChange} />
+
           <Input label="Venue" name="venue" value={form.venue} onChange={handleChange} />
           <Input label="Issued By" name="issuedBy" value={form.issuedBy} onChange={handleChange} />
-          <Select
-            label="Category"
-            name="category"
-            value={form.category}
-            onChange={handleChange}
-            options={[
-              { label: "General", value: "general" },
-              { label: "Event", value: "event" },
-              { label: "Meeting", value: "meeting" },
-              { label: "Announcement", value: "announcement" },
-              { label: "Donation", value: "donation" },
-              { label: "Puja", value: "puja" },
-            ]}
-          />
-          <Select
-            label="Status"
-            name="status"
-            value={form.status}
-            onChange={handleChange}
-            options={[
-              { label: "Active", value: "active" },
-              { label: "Inactive", value: "inactive" },
-            ]}
-          />
+
+          
         </div>
-        <div className="p-4 border-t bg-white">
-          <button onClick={handleSubmit} className="btn-primary w-full">{initialData ? "Update" : "Create"}</button>
+
+        <div className="md:p-4 md:py-0 py-3 border-t border-zinc-200">
+          <button onClick={handleSubmit} className="btn-primary w-full">
+            {initialData ? "Update" : "Create"}
+          </button>
         </div>
       </div>
     </Modal>
   );
 };
 
-const Input = ({ label, name, value, onChange, type = "text" }) => (
+const Input = ({ label, ...props }) => (
   <div>
-    <label className="text-xs font-medium">{label}</label>
-    <input type={type} name={name} value={value} onChange={onChange} className="input-field mt-1" />
+    <label className="text-sm font-medium">{label}</label>
+    <input {...props} className="input-field mt-1" />
   </div>
 );
 
-const Textarea = ({ label, name, value, onChange }) => (
+const Textarea = ({ label, ...props }) => (
   <div className="sm:col-span-2">
-    <label className="text-xs font-medium">{label}</label>
-    <textarea name={name} value={value} onChange={onChange} className="input-field mt-1" rows={4} />
-  </div>
-);
-
-const Select = ({ label, name, value, onChange, options }) => (
-  <div>
-    <label className="text-xs font-medium">{label}</label>
-    <select name={name} value={value} onChange={onChange} className="input-field mt-1">
-      {options.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
-    </select>
+    <label className="text-sm font-medium">{label}</label>
+    <textarea {...props} className="input-field mt-1" rows={4} />
   </div>
 );
 

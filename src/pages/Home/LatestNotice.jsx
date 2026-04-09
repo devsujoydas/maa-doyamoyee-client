@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -12,8 +12,10 @@ import useNotices from "../../hooks/useNotices";
 
 const LatestNotice = () => {
   const { t } = useTranslation();
-  // const { notices } = useNotices();
+  const { notices } = useNotices();
   const [previewNotice, setPreviewNotice] = useState(null);
+
+  const activeNotices = notices?.filter((n) => n.active === true) || [];
 
   return (
     <div className="">
@@ -31,32 +33,30 @@ const LatestNotice = () => {
           slidesPerView={1}
           spaceBetween={16}
           modules={[Autoplay]}
-          autoplay={{
-            delay: 3500,
-            disableOnInteraction: false,
-          }}
+          autoplay={{ delay: 3500, disableOnInteraction: false }}
           loop={true}
           breakpoints={{
             500: { slidesPerView: 1, spaceBetween: 12 },
             765: { slidesPerView: 2, spaceBetween: 16 },
             1024: { slidesPerView: 3, spaceBetween: 20 },
           }}
-          className="rounded-md"
+          className="rounded-md h-full"
         >
-          {/* {notices.map((notice) => (
-            <SwiperSlide key={notice._id} className="my-4">
+          {activeNotices.map((notice) => (
+            <SwiperSlide key={notice._id} className="my-4 h-full">
               <NoticeCard
                 notice={notice}
-                onPreview={(n) => setPreviewNotice(n)} // separate state
+                onPreview={(n) => setPreviewNotice(n)}
               />
             </SwiperSlide>
-          ))} */}
+          ))}
         </Swiper>
       </div>
 
       {/* Preview Modal */}
       <PreviewModal
         selected={previewNotice}
+        isOpen={!!previewNotice}
         onClose={() => setPreviewNotice(null)}
       />
     </div>

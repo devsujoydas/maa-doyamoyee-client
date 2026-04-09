@@ -4,14 +4,11 @@ import * as noticeService from "../services/noticeService";
 const useNotices = () => {
   const queryClient = useQueryClient();
 
-  // Fetch notices
-  const { data, isLoading } = useQuery({
+  const { data: notices = [], isLoading } = useQuery({
     queryKey: ["notices"],
     queryFn: noticeService.fetchNotices,
   });
 
-  console.log(data)
-  // Create or update
   const createOrUpdate = useMutation({
     mutationFn: async ({ id, formData }) => {
       if (id) return noticeService.updateNotice(id, formData);
@@ -20,17 +17,38 @@ const useNotices = () => {
     onSuccess: () => queryClient.invalidateQueries(["notices"]),
   });
 
-  // Delete
-  const deleteNotice = useMutation({
+  const togglePinMutation = useMutation({
+    mutationFn: noticeService.togglePin,
+    onSuccess: (updatedNotice) => {
+      queryClient.setQueryData(["notices"], (old = []) =>
+        old.map((n) => (n._id === updatedNotice._id ? updatedNotice : n))
+      );
+    },
+  });
+
+  const toggleStatusMutation = useMutation({
+    mutationFn: noticeService.toggleStatus, 
+    onSuccess: (updatedNotice) => {
+      queryClient.setQueryData(["notices"], (old = []) =>
+        old.map((n) => (n._id === updatedNotice._id ? updatedNotice : n))
+      );
+    }, 
+  });
+
+  const deleteMutation = useMutation({
     mutationFn: noticeService.deleteNotice,
-    onSuccess: () => queryClient.invalidateQueries(["notices"]),
+    onSuccess: (id) => {
+      queryClient.setQueryData(["notices"], (old = []) => old.filter((n) => n._id !== id));
+    },
   });
 
   return {
-    notices: Array.isArray(data) ? data : [], // ensure always array
+    notices,
     isLoading,
     createOrUpdate,
-    deleteNotice: deleteNotice.mutateAsync,
+    togglePin: togglePinMutation.mutateAsync,
+    toggleStatus: toggleStatusMutation.mutateAsync,
+    deleteNotice: deleteMutation.mutateAsync,
   };
 };
 

@@ -91,14 +91,14 @@ const AdminBlogs = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100 sticky top-0 z-10">
             <tr className="text-xs font-medium text-gray-500 uppercase tracking-wider">
-              <th className="px-6 py-3 text-left ">SL: </th>
-              <th className="px-6 py-3 text-left ">Title</th>
-              <th className="px-6 py-3 text-left">Author</th>
-              <th className="px-6 py-3 text-left">Likes</th>
-              <th className="px-6 py-3 text-left">Comments</th>
-              <th className="px-6 py-3 text-left">Date</th>
-              <th className="px-6 py-3 text-left">Status</th>
-              <th className="px-6 py-3 text-center">Actions</th>
+              <th className="px-6 py-4 text-left ">SL: </th>
+              <th className="px-6 py-4 text-left ">Title</th>
+              <th className="px-6 py-4 text-left">Author</th>
+              <th className="px-6 py-4 text-left">Likes</th>
+              <th className="px-6 py-4 text-left">Comments</th>
+              <th className="px-6 py-4 text-left">Date</th>
+              <th className="px-6 py-4 text-left">Status</th>
+              <th className="px-6 py-4 text-center">Actions</th>
             </tr>
           </thead>
 
@@ -114,7 +114,9 @@ const AdminBlogs = () => {
                     {post.title}
                   </Link>
                 </td>
-                <td className="px-6 py-4 text-gray-500 text-nowrap">{post.author.name}</td>
+                <td className="px-6 py-4 text-gray-500 text-nowrap">
+                  {post.author.name}
+                </td>
                 <td className="px-6 py-4 text-gray-500">
                   {post.reacts?.length || 0}
                 </td>

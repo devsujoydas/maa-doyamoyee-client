@@ -1,26 +1,13 @@
-import Modal from "../ui/Modal";
 import NoticeCard from "../../pages/NoticePage/NoticeCard";
+import Modal from "../ui/Modal";
 
-const NoticeViewModal = ({
-  selectedNotice,
-  viewModalOpen,
-  setViewModalOpen,
-  onPreview,
-}) => {
-  if (!selectedNotice) return null;
-
-  const handlePreview = () => {
-    onPreview(selectedNotice); // call preview from parent
-  };
+const NoticeViewModal = ({ isOpen, onClose, notice, onPreview }) => {
+  if (!isOpen || !notice) return null;
 
   return (
-    <Modal
-      wClass=" max-w-xl"
-      isOpen={viewModalOpen}
-      onClose={() => setViewModalOpen(false)}
-    >
-      <div className="-m-5">
-        <NoticeCard notice={selectedNotice} onPreview={handlePreview} />
+    <Modal isOpen={isOpen} onClose={onClose} wClass="max-w-xl">
+      <div className="-m-6">
+      <NoticeCard notice={notice} onPreview={onPreview} />
       </div>
     </Modal>
   );

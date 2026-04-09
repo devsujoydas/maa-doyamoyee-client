@@ -1,25 +1,31 @@
 import api from "../utils/api";
 
-// Fetch all notices
 export const fetchNotices = async () => {
   const res = await api.get("/notices");
   return res.data;
 };
 
-// Create notice
-export const createNotice = async (data) => {
-  const res = await api.post("/notices", data);
+export const createNotice = async (formData) => {
+  const res = await api.post("/notices", formData);
   return res.data;
 };
 
-// Update notice
-export const updateNotice = async (id, data) => {
-  const res = await api.put(`/notices/${id}`, data);
+export const updateNotice = async (id, formData) => {
+  const res = await api.put(`/notices/${id}`, formData);
   return res.data;
 };
 
-// Delete notice
 export const deleteNotice = async (id) => {
   await api.delete(`/notices/${id}`);
   return id;
+};
+
+export const togglePin = async (id) => {
+  const res = await api.patch(`/notices/${id}/toggle-pin`);
+  return res.data;
+};
+
+export const toggleStatus = async (id) => {
+  const res = await api.patch(`/notices/${id}/toggle-status`);
+  return res.data;
 };
