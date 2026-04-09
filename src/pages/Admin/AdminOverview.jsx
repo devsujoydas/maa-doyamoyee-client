@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useMemo } from "react";
 import SEOHead from "../../components/SEOHead";
 import { Bell, Calendar, FileText, HandCoins, Mail, Users } from "lucide-react";
 import {
@@ -7,6 +7,7 @@ import {
 } from "../../utils/dashboardUtils";
 import SectionReveal from "../../components/SectionReveal";
 import { Link } from "react-router-dom";
+
 import useBlogs from "../../hooks/useBlogs";
 import useUsers from "../../hooks/useUsers";
 import useEvents from "../../hooks/useEvents";
@@ -24,20 +25,48 @@ const RecentActivity = lazy(
 const AdminOverview = () => {
   const { data: users = [] } = useUsers();
   const { blogs = [] } = useBlogs();
-  const { data: events = [] } = useEvents();
+  const { events = [] } = useEvents();
   const { data: notices = [] } = useNotices();
-  const { data: messages = [] } = useMessages();
-  const { data: donations = [] } = useDonations();
+  const { messages = [] } = useMessages();
+  const { donations = [] } = useDonations();
 
   const [year, setYear] = useState(2026);
 
-  const userChart = generateMonthlyData(users, "createdAt");
-  const blogChart = generateMonthlyData(blogs, "createdAt");
-  const eventChart = generateMonthlyData(events, "createdAt");
-  const noticeChart = generateMonthlyData(notices, "publishDate");
+  // 🔥 charts (memo optimized)
+  const userChart = useMemo(
+    () => generateMonthlyData(users, "createdAt"),
+    [users],
+  );
 
-  const userGrowth = calculateGrowth(users, "createdAt");
+  const blogChart = useMemo(
+    () => generateMonthlyData(blogs, "createdAt"),
+    [blogs],
+  );
 
+  const eventChart = useMemo(
+    () => generateMonthlyData(events, "createdAt"),
+    [events],
+  );
+
+  const noticeChart = useMemo(
+    () => generateMonthlyData(notices, "createdAt"),
+    [notices],
+  );
+
+  const userGrowth = useMemo(
+    () => calculateGrowth(users, "createdAt"),
+    [users],
+  );
+
+  // 🔥 safe donation sum (IMPORTANT FIX)
+  const totalDonationAmount = useMemo(() => {
+    return donations.reduce(
+      (sum, d) => sum + (Number(d.paymentAmount) || 0),
+      0,
+    );
+  }, [donations]);
+
+  // pie data
   const pieData = [
     { name: "Users", value: users.length },
     { name: "Blogs", value: blogs.length },
@@ -45,7 +74,7 @@ const AdminOverview = () => {
     { name: "Notices", value: notices.length },
   ];
 
-  // Stats cards
+  // stats
   const stats = [
     {
       label: "Total Users",
@@ -84,10 +113,10 @@ const AdminOverview = () => {
     },
     {
       label: "Total Donations",
-      value: `৳ ${donations.reduce((sum, d) => sum + (d.amount || 0), 0)}`,
+      value: `৳ ${totalDonationAmount}`,
       icon: HandCoins,
       color: "bg-gradient-to-br from-amber-200 to-orange-300 text-orange-900",
-      path: "/admin/donation",
+      path: "/admin/donations",
     },
   ];
 
@@ -95,9 +124,10 @@ const AdminOverview = () => {
     <div className="space-y-6">
       <SEOHead title="Admin Dashboard" />
 
-      {/* Header */}
+      {/* HEADER */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Dashboard</h1>
+
         <select
           value={year}
           onChange={(e) => setYear(Number(e.target.value))}
@@ -108,18 +138,19 @@ const AdminOverview = () => {
         </select>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 lang-en-US">
+      {/* STATS */}
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         {stats.map((stat, i) => (
           <SectionReveal key={stat.label} delay={i * 0.05}>
             <Link to={stat.path}>
-              <div className="bg-white shadow-md rounded-xl p-4 hover:scale-105 active:scale-100 transition-all">
+              <div className="bg-white shadow-md rounded-xl p-4 hover:scale-105 transition-all">
                 <div
                   className={`w-10 h-10 rounded-lg ${stat.color} flex items-center justify-center mb-3`}
                 >
                   <stat.icon size={20} />
                 </div>
-                <p className="text-2xl text-[#251D18] font-bold">
+
+                <p className="text-2xl font-bold text-[#251D18]">
                   {stat.value}
                 </p>
                 <p className="text-xs text-[#251D18]">{stat.label}</p>
@@ -129,35 +160,40 @@ const AdminOverview = () => {
         ))}
       </div>
 
-      {/* User Growth */}
+      {/* USER GROWTH */}
       <div className="bg-white p-4 rounded shadow">
-        <p>User Growth: {userGrowth}%</p>
+        <p className="font-medium">User Growth: {userGrowth}%</p>
       </div>
 
-      {/* Charts */}
+      {/* CHARTS */}
       <div className="grid lg:grid-cols-2 gap-6">
         <Suspense fallback={<p>Loading Charts...</p>}>
           <ChartCard title="Users" data={userChart} />
         </Suspense>
+
         <Suspense fallback={<p>Loading Charts...</p>}>
           <ChartCard title="Blogs" data={blogChart} />
         </Suspense>
+
         <Suspense fallback={<p>Loading Charts...</p>}>
           <ChartCard title="Events" data={eventChart} />
         </Suspense>
+
         <Suspense fallback={<p>Loading Charts...</p>}>
           <ChartCard title="Notices" data={noticeChart} />
         </Suspense>
       </div>
 
-      {/* Bottom Section */}
+      {/* BOTTOM */}
       <div className="grid lg:grid-cols-3 gap-6">
         <Suspense fallback={<p>Loading Pie...</p>}>
           <PieChartCard pieData={pieData} />
         </Suspense>
+
         <Suspense fallback={<p>Loading Top Donors...</p>}>
           <TopDonors donations={donations} />
         </Suspense>
+
         <Suspense fallback={<p>Loading Activity...</p>}>
           <RecentActivity
             users={users}

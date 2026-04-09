@@ -19,9 +19,9 @@
   "nav_notice": "Notice",
   "nav_contact": "Contact",
   "nav_donation": "Donation",
-  
+
   "nav_temple_title": "Temple",
-  
+
   "auth_signin": "Signin",
   "auth_signup": "Signup",
   "auth_dashboard": "Dashboard",
@@ -31,14 +31,11 @@
   "nav_bangla": "Bangla",
   "nav_english": "English",
 
-
-
   "hero_title": "Sri Sri Ri Doyamoyee Temple",
   "hero_subtitle": "A historic and spiritual sacred place in Jamalpur",
   "hero_cta_history": "Temple History",
-    "hero_cta_donation": "Donate Now",
+  "hero_cta_donation": "Donate Now",
 
-  
   "about_title": "About Temple",
   "about_text": "Doyamoyee Temple, located at Zero Point in Jamalpur, is a historic Hindu temple established in 1698 (1104 Bengali Era) during the reign of Nawab Murshid Quli Khan. Founded by Jagirdar Sri Krishna Roy Chowdhury, the temple complex includes shrines dedicated to Shiva, Kali, Nat Mandir, and Manasa Devi. It is renowned for its centuries-old murals and traditional architectural heritage.",
 
@@ -49,10 +46,7 @@
   "estate_founder": "Debottor Estate Founder: Rani Shrimati Narayani Roy Chowdhury",
   "development": "Infrastructure Development: Raja Jogendra Kishore Roy Chowdhury",
 
-
-
-
- "temple": {
+  "temple": {
     "name": "Sri Sri Ri Doyamoyee Temple",
     "location": "Jamalpur-2000, Bangladesh",
     "history": "One of the most prominent religious institutions for Sanatan Dharm followers in the subcontinent, Sri Sri Ri Doyamoyee Temple was established in Bengali 1104 by Shreekrishna Roy Chowdhury, a close associate of Murshidkuli Khan, the zamindar of Zafarshahi and Mymensingh. His daughter-in-law Narayani Chowdhurani, during the time of Bengal Governor General Warren Hastings, established the 'Sri Sri Ri Doyamoyee Debottor Estate' for temple expenditure management. Their descendants, zamindar Jogendra Kishore Roy Chowdhury of Ramgopalpur, undertook extensive development work of the temple.",
@@ -66,7 +60,6 @@
     "national_events": "On various national days, prayers are offered in the temple for the welfare of the country and world peace.",
     "library_scholarship": "The temple has a well-stocked library. Every year, the temple provides the 'Sri Sri Ri Doyamoyee Educational Scholarship' to poor and meritorious female students and distributes clothing to the needy."
   },
-  
 
   "purohit": {
     "title": "Our Priests",
@@ -103,58 +96,26 @@
     ]
   },
 
-"donation": {
-    "submit_donation_proof": "Submit Donation Proof",
-    "name": "Full Name",
-    "email": "Email",
-    "phone": "Phone Number",
-    "payment_method": "Payment Method",
-    "bank_transfer": "Bank Transfer",
-    "mobile_banking_option": "Mobile Banking",
-    "bank_name": "Bank Name",
-    "account_number": "Account Number",
-    "branch_name": "Branch Name",
-    "routing_number": "Routing Number",
-    "sender_account": "Sender Account Number",
-    "select_mobile_banking": "Select Mobile Banking",
-    "sender_mobile": "Sender Mobile Number",
-    "donation_amount": "Donation Amount",
-    "transaction_id": "Transaction ID",
-    "upload_screenshot": "Upload Payment Screenshot",
-    "upload_hint": "Click to upload or drag & drop",
-    "message": "Message (Optional)",
-    "message_placeholder": "Optional message...",
-    "submit_donation": "Submit Donation",
-    "donation_success": "Donation proof submitted successfully!"
-  },
-
-
-
   "latest_notices": "Latest Notices",
   "upcoming_festivals": "Upcoming Festivals",
   "blogs": "Blogs",
   "read_more": "Read More",
   "view_all": "View All",
-  
-  
-  
-  
+
   "history_title": "Temple History",
   "history_desc": "Information about the heritage, ancient architecture, and religious activities of Doyamoyee Temple.",
   "history_shortdesc": "For centuries, the temple has enriched the community spiritually and socially.",
 
-  
-   "back_to_all_events": "Back to all events",
+  "back_to_all_events": "Back to all events",
   "events_title": "Puja and Religious Festivals of Doyamoyee Temple",
   "events_desc": "Information about various pujas, religious ceremonies, and festivals held throughout the year at Sri Sri Doyamoyee Temple.",
   "events_shortdesc": "Devotees can easily find upcoming puja dates, festival schedules, and detailed information here.",
-  
+
   "gallery_title": "Gallery",
   "gallery_desc": "A photo gallery showcasing the beauty of the temple and its centuries-old artworks.",
   "gallery_shortdesc": "Explore moments from temple festivals, rituals, and historic memories through our photo collection.",
 
-
-   "gallery": {
+  "gallery": {
     "newImages": {
       "title": "New Images – Shree Shree Ri Doyamoyee Mandir",
       "description": "The new images of Shree Shree Ri Doyamoyee Mandir offer devotees and visitors a fresh experience. These images showcase recent renovations, mandap, main gate, and modern architectural beauty of the temple. The new visuals reflect the spiritual charm and grandeur of Shree Shree Ri Doyamoyee Mandir."
@@ -164,31 +125,26 @@
       "description": "The old images of Shree Shree Ri Doyamoyee Mandir capture its heritage, ancient architecture, and memorable moments of devotees. These images preserve the history and timeless beauty of Shree Shree Ri Doyamoyee Mandir, allowing visitors to experience its spiritual legacy."
     }
   },
-  
+
   "videos_title": "Videos of Sri Sri Doyamoyee Temple",
   "videos_desc": "A collection of videos from pujas, festivals, cultural events, and special moments of the temple.",
   "videos_shortdesc": "Devotees can easily watch videos of temple events and special occasions here.",
-  
-  
+
   "purohit_title": "Priests",
   "purohit_desc": "Experienced priests regularly perform pujas and religious rituals at our temple.",
   "purohit_shortdesc": "They conduct daily worship, special festivals, and provide spiritual guidance to devotees.",
-  
+
   "committee_title": "Executive Committee 1430–1431 Bangabda",
   "committee_desc": "Sri Sri Doyamoyee Temple Management Committee",
   "committee_shortdesc": "Members elected to manage and oversee temple activities.",
-  
+
   "member_title": "Sri Sri Doyamoyee Temple Management Committee",
   "member_desc": "List of Lifetime Members",
   "member_shortdesc": "Total Members: {{count}}",
-  
+
   "advisors_title": "Honorable Advisors of 1430–1431",
   "advisors_desc": "Sri Sri Doyamoyee Temple Management Committee",
   "advisors_shortdesc": "Jamalpur",
-  
-  
-  
-  
 
   "back_to_all_notices": "Back to all notices",
   "notice_title": "Notices of Sri Sri Doyamoyee Temple",
@@ -196,8 +152,6 @@
   "notice_shortdesc": "Stay updated with the latest temple announcements, schedules, and important updates.",
   "important_notice": "Important Notice",
   "no_notice": "No notices at the moment.",
-  
-
 
   "back_to_all_posts": "Back to all posts",
   "blogs_title": "Blogs and Articles of Sri Sri Doyamoyee Temple",
@@ -212,16 +166,13 @@
   "search_placeholder": "Search blog posts...",
   "views": "Views",
   "login_to_comment": "Please login to leave a comment.",
-   "likes": "Likes",
+  "likes": "Likes",
   "share": "Share",
   "edit": "Edit",
   "delete": "Delete",
   "save": "Save",
   "cancel": "Cancel",
   "no_comments_yet": "No comments yet. Be the first to comment!",
-  
-
-  
 
   "contact_title": "Contact",
   "contact_desc": "Use the address below for information or to contact our temple.",
@@ -233,88 +184,72 @@
 
   "contact_social": "Social Media",
   "send_message": "Send Message",
-  
 
   "email": "Email",
   "email_placeholder": "Enter your email",
-  
+
   "message": "Message",
   "message_placeholder": "Enter your message",
   "submit": "Submit",
 
-
-  
   "supportTemple_title": "Support the Temple",
   "supportTemple_description": "Your generous donations help maintain the temple, organize religious festivals, and support community services. Together we can preserve this sacred heritage for future generations.",
   "supportTemple_button": "Make a Donation",
-  
+
   "donation_title": "Donation",
   "donation_desc": "Your contribution helps Maa Doyamoyee Temple maintain its services, pujas, and spiritual activities.",
   "donation_shortdesc": "Use any of the bank accounts or mobile banking options below to donate.",
- 
-
-
-
 
   "bank_accounts": "Bank Accounts",
   "mobile_banking": "Mobile Banking",
   "copy": "Copy",
   "number_copied": "Number Copied!",
   "submit_donation_proof": "Submit Donation Proof",
-  
+
   "name": "Name",
   "enter_name": "Enter your name",
-  
+
   "phone": "Phone Number",
   "enter_phone": "Enter your phone number",
-  
+
   "payment_method": "Payment Method",
   "bank_transfer": "Bank Transfer",
   "mobile_banking_option": "Mobile Banking",
-  
+
   "bank_name": "Bank Name",
   "account_number": "Account Number",
   "branch_name": "Branch Name",
-  
+
   "mobile_banking_name": "Mobile Banking Name",
   "select_mobile_banking": "Select Mobile Banking",
   "nagad": "Nagad",
   "bkash": "bKash",
   "rocket": "Rocket",
 
-
-
   "donation_amount": "Donation Amount",
   "enter_amount": "Enter amount",
-  
+
   "transaction_id": "Transaction ID / Reference",
- 
+
   "upload_screenshot": "Upload Screenshot",
   "upload_hint": "Click to upload or drag and drop",
-  
+
   "remove_change": "Remove / Change",
   "optional_message": "Optional Message",
   "submit_donation": "Submit Donation Proof",
-  
 
-  
-  
-  
-  
   "footer_about_text": "Sri Sri Ri Doyamoyee Temple is a sacred place of worship, devotion and spiritual peace located in Jamalpur. Devotees gather here for puja, festivals and community service.",
   "footer_contact": "Contact Us",
   "footer_contact_phone": "+880 1234-567890",
   "footer_contact_email": "madoyamoyee@gmail.com",
   "footer_contact_address": "Medical Rd, Jamalpur",
 
-  
   "footer_location_title": "Location Map",
   "footer_rights": "All Rights Reserved.",
   "footer_developed": "Developed ",
   "footer_by": "by",
 
-
-"auth": {
+  "auth": {
     "login_title": "Sign In",
     "signup_title": "Sign Up",
 
@@ -363,11 +298,97 @@
     "button": "Reset Password"
   },
 
-  
   "noBlogs": {
     "title": "No Blogs Found",
     "subtitle": "There are no blogs available at the moment. Please check back later."
+  },
+
+  "donation": {
+    "title": "Submit Donation Proof",
+
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter your name"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    },
+    "phone": {
+      "label": "Phone",
+      "placeholder": "Enter your phone number"
+    },
+
+    "paymentMethod": {
+      "label": "Payment Method",
+      "bank": "Bank",
+      "mobile": "Mobile Banking"
+    },
+
+    "bankName": {
+      "label": "Bank Name",
+      "placeholder": "Enter bank name"
+    },
+    "branchName": {
+      "label": "Branch Name",
+      "placeholder": "Enter branch name"
+    },
+    "branchCode": {
+      "label": "Branch Code",
+      "placeholder": "Enter branch code"
+    },
+    "accountNumber": {
+      "label": "Account Number",
+      "placeholder": "Enter account number"
+    },
+    "swiftCode": {
+      "label": "SWIFT Code",
+      "placeholder": "Enter SWIFT code"
+    },
+    "routingNumber": {
+      "label": "Routing Number",
+      "placeholder": "Enter routing number"
+    },
+
+    "mobileBank": {
+      "label": "Mobile Bank Name",
+      "select": "Select Provider",
+      "bkash": "Bkash",
+      "nagad": "Nagad",
+      "rocket": "Rocket",
+      "taptap": "TapTapSend"
+    },
+    "senderNumber": {
+      "label": "Sender Number",
+      "placeholder": "Enter sender number"
+    },
+    "transactionId": {
+      "label": "Transaction ID",
+      "placeholder": "Enter transaction ID"
+    },
+
+    "amount": {
+      "label": "Amount",
+      "placeholder": "Enter amount"
+    },
+
+    "screenshot": {
+      "label": "Upload Payment Screenshot"
+    },
+
+    "message": {
+      "label": "Message",
+      "placeholder": "Write your message"
+    },
+
+    "submit": "Submit Donation",
+    "submitting": "Submitting..."
+  },
+  "donationSuccess": {
+    "title": "Thank You",
+    "messageLine1": "Your donation has been successfully submitted.",
+    "messageLine2": "Your contribution helps us grow and support others.",
+    "processing": "Processing your kindness... ❤️",
+    "close": "Close"
   }
-
-
 }

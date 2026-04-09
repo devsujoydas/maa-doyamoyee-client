@@ -172,7 +172,7 @@ const BlogCard = ({ blog, type }) => {
           {user?.role === "admin" && (
             <div className="flex items-center gap-3 mt-4">
               <img
-                src={blog?.author?.profileImage}
+                src={blog?.author?.profileImage.url}
                 alt={blog?.author?.name}
                 className="w-8 h-8 rounded-full object-cover"
               />

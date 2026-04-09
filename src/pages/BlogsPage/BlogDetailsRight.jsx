@@ -41,15 +41,15 @@ const BlogDetailsRight = ({ blog, recentPosts = [] }) => {
       {/* Author Card */}
       {blog?.author && (
         <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 text-center  lang-bn-BD">
-          {blog.author.profileImage && (
+          {blog.author.profileImage?.url && (
             <a
-              href={blog.author.profileImage}
+              href={blog.author.profileImage?.url}
               data-fancybox="author-image"
               data-caption="Author"
             >
               <img
                 loading="lazy"
-                src={blog.author.profileImage}
+                src={blog.author.profileImage?.url}
                 alt={blog.author.name}
                 className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full object-cover mb-3 sm:mb-4"
               />

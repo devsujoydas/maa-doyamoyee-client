@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       const { data } = await api.get("/users/profile");
-
+    
       // 🔥 check response shape
       setUser(data.user || data);
     } catch (err) {

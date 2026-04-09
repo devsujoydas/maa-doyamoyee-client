@@ -13,14 +13,14 @@ const ProfileCard = ({ user }) => {
     <div className=" bg-white rounded-xl overflow-hidden shadow-2xl -m-5 h-fit">
       {/* Cover */}
       <div className="h-48 relative">
-        <img src={user?.coverImage} className="w-full h-full object-cover" />
+        <img src={user?.coverImage.url} className="w-full h-full object-cover" />
       </div>
 
       {/* Profile Info */}
       <div className="p-6 flex flex-col items-center">
         <div className="relative -mt-20">
           <img
-            src={user?.profileImage}
+            src={user?.profileImage.url}
             className="w-32 h-32 rounded-full border-4 border-white object-cover shadow"
           />
         </div>

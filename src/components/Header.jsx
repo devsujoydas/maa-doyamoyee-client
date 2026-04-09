@@ -156,7 +156,7 @@ const Header = () => {
                 <div className=" h-10 w-10 rounded-full overflow-hidden cursor-pointer shadow-lg">
                   <img
                     className="h-full object-cover w-full"
-                    src={user?.profileImage}
+                    src={user?.profileImage?.url}
                     alt=""
                   />
                 </div>

@@ -10,7 +10,7 @@ const GalleryCard = ({ img }) => {
   const blurImg = img.img.url.replace("/upload/", "/upload/e_blur:2000,q_1/");
 
   return (
-    <div className="mb-4 break-inside-avoid relative">
+    <div className="mb-4  relative">
       {/* Blur Placeholder */}
       <img
         src={blurImg}

@@ -121,8 +121,8 @@ const Donation = () => {
                     </p>
 
                     <div className="grid grid-cols-2 gap-x-4 text-xs text-gray-500 mt-2">
-                      <span>Branch: {acc.branch}</span>
-                      <span>Code: {acc.branchCode}</span>
+                      <span>Branch Name: {acc.branch}</span>
+                      <span>Branch Code: {acc.branchCode}</span>
                       <span>SWIFT: {acc.swiftCode}</span>
                       <span>Routing: {acc.routingNumber}</span>
                     </div>

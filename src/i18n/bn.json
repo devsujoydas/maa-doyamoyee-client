@@ -97,31 +97,6 @@
     ]
   },
 
-  "donation": {
-    "submit_donation_proof": "ডোনেশন প্রমাণ জমা দিন",
-    "name": "নাম",
-    "email": "ইমেইল",
-    "phone": "ফোন নম্বর",
-    "payment_method": "পেমেন্ট পদ্ধতি",
-    "bank_transfer": "ব্যাংক ট্রান্সফার",
-    "mobile_banking_option": "মোবাইল ব্যাংকিং",
-    "bank_name": "ব্যাংকের নাম",
-    "account_number": "অ্যাকাউন্ট নম্বর",
-    "branch_name": "শাখার নাম",
-    "routing_number": "রাউটিং নাম্বার",
-    "sender_account": "প্রেরকের অ্যাকাউন্ট নম্বর",
-    "select_mobile_banking": "মোবাইল ব্যাংকিং নির্বাচন করুন",
-    "sender_mobile": "প্রেরকের মোবাইল নম্বর",
-    "donation_amount": "ডোনেশন পরিমাণ",
-    "transaction_id": "ট্রানজেকশন আইডি",
-    "upload_screenshot": "স্ক্রিনশট আপলোড করুন",
-    "upload_hint": "ক্লিক করুন বা ড্র্যাগ করে প্রমাণ আপলোড করুন",
-    "message": "বার্তা (ঐচ্ছিক)",
-    "message_placeholder": "ঐচ্ছিক বার্তা লিখুন...",
-    "submit_donation": "ডোনেশন সাবমিট করুন",
-    "donation_success": "ডোনেশন সফলভাবে জমা হয়েছে!"
-  },
-
   "latest_notices": "সর্বশেষ নোটিশ",
   "upcoming_festivals": "আসন্ন উৎসবসমূহ",
   "blogs": "ব্লগ সমূহ",
@@ -326,5 +301,94 @@
   "noBlogs": {
     "title": "কোনো ব্লগ পাওয়া যায়নি",
     "subtitle": "এই মুহূর্তে কোনো ব্লগ উপলব্ধ নেই। অনুগ্রহ করে পরে আবার দেখুন।"
+  },
+
+  "donation": {
+    "title": "অনুদানের প্রমাণ জমা দিন",
+
+    "name": {
+      "label": "নাম",
+      "placeholder": "আপনার নাম লিখুন"
+    },
+    "email": {
+      "label": "ইমেইল",
+      "placeholder": "আপনার ইমেইল লিখুন"
+    },
+    "phone": {
+      "label": "ফোন",
+      "placeholder": "আপনার ফোন নম্বর লিখুন"
+    },
+
+    "paymentMethod": {
+      "label": "পেমেন্ট মাধ্যম",
+      "bank": "ব্যাংক",
+      "mobile": "মোবাইল ব্যাংকিং"
+    },
+
+    "bankName": {
+      "label": "ব্যাংকের নাম",
+      "placeholder": "ব্যাংকের নাম লিখুন"
+    },
+    "branchName": {
+      "label": "শাখার নাম",
+      "placeholder": "শাখার নাম লিখুন"
+    },
+    "branchCode": {
+      "label": "শাখা কোড",
+      "placeholder": "শাখা কোড লিখুন"
+    },
+    "accountNumber": {
+      "label": "অ্যাকাউন্ট নম্বর",
+      "placeholder": "অ্যাকাউন্ট নম্বর লিখুন"
+    },
+    "swiftCode": {
+      "label": "SWIFT কোড",
+      "placeholder": "SWIFT কোড লিখুন"
+    },
+    "routingNumber": {
+      "label": "রাউটিং নম্বর",
+      "placeholder": "রাউটিং নম্বর লিখুন"
+    },
+
+    "mobileBank": {
+      "label": "মোবাইল ব্যাংক নাম",
+      "select": "প্রোভাইডার নির্বাচন করুন",
+      "bkash": "বিকাশ",
+      "nagad": "নগদ",
+      "rocket": "রকেট",
+      "taptap": "ট্যাপট্যাপসেন্ড"
+    },
+    "senderNumber": {
+      "label": "প্রেরকের নম্বর",
+      "placeholder": "প্রেরকের নম্বর লিখুন"
+    },
+    "transactionId": {
+      "label": "লেনদেন আইডি",
+      "placeholder": "লেনদেন আইডি লিখুন"
+    },
+
+    "amount": {
+      "label": "পরিমাণ",
+      "placeholder": "পরিমাণ লিখুন"
+    },
+
+    "screenshot": {
+      "label": "পেমেন্ট স্ক্রিনশট আপলোড করুন"
+    },
+
+    "message": {
+      "label": "বার্তা",
+      "placeholder": "আপনার বার্তা লিখুন"
+    },
+
+    "submit": "জমা দিন",
+    "submitting": "জমা হচ্ছে..."
+  },
+  "donationSuccess": {
+    "title": "ধন্যবাদ",
+    "messageLine1": "আপনার অনুদান সফলভাবে গ্রহণ করা হয়েছে।",
+    "messageLine2": "আপনার সহযোগিতা আমাদের এগিয়ে যেতে সাহায্য করে।",
+    "processing": "আপনার ভালোবাসা প্রসেস করা হচ্ছে... ❤️",
+    "close": "বন্ধ করুন"
   }
 }

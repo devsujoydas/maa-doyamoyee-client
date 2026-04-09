@@ -85,7 +85,7 @@ const AdminUsers = () => {
                     <img
                       loading="lazy"
                       className=" rounded-full object-center "
-                      src={user?.profileImage}
+                      src={user?.profileImage?.url}
                       alt={user?.name}
                     />
                   </div>

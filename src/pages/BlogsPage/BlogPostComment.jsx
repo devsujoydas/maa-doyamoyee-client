@@ -84,10 +84,10 @@ const BlogPostComment = ({ comments, setComments }) => {
           >
             {/* Author Photo */}
             <div className="w-10 h-10  rounded-full border border-zinc-100 overflow-hidden shadow-inner shrink-0">
-              {comment.author.profileImage && (
+              {comment.author.profileImage?.url && (
                 <img
                   loading="lazy"
-                  src={comment.author.profileImage}
+                  src={comment.author.profileImage?.url}
                   alt={comment?.author?.name}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
