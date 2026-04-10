@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense, useMemo } from "react";
+import { useState, lazy, Suspense, useMemo, useEffect } from "react";
 import SEOHead from "../../components/SEOHead";
 import { Bell, Calendar, FileText, HandCoins, Mail, Users } from "lucide-react";
 import {
@@ -14,6 +14,7 @@ import useEvents from "../../hooks/useEvents";
 import useNotices from "../../hooks/useNotices";
 import useMessages from "../../hooks/useMessages";
 import useDonations from "../../hooks/useDonations";
+import useGallery from "../../hooks/useGallery";
 
 const ChartCard = lazy(() => import("../../components/admin/ChartCard"));
 const PieChartCard = lazy(() => import("../../components/admin/PieChartCard"));
@@ -25,10 +26,21 @@ const RecentActivity = lazy(
 const AdminOverview = () => {
   const { data: users = [] } = useUsers();
   const { blogs = [] } = useBlogs();
-  const { events = [] } = useEvents();
-  const { data: notices = [] } = useNotices();
-  const { messages = [] } = useMessages();
+  const { events } = useEvents();
+  const { notices } = useNotices();
+  const { messages } = useMessages();
   const { donations = [] } = useDonations();
+  const { gallery } = useGallery();
+  
+  
+    console.log("users:", users);
+    console.log("blogs:", blogs);
+    console.log("events:", events);
+    console.log("notices:", notices);
+    console.log("messages:", messages);
+    console.log("gallery:", gallery);
+    console.log("donations:", donations);
+
 
   const [year, setYear] = useState(2026);
 

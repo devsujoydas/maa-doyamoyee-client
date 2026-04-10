@@ -52,7 +52,8 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       const res = await api.post("/auth/logout");
-      toast.success(res.message);
+  
+      toast.success(res.data.message);
     } catch (err) {
       console.error("Logout error:", err);
     } finally {

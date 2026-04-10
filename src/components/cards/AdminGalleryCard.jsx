@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import { motion } from "framer-motion";
+
 
 const AdminGalleryCard = ({ item, setSelected, setOpen, setDeleteOpen }) => {
   const [loaded, setLoaded] = useState(false);
@@ -17,10 +19,16 @@ const AdminGalleryCard = ({ item, setSelected, setOpen, setDeleteOpen }) => {
   const blurImg = item.img.url.replace("/upload/", "/upload/e_blur:2000,q_1/");
 
   return (
-    <div className="border p-3 border-zinc-200 shadow-lg rounded-md">
+    <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }} 
+    
+    className="border p-3 border-zinc-200 shadow-lg rounded-md">
       <div className="h-56 w-full overflow-hidden rounded-md relative">
         {/* Blur Placeholder */}
         <img
+        loading="lazy"
           src={blurImg}
           alt=""
           className={`absolute inset-0 w-full h-full object-cover scale-110 blur-xl transition-opacity duration-500 ${
@@ -71,7 +79,7 @@ const AdminGalleryCard = ({ item, setSelected, setOpen, setDeleteOpen }) => {
           Delete
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -3,14 +3,16 @@ import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import api from "../../utils/api";
 import { useAuth } from "../../AuthProvider/authProvider";
+import { useTranslation } from "react-i18next";
 
 const PersonalInfo = () => {
   const { user, setUser } = useAuth();
+  const { t } = useTranslation();
+
   const [editing, setEditing] = useState(false);
 
-  // 🎨 Reusable styles
   const inputClass =
-    " input-field outline-none mt-1  disabled:bg-gray-100 disabled:cursor-not-allowed";
+    "input-field outline-none mt-1 disabled:bg-gray-100 disabled:cursor-not-allowed";
 
   const labelClass = "font-light text-[#4B1E2F] text-sm uppercase";
 
@@ -38,7 +40,7 @@ const PersonalInfo = () => {
     },
   });
 
-  // ✅ Load user
+  // Load user
   useEffect(() => {
     if (user) {
       setFormData({
@@ -64,7 +66,6 @@ const PersonalInfo = () => {
     }
   }, [user]);
 
-  // Handlers
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -80,144 +81,151 @@ const PersonalInfo = () => {
     }));
   };
 
-  // Submit
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+
     try {
       const res = await api.put("/users/profile", formData);
+
       setUser(res.data.user);
-      toast.success(res.data.message);
+
+      toast.success(t("profile_updated_success"));
+
       setEditing(false);
-    } catch {
-      toast.error("Failed to update profile.");
+    } catch (err) {
+      toast.error(t("profile_update_failed"));
     }
   };
 
   return (
-    <div className="">
-      {/* Header */}
-      <div className="flex justify-between items-center p-6  bg-[#F9F9F9] rounded-t-xl">
-        <h3 className="font-semibold text-lg">Personal Information</h3>
+    <div>
+      {/* HEADER */}
+      <div className="flex justify-between items-center p-6 bg-[#F9F9F9] rounded-t-xl">
+        <h3 className="font-semibold text-lg">{t("personal_information")}</h3>
+
         <button
           onClick={() => setEditing(!editing)}
           className="text-sm hover:underline cursor-pointer"
         >
-          {editing ? "Cancel" : "Update Profile"}
+          {editing ? t("cancel") : t("update_profile")}
         </button>
       </div>
 
-      {/* Form */}
+      {/* FORM */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         className="p-6 space-y-6"
       >
         <form onSubmit={handleUpdateProfile} className="space-y-6">
-          {/* 🔹 Basic Info */}
+          {/* BASIC */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className={labelClass}>NAME</label>
+              <label className={labelClass}>{t("name")}</label>
               <input
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 disabled={!editing}
                 className={inputClass}
-                placeholder="Enter your name"
               />
             </div>
 
             <div>
-              <label className={labelClass}>USERNAME</label>
+              <label className={labelClass}>{t("username")}</label>
               <input
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
                 disabled={!editing}
                 className={inputClass}
-                placeholder="Enter username"
               />
             </div>
 
             <div className="md:col-span-2">
-              <label className={labelClass}>BIO</label>
+              <label className={labelClass}>{t("bio")}</label>
               <input
                 name="bio"
                 value={formData.bio}
                 onChange={handleChange}
                 disabled={!editing}
                 className={inputClass}
-                placeholder="Enter bio"
               />
             </div>
           </div>
 
-          {/* 🔹 Address */}
+          {/* ADDRESS */}
           <div>
-            <h2 className={sectionTitle}>Address Info</h2>
+            <h2 className={sectionTitle}>{t("address_info")}</h2>
 
-            {/* top 3 */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-4">
               <div>
-                <label className={labelClass}>ADDRESS</label>
+                <label className={labelClass}>{t("address")}</label>
                 <input
                   name="address"
+                  placeholder={t("address")}
                   value={formData.addressInfo.address}
+                  disabled={!editing}
                   onChange={(e) =>
                     handleNestedChange("addressInfo", "address", e.target.value)
                   }
-                  disabled={!editing}
                   className={inputClass}
                 />
               </div>
 
               <div>
-                <label className={labelClass}>CITY</label>
+                <label className={labelClass}>{t("city")}</label>
+
                 <input
+                  placeholder={t("city")}
                   name="city"
                   value={formData.addressInfo.city}
+                  disabled={!editing}
                   onChange={(e) =>
                     handleNestedChange("addressInfo", "city", e.target.value)
                   }
-                  disabled={!editing}
                   className={inputClass}
                 />
               </div>
 
               <div>
-                <label className={labelClass}>STATE</label>
+                <label className={labelClass}>{t("state")}</label>
+
                 <input
-                  name="state"
+                  placeholder={t("state")}
                   value={formData.addressInfo.state}
+                  disabled={!editing}
                   onChange={(e) =>
                     handleNestedChange("addressInfo", "state", e.target.value)
                   }
-                  disabled={!editing}
                   className={inputClass}
                 />
               </div>
             </div>
 
-            {/* bottom 2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
               <div>
-                <label className={labelClass}>COUNTRY</label>
+                <label className={labelClass}>{t("country")}</label>
+
                 <input
                   name="country"
+                  placeholder={t("country")}
                   value={formData.addressInfo.country}
+                  disabled={!editing}
                   onChange={(e) =>
                     handleNestedChange("addressInfo", "country", e.target.value)
                   }
-                  disabled={!editing}
                   className={inputClass}
                 />
               </div>
 
               <div>
-                <label className={labelClass}>POSTAL CODE</label>
+                <label className={labelClass}>{t("postal_code")}</label>
                 <input
-                  name="postalCode"
+                  name="postal_code"
+                  placeholder={t("postal_code")}
                   value={formData.addressInfo.postalCode}
+                  disabled={!editing}
                   onChange={(e) =>
                     handleNestedChange(
                       "addressInfo",
@@ -225,34 +233,37 @@ const PersonalInfo = () => {
                       e.target.value,
                     )
                   }
-                  disabled={!editing}
                   className={inputClass}
                 />
               </div>
             </div>
           </div>
 
-          {/* 🔹 contacts */}
+          {/* CONTACTS */}
           <div>
-            <h2 className={sectionTitle}>Contacts </h2>
+            <h2 className={sectionTitle}>{t("contacts")}</h2>
 
-            {/* top 3 */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-4">
               <div>
-                <label className={labelClass}>PHONE</label>
+                <label className={labelClass}>{t("phone")}</label>
+
                 <input
                   name="phone"
+                  placeholder={t("phone")}
                   value={formData.phone}
-                  onChange={handleChange}
                   disabled={!editing}
+                  onChange={handleChange}
                   className={inputClass}
                 />
               </div>
               <div>
-                <label className={labelClass}>WEBSITE</label>
+                <label className={labelClass}>{t("website")}</label>
+
                 <input
                   name="website"
+                  placeholder={t("website")}
                   value={formData.contactDetails.website}
+                  disabled={!editing}
                   onChange={(e) =>
                     handleNestedChange(
                       "contactDetails",
@@ -260,16 +271,17 @@ const PersonalInfo = () => {
                       e.target.value,
                     )
                   }
-                  disabled={!editing}
                   className={inputClass}
                 />
               </div>
-
               <div>
-                <label className={labelClass}>FACEBOOK</label>
+                <label className={labelClass}>{t("facebook")}</label>
+
                 <input
                   name="facebook"
+                  placeholder={t("facebook")}
                   value={formData.contactDetails.facebook}
+                  disabled={!editing}
                   onChange={(e) =>
                     handleNestedChange(
                       "contactDetails",
@@ -277,19 +289,19 @@ const PersonalInfo = () => {
                       e.target.value,
                     )
                   }
-                  disabled={!editing}
                   className={inputClass}
                 />
               </div>
             </div>
 
-            {/* bottom 2 */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
               <div>
-                <label className={labelClass}>INSTAGRAM</label>
+                <label className={labelClass}>{t("instagram")}</label>
                 <input
                   name="instagram"
+                  placeholder={t("instagram")}
                   value={formData.contactDetails.instagram}
+                  disabled={!editing}
                   onChange={(e) =>
                     handleNestedChange(
                       "contactDetails",
@@ -297,15 +309,18 @@ const PersonalInfo = () => {
                       e.target.value,
                     )
                   }
-                  disabled={!editing}
                   className={inputClass}
                 />
               </div>
+
               <div>
-                <label className={labelClass}>YOUTUBE</label>
+                <label className={labelClass}>{t("youtube")}</label>
+
                 <input
                   name="youtube"
+                  placeholder={t("youtube")}
                   value={formData.contactDetails.youtube}
+                  disabled={!editing}
                   onChange={(e) =>
                     handleNestedChange(
                       "contactDetails",
@@ -313,16 +328,17 @@ const PersonalInfo = () => {
                       e.target.value,
                     )
                   }
-                  disabled={!editing}
                   className={inputClass}
                 />
               </div>
 
               <div>
-                <label className={labelClass}>GITHUB</label>
+                <label className={labelClass}>{t("github")}</label>
                 <input
                   name="github"
+                  placeholder={t("github")}
                   value={formData.contactDetails.github}
+                  disabled={!editing}
                   onChange={(e) =>
                     handleNestedChange(
                       "contactDetails",
@@ -330,18 +346,17 @@ const PersonalInfo = () => {
                       e.target.value,
                     )
                   }
-                  disabled={!editing}
                   className={inputClass}
                 />
               </div>
             </div>
           </div>
 
-          {/* Submit */}
+          {/* SUBMIT */}
           {editing && (
             <div className="flex justify-center pt-4">
               <button type="submit" className="btn-primary">
-                Update Now
+                {t("update_now")}
               </button>
             </div>
           )}

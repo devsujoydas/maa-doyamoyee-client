@@ -1,23 +1,31 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import {
-  FaFacebook,
-  FaYoutube,
-  FaGlobe,
-  FaGithub,
-} from "react-icons/fa";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import { FaFacebook, FaYoutube, FaGlobe, FaGithub } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { Camera, LockIcon, LogOut, User, CheckCircle } from "lucide-react";
 import api from "../../utils/api";
 import UploadPhotoModal from "./UploadPhotoModal";
 import { useAuth } from "../../AuthProvider/authProvider";
 import { MdEmail, MdVerified } from "react-icons/md";
+import { useTranslation } from "react-i18next";
+
 
 const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
+  const { t } = useTranslation();
   const [verifying, setVerifying] = useState(false);
   const [photoType, setPhotoType] = useState("profile");
   const [photoModalOpen, setPhotoModalOpen] = useState(false);
   const { logout } = useAuth();
+  useEffect(() => {
+    Fancybox.bind("[data-fancybox='profile-image']", {});
+    return () => Fancybox.unbind("[data-fancybox='profile-image']");
+  }, []);
+  useEffect(() => {
+    Fancybox.bind("[data-fancybox='cover-image']", {});
+    return () => Fancybox.unbind("[data-fancybox='cover-image']");
+  }, []);
 
   const handlePhotoUpload = (img) => {
     const field = photoType === "profile" ? "profileImage" : "coverImage";
@@ -65,7 +73,17 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
     <div className="xl:w-1/3 bg-white rounded-xl shadow-md overflow-hidden xl:sticky top-0 h-fit">
       {/* Cover */}
       <div className="h-48 relative">
-        <img src={user?.coverImage.url} className="w-full h-full object-cover" />
+        <a
+          href={user?.coverImage.url}
+          data-fancybox="cover-image"
+          data-caption={user.title}
+          className="overflow-hidden"
+        >
+          <img
+            src={user?.coverImage.url}
+            className="w-full h-full object-cover"
+          />
+        </a>
         <button
           onClick={() => {
             setPhotoType("cover");
@@ -80,10 +98,17 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
       {/* Profile Info */}
       <div className="p-6 flex flex-col items-center">
         <div className="relative -mt-20">
-          <img
-            src={user?.profileImage?.url}
-            className="w-32 h-32 rounded-full border-4 border-white object-cover shadow"
-          />
+          <a
+            href={user?.profileImage?.url}
+            data-fancybox="profile-image"
+            data-caption={user.title}
+            className="overflow-hidden"
+          >
+            <img
+              src={user?.profileImage?.url}
+              className="w-32 h-32 rounded-full border-4 border-white object-cover shadow"
+            />
+          </a>
           <button
             onClick={() => {
               setPhotoType("profile");
@@ -218,7 +243,7 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
               activeTab === "personal" ? "bg-[#EDE9EA]" : "hover:bg-zinc-100"
             }`}
           >
-            <User /> Personal Information
+            <User /> {t("personal_information")}
           </button>
 
           <button
@@ -227,7 +252,7 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
               activeTab === "security" ? "bg-[#EDE9EA]" : "hover:bg-zinc-100"
             }`}
           >
-            <LockIcon /> Security
+            <LockIcon />  {t("security_settings")}
           </button>
 
           <hr className="text-zinc-200" />
@@ -236,7 +261,7 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
             onClick={() => logout()}
             className="md:px-4 px-3 py-2 md:py-3 rounded-lg text-left text-red-500 hover:bg-red-100 flex items-center gap-2 transition-all cursor-pointer"
           >
-            <LogOut /> Sign Out
+            <LogOut />{t("auth_logout")}
           </button>
         </div>
       </div>

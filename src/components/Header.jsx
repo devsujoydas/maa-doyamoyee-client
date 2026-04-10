@@ -22,6 +22,8 @@ const Header = () => {
     setLangOpen(false);
   };
 
+
+
   const toggleMobileDropdown = (index) => {
     setMobileDropdown(mobileDropdown === index ? null : index);
   };
@@ -180,7 +182,7 @@ const Header = () => {
                 >
                   {user ? (
                     <>
-                      {user?.role == "admin" && (
+                      {(user.role === "admin" || user.role === "moderator") && (
                         <Link
                           to="/admin"
                           className="block px-4 py-2 hover:bg-yellow-100 hover:text-black transition-colors"
@@ -197,7 +199,7 @@ const Header = () => {
                       </Link>
                       <button
                         onClick={() => logout()}
-                        className="w-full text-left px-4 py-2 hover:bg-yellow-100 hover:text-black transition-colors"
+                        className="w-full text-left px-4 py-2 cursor-pointer text-red-500 hover:bg-red-100 transition-colors"
                       >
                         {t("auth_logout")}
                       </button>
@@ -361,12 +363,14 @@ const Header = () => {
               <div className="  flex flex-col space-y-2">
                 {user ? (
                   <>
-                    <Link
-                      to="/admin"
-                      className="px-3 py-2 border border-zinc-500 rounded-md text-center"
-                    >
-                      {t("auth_dashboard")}
-                    </Link>
+                    {(user.role === "admin" || user.role === "moderator") && (
+                      <Link
+                        to="/admin"
+                        className="px-3 py-2 border border-zinc-500 rounded-md text-center"
+                      >
+                        {t("auth_dashboard")}
+                      </Link>
+                    )}
                     <Link
                       to="/profile"
                       onClick={() => setMenuOpen(!menuOpen)}

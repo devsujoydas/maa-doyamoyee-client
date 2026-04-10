@@ -9,11 +9,10 @@ import {
   Send,
   Mail,
 } from "lucide-react";
-
-import Input from "../../components/ui/Input";
-import Button from "../../components/ui/Button";
-import Textarea from "../../components/ui/Textarea";
+ 
+import Button from "../../components/ui/Button"; 
 import useMessages from "../../hooks/useMessages";
+import toast from "react-hot-toast";
 
 const AdminMessages = () => {
   const [search, setSearch] = useState("");
@@ -30,10 +29,12 @@ const AdminMessages = () => {
   // ✅ HANDLERS
   const markReadHandler = async (id) => {
     await markRead(id);
+    toast.success("Read");
   };
 
   const deleteHandler = async (id) => {
     await deleteMsg(id);
+    toast.success("Message delete successfully");
   };
 
   const sendReply = async (id) => {
@@ -41,7 +42,7 @@ const AdminMessages = () => {
     if (!text) return;
 
     await reply({ id, message: text });
-
+    toast.success("Reply send successfully");
     setReplyTexts((prev) => ({ ...prev, [id]: "" }));
   };
 
@@ -58,28 +59,29 @@ const AdminMessages = () => {
 
       {/* Search + Filter */}
       <div className="flex gap-3 mb-6">
-        <div className="relative flex-1">
+        <div className="relative flex-1 input-field">
           <Search
             className="absolute left-3 top-1/2 -translate-y-1/2"
             size={16}
           />
-          <Input
+          <input
             placeholder="Search messages..."
-            className="pl-9"
+            className="pl-5 h-full outline-none w-full"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
         {["all", "read", "unread"].map((f) => (
-          <Button
+          <button
+            className="btn-primary"
             key={f}
             size="sm"
             variant={filter === f ? "default" : "outline"}
             onClick={() => setFilter(f)}
           >
             {f}
-          </Button>
+          </button>
         ))}
       </div>
 
@@ -115,8 +117,7 @@ const AdminMessages = () => {
                   </h2>
 
                   <p className="text-xs mt-1 text-gray-500">
-                    {msg.email} ·{" "}
-                    {new Date(msg.createdAt).toLocaleDateString()}
+                    {msg.email} · {new Date(msg.createdAt).toLocaleDateString()}
                   </p>
 
                   <p className="text-xs text-gray-500">
@@ -148,9 +149,7 @@ const AdminMessages = () => {
                     size="icon"
                     variant="ghost"
                     onClick={() =>
-                      setExpandedId(
-                        expandedId === msg._id ? null : msg._id
-                      )
+                      setExpandedId(expandedId === msg._id ? null : msg._id)
                     }
                   >
                     {expandedId === msg._id ? (
@@ -193,7 +192,8 @@ const AdminMessages = () => {
                       )}
 
                       <div className="flex gap-2">
-                        <Textarea
+                        <textarea
+                          className="input-field"
                           placeholder="Type your reply..."
                           value={replyTexts[msg._id] || ""}
                           onChange={(e) =>
@@ -204,9 +204,12 @@ const AdminMessages = () => {
                           }
                         />
 
-                        <Button onClick={() => sendReply(msg._id)}>
+                        <button
+                          className="btn-primary h-fit"
+                          onClick={() => sendReply(msg._id)}
+                        >
                           <Send size={14} /> Reply
-                        </Button>
+                        </button>
                       </div>
                     </div>
                   </motion.div>

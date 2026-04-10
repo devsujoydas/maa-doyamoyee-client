@@ -1,5 +1,5 @@
 export const filterByYear = (data, field, year) => {
-  console.log(data);
+
   return data?.filter((item) => {
     const d = new Date(item[field]);
     return d.getFullYear() === year;

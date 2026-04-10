@@ -15,21 +15,10 @@ import {
 } from "lucide-react";
 import { useAuth } from "../AuthProvider/authProvider";
 
-const SidebarContent = ({ collapsed, toggleCollapsed, logout }) => {
+const SidebarContent = ({ collapsed, toggleCollapsed }) => {
   const location = useLocation();
-  const { user } = useAuth();
-
-  const adminLinks = [
-    { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
-    { label: "Users", path: "/admin/users", icon: Users },
-    { label: "Blog", path: "/admin/blogs", icon: FileText },
-    { label: "Notice", path: "/admin/notices", icon: Bell },
-    { label: "Gallery", path: "/admin/gallery", icon: Image },
-    { label: "Messages", path: "/admin/messages", icon: Mail },
-    { label: "Event", path: "/admin/events", icon: Calendar },
-    { label: "Donations", path: "/admin/donations", icon: HandCoins },
-    { label: "Back to Site", path: "/", icon: LogOut },
-  ];
+ 
+   const { user ,logout} = useAuth();
 
   return (
     <motion.aside
@@ -52,21 +41,127 @@ const SidebarContent = ({ collapsed, toggleCollapsed, logout }) => {
 
       {/* Nav */}
       <nav className="flex-1 p-2 space-y-1">
-        {adminLinks.map((link) => (
-          <Link
-            key={link.path}
-            to={link.path}
-            title={link.label}
-            className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
-              location.pathname === link.path
-                ? "bg-black text-white"
-                : " hover:bg-black/10"
-            } ${collapsed ? "justify-center" : ""}`}
-          >
-            <link.icon size={18} />
-            {!collapsed && link.label}
-          </Link>
-        ))}
+        <Link
+          to={"/admin"}
+          title={"Dashboard"}
+          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+            location.pathname === "/admin"
+              ? "bg-black text-white"
+              : " hover:bg-black/10"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <LayoutDashboard size={18} />
+          {!collapsed && "Dashboard"}
+        </Link>
+
+        <Link
+          to={"/admin/users"}
+          title={"Users"}
+          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+            location.pathname === "/admin/users"
+              ? "bg-black text-white"
+              : " hover:bg-black/10"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <Users size={18} />
+          {!collapsed && "Users"}
+        </Link>
+
+        {user.role == "admin" && (
+          <>
+            <Link
+              to={"/admin/blogs"}
+              title={"Blog"}
+              className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+                location.pathname === "/admin/blogs"
+                  ? "bg-black text-white"
+                  : " hover:bg-black/10"
+              } ${collapsed ? "justify-center" : ""}`}
+            >
+              <FileText size={18} />
+              {!collapsed && "Blog"}
+            </Link>
+
+            <Link
+              to={"/admin/notices"}
+              title={"Notice"}
+              className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+                location.pathname === "/admin/notices"
+                  ? "bg-black text-white"
+                  : " hover:bg-black/10"
+              } ${collapsed ? "justify-center" : ""}`}
+            >
+              <Bell size={18} />
+              {!collapsed && "Notice"}
+            </Link>
+            
+
+            <Link
+              to={"/admin/gallery"}
+              title={"Gallery"}
+              className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+                location.pathname === "/admin/gallery"
+                  ? "bg-black text-white"
+                  : " hover:bg-black/10"
+              } ${collapsed ? "justify-center" : ""}`}
+            >
+              <Image size={18} />
+              {!collapsed && "Gallery"}
+            </Link>
+          </>
+        )}
+
+        <Link
+              to={"/admin/messages"}
+              title={"Messages"}
+              className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+                location.pathname === "/admin/messages"
+                  ? "bg-black text-white"
+                  : " hover:bg-black/10"
+              } ${collapsed ? "justify-center" : ""}`}
+            >
+              <Bell size={18} />
+              {!collapsed && "Messages"}
+            </Link>
+
+        <Link
+          to={"/admin/events"}
+          title={"Event"}
+          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+            location.pathname === "/admin/events"
+              ? "bg-black text-white"
+              : " hover:bg-black/10"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <Calendar size={18} />
+          {!collapsed && "Event"}
+        </Link>
+
+        <Link
+          to={"/admin/donations"}
+          title={"Donations"}
+          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+            location.pathname === "/admin/donations"
+              ? "bg-black text-white"
+              : " hover:bg-black/10"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <HandCoins size={18} />
+          {!collapsed && "Donations"}
+        </Link>
+
+        <Link
+          to={"/"}
+          title={"Back to Site"}
+          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+            location.pathname === "/"
+              ? "bg-black text-white"
+              : " hover:bg-black/10"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <LogOut size={18} />
+          {!collapsed && "Back to Site"}
+        </Link>
       </nav>
 
       {/* Bottom Section */}

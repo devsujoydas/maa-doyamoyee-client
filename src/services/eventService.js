@@ -8,13 +8,21 @@ export const getEventsService = async () => {
 
 // CREATE event
 export const createEventService = async (formData) => {
-  const res = await api.post("/events", formData);
+  const res = await api.post("/events", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return res.data;
 };
 
-// UPDATE event
+// UPDATE event ✅ FIXED
 export const updateEventService = async (id, formData) => {
-  const res = await api.put(`/events/${id}`, formData);
+  const res = await api.put(`/events/${id}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return res.data;
 };
 

@@ -5,6 +5,7 @@ import { HiTrash, HiEye } from "react-icons/hi";
 import DonationPreviewModal from "../../components/modals/DonationPreviewModal";
 import { motion } from "framer-motion";
 import { Edit2, Eye } from "lucide-react";
+import { formatDateDynamic, formatDateEnglish } from "../../utils/formatDateDynamic";
 
 const AdminDonations = () => {
   const { donations = [], deleteDonation, updateStatus } = useDonations();
@@ -93,8 +94,9 @@ const AdminDonations = () => {
           <thead className="bg-gray-100 sticky top-0 z-10">
             <tr className="text-xs font-medium text-gray-500 uppercase tracking-wider">
               <th className="px-6 py-4 text-left ">Name</th>
-              <th className="px-6 py-4 text-left ">Amount</th>
               <th className="px-6 py-4 text-left ">Phone</th>
+              <th className="px-6 py-4 text-left ">Date</th>
+              <th className="px-6 py-4 text-left ">Amount</th>
               <th className="px-6 py-4 text-left ">Payment</th>
               <th className="px-6 py-4 text-left ">Status</th>
               <th className="px-6 py-4 text-center ">Action</th>
@@ -104,34 +106,27 @@ const AdminDonations = () => {
           <tbody className="divide-y divide-gray-200 text-sm">
             {filtered.map((d) => (
               <tr key={d._id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 text-gray-500">
+                <td className="px-6 py-3 text-gray-500">
                   {d.accountName}
                   <div>{d.email}</div>
                 </td>
 
-                <td className="px-6 py-4 text-gray-500">৳{d.paymentAmount}</td>
+                <td className="px-6 py-3 text-gray-500">{d.phone}</td>
+                <td className="px-6 py-3 text-gray-500">{formatDateEnglish(d.createdAt)}</td>
+                <td className="px-6 py-3 text-gray-500">৳{d.paymentAmount}</td>
 
-                <td className="px-6 py-4 text-gray-500">{d.phone}</td>
 
-                <td className="px-6 py-4 text-gray-500">
+                <td className="px-6 py-3 text-gray-500 text-nowrap">
                   {d.paymentMethod === "Bank"
                     ? d.bankPayment?.bankName
                     : d.mobilePayment?.provider}
                 </td>
 
-                <td className="px-6 py-4 text-gray-500">
+                <td className="px-6 py-3 text-gray-500">
                   <select
                     value={d.status}
                     onChange={(e) => handleStatus(d._id, e.target.value)}
-                    className={`border px-2 py-1 rounded outline-none cursor-pointer font-medium
-      ${
-        d.status === "pending"
-          ? "bg-yellow-100 text-yellow-700 border-yellow-300"
-          : d.status === "approved"
-            ? "bg-green-100 text-green-700 border-green-300"
-            : "bg-red-100 text-red-700 border-red-300"
-      }
-    `}
+                    className={`border px-2  rounded outline-none cursor-pointer font-medium ${d.status === "pending" ? "bg-yellow-100 text-yellow-700 border-yellow-300" : d.status === "approved" ? "bg-green-100 text-green-700 border-green-300" : "bg-red-100 text-red-700 border-red-300"}`}
                   >
                     <option
                       value="pending"
@@ -156,10 +151,10 @@ const AdminDonations = () => {
                   </select>
                 </td>
 
-                <td className="flex gap-2 px-6 py-4 text-gray-500 text-center">
+                <td className=" gap-2 px-6 py-4 text-gray-500  flex justify-center items-center mt-2">
                   <motion.button
                     whileHover={{ scale: 1.2 }}
-                    className="text-blue-600 hover:text-blue-800 cursor-pointer"
+                    className="text-blue-600 hover:text-blue-800 cursor-pointer "
                     onClick={() => setSelected(d)}
                   >
                     <Eye size={18} />

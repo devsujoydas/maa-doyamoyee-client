@@ -1,28 +1,25 @@
 // AdminUsers.jsx
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Trash2, Eye, UserCheck, User } from "lucide-react";
+import { Trash2, Eye, UserCheck, User, Crown } from "lucide-react";
 import toast from "react-hot-toast";
 import UserViewModal from "../../components/modals/UserViewModal";
-import DeleteModal from "../../components/modals/DeleteModal"; 
-import { MdVerified } from "react-icons/md"; 
+import DeleteModal from "../../components/modals/DeleteModal";
+import { MdVerified } from "react-icons/md";
 import useUsers from "../../hooks/useUsers";
 import { formatDynamicDate } from "../../utils/formatDateDynamic";
 
 const AdminUsers = () => {
-    const { data: users = [] } = useUsers();
-
+  const { data: users = [] } = useUsers();
 
   const [selectedUser, setSelectedUser] = useState(null);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
-
   const handleView = (user) => {
     setSelectedUser(user);
     setViewModalOpen(true);
   };
-
 
   const handleDelete = (user) => {
     setSelectedUser(user);
@@ -31,8 +28,6 @@ const AdminUsers = () => {
 
   // Confirm delete
   const confirmDelete = () => {
-   
-
     toast.success("User deleted successfully");
     setDeleteModalOpen(false);
     setViewModalOpen(false);
@@ -113,7 +108,11 @@ const AdminUsers = () => {
                 <td className="px-6 py-3 text-sm">
                   {user?.role === "admin" ? (
                     <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                      <UserCheck className="mr-1 w-3 h-3" /> Admin
+                      <Crown className="mr-1 w-3 h-3" /> Admin
+                    </span>
+                  ) : user?.role === "moderator" ? (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800">
+                      <UserCheck className="mr-1 w-3 h-3" /> Moderator
                     </span>
                   ) : (
                     <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
@@ -135,7 +134,7 @@ const AdminUsers = () => {
                     <Eye size={18} />
                   </motion.button>
 
-                  {user.role !== "admin" && (
+                  {user.role !== "admin" && user.role !== "ceo" && (
                     <motion.button
                       whileHover={{ scale: 1.2 }}
                       className="text-red-600 hover:text-red-800  cursor-pointer"

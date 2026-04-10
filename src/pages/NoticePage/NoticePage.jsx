@@ -10,7 +10,7 @@ const NoticePage = () => {
   const { t } = useTranslation();
   const { notices } = useNotices();
   const [previewNotice, setPreviewNotice] = useState(null);
-  console.log(notices);
+
 
   // Filter active notices
   const activeNotices = notices?.filter((n) => n.active === true) || [];

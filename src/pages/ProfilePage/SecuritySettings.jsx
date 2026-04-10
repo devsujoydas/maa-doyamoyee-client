@@ -3,9 +3,11 @@ import { Lock, Eye, EyeClosed } from "lucide-react";
 import toast from "react-hot-toast";
 import api from "../../utils/api";
 import { motion } from "framer-motion";
-
+import { useTranslation } from "react-i18next";
 
 const SecuritySettings = () => {
+  const { t } = useTranslation();
+
   const [form, setForm] = useState({
     currentPassword: "",
     newPassword: "",
@@ -18,29 +20,34 @@ const SecuritySettings = () => {
     confirm: false,
   });
 
-  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // 🔥 SIMPLE VALIDATION (backend handles security)
   const validate = () => {
-    const newErrors = {};
-    if (!form.currentPassword)
-      newErrors.currentPassword = "Current password is required";
-    if (!form.newPassword) newErrors.newPassword = "New password is required";
-    else if (form.newPassword.length < 8)
-      newErrors.newPassword = "At least 8 characters required";
-    else if (!form.newPassword.match(/^(?=.*[A-Z])(?=.*\d).+$/))
-      newErrors.newPassword = "Must include uppercase & number";
+    if (
+      !form.currentPassword ||
+      !form.newPassword ||
+      !form.confirmNewPassword
+    ) {
+      toast.error(t("all_fields_required"));
+      return false;
+    }
 
-    if (!form.confirmNewPassword)
-      newErrors.confirmNewPassword = "Confirm password is required";
-    else if (form.confirmNewPassword !== form.newPassword)
-      newErrors.confirmNewPassword = "Passwords do not match";
+    if (form.newPassword.length < 8) {
+      toast.error(t("password_min_length"));
+      return false;
+    }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    if (form.newPassword !== form.confirmNewPassword) {
+      toast.error(t("password_mismatch"));
+      return false;
+    }
+
+    return true;
   };
 
   const handleSubmit = async (e) => {
@@ -48,30 +55,61 @@ const SecuritySettings = () => {
     if (!validate()) return;
 
     try {
+      setLoading(true);
+
       const payload = {
         currentPassword: form.currentPassword.trim(),
         newPassword: form.newPassword.trim(),
         confirmNewPassword: form.confirmNewPassword.trim(),
       };
 
-      await api.put("/password/change-password", payload);
-      toast.success("Password updated successfully!");
-      setForm({ currentPassword: "", newPassword: "", confirmNewPassword: "" });
-      setErrors({});
+      const res = await api.put("/password/change-password", payload);
+
+      toast.success(t("password_updated_success"));
+
+      setForm({
+        currentPassword: "",
+        newPassword: "",
+        confirmNewPassword: "",
+      });
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to update password");
+      const msg = err.response?.data?.message;
+
+      switch (msg) {
+        case "CURRENT_PASSWORD_INCORRECT":
+          toast.error(t("current_password_incorrect"));
+          break;
+        case "PASSWORD_MISMATCH":
+          toast.error(t("password_mismatch"));
+          break;
+        case "PASSWORD_TOO_SHORT":
+          toast.error(t("password_min_length"));
+          break;
+        case "NEW_PASSWORD_MUST_BE_DIFFERENT":
+          toast.error(t("new_password_different"));
+          break;
+        case "ALL_FIELDS_REQUIRED":
+          toast.error(t("all_fields_required"));
+          break;
+        default:
+          toast.error(t("something_went_wrong"));
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   const inputWrapper =
-    "input-field flex justify-center items-center gap-2 mt-1 ";
+    "input-field flex items-center gap-2 mt-1";
   const labelClass = "font-light text-sm text-[#4B1E2F] uppercase";
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Header */}
-      <div className="flex justify-between items-center p-6  bg-[#F9F9F9] rounded-t-xl">
-        <h3 className="font-semibold text-lg">Security Settings</h3>
+      {/* HEADER */}
+      <div className="flex justify-between items-center p-6 bg-[#F9F9F9] rounded-t-xl">
+        <h3 className="font-semibold text-lg">
+          {t("security_settings")}
+        </h3>
       </div>
 
       <motion.div
@@ -79,99 +117,113 @@ const SecuritySettings = () => {
         animate={{ opacity: 1, y: 0 }}
         className="p-6 space-y-5"
       >
-        {/* Current Password */}
+        {/* CURRENT PASSWORD */}
         <div>
-          <label className={labelClass}>Current Password</label>
+          <label className={labelClass}>
+            {t("current_password")}
+          </label>
+
           <div className={inputWrapper}>
-            <Lock className="text-zinc-400 w-4.5  " />
+            <Lock className="text-zinc-400 w-4.5" />
             <input
               type={show.current ? "text" : "password"}
               name="currentPassword"
-              placeholder="Enter current password"
               value={form.currentPassword}
               onChange={handleChange}
+              placeholder={t("enter_current_password")}
               className="w-full outline-none"
             />
+
             <span
-              onClick={() =>
-                setShow((prev) => ({ ...prev, current: !prev.current }))
-              }
               className="cursor-pointer"
+              onClick={() =>
+                setShow((p) => ({ ...p, current: !p.current }))
+              }
             >
-              {show.current ? <Eye size={18} /> : <EyeClosed size={18} />}
+              {show.current ? (
+                <Eye size={18} />
+              ) : (
+                <EyeClosed size={18} />
+              )}
             </span>
           </div>
-          {errors.currentPassword && (
-            <p className="text-red-600 text-sm mt-1">
-              {errors.currentPassword}
-            </p>
-          )}
         </div>
 
-        {/* New Password */}
+        {/* NEW PASSWORD */}
         <div>
-          <label className={labelClass}>New Password</label>
+          <label className={labelClass}>
+            {t("new_password")}
+          </label>
+
           <div className={inputWrapper}>
-            <Lock className="text-zinc-400  w-4.5  " />
+            <Lock className="text-zinc-400 w-4.5" />
             <input
               type={show.new ? "text" : "password"}
               name="newPassword"
-              placeholder="Enter new password"
               value={form.newPassword}
               onChange={handleChange}
+              placeholder={t("enter_new_password")}
               className="w-full outline-none"
             />
+
             <span
-              onClick={() => setShow((prev) => ({ ...prev, new: !prev.new }))}
               className="cursor-pointer"
+              onClick={() =>
+                setShow((p) => ({ ...p, new: !p.new }))
+              }
             >
-              {show.new ? <Eye size={18} /> : <EyeClosed size={18} />}
+              {show.new ? (
+                <Eye size={18} />
+              ) : (
+                <EyeClosed size={18} />
+              )}
             </span>
           </div>
-
-         
-          {errors.newPassword && (
-            <p className="text-red-600 text-sm mt-1">{errors.newPassword}</p>
-          )}
         </div>
 
-        {/* Confirm Password */}
+        {/* CONFIRM PASSWORD */}
         <div>
-          <label className={labelClass}>Confirm Password</label>
+          <label className={labelClass}>
+            {t("confirm_password")}
+          </label>
+
           <div className={inputWrapper}>
-            <Lock className="text-zinc-400  w-4.5  " />
+            <Lock className="text-zinc-400 w-4.5" />
             <input
               type={show.confirm ? "text" : "password"}
               name="confirmNewPassword"
-              placeholder="Confirm new password"
               value={form.confirmNewPassword}
               onChange={handleChange}
+              placeholder={t("confirm_new_password")}
               className="w-full outline-none"
             />
+
             <span
-              onClick={() =>
-                setShow((prev) => ({ ...prev, confirm: !prev.confirm }))
-              }
               className="cursor-pointer"
+              onClick={() =>
+                setShow((p) => ({
+                  ...p,
+                  confirm: !p.confirm,
+                }))
+              }
             >
-              {show.confirm ? <Eye size={18} /> : <EyeClosed size={18} />}
+              {show.confirm ? (
+                <Eye size={18} />
+              ) : (
+                <EyeClosed size={18} />
+              )}
             </span>
           </div>
-
-          {errors.confirmNewPassword && (
-            <p className="text-red-600 text-sm mt-1">
-              {errors.confirmNewPassword}
-            </p>
-          )}
         </div>
 
-        {/* Submit */}
+        {/* SUBMIT */}
         <div className="flex justify-center pt-3">
           <button
             type="submit"
-            className="btn-primary"
+            disabled={loading}
+            className="btn-primary disabled:opacity-60"
           >
-            Save Changes
+            {loading ? t("updating") : t("save_changes")}
           </button>
         </div>
       </motion.div>

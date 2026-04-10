@@ -9,6 +9,17 @@ export const formatDateDynamic = (dateStr) => {
   });
 };
 
+export const formatDateEnglish = (dateStr) => { 
+
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
+
 
 export const formatDynamicDate = (dateString) => {
   if (!dateString) return "";

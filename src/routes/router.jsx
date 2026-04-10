@@ -10,6 +10,7 @@ import { HelmetProvider } from "react-helmet-async";
 import PrivateRoutes from "./PrivateRoutes";
 import AuthPrivateRoutes from "./AuthPrivateRoutes";
 import AdminPrivateRoutes from "./AdminPrivateRoutes"; 
+import ModeratorPrivateRoutes from "./AdminOnlyRoutes";
 
 /* ---------------- Lazy Pages ---------------- */
 const Home = lazy(() => import("../pages/Home/Home"));
@@ -133,7 +134,6 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // 🔒 Admin Routes (Protected via PrivateRoutes)
   {
     path: "/admin",
     element: withSuspense(
@@ -145,11 +145,18 @@ export const router = createBrowserRouter([
       { path: "", element: withSuspense(<AdminOverview />) },
       { path: "users", element: withSuspense(<AdminUsers />) },
       { path: "messages", element: withSuspense(<AdminMessages />) },
-      { path: "gallery", element: withSuspense(<AdminGallary />) },
-      { path: "blogs", element: withSuspense(<AdminBlogs />) },
-      { path: "notices", element: withSuspense(<AdminNotices />) },
       { path: "events", element: withSuspense(<AdminEvents />) },
       { path: "donations", element: withSuspense(<AdminDonations />) },
+
+      // 🔒 CEO Restricted Routes
+      {
+        element: <ModeratorPrivateRoutes />,
+        children: [
+          { path: "gallery", element: withSuspense(<AdminGallary />) },
+          { path: "blogs", element: withSuspense(<AdminBlogs />) },
+          { path: "notices", element: withSuspense(<AdminNotices />) },
+        ],
+      },
     ],
   },
 ]);
