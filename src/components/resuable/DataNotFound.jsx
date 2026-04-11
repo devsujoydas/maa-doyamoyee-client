@@ -1,6 +1,6 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
-import LoadingSpinner from "./loadingSpinner";
+import { useTranslation } from "react-i18next"; 
+import LoadingSpinner from "../LoadingSpinner";
 
 const DataNotFound = ({ name, isLoading }) => {
   const { t } = useTranslation();

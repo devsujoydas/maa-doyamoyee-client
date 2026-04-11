@@ -14,8 +14,8 @@ import DeleteModal from "../../components/modals/DeleteModal";
 import { deleteUserByAdmin, changeUserRole } from "../../services/userService";
 
 import { useAuth } from "../../AuthProvider/authProvider";
-import LoadingSpinner from "../../components/resuable/loadingSpinner";
-
+import LoadingSpinner from "../../components/LoadingSpinner";
+ 
 const AdminUsers = () => {
   const { user: loggedInUser } = useAuth();
 

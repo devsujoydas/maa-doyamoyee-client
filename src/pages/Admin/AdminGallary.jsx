@@ -4,8 +4,8 @@ import GalleryFormModal from "../../components/modals/GallaryFormModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import { Plus } from "lucide-react";
 import AdminGalleryCard from "../../components/cards/AdminGalleryCard";
-import LoadingSpinner from "../../components/resuable/loadingSpinner";
-
+import LoadingSpinner from "../../components/LoadingSpinner";
+ 
 const AdminGallery = () => {
   const { gallery, isLoading, createOrUpdate, deleteGallery, isSubmitting } =
     useGallery();
