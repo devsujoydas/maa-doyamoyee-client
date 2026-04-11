@@ -15,8 +15,8 @@ import BlogViewModal from "../../components/modals/BlogViewModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import BlogFormModal from "../../components/modals/BlogFormModal";
 import useBlogs from "../../hooks/useBlogs";
-import LoadingSpinner from "../../components/resuable/loadingSpinner";
-
+import LoadingSpinner from "../../components/LoadingSpinner";
+ 
 const AdminBlogs = () => {
   const { blogs = [], deleteBlog, isLoading } = useBlogs();
   const [selectedBlog, setSelectedBlog] = useState(null);

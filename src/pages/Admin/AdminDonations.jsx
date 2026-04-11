@@ -6,7 +6,7 @@ import DonationPreviewModal from "../../components/modals/DonationPreviewModal";
 import { motion } from "framer-motion";
 import { Edit2, Eye } from "lucide-react";
 import { formatDateDynamic, formatDateEnglish } from "../../utils/formatDateDynamic";
-import LoadingSpinner from "../../components/resuable/loadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const AdminDonations = () => {
   const { donations = [], isLoading, updateStatus } = useDonations();

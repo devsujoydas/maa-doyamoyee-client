@@ -8,12 +8,11 @@ import NoticeViewModal from "../../components/modals/NoticeViewModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import { HiTrash } from "react-icons/hi";
 import { Edit2, Eye, Plus } from "lucide-react";
-import {
-  formatDateDynamic,
+import { 
   formatDateEnglish,
 } from "../../utils/formatDateDynamic";
 import PreviewModal from "../NoticePage/PreviewModal";
-import LoadingSpinner from "../../components/resuable/loadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const AdminNotices = () => {
   const {

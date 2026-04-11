@@ -9,8 +9,8 @@ import EventViewModal from "../../components/modals/EventViewModal";
 import EventFormModal from "../../components/modals/EventFormModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import useEvents from "../../hooks/useEvents";
-import { formatDateDynamic } from "../../utils/formatDateDynamic";
-import LoadingSpinner from "../../components/resuable/loadingSpinner";
+import { formatDateDynamic } from "../../utils/formatDateDynamic"; 
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const AdminEvents = () => {
   const { events, deleteEvent,isLoading } = useEvents();
