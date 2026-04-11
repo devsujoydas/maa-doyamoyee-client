@@ -13,14 +13,14 @@ import DataNotFound from "../../components/resuable/DataNotFound";
 
 const LatestNotice = () => {
   const { t } = useTranslation();
-  const { notices } = useNotices();
+  const { notices, isLoading } = useNotices();
   const [previewNotice, setPreviewNotice] = useState(null);
 
   const activeNotices = notices.filter((n) => n?.active === true) || [];
 
   return (
-    <div className="">
-      <div className="custom-container">
+    <div className=" py-6 md:py-0">
+      <div className="custom-container ">
         {/* Section Heading */}
         <SectionHeading
           title={t("latest_notices")}
@@ -29,8 +29,8 @@ const LatestNotice = () => {
           textcolor={"text-black"}
         />
 
-        {!notices.length > 0? (
-          <DataNotFound name={"notices"} />
+        {!notices.length > 0 ? (
+          <DataNotFound name={"notices"} isLoading={isLoading} />
         ) : (
           <Swiper
             slidesPerView={1}
@@ -46,7 +46,7 @@ const LatestNotice = () => {
             className="rounded-md h-full"
           >
             {activeNotices.map((notice) => (
-              <SwiperSlide key={notice._id} className="my-4 h-auto! flex">
+              <SwiperSlide key={notice._id} className="my- h-auto! flex">
                 <NoticeCard
                   notice={notice}
                   onPreview={(n) => setPreviewNotice(n)}

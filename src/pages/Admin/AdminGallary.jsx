@@ -4,6 +4,7 @@ import GalleryFormModal from "../../components/modals/GallaryFormModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import { Plus } from "lucide-react";
 import AdminGalleryCard from "../../components/cards/AdminGalleryCard";
+import LoadingSpinner from "../../components/resuable/loadingSpinner";
 
 const AdminGallery = () => {
   const { gallery, isLoading, createOrUpdate, deleteGallery, isSubmitting } =
@@ -38,7 +39,7 @@ const AdminGallery = () => {
     <div>
       {/* HEADER */}
       <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">
+        <h1 className="text-lg md:text-2xl  font-bold">
           Gallery Management ({gallery.length})
         </h1>
 
@@ -53,7 +54,7 @@ const AdminGallery = () => {
         </button>
       </div>
 
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <LoadingSpinner />}
 
       {/* GRID */}
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4">

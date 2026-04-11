@@ -9,7 +9,7 @@ import DataNotFound from "../../components/resuable/DataNotFound";
 
 const NoticePage = () => {
   const { t } = useTranslation();
-  const { notices } = useNotices();
+  const { notices, isLoading } = useNotices();
   const [previewNotice, setPreviewNotice] = useState(null);
 
   // Filter active notices
@@ -26,7 +26,7 @@ const NoticePage = () => {
 
         {/* Notices Grid */}
         {!notices.length > 0 ? (
-          <DataNotFound name={"notices"} />
+          <DataNotFound name={"notices"} isLoading={isLoading} />
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
             {activeNotices.length > 0 &&

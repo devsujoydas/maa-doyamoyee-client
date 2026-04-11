@@ -9,7 +9,7 @@ import DataNotFound from "../../components/resuable/DataNotFound";
 
 const BlogsSection = () => {
   const { t } = useTranslation();
-  const { blogs = [] } = useBlogs();
+  const { blogs = [],isLoading } = useBlogs();
 
   // ✅ FIXED typo
   const approvedBlogs = blogs.filter((b) => b.status === "approved");
@@ -26,7 +26,7 @@ const BlogsSection = () => {
 
         <div className="mt-10">
           {!approvedBlogs.length > 0 ? (
-            <DataNotFound name={"blogs"} />
+            <DataNotFound name={"blogs"} isLoading={isLoading} />
           ) : (
             <Swiper
               slidesPerView={1}

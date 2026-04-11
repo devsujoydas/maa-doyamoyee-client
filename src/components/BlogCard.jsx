@@ -116,7 +116,7 @@ const BlogCard = ({ blog, type }) => {
           </div>
 
           {/* Title */}
-          <h3 className=" hover:text-[#DB4242] text-xl sm:text-2xl font-bold mb-2 text-gray-900">
+          <h3 className=" hover:text-[#DB4242] text-xl lg:text-2xl font-bold mb-2 text-gray-900">
             <Link to={`/blogs/${blog?._id}`}>{blog?.title}</Link>
           </h3>
 

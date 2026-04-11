@@ -6,15 +6,19 @@ import { HiTrash } from "react-icons/hi";
 import { Eye, Plus, Edit2 } from "lucide-react";
 
 import SEOHead from "../../components/SEOHead";
-import { formatDateEnglish, formatDynamicDate } from "../../utils/formatDateDynamic";
+import {
+  formatDateEnglish,
+  formatDynamicDate,
+} from "../../utils/formatDateDynamic";
 
 import BlogViewModal from "../../components/modals/BlogViewModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import BlogFormModal from "../../components/modals/BlogFormModal";
 import useBlogs from "../../hooks/useBlogs";
+import LoadingSpinner from "../../components/resuable/loadingSpinner";
 
 const AdminBlogs = () => {
-  const { blogs = [], deleteBlog } = useBlogs();
+  const { blogs = [], deleteBlog, isLoading } = useBlogs();
   const [selectedBlog, setSelectedBlog] = useState(null);
 
   const [viewModalOpen, setViewModalOpen] = useState(false);
@@ -54,7 +58,7 @@ const AdminBlogs = () => {
       />
 
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-lg md:text-2xl  font-bold">
           Blogs Management ({blogs.length})
         </h1>
 
@@ -69,78 +73,82 @@ const AdminBlogs = () => {
         transition={{ duration: 0.3 }}
         className="overflow-x-auto bg-white shadow rounded-lg"
       >
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-100 sticky top-0 z-10">
-            <tr className="text-xs font-medium text-gray-500 uppercase tracking-wider">
-              <th className="px-6 py-4 text-left ">SL: </th>
-              <th className="px-6 py-4 text-left ">Title</th>
-              <th className="px-6 py-4 text-left">Author</th>
-              <th className="px-6 py-4 text-left">Likes</th>
-              <th className="px-6 py-4 text-left">Comments</th>
-              <th className="px-6 py-4 text-left">Date</th>
-              <th className="px-6 py-4 text-left">Status</th>
-              <th className="px-6 py-4 text-center">Actions</th>
-            </tr>
-          </thead>
-
-          <tbody className="divide-y divide-gray-200 text-sm">
-            {blogs.map((post, idx) => (
-              <tr key={post._id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 text-gray-500">{idx + 1}</td>
-                <td className="px-6 py-4 text-gray-900">
-                  <Link
-                    to={`/blogs/${post?._id}`}
-                    className="hover:underline font-medium text-nowrap"
-                  >
-                    {post.title}
-                  </Link>
-                </td>
-                <td className="px-6 py-4 text-gray-500 text-nowrap">
-                  {post.author.name}
-                </td>
-                <td className="px-6 py-4 text-gray-500">
-                  {post.reacts?.length || 0}
-                </td>
-                <td className="px-6 py-4 text-gray-500">
-                  {post.commentCount || 0}
-                </td>
-                <td className="px-6 py-4 text-gray-500 text-nowrap">
-                  {formatDateEnglish(post.createdAt)}
-                </td>
-                <td className="px-6 py-4 text-xs">
-                  <span
-                    className={`px-2 py-0.5 rounded-full ${post.status === "pending" ? "text-yellow-800 bg-yellow-100" : post.status === "approved" ? "text-green-800 bg-green-100" : "text-red-800 bg-red-100"}`}
-                  >
-                    {post.status}
-                  </span>
-                </td>
-                <td className="px-6 py-4 text-center flex justify-center space-x-3">
-                  <motion.button
-                    whileHover={{ scale: 1.2 }}
-                    className="text-blue-600 hover:text-blue-800 cursor-pointer"
-                    onClick={() => openViewModal(post)}
-                  >
-                    <Eye size={18} />
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.2 }}
-                    className="text-yellow-600 hover:text-yellow-800 cursor-pointer"
-                    onClick={() => openFormModal(post)}
-                  >
-                    <Edit2 size={18} />
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.2 }}
-                    className="text-red-600 hover:text-red-800 cursor-pointer"
-                    onClick={() => openDeleteModal(post)}
-                  >
-                    <HiTrash size={18} />
-                  </motion.button>
-                </td>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-100 sticky top-0 z-10">
+              <tr className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left ">SL: </th>
+                <th className="px-6 py-4 text-left ">Title</th>
+                <th className="px-6 py-4 text-left">Author</th>
+                <th className="px-6 py-4 text-left">Likes</th>
+                <th className="px-6 py-4 text-left">Comments</th>
+                <th className="px-6 py-4 text-left">Date</th>
+                <th className="px-6 py-4 text-left">Status</th>
+                <th className="px-6 py-4 text-center">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody className="divide-y divide-gray-200 text-sm">
+              {blogs.map((post, idx) => (
+                <tr key={post._id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 text-gray-500">{idx + 1}</td>
+                  <td className="px-6 py-4 text-gray-900">
+                    <Link
+                      to={`/blogs/${post?._id}`}
+                      className="hover:underline font-medium text-nowrap"
+                    >
+                      {post.title}
+                    </Link>
+                  </td>
+                  <td className="px-6 py-4 text-gray-500 text-nowrap">
+                    {post.author.name}
+                  </td>
+                  <td className="px-6 py-4 text-gray-500">
+                    {post.reacts?.length || 0}
+                  </td>
+                  <td className="px-6 py-4 text-gray-500">
+                    {post.commentCount || 0}
+                  </td>
+                  <td className="px-6 py-4 text-gray-500 text-nowrap">
+                    {formatDateEnglish(post.createdAt)}
+                  </td>
+                  <td className="px-6 py-4 text-xs">
+                    <span
+                      className={`px-2 py-0.5 rounded-full ${post.status === "pending" ? "text-yellow-800 bg-yellow-100" : post.status === "approved" ? "text-green-800 bg-green-100" : "text-red-800 bg-red-100"}`}
+                    >
+                      {post.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-center flex justify-center space-x-3">
+                    <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      className="text-blue-600 hover:text-blue-800 cursor-pointer"
+                      onClick={() => openViewModal(post)}
+                    >
+                      <Eye size={18} />
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      className="text-yellow-600 hover:text-yellow-800 cursor-pointer"
+                      onClick={() => openFormModal(post)}
+                    >
+                      <Edit2 size={18} />
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      className="text-red-600 hover:text-red-800 cursor-pointer"
+                      onClick={() => openDeleteModal(post)}
+                    >
+                      <HiTrash size={18} />
+                    </motion.button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </motion.div>
 
       {/* Modals */}

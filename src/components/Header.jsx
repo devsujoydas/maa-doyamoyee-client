@@ -11,12 +11,15 @@ import LogoutModal from "./modals/LogoutModal";
 
 const Header = ({ setLogoutOpen }) => {
   const { t, i18n } = useTranslation();
-
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(null);
   const { user, setUser } = useAuth();
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const toggleDropdown = (idx) => {
+    setOpenDropdown(openDropdown === idx ? null : idx);
+  };
 
   const changeLang = (lang) => {
     i18n.changeLanguage(lang);
@@ -71,21 +74,34 @@ const Header = ({ setLogoutOpen }) => {
           {navItems.map((item, idx) =>
             item.dropdown ? (
               <div key={idx} className="relative group">
-                <button className="flex items-center gap-1 transition-colors hover:text-yellow-400 ">
+                <button
+                  onClick={() => toggleDropdown(idx)}
+                  className="flex items-center gap-1 transition-colors hover:text-yellow-400"
+                >
                   {item.label}
+
                   <ChevronDown
                     size={16}
-                    className="transition-transform group-hover:rotate-180"
+                    className={`transition-transform duration-200 ${
+                      openDropdown === idx
+                        ? "rotate-180"
+                        : "group-hover:rotate-180"
+                    }`}
                   />
                 </button>
-                <div className="absolute top-full left-0 mt-2 w-38 bg-shared-primary text-shared-color-primary shadow-lg rounded-md overflow-hidden opacity-0 invisible group-hover:opacity-100 group-active::visible group-active:opacity-100 group-hover:visible transition-all">
+
+                <div
+                  className={`absolute top-full left-0 mt-2 w-38 bg-shared-primary text-shared-color-primary shadow-lg rounded-md overflow-hidden transition-all ${openDropdown === idx ? "opacity-100 visible" : "opacity-0 invisible group-hover:opacity-100 group-hover:visible"}`}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
                   {item.dropdown.map((sub, i) => (
                     <NavLink
                       key={i}
                       to={sub.to}
+                      onClick={() => setOpenDropdown(null)}
                       className={({ isActive }) =>
-                        `transition  block px-4 py-2 hover:text-black hover:bg-yellow-100   ${
-                          isActive ? "text-yellow-400  font-semibold" : ""
+                        `transition block px-4 py-2 hover:text-black hover:bg-yellow-100 ${
+                          isActive ? "text-yellow-400 font-semibold" : ""
                         }`
                       }
                     >
@@ -113,7 +129,7 @@ const Header = ({ setLogoutOpen }) => {
           <div className="relative">
             <button
               onClick={() => setLangOpen(!langOpen)}
-              className="border px-3 py-1 rounded-md  text-sm flex items-center gap-1 cursor-pointer"
+              className="border border-zinc-200 px-3 py-1 rounded-md  text-[14px] flex items-center gap-1 cursor-pointer"
             >
               {i18n.language === "bn-BD" ? "বাংলা" : "English"}
               <ChevronDown size={14} />
@@ -125,11 +141,11 @@ const Header = ({ setLogoutOpen }) => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
                   onMouseLeave={() => setLangOpen(!langOpen)}
-                  className="absolute right-0 mt-2 bg-shared-primary text-shared-color-primary shadow-md rounded-md overflow-hidden"
+                  className="absolute right-0 mt-2 bg-shared-primary text-shared-color-primary shadow-md rounded-md overflow-hidden text-sm"
                 >
                   <div
                     onClick={() => changeLang("bn-BD")}
-                    className={`px-4 py-2  cursor-pointer hover:text-black hover:bg-yellow-100 ${
+                    className={`px-4 py-1.5  cursor-pointer hover:text-black hover:bg-yellow-100 ${
                       i18n.language === "bn-BD"
                         ? "bg-yellow-300 text-black"
                         : ""
@@ -139,7 +155,7 @@ const Header = ({ setLogoutOpen }) => {
                   </div>
                   <div
                     onClick={() => changeLang("en-US")}
-                    className={`px-4 py-2  cursor-pointer hover:text-black hover:bg-yellow-100 ${
+                    className={`px-4 py-1.5 cursor-pointer hover:text-black hover:bg-yellow-100 ${
                       i18n.language === "en-US"
                         ? "bg-yellow-300 text-black"
                         : ""
@@ -232,15 +248,22 @@ const Header = ({ setLogoutOpen }) => {
         <div className="lg:hidden flex gap-2">
           {/* <DarkModeToggler /> */}
           {/* Mobile Toggle */}
+          {user && (
+            <div onClick={() => setMenuOpen(!menuOpen)}>
+              <div className=" h-8 w-8 rounded-full overflow-hidden cursor-pointer shadow-lg">
+                <img
+                  className="h-full object-cover w-full"
+                  src={user?.profileImage?.url}
+                  alt=""
+                />
+              </div>
+            </div>
+          )}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-shared-color-primary cursor-pointer"
           >
-            {menuOpen ? (
-              <X size={28} className="" />
-            ) : (
-              <Menu size={28} className="" />
-            )}
+            <Menu size={28} className="" />
           </button>
         </div>
       </div>
@@ -249,166 +272,215 @@ const Header = ({ setLogoutOpen }) => {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="lg:hidden  border-t border-zinc-400 bg-shared-primary text-shared-color-primary"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="lg:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
+            onClick={() => setMenuOpen(false)}
           >
-            <div className="flex flex-col px-4 py-4 space-y-3">
-              {navItems.map((item, idx) =>
-                item.dropdown ? (
-                  <div key={idx}>
-                    <button
-                      onClick={() => toggleMobileDropdown(idx)}
-                      className="flex justify-between items-center w-full font-semibold transition-colors cursor-pointer"
-                    >
-                      {item.label}
-                      <ChevronDown
-                        size={16}
-                        className={`transition ${mobileDropdown === idx ? "rotate-180" : ""}`}
-                      />
-                    </button>
-                    <AnimatePresence>
-                      {mobileDropdown === idx && (
-                        <motion.div
-                          initial={{ height: 0 }}
-                          animate={{ height: "auto" }}
-                          exit={{ height: 0 }}
-                          className="ml-3 mt-2 flex flex-col space-y-1"
-                        >
-                          {item.dropdown.map((sub, i) => (
-                            <NavLink
-                              key={i}
-                              to={sub.to}
-                              onClick={() => setMenuOpen(false)}
-                              className={({ isActive }) =>
-                                `transition  block   ${
-                                  isActive
-                                    ? "text-yellow-400  font-semibold"
-                                    : "hover:text-yellow-400"
-                                }`
-                              }
-                            >
-                              {sub.label}
-                            </NavLink>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
-                  <NavLink
-                    key={idx}
-                    to={item.to}
-                    onClick={() => setMenuOpen(false)}
-                    className={({ isActive }) =>
-                      `transition hover:text-yellow-500  ${
-                        isActive ? "text-yellow-400  font-semibold" : ""
-                      }`
-                    }
+            <div className=" bg-black/40 backdrop-blur-sm p-5 h-dvh"></div>
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween" }}
+              className="absolute right-0 top-0 h-dvh w-full bg-white text-black shadow-2xl overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-5 space-y-6">
+                {/* HEADER STYLE (like ecommerce category title) */}
+                <div className="text-lg font-bold border-b border-zinc-200 pb-3 flex justify-between">
+                  <Link
+                    to="/"
+                    className="text-xl md:text-2xl font-bold text-gradient  "
                   >
-                    {item.label}
-                  </NavLink>
-                ),
-              )}
+                    {t("site_name")}
+                  </Link>
 
-              {/* Mobile Language Switch */}
-              <div className="">
-                <button
-                  onClick={() => setLangOpen(!langOpen)}
-                  className="w-full px-3 py-2 border border-zinc-400 cursor-pointer  rounded-md flex justify-between items-center"
-                >
-                  {i18n.language === "bn-BD" ? "বাংলা" : "English"}
-                  <ChevronDown size={16} />
-                </button>
-                <AnimatePresence>
-                  {langOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="flex flex-col mt-2 border border-zinc-600 rounded-md overflow-hidden"
-                    >
+                  <button
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    className=" cursor-pointer"
+                  >
+                    <X size={28} className="" />
+                  </button>
+                </div>
+
+                {/* NAV ITEMS - ECOMMERCE STYLE ACCORDION */}
+                <div className="space-y-2">
+                  {navItems.map((item, idx) =>
+                    item.dropdown ? (
                       <div
-                        onClick={() => {
-                          changeLang("bn-BD");
-                          setMenuOpen(!menuOpen);
-                        }}
-                        className={`px-4 py-2  cursor-pointer hover:text-black hover:bg-yellow-100 ${
-                          i18n.language === "bn-BD"
-                            ? "bg-yellow-300 text-black"
-                            : ""
-                        }`}
+                        key={idx}
+                        className=" rounded-lg overflow-hidden text-sm"
                       >
-                        {t("nav_bangla")}
+                        {/* CATEGORY BUTTON */}
+                        <button
+                          onClick={() => toggleMobileDropdown(idx)}
+                          className="w-full flex justify-between items-center px-4 py-1.5 font-semibold bg-gray-50 hover:bg-gray-100 transition "
+                        >
+                          {item.label}
+
+                          <ChevronDown
+                            size={18}
+                            className={`transition-transform duration-300 ${
+                              mobileDropdown === idx ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+
+                        {/* SUB MENU */}
+                        <AnimatePresence>
+                          {mobileDropdown === idx && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="bg-white text-xs"
+                            >
+                              {item.dropdown.map((sub, i) => (
+                                <NavLink
+                                  key={i}
+                                  to={sub.to}
+                                  onClick={() => setMenuOpen(false)}
+                                  className={({ isActive }) =>
+                                    `block px-6 py-1.5  rounded-md  transition ${
+                                      isActive
+                                        ? "bg-yellow-100 text-black font-semibold"
+                                        : "hover:bg-gray-50"
+                                    }`
+                                  }
+                                >
+                                  {sub.label}
+                                </NavLink>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
-                      <div
-                        onClick={() => {
-                          changeLang("en-US");
-                          setMenuOpen(!menuOpen);
-                        }}
-                        className={`px-4 py-2  cursor-pointer hover:text-black hover:bg-yellow-100 ${
-                          i18n.language === "en-US"
-                            ? "bg-yellow-300 text-black"
-                            : ""
-                        }`}
+                    ) : (
+                      <NavLink
+                        key={idx}
+                        to={item.to}
+                        onClick={() => setMenuOpen(false)}
+                        className={({ isActive }) =>
+                          `block px-4 py-1.5 rounded-sm  transition text-sm ${
+                            isActive
+                              ? "bg-yellow-400 text-black font-semibold"
+                              : "hover:bg-gray-100 "
+                          }`
+                        }
                       >
-                        {t("nav_english")}
-                      </div>
-                    </motion.div>
+                        {item.label}
+                      </NavLink>
+                    ),
                   )}
-                </AnimatePresence>
-              </div>
+                </div>
 
-              {/* Auth */}
-              <div className="  flex flex-col space-y-2">
-                {user ? (
-                  <>
-                    {(user.role === "admin" || user.role === "moderator") && (
-                      <Link
-                        to="/admin"
-                        className="px-3 py-2 border border-zinc-500 rounded-md text-center"
-                      >
-                        {t("auth_dashboard")}
-                      </Link>
-                    )}
-                    <Link
-                      to="/profile"
-                      onClick={() => setMenuOpen(!menuOpen)}
-                      className="px-3 py-2 border border-zinc-500 rounded-md text-center"
-                    >
-                      {t("auth_profile")}
-                    </Link>
+                {/* LANGUAGE (ecommerce style box) */}
+                <div className="border border-zinc-200 rounded-lg p-3 space-y-2 text-xs">
+                  <p className=" text-gray-500">Language</p>
+
+                  <div className="flex gap-2">
                     <button
-                      onClick={() => {
-                        setLogoutOpen(true);
-                        setMenuOpen(!menuOpen);
-                      }}
-                      className="px-3 py-2 border border-zinc-500 bg-red-500 text-white hover:bg-white hover:text-red-500 active:scale-95 transition-all cursor-pointer rounded-md text-center "
+                      onClick={() => changeLang("bn-BD")}
+                      className={`flex-1 py-1.5 rounded-md  border border-zinc-200 ${
+                        i18n.language === "bn-BD"
+                          ? "bg-yellow-400 text-black font-semibold"
+                          : ""
+                      }`}
                     >
-                      {t("auth_logout")}
+                      বাংলা
                     </button>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      onClick={() => setMenuOpen(!menuOpen)}
-                      to="/signin"
-                      className="px-3 py-2 border border-zinc-500 rounded-md text-center"
+
+                    <button
+                      onClick={() => changeLang("en-US")}
+                      className={`flex-1 py-1.5 rounded-md border border-zinc-200  ${
+                        i18n.language === "en-US"
+                          ? "bg-yellow-400 text-black font-semibold"
+                          : ""
+                      }`}
                     >
-                      {t("auth_signin")}
-                    </Link>
-                    <Link
-                      onClick={() => setMenuOpen(!menuOpen)}
-                      to="/signup"
-                      className="px-3 py-2 border border-zinc-500 rounded-md text-center"
-                    >
-                      {t("auth_signup")}
-                    </Link>
-                  </>
-                )}
+                      English
+                    </button>
+                  </div>
+                </div>
+
+                {/* AUTH SECTION (ecommerce account box style) */}
+                <div className="border border-zinc-200  rounded-lg p-3 space-y-2 text-xs">
+                  {user ? (
+                    <>
+                      <p className=" text-gray-500">Account</p>
+
+                      {(user.role === "admin" || user.role === "moderator") && (
+                        <Link
+                          to="/admin"
+                          onClick={() => setMenuOpen(false)}
+                          className="block py-2 px-3 rounded-md hover:bg-gray-100"
+                        >
+                          {t("auth_dashboard")}
+                        </Link>
+                      )}
+
+                      <NavLink
+                        to="/profile"
+                        onClick={() => setMenuOpen(false)}
+                        className={({ isActive }) =>
+                          `block px-4 py-1.5 rounded-sm  transition text-sm ${
+                            isActive
+                              ? "bg-yellow-400 text-black font-semibold"
+                              : "hover:bg-gray-100 "
+                          }`
+                        }
+                      >
+                        {t("auth_profile")}
+                      </NavLink>
+
+                      <button
+                        onClick={() => {
+                          setLogoutOpen(true);
+                          setMenuOpen(false);
+                        }}
+                        className="w-full py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
+                      >
+                        {t("auth_logout")}
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-sm text-gray-500">Account</p>
+
+                      <NavLink
+                        to="/signin"
+                        onClick={() => setMenuOpen(false)}
+                        className={({ isActive }) =>
+                          `block px-4 py-1.5 rounded-sm  transition text-sm ${
+                            isActive
+                              ? "bg-yellow-400 text-black font-semibold"
+                              : "hover:bg-gray-100 "
+                          }`
+                        }
+                      >
+                        {t("auth_signin")}
+                      </NavLink>
+
+                      <NavLink
+                        to="/signup"
+                        onClick={() => setMenuOpen(false)}
+                        className={({ isActive }) =>
+                          `block px-4 py-1.5 rounded-sm  transition text-sm ${
+                            isActive
+                              ? "bg-yellow-400 text-black font-semibold"
+                              : "hover:bg-gray-100 "
+                          }`
+                        }
+                      >
+                        {t("auth_signup")}
+                      </NavLink>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

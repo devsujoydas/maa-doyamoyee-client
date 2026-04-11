@@ -17,8 +17,8 @@ import { useAuth } from "../AuthProvider/authProvider";
 
 const SidebarContent = ({ collapsed, toggleCollapsed }) => {
   const location = useLocation();
- 
-   const { user ,logout} = useAuth();
+
+  const { user, logout } = useAuth();
 
   return (
     <motion.aside
@@ -94,7 +94,6 @@ const SidebarContent = ({ collapsed, toggleCollapsed }) => {
               <Bell size={18} />
               {!collapsed && "Notice"}
             </Link>
-            
 
             <Link
               to={"/admin/gallery"}
@@ -112,19 +111,6 @@ const SidebarContent = ({ collapsed, toggleCollapsed }) => {
         )}
 
         <Link
-              to={"/admin/messages"}
-              title={"Messages"}
-              className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
-                location.pathname === "/admin/messages"
-                  ? "bg-black text-white"
-                  : " hover:bg-black/10"
-              } ${collapsed ? "justify-center" : ""}`}
-            >
-              <Bell size={18} />
-              {!collapsed && "Messages"}
-            </Link>
-
-        <Link
           to={"/admin/events"}
           title={"Event"}
           className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
@@ -135,6 +121,19 @@ const SidebarContent = ({ collapsed, toggleCollapsed }) => {
         >
           <Calendar size={18} />
           {!collapsed && "Event"}
+        </Link>
+
+        <Link
+          to={"/admin/messages"}
+          title={"Messages"}
+          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+            location.pathname === "/admin/messages"
+              ? "bg-black text-white"
+              : " hover:bg-black/10"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <Bell size={18} />
+          {!collapsed && "Messages"}
         </Link>
 
         <Link

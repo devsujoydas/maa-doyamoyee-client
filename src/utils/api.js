@@ -55,22 +55,18 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const { data } = await api.get(
-          "/auth/refresh",
-          { withCredentials: true },
-        );
+        const { data } = await api.get("/auth/refresh", {
+          withCredentials: true,
+        });
         const newToken = data.accessToken;
 
-        // save token
         localStorage.setItem("accessToken", newToken);
 
-        // update default header
+       
         api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
 
-        // run queued requests
         onRefreshed(newToken);
 
-        // 🔥 notify app (important)
         window.dispatchEvent(new Event("authUpdated"));
 
         return api(originalRequest);

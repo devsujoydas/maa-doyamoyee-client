@@ -8,7 +8,7 @@ import DataNotFound from "../../components/resuable/DataNotFound";
 import { useTranslation } from "react-i18next";
 
 const EventsPage = () => {
-  const { events } = useEvents();
+  const { events, isLoading } = useEvents();
   const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState("All");
 
@@ -32,7 +32,7 @@ const EventsPage = () => {
         <PageHeading section="events" />
 
         {!filteredItems.length > 0 ? (
-          <DataNotFound name={"events"} />
+          <DataNotFound name={"events"} isLoading={isLoading} />
         ) : (
           <div>
             {/* Filter Buttons */}

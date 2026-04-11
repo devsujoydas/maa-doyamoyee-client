@@ -6,9 +6,10 @@ import DonationPreviewModal from "../../components/modals/DonationPreviewModal";
 import { motion } from "framer-motion";
 import { Edit2, Eye } from "lucide-react";
 import { formatDateDynamic, formatDateEnglish } from "../../utils/formatDateDynamic";
+import LoadingSpinner from "../../components/resuable/loadingSpinner";
 
 const AdminDonations = () => {
-  const { donations = [], deleteDonation, updateStatus } = useDonations();
+  const { donations = [], isLoading, updateStatus } = useDonations();
   const [selected, setSelected] = useState(null);
   const [filter, setFilter] = useState("all");
 
@@ -90,6 +91,9 @@ const AdminDonations = () => {
         transition={{ duration: 0.3 }}
         className="overflow-x-auto bg-white shadow rounded-lg"
       >
+          {isLoading ? (
+          <LoadingSpinner />
+        ) : (
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100 sticky top-0 z-10">
             <tr className="text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -168,6 +172,7 @@ const AdminDonations = () => {
             ))}
           </tbody>
         </table>
+      ) }
       </motion.div>
 
       {/* MODAL */}

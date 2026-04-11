@@ -20,7 +20,7 @@ const MainLayout = () => {
   }, [i18n.language]);
 
   return (
-    <div className="relative">
+    <div className="">
       <MusicPlayer open={open} setOpen={setOpen} />
       <LogoutModal isOpen={logoutOpen} onClose={() => setLogoutOpen(false)} />
       <Header setLogoutOpen={setLogoutOpen}/>

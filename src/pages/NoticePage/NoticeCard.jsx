@@ -31,7 +31,7 @@ const NoticeCard = ({ notice, onPreview }) => {
         <div className="flex flex-wrap gap-2">
           {notice.eventDate && (
             <span className="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full flex items-center gap-1">
-              <Calendar size={12} /> {formatDateDynamic(notice.eventDate)}
+              📅 {formatDateDynamic(notice.eventDate)}
             </span>
           )}
 

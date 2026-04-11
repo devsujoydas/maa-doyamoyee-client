@@ -53,12 +53,10 @@ const Contact = () => {
       <div className="custom-container">
         <PageHeading section="contact" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12  items-start max-w-7xl mx-auto">
-
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12  items-start max-w-352.5 mx-auto">
           {/* LEFT SIDE */}
           <div className="space-y-6">
-            <motion.div className="space-y-6">
-
+            <motion.div className="space-y-4">
               {/* EMAIL */}
               <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
                 <Mail className="w-6 h-6 text-yellow-600" />
@@ -71,20 +69,37 @@ const Contact = () => {
                   </p>
                 </div>
               </div>
-
-              {/* PHONE */}
-              <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
-                <PhoneCall className="w-6 h-6 text-yellow-600" />
-                <div>
-                  <h4 className="text-sm text-gray-600">
-                    {t("contact_phone")}
-                  </h4>
-                  <p className="text-gray-900 font-medium">
-                    {t("footer_contact_phone")}
-                  </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* PHONE */}
+                <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
+                  <PhoneCall className="w-6 h-6 text-yellow-600" />
+                  <div>
+                    <h4 className="text-sm text-gray-600">
+                      {t("contact_phone")}
+                    </h4>
+                    <p className="text-gray-900 font-medium">
+                      +880 1711-975862
+                    </p>
+                    <p className="text-gray-900 font-medium">
+                      শ্রী সিদ্ধার্থ শংকর রায় (সভাপতি)
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
+                  <PhoneCall className="w-6 h-6 text-yellow-600" />
+                  <div>
+                    <h4 className="text-sm text-gray-600">
+                      {t("contact_phone")}
+                    </h4>
+                    <p className="text-gray-900 font-medium">
+                      +880 1711-645044
+                    </p>
+                    <p className="text-gray-900 font-medium">
+                      শ্রী রঞ্জন কুমার সিংহ (সাধারণ সম্পাদক)
+                    </p>
+                  </div>
                 </div>
               </div>
-
               {/* ADDRESS */}
               <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
                 <MapPin className="w-6 h-6 text-yellow-600" />
@@ -97,7 +112,6 @@ const Contact = () => {
                   </p>
                 </div>
               </div>
-
             </motion.div>
 
             {/* MAP */}
@@ -115,13 +129,11 @@ const Contact = () => {
 
           {/* RIGHT FORM */}
           <motion.div className="bg-white/30 backdrop-blur-xl p-8 rounded-3xl shadow-xl border border-white/30">
-
             <h3 className="text-2xl font-bold text-center mb-6">
               {t("send_message")}
             </h3>
 
             <form className="space-y-5" onSubmit={handleSubmit}>
-
               {/* NAME */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">
@@ -188,7 +200,6 @@ const Contact = () => {
               >
                 {sending ? t("sending") : t("submit")}
               </button>
-
             </form>
           </motion.div>
         </div>

@@ -119,7 +119,7 @@ const PersonalInfo = () => {
       >
         <form onSubmit={handleUpdateProfile} className="space-y-6">
           {/* BASIC */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-2 gap-5">
             <div>
               <label className={labelClass}>{t("name")}</label>
               <input
@@ -142,7 +142,7 @@ const PersonalInfo = () => {
               />
             </div>
 
-            <div className="md:col-span-2">
+            <div className="col-span-2">
               <label className={labelClass}>{t("bio")}</label>
               <input
                 name="bio"
@@ -158,7 +158,7 @@ const PersonalInfo = () => {
           <div>
             <h2 className={sectionTitle}>{t("address_info")}</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-4">
+            <div className="grid grid-cols-3 gap-5 mt-4">
               <div>
                 <label className={labelClass}>{t("address")}</label>
                 <input
@@ -203,7 +203,7 @@ const PersonalInfo = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+            <div className="grid grid-cols-2 gap-5 mt-5">
               <div>
                 <label className={labelClass}>{t("country")}</label>
 
@@ -243,7 +243,7 @@ const PersonalInfo = () => {
           <div>
             <h2 className={sectionTitle}>{t("contacts")}</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
               <div>
                 <label className={labelClass}>{t("phone")}</label>
 
@@ -274,7 +274,7 @@ const PersonalInfo = () => {
                   className={inputClass}
                 />
               </div>
-              <div>
+              <div className="md:col-span-1 col-span-2">
                 <label className={labelClass}>{t("facebook")}</label>
 
                 <input

@@ -5,9 +5,8 @@ import useBlogs from "../../hooks/useBlogs";
 import { useTranslation } from "react-i18next";
 import DataNotFound from "../../components/resuable/DataNotFound";
 
-
 const BlogsPage = () => {
-  const { blogs = [] } = useBlogs();
+  const { blogs = [], isLoading } = useBlogs();
   const { t } = useTranslation();
 
   const approvedBlogs = blogs.filter((b) => b.status === "approved");
@@ -21,7 +20,7 @@ const BlogsPage = () => {
         <PageHeading section="blogs" />
 
         {approvedBlogs.length === 0 ? (
-           <DataNotFound name={"blogs"} />
+          <DataNotFound name={"blogs"} isLoading={isLoading} />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 ">
             {approvedBlogs.map((blog, idx) => (

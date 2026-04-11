@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import DataNotFound from "../../components/resuable/DataNotFound";
 
 const GalleryPage = () => {
-  const { gallery } = useGallery();
+  const { gallery, isLoading } = useGallery();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -21,7 +21,6 @@ const GalleryPage = () => {
     .filter((img) => !img.eventDate)
     .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
- 
   return (
     <div className="relative">
       {/* Background blobs */}
@@ -31,7 +30,7 @@ const GalleryPage = () => {
       <div className="custom-container">
         <PageHeading section="gallery" />
         {!gallery.length > 0 ? (
-          <DataNotFound name={"events"} />
+          <DataNotFound name={"events"} isLoading={isLoading} />
         ) : (
           <div>
             {/* New Images */}

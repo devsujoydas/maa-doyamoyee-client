@@ -9,7 +9,7 @@ import DataNotFound from "../../components/resuable/DataNotFound";
 
 const UpcomingEvents = () => {
   const { t } = useTranslation();
-  const { events } = useEvents(); // get all events from hook
+  const { events, isLoading } = useEvents(); // get all events from hook
 
   const today = new Date();
 
@@ -30,9 +30,9 @@ const UpcomingEvents = () => {
 
         {/* Events Grid */}
         {!upcomingEvents.length > 0 ? (
-           <DataNotFound name={"events"} />
+          <DataNotFound name={"events"} isLoading={isLoading} />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
             <AnimatePresence>
               {upcomingEvents.map((item) => (
                 <motion.div
@@ -63,7 +63,7 @@ const UpcomingEvents = () => {
                     {/* Info */}
                     <div className="absolute bottom-0 left-0 right-0 p-5 z-10 bg-linear-to-t from-black/70 to-transparent">
                       <div className="flex items-center gap-2 text-white text-sm mb-2">
-                        <HiCalendar /> {formatDateDynamic(item.eventDate)}
+                        📅 {formatDateDynamic(item.eventDate)}
                       </div>
                       <h5 className="text-xl md:text-2xl font-semibold text-white line-clamp-2">
                         {item.title}

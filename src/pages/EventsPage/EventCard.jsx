@@ -27,7 +27,7 @@ const EventCard = ({ item }) => {
 
                 <div className="absolute bottom-0 left-0 right-0 p-5 duration-300 z-10">
                     <div className="flex items-center gap-2 text-white text-sm text-primary mb-2">
-                        <HiCalendar /> {formatDateDynamic(item.eventDate)}
+                        📅 {formatDateDynamic(item.eventDate)}
                     </div>
                     <h5 className="text-xl md:text-2xl font-semibold text-white ">{item.title}</h5>
                     <p className="text-sm text-white line-clamp-3">{item.description}</p>

@@ -19,11 +19,11 @@ const About = () => {
           path="/history" 
         />
 
-        <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+        <div className="flex flex-col xl:flex-row items-center gap-12 lg:gap-20">
 
           {/* Temple Image */}
           <motion.div
-            className="md:w-1/2 rounded-3xl overflow-hidden shadow-2xl border-4 border-amber-200 hover:scale-105 transition-transform duration-500"
+            className="lg:w-1/2 w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-amber-200 hover:scale-105 transition-transform duration-500"
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -38,7 +38,7 @@ const About = () => {
 
           {/* Text Content */}
           <motion.div
-            className="md:w-1/2 space-y-6 md:space-y-8"
+            className="lg:w-1/2 w-full space-y-6 md:space-y-8"
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}

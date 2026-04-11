@@ -54,7 +54,7 @@ const AdminMessages = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Contact Messages</h1>
+      <h1 className="text-lg md:text-2xl  font-bold mb-6">Contact Messages</h1>
 
       {/* Search + Filter */}
       <div className="flex gap-3 mb-6">

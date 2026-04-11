@@ -132,7 +132,7 @@ const AdminOverview = () => {
         <select
           value={year}
           onChange={(e) => setYear(Number(e.target.value))}
-          className="border px-3 py-1 rounded"
+          className="border border-zinc-200 px-3 rounded"
         >
           <option value={2025}>2025</option>
           <option value={2026}>2026</option>

@@ -75,8 +75,8 @@ const EventDetailsPage = () => {
 
               {/* Date */}
               {event.eventDate && (
-                <p className="text-gray-500 mb-6">
-                  <FaCalendarAlt className="inline mr-2" />
+                <p className=" space-x-1 mb-2">
+                 📅
                   {formatDateDynamic(event.eventDate)}
                 </p>
               )}

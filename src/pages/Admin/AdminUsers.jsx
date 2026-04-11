@@ -14,11 +14,12 @@ import DeleteModal from "../../components/modals/DeleteModal";
 import { deleteUserByAdmin, changeUserRole } from "../../services/userService";
 
 import { useAuth } from "../../AuthProvider/authProvider";
+import LoadingSpinner from "../../components/resuable/loadingSpinner";
 
 const AdminUsers = () => {
   const { user: loggedInUser } = useAuth();
 
-  const { data: users = [] } = useUsers();
+  const { data: users = [], isLoading } = useUsers();
   const queryClient = useQueryClient();
 
   const [selectedUser, setSelectedUser] = useState(null);
@@ -80,7 +81,7 @@ const AdminUsers = () => {
     setViewOpen(true);
   };
 
-  console.log(users)
+  console.log(users);
   // =====================
   // RULES
   // =====================
@@ -88,7 +89,7 @@ const AdminUsers = () => {
 
   return (
     <div className="flex flex-col space-y-6">
-      <h1 className="text-2xl font-bold">Users Management ({users.length})</h1>
+      <h1 className="text-lg md:text-2xl  font-bold">Users Management ({users.length})</h1>
 
       {/* TABLE */}
       <motion.div
@@ -96,111 +97,116 @@ const AdminUsers = () => {
         animate={{ opacity: 1, y: 0 }}
         className="overflow-x-auto bg-white shadow rounded-lg"
       >
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-100 sticky top-0 z-10">
-            <tr className="text-xs font-medium text-gray-500 uppercase">
-              <th className="px-6 py-4 text-left">SL</th>
-              <th className="px-6 py-4 text-left">User</th>
-              <th className="px-6 py-4 text-left">Email</th>
-              <th className="px-6 py-4 text-left">Role</th>
-              <th className="px-6 py-4 text-left">Joined</th>
-              <th className="px-6 py-4 text-center">Actions</th>
-            </tr>
-          </thead>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-100 sticky top-0 z-10">
+              <tr className="text-xs font-medium text-gray-500 uppercase">
+                <th className="px-6 py-4 text-left">SL</th>
+                <th className="px-6 py-4 text-left">User</th>
+                <th className="px-6 py-4 text-left">Email</th>
+                <th className="px-6 py-4 text-left">Role</th>
+                <th className="px-6 py-4 text-left">Joined</th>
+                <th className="px-6 py-4 text-center">Actions</th>
+              </tr>
+            </thead>
 
-          <tbody className="divide-y divide-gray-200 text-sm">
-            {users.map((u, idx) => {
-              const isSelf = loggedInUser?._id === u._id;
+            <tbody className="divide-y divide-gray-200 text-sm">
+              {users.map((u, idx) => {
+                const isSelf = loggedInUser?._id === u._id;
 
-              return (
-                <tr
-                  key={u._id}
-                  className={`hover:bg-gray-50 ${isSelf ? "bg-blue-50" : ""}`}
-                >
-                  {/* SL */}
-                  <td className="px-6 py-4 text-gray-500">
-                    {idx + 1}
-                    {isSelf && (
-                      <span className="ml-2 text-xs text-blue-600">(You)</span>
-                    )}
-                  </td>
+                return (
+                  <tr
+                    key={u._id}
+                    className={`hover:bg-gray-50 ${isSelf ? "bg-blue-50" : ""}`}
+                  >
+                    {/* SL */}
+                    <td className="px-6 py-4 text-gray-500">
+                      {idx + 1}
+                      {isSelf && (
+                        <span className="ml-2 text-xs text-blue-600">
+                          (You)
+                        </span>
+                      )}
+                    </td>
 
-                  {/* USER */}
-                  <td className="px-6 py-4 flex items-center gap-3">
-                    <img
-                      src={u?.profileImage?.url}
-                      className="w-10 h-10 shadow-lg rounded-full"
-                      alt=""
-                    />
+                    {/* USER */}
+                    <td className="px-6 py-4 flex items-center gap-3">
+                      <img
+                        src={u?.profileImage?.url}
+                        className="w-10 h-10 shadow-lg rounded-full"
+                        alt=""
+                      />
 
-                    <div>
-                      <p className="flex items-center gap-1flex-nowrap">
-                       
-                        {u.name}
-                        {u.isVerified && (
-                          <MdVerified className="text-blue-500" />
-                        )} 
-                      </p>
-                      <p className="text-sm text-gray-500">@{u.username}</p>
-                    </div>
-                  </td>
+                      <div>
+                        <p className="flex items-center gap-1 flex-nowrap text-nowrap">
+                          {u.name}
+                          {u.isVerified && (
+                            <MdVerified className="text-blue-500" />
+                          )}
+                        </p>
+                        <p className="text-sm text-gray-500">@{u.username}</p>
+                      </div>
+                    </td>
 
-                  {/* EMAIL */}
-                  <td className="px-6 py-4">{u.email}</td>
+                    {/* EMAIL */}
+                    <td className="px-6 py-4">{u.email}</td>
 
-                  {/* ROLE */}
-                  <td className="px-6 py-4">
-                    {canChangeRole && !isSelf ? (
-                      <select
-                        value={u.role}
-                        onChange={(e) =>
-                          handleRoleChange(u._id, e.target.value)
-                        }
-                        className="border border-zinc-200 px-2 py-1 rounded outline-none"
-                        disabled={roleMutation.isLoading}
-                      >
-                        <option value="user">User</option>
-                        <option value="moderator">Moderator</option>
-                        <option value="admin">Admin</option>
-                      </select>
-                    ) : (
-                      <span className="font-medium text-gray-700 capitalize">
-                        {u.role}
-                      </span>
-                    )}
-                  </td>
+                    {/* ROLE */}
+                    <td className="px-6 py-4">
+                      {canChangeRole && !isSelf ? (
+                        <select
+                          value={u.role}
+                          onChange={(e) =>
+                            handleRoleChange(u._id, e.target.value)
+                          }
+                          className="border border-zinc-200 px-2 py-1 rounded outline-none"
+                          disabled={roleMutation.isLoading}
+                        >
+                          <option value="user">User</option>
+                          <option value="moderator">Moderator</option>
+                          <option value="admin">Admin</option>
+                        </select>
+                      ) : (
+                        <span className="font-medium text-gray-700 capitalize">
+                          {u.role}
+                        </span>
+                      )}
+                    </td>
 
-                  {/* JOINED */}
-                  <td className="px-6 py-4">
-                    {formatDateEnglish(u.createdAt)}
-                  </td>
+                    {/* JOINED */}
+                    <td className="px-6 py-4 text-nowrap">
+                      {formatDateEnglish(u.createdAt)}
+                    </td>
 
-                  {/* ACTIONS */}
-                  <td className="px-6 py-4 text-center space-x-2">
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      onClick={() => handleView(u)}
-                      className="text-blue-600"
-                    >
-                      <Eye size={18} />
-                    </motion.button>
-
-                    {/* DELETE (NO SELF DELETE) */}
-                    {u.role !== "admin" && u.role !== "ceo" && !isSelf && (
+                    {/* ACTIONS */}
+                    <td className="px-6 py-4 text-center space-x-2">
                       <motion.button
                         whileHover={{ scale: 1.2 }}
-                        onClick={() => handleDelete(u)}
-                        className="text-red-600"
+                        onClick={() => handleView(u)}
+                        className="text-blue-600"
                       >
-                        <Trash2 size={18} />
+                        <Eye size={18} />
                       </motion.button>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+
+                      {/* DELETE (NO SELF DELETE) */}
+                      {u.role !== "admin" && u.role !== "ceo" && !isSelf && (
+                        <motion.button
+                          whileHover={{ scale: 1.2 }}
+                          onClick={() => handleDelete(u)}
+                          className="text-red-600"
+                        >
+                          <Trash2 size={18} />
+                        </motion.button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </motion.div>
 
       {/* VIEW MODAL */}
