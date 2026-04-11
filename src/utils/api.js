@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: "https://maa-doyamoyee-server.vercel.app/api/v1",
+  // baseURL: "http://localhost:5000/api/v1",
   withCredentials: true,
 });
 
@@ -54,8 +55,8 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const { data } = await axios.get(
-          "http://localhost:5000/api/v1/auth/refresh",
+        const { data } = await api.get(
+          "/auth/refresh",
           { withCredentials: true },
         );
         const newToken = data.accessToken;

@@ -4,13 +4,14 @@ import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { FaFacebook, FaYoutube, FaGlobe, FaGithub } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
-import { Camera, LockIcon, LogOut, User, CheckCircle } from "lucide-react";
+import { Camera, LockIcon, LogOut, Trash2, User } from "lucide-react";
 import api from "../../utils/api";
 import UploadPhotoModal from "./UploadPhotoModal";
 import { useAuth } from "../../AuthProvider/authProvider";
 import { MdEmail, MdVerified } from "react-icons/md";
 import { useTranslation } from "react-i18next";
-
+import DeleteAccountModal from "../../components/modals/DeleteAccountModal";
+import LogoutModal from "../../components/modals/LogoutModal";
 
 const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
   const { t } = useTranslation();
@@ -18,6 +19,9 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
   const [photoType, setPhotoType] = useState("profile");
   const [photoModalOpen, setPhotoModalOpen] = useState(false);
   const { logout } = useAuth();
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [logoutOpen, setLogoutOpen] = useState(false);
+
   useEffect(() => {
     Fancybox.bind("[data-fancybox='profile-image']", {});
     return () => Fancybox.unbind("[data-fancybox='profile-image']");
@@ -35,7 +39,7 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
   const sendVerificationEmail = async () => {
     try {
       setVerifying(true);
-      const res = await api.post("/auth/send-verification");
+      const res = await api.post("/users/request");
       toast.success(res.data.message);
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to send verification");
@@ -51,7 +55,7 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
 
     const verifyToken = async () => {
       try {
-        const res = await api.get(`/auth/verify-email?token=${token}`);
+        const res = await api.get(`/users/verify?token=${token}`);
         toast.success(res.data.message);
         // Update user state immediately
         setUser((prev) => ({ ...prev, isVerified: true }));
@@ -159,21 +163,33 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
           )}
         </div>
 
-        {/* Bio */}
-        <p className="mt-4 text-gray-600 text-sm sm:text-base text-center leading-relaxed px-2">
-          {user?.bio}
-        </p>
-
-        {/* Address */}
-        {user?.addressInfo && (
-          <div className=" text-gray-700 text-xs sm:text-sm w-full text-center px-2 leading-relaxed">
-            {user?.addressInfo.address && (
-              <p>
-                <strong>Address:</strong> {user?.addressInfo?.address},{" "}
-                {user?.addressInfo?.city}, {user?.addressInfo?.state},{" "}
-                {user?.addressInfo?.postalCode}, {user?.addressInfo?.country}
+        {/* Bio (Premium Style) */}
+        {user?.bio && (
+          <div className="mt-4 w-full ">
+            <div className="relative py-2 px-3 rounded-2xl bg-linear-to-br from-gray-50 to-white border border-gray-100 shadow-sm text-sm">
+              <p className=" text-gray-500 ">
+                Bio: <p className=" text-gray-700 ">{user.bio}</p>
               </p>
-            )}
+            </div>
+          </div>
+        )}
+
+        {/* Address (Premium Card Style) */}
+        {user?.addressInfo.address && (
+          <div className="mt-3 w-full text-sm">
+            <div className="py-2 px-3 rounded-2xl bg-linear-to-br flex items-center justify-baseline gap-1 from-yellow-50 to-orange-50 border border-yellow-100 shadow-sm ">
+              <p className=" text-yellow-700 font-medium">Location:</p>
+
+              <p className=" text-gray-700 ">
+                {user?.addressInfo?.address && (
+                  <>
+                    {user.addressInfo.address}, {user.addressInfo.city},{" "}
+                    {user.addressInfo.state}, {user.addressInfo.postalCode},{" "}
+                    {user.addressInfo.country}
+                  </>
+                )}
+              </p>
+            </div>
           </div>
         )}
 
@@ -235,36 +251,56 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
         </div>
 
         {/* Tabs & Logout */}
-        <div className="w-full flex flex-col space-y-2 mt-5 border-zinc-200">
-          <hr className="text-zinc-200" />
-          <button
-            onClick={() => setActiveTab("personal")}
-            className={`md:px-4 px-3 py-2 md:py-3 rounded-md text-left flex items-center gap-2 transition-all cursor-pointer ${
-              activeTab === "personal" ? "bg-[#EDE9EA]" : "hover:bg-zinc-100"
-            }`}
-          >
-            <User /> {t("personal_information")}
-          </button>
-
-          <button
-            onClick={() => setActiveTab("security")}
-            className={`md:px-4 px-3 py-2 md:py-3 rounded-md text-left flex items-center gap-2  transition-all cursor-pointer ${
-              activeTab === "security" ? "bg-[#EDE9EA]" : "hover:bg-zinc-100"
-            }`}
-          >
-            <LockIcon />  {t("security_settings")}
-          </button>
-
+        <div className="w-full flex flex-col space-y-2 mt-5 border-zinc-200 text-sm">
           <hr className="text-zinc-200" />
 
-          <button
-            onClick={() => logout()}
-            className="md:px-4 px-3 py-2 md:py-3 rounded-lg text-left text-red-500 hover:bg-red-100 flex items-center gap-2 transition-all cursor-pointer"
-          >
-            <LogOut />{t("auth_logout")}
-          </button>
+          <div className="grid grid-cols-2 gap-5">
+            <button
+              onClick={() => setActiveTab("personal")}
+              className={`md:px-4 px-3 py-2 md:py-3 rounded-md text-left flex items-center gap-2 transition-all cursor-pointer ${
+                activeTab === "personal" ? "bg-[#EDE9EA]" : "hover:bg-zinc-100"
+              }`}
+            >
+              <User /> {t("personal_information")}
+            </button>
+
+            <button
+              onClick={() => setActiveTab("security")}
+              className={`md:px-4 px-3 py-2 md:py-3 rounded-md text-left flex items-center gap-2  transition-all cursor-pointer ${
+                activeTab === "security" ? "bg-[#EDE9EA]" : "hover:bg-zinc-100"
+              }`}
+            >
+              <LockIcon /> {t("security_settings")}
+            </button>
+          </div>
+
+          <hr className="text-zinc-200" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <button
+              onClick={() => setLogoutOpen(true)}
+              className="md:px-4 px-3 py-2 md:py-3 rounded-lg text-left text-red-500 hover:bg-red-100 flex items-center gap-2 transition-all cursor-pointer"
+            >
+              <LogOut />
+              {t("auth_logout")}
+            </button>
+            <button
+              onClick={() => setDeleteOpen(true)}
+              className="md:px-4 px-3 py-2 md:py-3 rounded-lg text-left text-red-500 hover:bg-red-100 flex items-center gap-2 transition-all cursor-pointer"
+            >
+              <Trash2 />
+              {t("delete_account.title")}
+            </button>
+          </div>
         </div>
       </div>
+
+      <LogoutModal isOpen={logoutOpen} onClose={() => setLogoutOpen(false)} />
+
+      <DeleteAccountModal
+        isOpen={deleteOpen}
+        onClose={() => setDeleteOpen(false)}
+        user={user}
+      />
 
       {/* Upload Modal */}
       <UploadPhotoModal

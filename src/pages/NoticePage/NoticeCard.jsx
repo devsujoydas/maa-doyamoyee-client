@@ -12,10 +12,10 @@ const NoticeCard = ({ notice, onPreview }) => {
       initial={{ opacity: 0, y: 5 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="border border-zinc-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition bg-white lang-bn-BD h-full flex flex-col justify-between"
+      className="border w-full h-full border-zinc-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition bg-white lang-bn-BD flex flex-col"
     >
       {/* Top Section */}
-      <div className="flex flex-col gap-3">
+       <div className="flex flex-col gap-3 flex-1">
         {/* Title + Pinned */}
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-2">
@@ -29,7 +29,6 @@ const NoticeCard = ({ notice, onPreview }) => {
 
         {/* Category + Event Date + Event Time */}
         <div className="flex flex-wrap gap-2">
-       
           {notice.eventDate && (
             <span className="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full flex items-center gap-1">
               <Calendar size={12} /> {formatDateDynamic(notice.eventDate)}
@@ -75,7 +74,7 @@ const NoticeCard = ({ notice, onPreview }) => {
 
             {notice.pdfUrl && (
               <a
-                href={notice.pdfUrl.replace("/view", "/preview")}
+                href={notice.pdfUrl.replace("/view", "/view")}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-1 text-sm bg-green-100 px-3 py-1 rounded-lg hover:bg-green-200 cursor-pointer"

@@ -1,5 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Play, Pause, SkipForward, SkipBack, Music, Volume2, X } from "lucide-react";
+import {
+  Play,
+  Pause,
+  SkipForward,
+  SkipBack,
+  Music,
+  Volume2,
+  X,
+} from "lucide-react";
 
 const songs = [
   { title: "Nacho Nacho", src: "/audio/nacho.mp3", icon: "🔱" },
@@ -80,7 +88,9 @@ const MusicPlayer = ({ open, setOpen }) => {
 
   const updateProgress = () => {
     if (!audioRef.current?.duration) return;
-    setProgress((audioRef.current.currentTime / audioRef.current.duration) * 100);
+    setProgress(
+      (audioRef.current.currentTime / audioRef.current.duration) * 100,
+    );
   };
 
   const seekSong = (e) => {
@@ -123,66 +133,73 @@ const MusicPlayer = ({ open, setOpen }) => {
       {open && (
         <div
           className="fixed bottom-20 right-4 md:right-6
-                     w-[92vw] sm:w-80 md:w-96
-                     bg-linear-to-br from-yellow-50 to-orange-100
-                     border-2 border-yellow-400
-                     shadow-2xl rounded-2xl p-4 z-50"
+               w-[92vw] sm:w-80 md:w-96
+               backdrop-blur-xl bg-white/70
+               border border-white/40
+               shadow-2xl rounded-3xl p-5 z-50
+               overflow-hidden"
         >
+          {/* Glow background */}
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-yellow-300/30 blur-3xl rounded-full"></div>
+          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-orange-300/20 blur-3xl rounded-full"></div>
+
           {/* Header */}
-          <div className="flex justify-between items-center mb-3">
-            <h3 className="font-semibold text-orange-800">🪔 Kali Bhakti Music</h3>
-            <button onClick={() => setOpen(false)}>
+          <div className="relative flex justify-between items-center mb-4">
+            <h3 className="font-semibold text-orange-800 text-sm tracking-wide">
+              🪔 Bhakti Music
+            </h3>
+            <button
+              onClick={() => setOpen(false)}
+              className="hover:rotate-90 transition"
+            >
               <X size={18} />
             </button>
           </div>
 
-          {/* OM Symbol */}
-          <div className="flex justify-center mb-3">
-            <div className={`text-5xl ${playing ? "animate-pulse" : ""}`}>ॐ</div>
+          {/* Center Visual */}
+          <div className="relative flex flex-col items-center mb-4">
+            <div
+              className={`text-5xl mb-2 transition ${
+                playing ? "animate-pulse" : ""
+              }`}
+            >
+              ॐ
+            </div>
+
+            <p className="text-xl">{currentSong.icon}</p>
+            <p className="text-sm font-medium text-gray-800 text-center">
+              {currentSong.title}
+            </p>
           </div>
 
-          {/* Song Icon & Title */}
-          <p className="text-center text-lg mb-1">{currentSong.icon}</p>
-          <p className="text-center text-sm font-medium text-orange-900 mb-2">
-            {currentSong.title}
-          </p>
-
-          {/* Equalizer */}
-          {playing && (
-            <div className="flex justify-center gap-1 mb-3">
-              <div className="w-1 h-4 bg-orange-500 animate-bounce"></div>
-              <div className="w-1 h-6 bg-orange-600 animate-bounce delay-75"></div>
-              <div className="w-1 h-3 bg-orange-500 animate-bounce delay-150"></div>
-              <div className="w-1 h-5 bg-orange-600 animate-bounce delay-200"></div>
-            </div>
-          )}
-
-          {/* Progress Bar */}
+          {/* Progress */}
           <input
             type="range"
             value={progress}
             onChange={seekSong}
-            className="w-full mb-3"
+            className="w-full accent-orange-500 mb-4"
           />
 
           {/* Controls */}
-          <div className="flex justify-center gap-4 mb-4">
-            <button onClick={prevSong}>
+          <div className="flex justify-center items-center gap-6 mb-4">
+            <button onClick={prevSong} className="hover:scale-110 transition">
               <SkipBack size={22} />
             </button>
+
             <button
               onClick={togglePlay}
-              className="bg-orange-500 text-white p-3 rounded-full shadow"
+              className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition"
             >
-              {playing ? <Pause size={20} /> : <Play size={20} />}
+              {playing ? <Pause size={22} /> : <Play size={22} />}
             </button>
-            <button onClick={nextSong}>
+
+            <button onClick={nextSong} className="hover:scale-110 transition">
               <SkipForward size={22} />
             </button>
           </div>
 
           {/* Volume */}
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-4">
             <Volume2 size={18} />
             <input
               type="range"
@@ -191,23 +208,26 @@ const MusicPlayer = ({ open, setOpen }) => {
               step="0.01"
               value={volume}
               onChange={changeVolume}
-              className="w-full"
+              className="w-full accent-orange-500"
             />
           </div>
 
           {/* Playlist */}
-          <div className="max-h-28 overflow-y-auto text-sm">
+          <div className="max-h-28 overflow-y-auto text-sm space-y-1 pr-1">
             {songs.map((song, index) => (
               <div
                 key={index}
                 onClick={() => selectSong(index)}
-                className={`cursor-pointer px-2 py-1 rounded ${
+                className={`cursor-pointer px-3 py-2 rounded-xl transition flex justify-between items-center ${
                   index === currentSongIndex
-                    ? "bg-orange-200 text-orange-800"
-                    : "hover:bg-orange-100"
+                    ? "bg-orange-100 text-orange-800 font-medium"
+                    : "hover:bg-orange-50"
                 }`}
               >
-                {song.icon} {song.title}
+                <span>
+                  {song.icon} {song.title}
+                </span>
+                {index === currentSongIndex && "🎵"}
               </div>
             ))}
           </div>

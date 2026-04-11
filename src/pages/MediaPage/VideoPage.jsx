@@ -41,7 +41,7 @@ const VideoPage = () => {
                 )}
  
                 {!loading && (
-                    <div className="columns-1 sm:columns-3 lg:columns-4 gap-6 space-y-6  mt-5 md:mt-8">
+                    <div className="columns-1 sm:columns-3 lg:columns-4 gap-6 space-y-6  ">
                         {videoUrls.map((video) => (
                             <VideoCard key={video.id} video={video} />
                         ))}

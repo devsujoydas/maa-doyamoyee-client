@@ -5,6 +5,7 @@ import { Autoplay } from "swiper/modules";
 import SectionHeading from "../../shared/SectionHeading";
 import { useTranslation } from "react-i18next";
 import useBlogs from "../../hooks/useBlogs";
+import DataNotFound from "../../components/resuable/DataNotFound";
 
 const BlogsSection = () => {
   const { t } = useTranslation();
@@ -24,18 +25,9 @@ const BlogsSection = () => {
         />
 
         <div className="mt-10">
-          {approvedBlogs.length === 0 ? (
-            // ✅ Empty state
-            <div className="flex flex-col items-center justify-center text-center py-10">
-              <h2 className="text-lg sm:text-xl font-semibold text-gray-700">
-                {t("noBlogs.title")}
-              </h2>
-              <p className="text-gray-500 mt-2 text-sm sm:text-base">
-                {t("noBlogs.subtitle")}
-              </p>
-            </div>
+          {!approvedBlogs.length > 0 ? (
+            <DataNotFound name={"blogs"} />
           ) : (
-            // ✅ Swiper only when blogs exist
             <Swiper
               slidesPerView={1}
               spaceBetween={20}
@@ -44,7 +36,7 @@ const BlogsSection = () => {
                 delay: 3000,
                 disableOnInteraction: false,
               }}
-              loop={approvedBlogs.length > 3} 
+              loop={approvedBlogs.length > 3}
               breakpoints={{
                 500: { slidesPerView: 1, spaceBetween: 10 },
                 765: { slidesPerView: 2, spaceBetween: 10 },
@@ -53,7 +45,7 @@ const BlogsSection = () => {
               className="rounded-md"
             >
               {approvedBlogs.map((blog, idx) => (
-                <SwiperSlide key={idx}>
+                <SwiperSlide key={idx} className="py-3">
                   <BlogCard type={"blog-section"} blog={blog} />
                 </SwiperSlide>
               ))}

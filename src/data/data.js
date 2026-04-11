@@ -154,6 +154,68 @@ export const membersData = [
   { sl_no: "১১৮", name: "শ্রী রতন কুমার বাড়ই" },
   { sl_no: "১১৯", name: "শ্রী নরেন্দ্র চন্দ্র লাহা" },
   { sl_no: "১২০", name: "শ্রী দেবদাস নিয়োগী" },
+
+  { sl_no: "১২১", name: "বীর মুক্তিযোদ্ধা শ্রী শংকর কর্মকার" },
+  { sl_no: "১২২", name: "শ্রী হৃদয় চক্রবর্তী" },
+  { sl_no: "১২৩", name: "শ্রী রাজীব সোম" },
+  { sl_no: "১২৪", name: "শ্রী রাজীব সিংহ সাহা" },
+  { sl_no: "১২৫", name: "শ্রী তন্ময় বসাক" },
+  { sl_no: "১২৬", name: "শ্রীমতি রীমা বসাক" },
+  { sl_no: "১২৭", name: "কৃষিবিদ শিশির কুমার সেন" },
+  { sl_no: "১২৮", name: "শ্রী জীবন কুমার সাহা" },
+  { sl_no: "১২৯", name: "শ্রী নারায়ণ চন্দ্র পাল" },
+  { sl_no: "১৩০", name: "শ্রী নুপুর কুমার দেব" },
+  { sl_no: "১৩১", name: "শ্রী সজীব সোম মানিক" },
+  { sl_no: "১৩২", name: "শ্রী জয়ন্ত দাস" },
+  { sl_no: "১৩৩", name: "স্নেহা তালুকদার" },
+  { sl_no: "১৩৪", name: "ললিতা রানী দাস" },
+  { sl_no: "১৩৫", name: "ভারতী রায়" },
+  { sl_no: "১৩৬", name: "শ্রী স্বপন কুমার হোড়" },
+  { sl_no: "১৩৭", name: "শ্রী স্বপন কুমার" },
+  { sl_no: "১৩৮", name: "শ্রী সঞ্জয় বসাক" },
+  { sl_no: "১৩৯", name: "শ্রী বিশ্বজিৎ সোম" },
+  { sl_no: "১৪০", name: "এড. স্বপন কুমার নাগ" },
+  { sl_no: "১৪১", name: "শ্রী রাজন দত্ত" },
+  { sl_no: "১৪২", name: "শ্রী গোবিন্দ চন্দ্র নাথ" },
+  { sl_no: "১৪৩", name: "শ্রী সুবীর বসাক" },
+  { sl_no: "১৪৪", name: "শ্রী দীপক কুমার সরকার" },
+  { sl_no: "১৪৫", name: "শ্রী সুনীল কুমার কর" },
+  { sl_no: "১৪৬", name: "শ্রী সুজন দেবনাথ" },
+  { sl_no: "১৪৭", name: "শ্রী খোকন কুমার নাগ" },
+  { sl_no: "১৪৮", name: "শ্রী উত্তম ভৌমিক" },
+  { sl_no: "১৪৯", name: "শ্রী সত্যজিৎ সরকার" },
+  { sl_no: "১৫০", name: "শ্রী তপন কুমার পাল" },
+
+  { sl_no: "১৫১", name: "শ্রী তপস্যা কর্মকার" },
+  { sl_no: "১৫২", name: "শ্রী রাজীব দে" },
+  { sl_no: "১৫৩", name: "শ্রীমতি শর্মিষ্ঠা চৌধুরী" },
+  { sl_no: "১৫৪", name: "শ্রী কল্লোল কুমার দেব" },
+  { sl_no: "১৫৫", name: "শ্রী শুভ বসাক" },
+  { sl_no: "১৫৬", name: "শ্রী সংগ্রাম দত্ত চৌধুরী" },
+  { sl_no: "১৫৭", name: "শ্রী গোবিন্দ চন্দ্র সাহা" },
+  { sl_no: "১৫৮", name: "শ্রী বিমান কুমার সাহা" },
+  { sl_no: "১৫৯", name: "শ্রী লিটন চন্দ্র সুত্রধর" },
+  { sl_no: "১৬০", name: "শ্রী তুষার দত্ত" },
+  { sl_no: "১৬১", name: "শ্রী কৃষ্ণ গোপাল সরকার" },
+  { sl_no: "১৬২", name: "শ্রী সন্তোষ বসাক" },
+  { sl_no: "১৬৩", name: "শ্রী বিজয় চক্রবর্তী" },
+  { sl_no: "১৬৪", name: "শ্রী দিপ্ত মুখার্জী" },
+  { sl_no: "১৬৫", name: "শ্রী রাজু দাস (রিপন)" },
+  { sl_no: "১৬৬", name: "শ্রী পার্থ প্রতিম আর্য্য" },
+  { sl_no: "১৬৭", name: "শ্রী সৌমজিৎ দত্ত টনি" },
+  { sl_no: "১৬৮", name: "শ্রী ধ্রুবজিৎ দত্ত টয়" },
+  { sl_no: "১৬৯", name: "শ্রী দেবজিৎ দত্ত" },
+  { sl_no: "১৭০", name: "শ্রী ঋষিজিৎ দত্ত টুবাই" },
+  { sl_no: "১৭১", name: "শ্রী অভিজিৎ দত্ত" },
+  { sl_no: "১৭২", name: "শ্রীমতি সরস্বতী রানী সিংহ" },
+  { sl_no: "১৭৩", name: "শ্রী রঞ্জন কুমার সিংহ" },
+  { sl_no: "১৭৪", name: "শ্রীমতি পলি সিংহ" },
+  { sl_no: "১৭৫", name: "শ্রী অঞ্জন কুমার সিংহ" },
+  { sl_no: "১৭৬", name: "শ্রীমতি ঝুনু রানি সিংহ" },
+  { sl_no: "১৭৭", name: "শ্রী মাধব সিংহ" },
+  { sl_no: "১৭৮", name: "শ্রী নারায়ণ চন্দ্র ভাদুড়ী" },
+  { sl_no: "১৭৯", name: "শ্রী গোপাল চন্দ্র নাথ" },
+  { sl_no: "১৮০", name: "শ্রী প্রকাশ চন্দ্র সাহা" },
 ];
 
 export const advisorsData = [
@@ -174,16 +236,19 @@ export const advisorsData = [
   { id: 15, name: "শ্রী নারায়ণ চন্দ্র দেব", address: "বোষপাড়া" },
 ];
 
-
-
-
 export const gallerySEO = {
   title: "Maa Doyamoyee Mandir Photo Gallery",
   alt: "Maa Doyamoyee Mandir temple images",
   location: "Maa Doyamoyee Mandir, Bangladesh",
 };
 
-export const galleryCategories = ["all", "temple", "interior", "idol","festival"];
+export const galleryCategories = [
+  "all",
+  "temple",
+  "interior",
+  "idol",
+  "festival",
+];
 
 export const galleryImages = [
   {
@@ -209,153 +274,178 @@ export const galleryImages = [
   },
   {
     id: "3",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582081/old1_image_3_v4qd6a.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582081/old1_image_3_v4qd6a.webp",
     place: "Temple Interior",
     category: "temple",
   },
   {
     id: "4",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582079/old1_image_4_zelupe.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582079/old1_image_4_zelupe.webp",
     place: "Temple Interior",
     category: "temple",
   },
   {
     id: "5",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582080/old1_image_5_gu1pym.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582080/old1_image_5_gu1pym.webp",
     place: "Temple Interior",
     category: "temple",
   },
   {
     id: "6",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582086/old1_image_6_uavr9a.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582086/old1_image_6_uavr9a.webp",
     place: "Temple Interior",
     category: "temple",
   },
   {
     id: "7",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582083/old1_image_7_ekswdr.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582083/old1_image_7_ekswdr.webp",
     place: "Temple Interior",
     category: "temple",
   },
   {
     id: "8",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582077/old1_image_8_ueyo19.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582077/old1_image_8_ueyo19.webp",
     place: "Temple Interior",
     categ8ory: "temple",
   },
   // new images from somoy tv bellow
   {
     id: "9",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582580/old2_image_1_bl7ibj.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582580/old2_image_1_bl7ibj.webp",
     place: "Temple Gate",
     category: "temple",
   },
   {
     id: "10",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582561/old2_image_2_vymksu.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582561/old2_image_2_vymksu.webp",
     place: "Temple Gate",
     category: "temple",
   },
   {
     id: "11",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582544/old_image_2_nsimft.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582544/old_image_2_nsimft.webp",
     place: "Temple Dron View",
     category: "temple",
   },
   {
     id: "12",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582556/old_image_4_mbehad.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582556/old_image_4_mbehad.webp",
     place: "Temple Dron View",
     category: "temple",
   },
   {
     id: "13",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582554/old_image_3_ov9u1f.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582554/old_image_3_ov9u1f.webp",
     place: "Temple Dron View",
     category: "temple",
   },
   {
     id: "14",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582550/old_image_5_gbxnyh.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582550/old_image_5_gbxnyh.webp",
     place: "Temple Gate",
     category: "temple",
   },
   {
     id: "15",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582545/old_image_6_orrnvp.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582545/old_image_6_orrnvp.webp",
     place: "Temple Interior",
     category: "temple",
   },
   {
     id: "16",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582574/old_image_7_e0wacz.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582574/old_image_7_e0wacz.webp",
     place: "Temple Interior",
     category: "temple",
   },
   {
     id: "17",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582578/old_image_8_ecu73u.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582578/old_image_8_ecu73u.webp",
     place: "Temple Interior",
     category: "idol",
   },
   {
     id: "18",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582547/old_image_9_qz5tpp.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582547/old_image_9_qz5tpp.webp",
     place: "Temple Interior",
     category: "temple",
   },
   {
     id: "19",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582558/old_image_10_dkgodc.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582558/old_image_10_dkgodc.webp",
     place: "Temple Interior",
     category: "temple",
   },
   {
     id: "20",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582576/old_image_11_dknver.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582576/old_image_11_dknver.webp",
     place: "Temple Interior",
     category: "temple",
   },
   {
     id: "21",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582559/old_image_12_r8dpl9.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582559/old_image_12_r8dpl9.webp",
     place: "Temple Interior",
     category: "",
   },
   {
     id: "21",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582542/image43_vhhbfk.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582542/image43_vhhbfk.webp",
     place: "Temple idol",
     category: "idol",
   },
- 
+
   {
     id: "21",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582540/image40_ajsmc3.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582540/image40_ajsmc3.webp",
     place: "Temple idol",
     category: "",
   },
   {
     id: "fsdf21",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773583586/image38_p0mylr.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773583586/image38_p0mylr.webp",
     place: "Temple idol",
     category: "idol",
   },
   {
     id: "fa21",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773583585/image39_sf3jl4.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773583585/image39_sf3jl4.webp",
     place: "Temple idol",
     category: "idol",
   },
-   {
+  {
     id: "21",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582582/image4_v0plqg.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773582582/image4_v0plqg.webp",
     place: "Temple idol",
     category: "",
   },
   {
     id: "2affs1",
-    imgUrl: "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773583584/image41_szrofi.webp",
+    imgUrl:
+      "https://res.cloudinary.com/dpdsgroa7/image/upload/v1773583584/image41_szrofi.webp",
     place: "Temple idol",
     category: "idol",
   },

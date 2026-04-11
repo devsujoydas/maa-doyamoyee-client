@@ -5,12 +5,12 @@ import { useTranslation } from "react-i18next";
 import PreviewModal from "./PreviewModal";
 import NoticeCard from "./NoticeCard";
 import useNotices from "../../hooks/useNotices";
+import DataNotFound from "../../components/resuable/DataNotFound";
 
 const NoticePage = () => {
   const { t } = useTranslation();
   const { notices } = useNotices();
   const [previewNotice, setPreviewNotice] = useState(null);
-
 
   // Filter active notices
   const activeNotices = notices?.filter((n) => n.active === true) || [];
@@ -25,21 +25,20 @@ const NoticePage = () => {
         <PageHeading section="notice" />
 
         {/* Notices Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 h-full">
-          {activeNotices.length > 0 ? (
-            activeNotices.map((notice) => (
-              <NoticeCard
-                key={notice._id}
-                notice={notice}
-                onPreview={(n) => setPreviewNotice(n)}
-              />
-            ))
-          ) : (
-            <p className="text-center col-span-full text-gray-500">
-              {t("no_notice")}
-            </p>
-          )}
-        </div>
+        {!notices.length > 0 ? (
+          <DataNotFound name={"notices"} />
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
+            {activeNotices.length > 0 &&
+              activeNotices.map((notice) => (
+                <NoticeCard
+                  key={notice._id}
+                  notice={notice}
+                  onPreview={(n) => setPreviewNotice(n)}
+                />
+              ))}
+          </div>
+        )}
       </div>
 
       {/* Preview Modal */}

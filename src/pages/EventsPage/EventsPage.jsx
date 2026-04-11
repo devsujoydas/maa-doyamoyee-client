@@ -4,12 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import PageHeading from "../../shared/PageHeading";
 import EventCard from "./EventCard";
 import useEvents from "../../hooks/useEvents";
+import DataNotFound from "../../components/resuable/DataNotFound";
+import { useTranslation } from "react-i18next";
 
 const EventsPage = () => {
   const { events } = useEvents();
+  const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const filters = ["All", "Upcoming", "Past Events"];
   const today = new Date();
 
   // Ensure consistent event date key: use eventDate
@@ -17,8 +19,8 @@ const EventsPage = () => {
     activeFilter === "All"
       ? events
       : activeFilter === "Upcoming"
-      ? events.filter((item) => new Date(item.eventDate) >= today)
-      : events.filter((item) => new Date(item.eventDate) < today);
+        ? events.filter((item) => new Date(item?.eventDate) >= today)
+        : events.filter((item) => new Date(item?.eventDate) < today);
 
   return (
     <div className="relative">
@@ -29,43 +31,63 @@ const EventsPage = () => {
       <div className="custom-container">
         <PageHeading section="events" />
 
-        {/* Filter Buttons */}
-        <div className="flex flex-col md:flex-row justify-center items-center mb-6 md:mb-8">
-          <div className="flex gap-2">
-            {filters.map((filter) => (
-              <button
-                key={filter}
-                className={`md:px-4 px-2 md:py-2 py-1 border-b-2 transition-all font-semibold cursor-pointer ${
-                  activeFilter === filter
-                    ? "border-[#DB4242] text-[#DB4242]"
-                    : "border-b-transparent hover:text-[#DB4242]"
-                }`}
-                onClick={() => setActiveFilter(filter)}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Grid Gallery */}
-        {events.length === 0 ? (
-          <p className="text-center text-gray-500 py-20">No events found.</p>
+        {!filteredItems.length > 0 ? (
+          <DataNotFound name={"events"} />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
-            <AnimatePresence>
-              {filteredItems.map((item) => (
-                <motion.div
-                  key={item._id}
-                  layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
+          <div>
+            {/* Filter Buttons */}
+            <div className="flex flex-col md:flex-row justify-center items-center mb-6 md:mb-7">
+              <div className="flex gap-2">
+                <button
+                  className={`md:px-4 px-2 md:py-2 py-1 border-b-2 transition-all font-semibold cursor-pointer ${
+                    activeFilter === "All"
+                      ? "border-[#DB4242] text-[#DB4242]"
+                      : "border-b-transparent hover:text-[#DB4242]"
+                  }`}
+                  onClick={() => setActiveFilter("All")}
                 >
-                  <EventCard item={item} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
+                  {t("event_filters.all")}
+                </button>
+                <button
+                  className={`md:px-4 px-2 md:py-2 py-1 border-b-2 transition-all font-semibold cursor-pointer ${
+                    activeFilter === "Upcoming"
+                      ? "border-[#DB4242] text-[#DB4242]"
+                      : "border-b-transparent hover:text-[#DB4242]"
+                  }`}
+                  onClick={() => setActiveFilter("Upcoming")}
+                >
+                  {t("event_filters.upcoming")}
+                </button>
+                <button
+                  className={`md:px-4 px-2 md:py-2 py-1 border-b-2 transition-all font-semibold cursor-pointer ${
+                    activeFilter === "Past Events"
+                      ? "border-[#DB4242] text-[#DB4242]"
+                      : "border-b-transparent hover:text-[#DB4242]"
+                  }`}
+                  onClick={() => setActiveFilter("Past Events")}
+                >
+                  {t("event_filters.past")}
+                </button>
+              </div>
+            </div>
+
+            {/* Grid Gallery */}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+              <AnimatePresence>
+                {filteredItems.map((item) => (
+                  <motion.div
+                    key={item._id}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                  >
+                    <EventCard item={item} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
           </div>
         )}
       </div>

@@ -17,7 +17,7 @@ const MembersPage = () => {
           shortdesc={t("member_shortdesc", { count: membersData.length })}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 my-10 lang-bn-BD">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lang-bn-BD">
           {membersData.map((member, index) => (
             <motion.div
               key={member.sl_no}
@@ -35,7 +35,7 @@ const MembersPage = () => {
               ></div>
 
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-linear-to-r from-yellow-500 to-red-700 text-white px-2 sm:px-4 py-1 rounded-full text-xs">
-                আজীবন সদস্য
+                {member.sl_no}
               </div>
 
               <h3 className="mt-3 text-sm sm:text-base md:text-lg font-semibold text-gray-800 ">

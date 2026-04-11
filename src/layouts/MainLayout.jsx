@@ -5,10 +5,12 @@ import Footer from "../components/Footer";
 import { Toaster } from "react-hot-toast";
 import MusicPlayer from "../components/MusicPlayer";
 import { useTranslation } from "react-i18next";
+import LogoutModal from "../components/modals/LogoutModal";
 
 const MainLayout = () => {
   const { i18n } = useTranslation();
   const [open, setOpen] = useState(false);
+  const [logoutOpen, setLogoutOpen] = useState(false);
 
   useEffect(() => {
     const currentLang = i18n.language;
@@ -20,8 +22,9 @@ const MainLayout = () => {
   return (
     <div className="relative">
       <MusicPlayer open={open} setOpen={setOpen} />
-      <Header />
-      <Toaster position="top-right" />
+      <LogoutModal isOpen={logoutOpen} onClose={() => setLogoutOpen(false)} />
+      <Header setLogoutOpen={setLogoutOpen}/>
+      <Toaster position="bottom-center" />
       <Outlet />
       <Footer />
     </div>

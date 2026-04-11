@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       const { data } = await api.get("/users/profile");
-    
+
       // 🔥 check response shape
       setUser(data.user || data);
     } catch (err) {
@@ -52,10 +52,21 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       const res = await api.post("/auth/logout");
-  
-      toast.success(res.data.message);
     } catch (err) {
       console.error("Logout error:", err);
+    } finally {
+      setUser(null);
+      localStorage.removeItem("accessToken");
+    }
+  };
+
+  const deleteProfile = async () => {
+    try {
+      const res = await api.delete("/profile");
+
+      toast.success(res.data.message);
+    } catch (err) {
+      console.error("Delete Proile:", err);
     } finally {
       setUser(null);
       localStorage.removeItem("accessToken");
@@ -67,6 +78,7 @@ export const AuthProvider = ({ children }) => {
     setUser,
     loading,
     logout,
+    deleteProfile,
     refreshUser: fetchUser,
   };
 

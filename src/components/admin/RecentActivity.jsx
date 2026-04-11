@@ -1,14 +1,20 @@
 const RecentActivity = ({ users, blogs, events, notices }) => {
   const activities = [
     ...users.map((u) => ({
-      text: `New user joined: ${u.name}`,
-      date: u.joinedAt,
+      text: `New user: ${u.name}`,
+      date: u.createdAt,
     })),
-    ...blogs.map((b) => ({ text: `Blog published: ${b.title}`, date: b.date })),
-    ...events.map((e) => ({ text: `Event created: ${e.title}`, date: e.date })),
+    ...blogs.map((b) => ({
+      text: `Blog: ${b.title}`,
+      date: b.createdAt,
+    })),
+    ...events.map((e) => ({
+      text: `Event: ${e.title}`,
+      date: e.createdAt,
+    })),
     ...notices.map((n) => ({
       text: `Notice: ${n.title}`,
-      date: n.publishDate,
+      date: n.createdAt,
     })),
   ];
 
@@ -19,6 +25,7 @@ const RecentActivity = ({ users, blogs, events, notices }) => {
   return (
     <div className="bg-white p-6 rounded-xl shadow">
       <h3 className="font-semibold mb-4">Recent Activity</h3>
+
       {sorted.map((a, i) => (
         <p key={i} className="text-sm py-1">
           {a.text}
@@ -27,4 +34,5 @@ const RecentActivity = ({ users, blogs, events, notices }) => {
     </div>
   );
 };
+
 export default RecentActivity;

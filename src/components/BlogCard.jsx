@@ -9,7 +9,7 @@ import api from "../utils/api";
 import { useAuth } from "../AuthProvider/authProvider";
 import { Eye, MessageCircle, Share2, ThumbsUp } from "lucide-react";
 import toast from "react-hot-toast";
-import ShareModal from "../pages/BlogsPage/ShareModal";
+import { motion } from "framer-motion";
 
 const BlogCard = ({ blog, type }) => {
   const { t } = useTranslation();
@@ -18,7 +18,6 @@ const BlogCard = ({ blog, type }) => {
   const [author, setAuthor] = useState(null);
   const [loadingAuthor, setLoadingAuthor] = useState(false);
   const { user } = useAuth();
-
   const [reacts, setReacts] = useState(blog?.reacts || []);
   const [loading, setLoading] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
@@ -78,7 +77,12 @@ const BlogCard = ({ blog, type }) => {
   };
 
   return (
-    <div className="shadow-lg hover:shadow-xl transition-all border border-zinc-200 rounded-lg overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="shadow hover:shadow-lg transition-all border border-zinc-200 rounded-lg overflow-hidden"
+    >
       <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl p-3 transition-all duration-300 flex flex-col lang-bn-BD">
         {/* 🔹 Blog Image */}
         <div className="h-70 w-full overflow-hidden rounded-lg">
@@ -188,9 +192,7 @@ const BlogCard = ({ blog, type }) => {
                       {blog?.author?.name}
                     </span>
                   ) : (
-                    <span
-                      className="text-[#DB4242] hover:text-[#44233B] transition-all cursor-pointer font-medium"
-                    >
+                    <span className="text-[#DB4242] hover:text-[#44233B] transition-all cursor-pointer font-medium">
                       {blog?.author?.name}
                     </span>
                   )}
@@ -214,14 +216,7 @@ const BlogCard = ({ blog, type }) => {
         setOpen={setViewModalOpen}
         user={author}
       />
-
-      {/* <ShareModal
-        isOpen={shareOpen}
-        onClose={() => setShareOpen(false)}
-        url={shareUrl}
-        title={blog?.title}
-      /> */}
-    </div>
+    </motion.div>
   );
 };
 

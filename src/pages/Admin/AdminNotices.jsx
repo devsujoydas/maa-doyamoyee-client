@@ -8,7 +8,7 @@ import NoticeViewModal from "../../components/modals/NoticeViewModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import { HiTrash } from "react-icons/hi";
 import { Edit2, Eye, Plus } from "lucide-react";
-import { formatDateDynamic } from "../../utils/formatDateDynamic";
+import { formatDateDynamic, formatDateEnglish } from "../../utils/formatDateDynamic";
 import PreviewModal from "../NoticePage/PreviewModal";
 
 const AdminNotices = () => {
@@ -54,13 +54,8 @@ const AdminNotices = () => {
     <div className="flex flex-col space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h1>
-          <span className="text-lg md:text-2xl font-bold">
-            Notice Management{" "}
-          </span>
-          <span className="border rounded-full px-3 font-semibold text-sm md:text-lg ">
-            {notices?.length}
-          </span>
+        <h1 className="text-2xl font-bold">
+          Notices Management ({notices.length})
         </h1>
 
         <button
@@ -103,10 +98,10 @@ const AdminNotices = () => {
                   {n.title}
                 </td>
                 <td className="px-6 py-4 text-gray-900 text-nowrap">
-                  {formatDateDynamic(n.createdAt)}
+                  {formatDateEnglish(n.createdAt)}
                 </td>
                 <td className="px-6 py-4 text-gray-900 text-nowrap">
-                  {formatDateDynamic(n.eventDate)}
+                  {formatDateEnglish(n.eventDate)}
                 </td>
                 <td className="px-6 py-4 text-gray-900">{n.eventTime}</td>
 

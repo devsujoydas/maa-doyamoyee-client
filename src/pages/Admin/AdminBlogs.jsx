@@ -6,7 +6,7 @@ import { HiTrash } from "react-icons/hi";
 import { Eye, Plus, Edit2 } from "lucide-react";
 
 import SEOHead from "../../components/SEOHead";
-import { formatDynamicDate } from "../../utils/formatDateDynamic";
+import { formatDateEnglish, formatDynamicDate } from "../../utils/formatDateDynamic";
 
 import BlogViewModal from "../../components/modals/BlogViewModal";
 import DeleteModal from "../../components/modals/DeleteModal";
@@ -14,7 +14,7 @@ import BlogFormModal from "../../components/modals/BlogFormModal";
 import useBlogs from "../../hooks/useBlogs";
 
 const AdminBlogs = () => {
-  const { blogs = [], createOrUpdate, deleteBlog } = useBlogs();
+  const { blogs = [], deleteBlog } = useBlogs();
   const [selectedBlog, setSelectedBlog] = useState(null);
 
   const [viewModalOpen, setViewModalOpen] = useState(false);
@@ -45,20 +45,6 @@ const AdminBlogs = () => {
     }
   };
 
-  const handleFormSubmit = async (formData) => {
-    try {
-      await createOrUpdate.mutateAsync({ id: selectedBlog?._id, formData });
-      toast.success(
-        selectedBlog?._id
-          ? "Blog updated successfully"
-          : "Blog created successfully",
-      );
-      setFormModalOpen(false);
-    } catch {
-      toast.error("Operation failed");
-    }
-  };
-
   return (
     <div className="flex flex-col space-y-6 ">
       <SEOHead
@@ -68,13 +54,8 @@ const AdminBlogs = () => {
       />
 
       <div className="flex justify-between items-center">
-        <h1>
-          <span className="text-lg md:text-2xl font-bold">
-            Blogs Management{" "}
-          </span>
-          <span className="border rounded-full px-3 font-semibold text-sm md:text-lg ">
-            {blogs?.length}
-          </span>
+        <h1 className="text-2xl font-bold">
+          Blogs Management ({blogs.length})
         </h1>
 
         <button className="btn-primary" onClick={() => openFormModal(null)}>
@@ -124,7 +105,7 @@ const AdminBlogs = () => {
                   {post.commentCount || 0}
                 </td>
                 <td className="px-6 py-4 text-gray-500 text-nowrap">
-                  {formatDynamicDate(post.createdAt)}
+                  {formatDateEnglish(post.createdAt)}
                 </td>
                 <td className="px-6 py-4 text-xs">
                   <span

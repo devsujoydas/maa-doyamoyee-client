@@ -53,14 +53,14 @@ const Contact = () => {
       <div className="custom-container">
         <PageHeading section="contact" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12 items-start max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12  items-start max-w-7xl mx-auto">
 
           {/* LEFT SIDE */}
           <div className="space-y-6">
             <motion.div className="space-y-6">
 
               {/* EMAIL */}
-              <div className="flex items-center gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
+              <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
                 <Mail className="w-6 h-6 text-yellow-600" />
                 <div>
                   <h4 className="text-sm text-gray-600">
@@ -73,7 +73,7 @@ const Contact = () => {
               </div>
 
               {/* PHONE */}
-              <div className="flex items-center gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
+              <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
                 <PhoneCall className="w-6 h-6 text-yellow-600" />
                 <div>
                   <h4 className="text-sm text-gray-600">
@@ -86,7 +86,7 @@ const Contact = () => {
               </div>
 
               {/* ADDRESS */}
-              <div className="flex items-center gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
+              <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
                 <MapPin className="w-6 h-6 text-yellow-600" />
                 <div>
                   <h4 className="text-sm text-gray-600">

@@ -3,7 +3,6 @@ import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { motion } from "framer-motion";
 
-
 const AdminGalleryCard = ({ item, setSelected, setOpen, setDeleteOpen }) => {
   const [loaded, setLoaded] = useState(false);
 
@@ -12,30 +11,25 @@ const AdminGalleryCard = ({ item, setSelected, setOpen, setDeleteOpen }) => {
     return () => Fancybox.unbind("[data-fancybox='gallery-admin']");
   }, []);
 
-  // Cloudinary optimized images
-  const img400 = item.img.url.replace("/upload/", "/upload/w_400,f_auto,q_auto/");
-  const img800 = item.img.url.replace("/upload/", "/upload/w_800,f_auto,q_auto/");
-  const img1200 = item.img.url.replace("/upload/", "/upload/w_1200,f_auto,q_auto/");
-  const blurImg = item.img.url.replace("/upload/", "/upload/e_blur:2000,q_1/");
+  // Cloudinary optimized images (less aggressive)
+  const img400 = item.img.url.replace("/upload/", "/upload/w_400,f_auto,q_85/");
+  const img800 = item.img.url.replace("/upload/", "/upload/w_800,f_auto,q_85/");
+  const img1200 = item.img.url.replace(
+    "/upload/",
+    "/upload/w_1200,f_auto,q_85/",
+  );
+ 
 
   return (
     <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }} 
-    
-    className="border p-3 border-zinc-200 shadow-lg rounded-md">
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="border p-3 border-zinc-200 shadow-lg rounded-md"
+    >
       <div className="h-56 w-full overflow-hidden rounded-md relative">
-        {/* Blur Placeholder */}
-        <img
-        loading="lazy"
-          src={blurImg}
-          alt=""
-          className={`absolute inset-0 w-full h-full object-cover scale-110 blur-xl transition-opacity duration-500 ${
-            loaded ? "opacity-0" : "opacity-100"
-          }`}
-        />
-
+     
+         
         {/* Main Image */}
         <a
           href={item.img.url}

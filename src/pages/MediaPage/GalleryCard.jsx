@@ -4,19 +4,29 @@ const GalleryCard = ({ img }) => {
   const [loaded, setLoaded] = useState(false);
 
   // Cloudinary optimized images
-  const img400 = img.img.url.replace("/upload/", "/upload/w_400,f_auto,q_auto/");
-  const img800 = img.img.url.replace("/upload/", "/upload/w_800,f_auto,q_auto/");
-  const img1200 = img.img.url.replace("/upload/", "/upload/w_1200,f_auto,q_auto/");
-  const blurImg = img.img.url.replace("/upload/", "/upload/e_blur:2000,q_1/");
+  const img400 = img.img.url.replace("/upload/", "/upload/w_400,f_auto,q_85/");
+
+  const img800 = img.img.url.replace("/upload/", "/upload/w_800,f_auto,q_85/");
+
+  const img1200 = img.img.url.replace(
+    "/upload/",
+    "/upload/w_1200,f_auto,q_85/",
+  );
+
+  const blurImg = img.img.url.replace(
+    "/upload/",
+    "/upload/w_50,e_blur:300,q_30/",
+  );
 
   return (
     <div className="mb-4  relative">
       {/* Blur Placeholder */}
       <img
+      loading="lazy"
         src={blurImg}
         alt=""
         aria-hidden="true"
-        className={`absolute inset-0 w-full h-full object-cover scale-110 blur-xl transition-opacity duration-500 ${
+        className={`absolute inset-0 w-full h-full object-cover scale-105 blur-md transition-opacity duration-500 ${
           loaded ? "opacity-0" : "opacity-100"
         }`}
       />
@@ -26,7 +36,7 @@ const GalleryCard = ({ img }) => {
         href={img.img.url}
         data-fancybox="gallery-public"
         data-caption={img.title}
-        className="relative block"
+        className="relative block h-70 overflow-hidden rounded-lg border-zinc-200 shadow-lg  border"
       >
         <img
           src={img800}
@@ -37,7 +47,7 @@ const GalleryCard = ({ img }) => {
           loading="lazy"
           decoding="async"
           onLoad={() => setLoaded(true)}
-          className="w-full rounded-lg transition-transform duration-500 hover:scale-105"
+          className="w-full h-full object-cover  transition-transform duration-500 hover:scale-105"
         />
       </a>
 

@@ -45,8 +45,7 @@ const AdminMessages = () => {
     toast.success("Reply send successfully");
     setReplyTexts((prev) => ({ ...prev, [id]: "" }));
   };
-
-  // ✅ FILTER FRONTEND (optional double safety)
+ 
   const filtered = messages.filter((m) => {
     if (filter === "read") return m.isRead;
     if (filter === "unread") return !m.isRead;
@@ -59,14 +58,14 @@ const AdminMessages = () => {
 
       {/* Search + Filter */}
       <div className="flex gap-3 mb-6">
-        <div className="relative flex-1 input-field">
+        <div className="relative flex-1 flex items-center px-4 border rounded-md border-zinc-300 ">
           <Search
-            className="absolute left-3 top-1/2 -translate-y-1/2"
+            className=" "
             size={16}
           />
           <input
             placeholder="Search messages..."
-            className="pl-5 h-full outline-none w-full"
+            className="pl-3 h-full outline-none w-full"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -77,7 +76,6 @@ const AdminMessages = () => {
             className="btn-primary"
             key={f}
             size="sm"
-            variant={filter === f ? "default" : "outline"}
             onClick={() => setFilter(f)}
           >
             {f}

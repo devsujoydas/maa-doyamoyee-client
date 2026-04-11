@@ -6,23 +6,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, User, ChevronDown, CloudLightning } from "lucide-react";
 import DarkModeToggler from "./DarkModeToggler";
 import { useAuth } from "../AuthProvider/authProvider";
+import DeleteAccountModal from "./modals/DeleteAccountModal";
+import LogoutModal from "./modals/LogoutModal";
 
-const Header = () => {
+const Header = ({ setLogoutOpen }) => {
   const { t, i18n } = useTranslation();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(null);
-  const { user, setUser, logout } = useAuth();
+  const { user, setUser } = useAuth();
 
   const changeLang = (lang) => {
     i18n.changeLanguage(lang);
     localStorage.setItem("i18nextLng", lang);
     setLangOpen(false);
   };
-
-
 
   const toggleMobileDropdown = (index) => {
     setMobileDropdown(mobileDropdown === index ? null : index);
@@ -113,7 +113,7 @@ const Header = () => {
           <div className="relative">
             <button
               onClick={() => setLangOpen(!langOpen)}
-              className="border px-3 py-1 rounded-md  text-sm flex items-center gap-1"
+              className="border px-3 py-1 rounded-md  text-sm flex items-center gap-1 cursor-pointer"
             >
               {i18n.language === "bn-BD" ? "বাংলা" : "English"}
               <ChevronDown size={14} />
@@ -124,6 +124,7 @@ const Header = () => {
                   initial={{ opacity: 0, y: -5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
+                  onMouseLeave={() => setLangOpen(!langOpen)}
                   className="absolute right-0 mt-2 bg-shared-primary text-shared-color-primary shadow-md rounded-md overflow-hidden"
                 >
                   <div
@@ -198,7 +199,7 @@ const Header = () => {
                         {t("auth_profile")}
                       </Link>
                       <button
-                        onClick={() => logout()}
+                        onClick={() => setLogoutOpen(true)}
                         className="w-full text-left px-4 py-2 cursor-pointer text-red-500 hover:bg-red-100 transition-colors"
                       >
                         {t("auth_logout")}
@@ -225,11 +226,11 @@ const Header = () => {
             </AnimatePresence>
           </div>
 
-          <DarkModeToggler />
+          {/* <DarkModeToggler /> */}
         </nav>
 
         <div className="lg:hidden flex gap-2">
-          <DarkModeToggler />
+          {/* <DarkModeToggler /> */}
           {/* Mobile Toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -379,7 +380,10 @@ const Header = () => {
                       {t("auth_profile")}
                     </Link>
                     <button
-                      onClick={() => setUser(null)}
+                      onClick={() => {
+                        setLogoutOpen(true);
+                        setMenuOpen(!menuOpen);
+                      }}
                       className="px-3 py-2 border border-zinc-500 bg-red-500 text-white hover:bg-white hover:text-red-500 active:scale-95 transition-all cursor-pointer rounded-md text-center "
                     >
                       {t("auth_logout")}

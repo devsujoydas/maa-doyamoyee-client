@@ -10,15 +10,15 @@ const PageHeading = ({ title, desc, shortdesc, section }) => {
   const headingShortDesc = section ? t(`${section}_shortdesc`) : shortdesc;
 
   return (
-    <div>
+    <div className=" ">
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-center"
+        className="text-center mb-4 md:mb-8 "
       >
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#7a0c0c] leading-snug">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gradient leading-snug">
           {headingTitle}
         </h1>
 

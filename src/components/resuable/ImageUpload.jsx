@@ -17,16 +17,17 @@ const ImageUpload = ({ value, onChange, preview, setPreview, label }) => {
   }, [value, setPreview]);
 
   const compressImage = async (file) => {
-    try {
-      return await imageCompression(file, {
-        maxSizeMB: 0.5,
-        maxWidthOrHeight: 800,
-        useWebWorker: true,
-      });
-    } catch {
-      return file;
-    }
-  };
+  try {
+    return await imageCompression(file, {
+      maxSizeMB: 1.5,              // 🔥 increase (0.5 → 1.5)
+      maxWidthOrHeight: 1600,      // 🔥 increase (800 → 1600)
+      initialQuality: 0.85,        // 🔥 add this (important)
+      useWebWorker: true,
+    });
+  } catch {
+    return file;
+  }
+};
 
   const handleFile = async (file) => {
     if (!file?.type.startsWith("image/")) return toast.error("Only image allowed");
@@ -37,7 +38,7 @@ const ImageUpload = ({ value, onChange, preview, setPreview, label }) => {
 
   return (
     <div
-      className="border-2 border-dashed rounded-xl h-40 flex items-center justify-center cursor-pointer mb-4 relative"
+      className="border-2 border-dashed border-zinc-200 hover:border-zinc-400 rounded-xl h-40 flex items-center justify-center cursor-pointer mb-4 relative"
       onClick={() => fileInputRef.current.click()}
       onDrop={(e) => {
         e.preventDefault();

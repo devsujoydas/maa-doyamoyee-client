@@ -59,13 +59,8 @@ const AdminEvents = () => {
       />
 
       <div className="flex justify-between items-center">
-        <h1>
-          <span className="text-lg md:text-2xl font-bold">
-            Events Management
-          </span>
-          <span className="border rounded-full px-1 font-semibold text-sm md:text-lg ml-2">
-            {events.length}
-          </span>
+        <h1 className="text-2xl font-bold">
+          Events Management ({events.length})
         </h1>
 
         <button

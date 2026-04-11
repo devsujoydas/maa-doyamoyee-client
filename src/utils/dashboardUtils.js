@@ -1,10 +1,3 @@
-export const filterByYear = (data, field, year) => {
-
-  return data?.filter((item) => {
-    const d = new Date(item[field]);
-    return d.getFullYear() === year;
-  });
-};
 
 export const generateMonthlyData = (data, dateField, valueField = null) => {
   const map = {};
@@ -24,17 +17,44 @@ export const generateMonthlyData = (data, dateField, valueField = null) => {
   }));
 };
 
-export const calculateGrowth = (data, dateField) => {
-  const sorted = [...data].sort(
-    (a, b) => new Date(a[dateField]) - new Date(b[dateField]),
-  );
 
-  const mid = Math.floor(sorted.length / 2);
 
-  const firstHalf = sorted.slice(0, mid).length;
-  const secondHalf = sorted.slice(mid).length;
+export const getMonthlyStats = (data, dateField) => {
+  const map = {};
 
-  if (firstHalf === 0) return 100;
+  data.forEach((item) => {
+    const date = new Date(item[dateField]);
 
-  return (((secondHalf - firstHalf) / firstHalf) * 100).toFixed(1);
+    const key = `${date.getFullYear()}-${date.getMonth() + 1}`;
+
+    if (!map[key]) {
+      map[key] = 0;
+    }
+
+    map[key]++;
+  });
+
+  return map;
 };
+
+export const calculateMonthlyGrowth = (data, dateField) => {
+  const monthly = getMonthlyStats(data, dateField);
+
+  const months = Object.keys(monthly).sort();
+
+  if (months.length < 2) return 0;
+
+  const lastMonth = months[months.length - 1];
+  const prevMonth = months[months.length - 2];
+
+  const current = monthly[lastMonth];
+  const previous = monthly[prevMonth];
+
+  if (previous === 0) return 100;
+
+  const growth = ((current - previous) / previous) * 100;
+
+  return Number(growth.toFixed(1));
+};
+
+ 

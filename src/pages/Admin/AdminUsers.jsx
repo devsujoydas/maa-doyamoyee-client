@@ -1,171 +1,225 @@
-// AdminUsers.jsx
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Trash2, Eye, UserCheck, User, Crown } from "lucide-react";
+import { Trash2, Eye } from "lucide-react";
+import { MdVerified } from "react-icons/md";
 import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import useUsers from "../../hooks/useUsers";
+import { formatDateEnglish } from "../../utils/formatDateDynamic";
+
 import UserViewModal from "../../components/modals/UserViewModal";
 import DeleteModal from "../../components/modals/DeleteModal";
-import { MdVerified } from "react-icons/md";
-import useUsers from "../../hooks/useUsers";
-import { formatDynamicDate } from "../../utils/formatDateDynamic";
+
+import { deleteUserByAdmin, changeUserRole } from "../../services/userService";
+
+import { useAuth } from "../../AuthProvider/authProvider";
 
 const AdminUsers = () => {
+  const { user: loggedInUser } = useAuth();
+
   const { data: users = [] } = useUsers();
+  const queryClient = useQueryClient();
 
   const [selectedUser, setSelectedUser] = useState(null);
-  const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [viewOpen, setViewOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
 
-  const handleView = (user) => {
-    setSelectedUser(user);
-    setViewModalOpen(true);
+  // =====================
+  // DELETE USER
+  // =====================
+  const deleteMutation = useMutation({
+    mutationFn: deleteUserByAdmin,
+
+    onSuccess: () => {
+      toast.success("User deleted");
+      queryClient.invalidateQueries(["users"]);
+      setDeleteOpen(false);
+      setSelectedUser(null);
+    },
+
+    onError: (err) => {
+      toast.error(err?.response?.data?.message || "Delete failed");
+    },
+  });
+
+  // =====================
+  // CHANGE ROLE
+  // =====================
+  const roleMutation = useMutation({
+    mutationFn: changeUserRole,
+
+    onSuccess: (data) => {
+      toast.success(data.message);
+      queryClient.invalidateQueries(["users"]);
+    },
+
+    onError: (err) => {
+      toast.error(err?.response?.data?.message || "Role update failed");
+    },
+  });
+
+  // =====================
+  // HANDLERS
+  // =====================
+  const handleRoleChange = (userId, role) => {
+    roleMutation.mutate({ userId, role });
   };
 
   const handleDelete = (user) => {
     setSelectedUser(user);
-    setDeleteModalOpen(true);
+    setDeleteOpen(true);
   };
 
-  // Confirm delete
-  const confirmDelete = () => {
-    toast.success("User deleted successfully");
-    setDeleteModalOpen(false);
-    setViewModalOpen(false);
+  const confirmDelete = (userId) => {
+    deleteMutation.mutate(userId);
   };
+
+  const handleView = (user) => {
+    setSelectedUser(user);
+    setViewOpen(true);
+  };
+
+  console.log(users)
+  // =====================
+  // RULES
+  // =====================
+  const canChangeRole = loggedInUser?.role === "admin";
 
   return (
     <div className="flex flex-col space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-lg md:text-2xl font-bold">
-          Users Management{" "}
-          <span className="border rounded-full px-2 py-0.5 text-sm md:text-lg font-semibold">
-            {users.length}
-          </span>
-        </h1>
-      </div>
+      <h1 className="text-2xl font-bold">Users Management ({users.length})</h1>
 
-      {/* Table */}
+      {/* TABLE */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
         className="overflow-x-auto bg-white shadow rounded-lg"
       >
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                User
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Role
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Joined
-              </th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
+          <thead className="bg-gray-100 sticky top-0 z-10">
+            <tr className="text-xs font-medium text-gray-500 uppercase">
+              <th className="px-6 py-4 text-left">SL</th>
+              <th className="px-6 py-4 text-left">User</th>
+              <th className="px-6 py-4 text-left">Email</th>
+              <th className="px-6 py-4 text-left">Role</th>
+              <th className="px-6 py-4 text-left">Joined</th>
+              <th className="px-6 py-4 text-center">Actions</th>
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-200">
-            {users.map((user) => (
-              <tr key={user?._id} className="hover:bg-gray-50">
-                <td className="px-6 py-3 flex items-center space-x-3">
-                  <div className="h-10 w-10 rounded-full object-cover overflow-hidden object-center">
+          <tbody className="divide-y divide-gray-200 text-sm">
+            {users.map((u, idx) => {
+              const isSelf = loggedInUser?._id === u._id;
+
+              return (
+                <tr
+                  key={u._id}
+                  className={`hover:bg-gray-50 ${isSelf ? "bg-blue-50" : ""}`}
+                >
+                  {/* SL */}
+                  <td className="px-6 py-4 text-gray-500">
+                    {idx + 1}
+                    {isSelf && (
+                      <span className="ml-2 text-xs text-blue-600">(You)</span>
+                    )}
+                  </td>
+
+                  {/* USER */}
+                  <td className="px-6 py-4 flex items-center gap-3">
                     <img
-                      loading="lazy"
-                      className=" rounded-full object-center "
-                      src={user?.profileImage?.url}
-                      alt={user?.name}
+                      src={u?.profileImage?.url}
+                      className="w-10 h-10 shadow-lg rounded-full"
+                      alt=""
                     />
-                  </div>
-                  <div>
-                    <div className="text-sm font-medium text-gray-900 text-nowrap flex justify-start items-center gap-1">
-                      {user?.name}
-                      {user?.isVerified && (
-                        <MdVerified
-                          size={14}
-                          className="text-blue-500"
-                          title="Verified"
-                        />
-                      )}
+
+                    <div>
+                      <p className="flex items-center gap-1flex-nowrap">
+                       
+                        {u.name}
+                        {u.isVerified && (
+                          <MdVerified className="text-blue-500" />
+                        )} 
+                      </p>
+                      <p className="text-sm text-gray-500">@{u.username}</p>
                     </div>
-                    <div className="text-sm text-gray-500 -mt-1">
-                      @{user?.username}
-                    </div>
-                  </div>
-                </td>
+                  </td>
 
-                <td className="px-6 py-3 text-sm text-gray-500">
-                  {user?.email}
-                </td>
+                  {/* EMAIL */}
+                  <td className="px-6 py-4">{u.email}</td>
 
-                <td className="px-6 py-3 text-sm">
-                  {user?.role === "admin" ? (
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                      <Crown className="mr-1 w-3 h-3" /> Admin
-                    </span>
-                  ) : user?.role === "moderator" ? (
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800">
-                      <UserCheck className="mr-1 w-3 h-3" /> Moderator
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-                      <User className="mr-1 w-3 h-3" /> User
-                    </span>
-                  )}
-                </td>
+                  {/* ROLE */}
+                  <td className="px-6 py-4">
+                    {canChangeRole && !isSelf ? (
+                      <select
+                        value={u.role}
+                        onChange={(e) =>
+                          handleRoleChange(u._id, e.target.value)
+                        }
+                        className="border border-zinc-200 px-2 py-1 rounded outline-none"
+                        disabled={roleMutation.isLoading}
+                      >
+                        <option value="user">User</option>
+                        <option value="moderator">Moderator</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                    ) : (
+                      <span className="font-medium text-gray-700 capitalize">
+                        {u.role}
+                      </span>
+                    )}
+                  </td>
 
-                <td className="px-6 py-3 text-sm text-gray-500">
-                  {formatDynamicDate(user?.createdAt)}
-                </td>
+                  {/* JOINED */}
+                  <td className="px-6 py-4">
+                    {formatDateEnglish(u.createdAt)}
+                  </td>
 
-                <td className="px-6 py-3 text-center space-x-3">
-                  <motion.button
-                    whileHover={{ scale: 1.2 }}
-                    className="text-blue-600 hover:text-blue-800 cursor-pointer"
-                    onClick={() => handleView(user)}
-                  >
-                    <Eye size={18} />
-                  </motion.button>
-
-                  {user.role !== "admin" && user.role !== "ceo" && (
+                  {/* ACTIONS */}
+                  <td className="px-6 py-4 text-center space-x-2">
                     <motion.button
                       whileHover={{ scale: 1.2 }}
-                      className="text-red-600 hover:text-red-800  cursor-pointer"
-                      onClick={() => handleDelete(user)}
+                      onClick={() => handleView(u)}
+                      className="text-blue-600"
                     >
-                      <Trash2 size={18} />
+                      <Eye size={18} />
                     </motion.button>
-                  )}
-                </td>
-              </tr>
-            ))}
+
+                    {/* DELETE (NO SELF DELETE) */}
+                    {u.role !== "admin" && u.role !== "ceo" && !isSelf && (
+                      <motion.button
+                        whileHover={{ scale: 1.2 }}
+                        onClick={() => handleDelete(u)}
+                        className="text-red-600"
+                      >
+                        <Trash2 size={18} />
+                      </motion.button>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </motion.div>
 
-      {/* Modals */}
+      {/* VIEW MODAL */}
       {selectedUser && (
         <UserViewModal
-          isOpen={viewModalOpen}
-          setOpen={setViewModalOpen}
+          isOpen={viewOpen}
+          setOpen={setViewOpen}
           user={selectedUser}
         />
       )}
 
+      {/* DELETE MODAL */}
       {selectedUser && (
         <DeleteModal
-          deleteModalOpen={deleteModalOpen}
-          setDeleteModalOpen={setDeleteModalOpen}
-          confirmDelete={confirmDelete}
+          isUser={true}
+          isOpen={deleteOpen}
+          onClose={() => setDeleteOpen(false)}
           selected={selectedUser}
-          isUser={selectedUser}
+          confirmDelete={confirmDelete}
         />
       )}
     </div>

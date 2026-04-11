@@ -57,13 +57,6 @@ const mobileBanking = [
     number: "0123456789",
     logo: "https://images.seeklogo.com/logo-png/31/1/dutch-bangla-rocket-logo-png_seeklogo-317692.png",
   },
-  {
-    name: "Taptap Send",
-    accountName: "Maa Doyamoyee Mandir",
-    number: "+8801234567890",
-    note: "Use this number in Taptap Send app to send money from abroad.",
-    logo: "https://images.seeklogo.com/logo-png/50/1/taptap-send-logo-png_seeklogo-500619.png",
-  },
 ];
 
 /* ------------------ COMPONENT ------------------ */
@@ -84,7 +77,7 @@ const Donation = () => {
       <div className="custom-container">
         <PageHeading section="donation" />
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           {/* ---------------- BANK ---------------- */}
           <motion.div

@@ -3,6 +3,8 @@ import PageHeading from "../../shared/PageHeading";
 import BlogCard from "../../components/BlogCard";
 import useBlogs from "../../hooks/useBlogs";
 import { useTranslation } from "react-i18next";
+import DataNotFound from "../../components/resuable/DataNotFound";
+
 
 const BlogsPage = () => {
   const { blogs = [] } = useBlogs();
@@ -19,16 +21,9 @@ const BlogsPage = () => {
         <PageHeading section="blogs" />
 
         {approvedBlogs.length === 0 ? (
-          <div className="flex flex-col items-center justify-center mt-10 text-center">
-            <h2 className="text-xl sm:text-2xl font-semibold text-gray-700">
-              {t("noBlogs.title")}
-            </h2>
-            <p className="text-gray-500 mt-2 text-sm sm:text-base">
-              {t("noBlogs.subtitle")}
-            </p>
-          </div>
+           <DataNotFound name={"blogs"} />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 mt-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 ">
             {approvedBlogs.map((blog, idx) => (
               <BlogCard type={"blog-page"} key={idx} blog={blog} />
             ))}

@@ -60,7 +60,7 @@ const AdminDonations = () => {
         {stats.map((s) => (
           <div
             key={s.label}
-            className="bg-white p-4 shadow rounded text-center"
+            className="bg-white shadow-md rounded-xl p-4 hover:scale-105 transition text-center"
           >
             <p className="text-xl font-bold">৳{s.value}</p>
             <p>{s.label}</p>
@@ -74,7 +74,7 @@ const AdminDonations = () => {
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-3 py-1 rounded border border-zinc-200 cursor-pointer ${
+            className={`px-3 py-1 rounded-full border border-zinc-200 cursor-pointer ${
               filter === f ? "bg-black text-white" : ""
             }`}
           >
@@ -107,7 +107,7 @@ const AdminDonations = () => {
             {filtered.map((d) => (
               <tr key={d._id} className="hover:bg-gray-50">
                 <td className="px-6 py-3 text-gray-500">
-                  {d.accountName}
+                  <span className="font-semibold">{d.accountName}</span>
                   <div>{d.email}</div>
                 </td>
 

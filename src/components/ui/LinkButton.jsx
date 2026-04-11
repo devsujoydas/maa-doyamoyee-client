@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-const LinkButton = ({ path, title, isArrow }) => {
+const   LinkButton = ({ path, title, isArrow }) => {
   const { t } = useTranslation();
 
   return (

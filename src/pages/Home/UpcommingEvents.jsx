@@ -5,6 +5,7 @@ import SectionHeading from "../../shared/SectionHeading";
 import { useTranslation } from "react-i18next";
 import { formatDateDynamic } from "../../utils/formatDateDynamic";
 import useEvents from "../../hooks/useEvents";
+import DataNotFound from "../../components/resuable/DataNotFound";
 
 const UpcomingEvents = () => {
   const { t } = useTranslation();
@@ -28,10 +29,8 @@ const UpcomingEvents = () => {
         />
 
         {/* Events Grid */}
-        {upcomingEvents.length === 0 ? (
-          <p className="text-center text-gray-300 py-10">
-            কোন আসন্ন উৎসব পাওয়া যায়নি।
-          </p>
+        {!upcomingEvents.length > 0 ? (
+           <DataNotFound name={"events"} />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
             <AnimatePresence>

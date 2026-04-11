@@ -27,14 +27,8 @@ const CommitteePage = () => {
       <div className="custom-container">
         <PageHeading section="committee" />
 
-        {/* Glow Hover Effect */}
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 group-active:opacity-100 
-              bg-linear-to-r from-yellow-400/10 to-red-600/10 
-              transition duration-500"
-        ></div>
-
-        <div className="grid md:grid-cols-2 gap-10 my-10 lang-bn-BD">
+     
+        <div className="grid md:grid-cols-2 gap-10  lang-bn-BD">
           {/* LEFT SIDE */}
           <div className="space-y-8 shadow-md h-fit p-3 rounded-xl">
             {/* President */}
@@ -108,7 +102,7 @@ const CommitteePage = () => {
             )}
 
             {/* Other Secretaries */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 ">
               {secretaries.map((m, i) => (
                 <motion.div
                   key={m.id}
@@ -140,7 +134,7 @@ const CommitteePage = () => {
 
         {/* ================= MEMBERS ================= */}
 
-        <div className="mb-10 lang-bn-BD">
+        <div className="my-10 lang-bn-BD">
           <div className="text-center text-xl md:text-2xl font-bold mb-10 text-gray-800">
             সদস্যবৃন্দ
           </div>
