@@ -4,6 +4,7 @@ import BlogCard from "../../components/BlogCard";
 import useBlogs from "../../hooks/useBlogs";
 import { useTranslation } from "react-i18next";
 import DataNotFound from "../../components/resuable/DataNotFound";
+import SEO from "../../components/SEO";
 
 const BlogsPage = () => {
   const { blogs = [], isLoading } = useBlogs();
@@ -13,8 +14,17 @@ const BlogsPage = () => {
 
   return (
     <section id="blogs" className="relative ">
+      <SEO
+        title="Temple Blog | Maa Doyamoyee Temple"
+        description="Read blogs, spiritual articles, temple updates and religious knowledge from Maa Doyamoyee Temple."
+        url="https://maa-doyamoyee.vercel.app/blogs"
+        keywords="temple blog, spiritual blog Bangladesh, Maa Doyamoyee blog, ধর্মীয় ব্লগ"
+      />
+
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
-      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+           <div className="absolute hidden xl:block bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+
+
 
       <div className="custom-container">
         <PageHeading section="blogs" />

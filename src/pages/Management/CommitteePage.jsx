@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import PageHeading from "../../shared/PageHeading";
 import { committeeData } from "../../data/data";
+import SEO from "../../components/SEO";
 
 const CommitteePage = () => {
   const president = committeeData.find((m) => m.designation === "সভাপতি");
@@ -22,12 +23,20 @@ const CommitteePage = () => {
 
   return (
     <section className="relative">
+      <SEO
+        title="Temple Committee | Maa Doyamoyee Temple"
+        description="Temple management committee members of Maa Doyamoyee Temple and their responsibilities."
+        url="https://maa-doyamoyee.vercel.app/committee"
+        keywords="temple committee, management committee, Hindu temple management, মন্দির কমিটি"
+      />
+      
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
-      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+           <div className="absolute hidden xl:block bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+
+
       <div className="custom-container">
         <PageHeading section="committee" />
 
-     
         <div className="grid md:grid-cols-2 gap-10  lang-bn-BD">
           {/* LEFT SIDE */}
           <div className="space-y-8 shadow-md h-fit p-3 rounded-xl">

@@ -20,7 +20,7 @@ const EventDetailsPage = lazy(
   () => import("../pages/EventsPage/EventDetailsPage"),
 );
 const ContactPage = lazy(() => import("../pages/ContactPage/ContactPage"));
-const Donation = lazy(() => import("../pages/Donate/Donation"));
+const Donation = lazy(() => import("../pages/Donation/Donation"));
 
 const Signup = lazy(() => import("../pages/Authentication/Signup"));
 const Signin = lazy(() => import("../pages/Authentication/Signin"));
@@ -92,7 +92,7 @@ export const router = createBrowserRouter([
       { path: "/advisors", element: withSuspense(<AdvisorsPage />) },
       { path: "/members", element: withSuspense(<MembersPage />) },
       { path: "/contact", element: withSuspense(<ContactPage />) },
-      { path: "/donate", element: withSuspense(<Donation />) },
+      { path: "/donation", element: withSuspense(<Donation />) },
 
       { path: "/events", element: withSuspense(<EventsPage />) },
       { path: "/events/:id", element: withSuspense(<EventDetailsPage />) },

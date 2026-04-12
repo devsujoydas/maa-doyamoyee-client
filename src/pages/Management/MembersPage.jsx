@@ -2,14 +2,23 @@ import { motion } from "framer-motion";
 import PageHeading from "../../shared/PageHeading";
 import { useTranslation } from "react-i18next";
 import { membersData } from "../../data/data";
+import SEO from "../../components/SEO";
 
 const MembersPage = () => {
   const { t } = useTranslation();
 
   return (
     <section className="relative">
+      <SEO
+        title="Temple Members | Maa Doyamoyee Temple"
+        description="List of all List of Lifetime Members associated with Maa Doyamoyee Temple and their contributions."
+        url="https://maa-doyamoyee.vercel.app/members"
+        keywords="temple members, community members, Hindu temple members, সদস্য তালিকা"
+      />
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
-      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+           <div className="absolute hidden xl:block bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+
+
       <div className="custom-container">
         <PageHeading
           title={t("member_title")}

@@ -1,17 +1,18 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import api from "../../utils/api";
-import toast from "react-hot-toast"; 
+import toast from "react-hot-toast";
 import BlogPostComment from "./BlogPostComment";
 import BlogLeaveAComment from "./BlogLeaveAComment";
 import BlogPostCard from "./BlogPostCard";
+import SEO from "../../components/SEO";
 
 const BlogsDetails = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams();
- 
+
   const [blog, setBlog] = useState(null);
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,6 +52,18 @@ const BlogsDetails = () => {
 
   return (
     <div className="bg-white">
+    
+      <SEO
+        title={`${blog?.title} | Maa Doyamoyee Blog`}
+        description={blog?.content}
+        url={`https://maa-doyamoyee.vercel.app/blogs/${blog._id}`}
+        image={blog.postImg?.url}
+        type="article"
+        publishedTime={blog.createdAt}
+        updatedTime={blog.updatedAt}
+        keywords="spiritual blog, Hindu article, Maa Doyamoyee blog"
+      />
+
       <div className="container xl:mx-auto px-3 md:px-0 md:py-10">
         <button
           onClick={() => navigate("/blogs")}
@@ -60,12 +73,10 @@ const BlogsDetails = () => {
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-
           {/* left side */}
           <div className="md:col-span-2">
-              <BlogPostCard blog={blog} />
+            <BlogPostCard blog={blog} />
           </div>
-
 
           {/* right side */}
           <div className=" md:col-span-1 ">
@@ -81,7 +92,6 @@ const BlogsDetails = () => {
               postId={blog._id}
             />
           </div>
-        
         </div>
       </div>
     </div>

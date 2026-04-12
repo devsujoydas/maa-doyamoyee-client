@@ -5,10 +5,8 @@ import toast from "react-hot-toast";
 import { HiTrash } from "react-icons/hi";
 import { Eye, Plus, Edit2 } from "lucide-react";
 
-import SEOHead from "../../components/SEOHead";
 import {
   formatDateEnglish,
-  formatDynamicDate,
 } from "../../utils/formatDateDynamic";
 
 import BlogViewModal from "../../components/modals/BlogViewModal";
@@ -51,11 +49,7 @@ const AdminBlogs = () => {
 
   return (
     <div className="flex flex-col space-y-6 ">
-      <SEOHead
-        title="Blog Management"
-        description="Manage blog posts."
-        path="/admin/blogs"
-      />
+   
 
       <div className="flex justify-between items-center">
         <h1 className="text-lg md:text-2xl  font-bold">

@@ -54,7 +54,7 @@ const Header = ({ setLogoutOpen }) => {
     { label: t("nav_posts"), to: "/blogs" },
     { label: t("nav_notice"), to: "/notices" },
     { label: t("nav_contact"), to: "/contact" },
-    { label: t("nav_donation"), to: "/donate" },
+    { label: t("nav_donation"), to: "/donation" },
   ];
 
   return (

@@ -28,7 +28,7 @@ const Footer = () => {
     { to: "/blogs", label: t("nav_posts") },
     { to: "/notices", label: t("nav_notice") },
     { to: "/contact", label: t("nav_contact") },
-    { to: "/donate", label: t("nav_donation") },
+    { to: "/donation", label: t("nav_donation") },
   ];
 
   const renderLinks = (links) =>

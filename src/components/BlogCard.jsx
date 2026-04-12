@@ -153,14 +153,7 @@ const BlogCard = ({ blog, type }) => {
                 </div>
               </Link>
 
-              {/* Views
-              <div className="flex items-center gap-1 text-gray-600 text-sm">
-                <Eye size={16} />
-                <span className="flex justify-center items-center gap-1">
-                  {blog?.views?.length || 0}
-                  <span className="sm:block hidden"> {t("views")}</span>
-                </span>
-              </div> */}
+        
             </div>
 
             <button

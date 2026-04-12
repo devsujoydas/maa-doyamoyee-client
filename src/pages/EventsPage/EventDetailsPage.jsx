@@ -47,9 +47,20 @@ const EventDetailsPage = () => {
 
   return (
     <div className="relative">
+      <SEO
+        title={`${event.title} | Maa Doyamoyee Temple Event`}
+        description={event.description}
+        url={`https://maa-doyamoyee.vercel.app/events/${event._id}`}
+        image={event.image.url}
+        type="article"
+        keywords="puja event, temple festival Bangladesh, Maa Doyamoyee event"
+      />
+
       {/* Decorative blobs */}
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
-      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+           <div className="absolute hidden xl:block bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+
+
 
       <div className="custom-container">
         <button
@@ -76,7 +87,7 @@ const EventDetailsPage = () => {
               {/* Date */}
               {event.eventDate && (
                 <p className=" space-x-1 mb-2">
-                 📅
+                  📅
                   {formatDateDynamic(event.eventDate)}
                 </p>
               )}
@@ -108,9 +119,7 @@ const EventDetailsPage = () => {
 
           {/* Sidebar */}
           <EventDetailsSideBar
-            events={events
-              .filter((n) => n._id !== event._id)
-              .slice(0, 3)}
+            events={events.filter((n) => n._id !== event._id).slice(0, 3)}
           />
         </motion.div>
       </div>

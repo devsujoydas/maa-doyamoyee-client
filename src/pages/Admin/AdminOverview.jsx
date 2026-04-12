@@ -1,5 +1,4 @@
 import { useState, lazy, Suspense, useMemo } from "react";
-import SEOHead from "../../components/SEOHead";
 import { Bell, Calendar, FileText, HandCoins, Mail, Users } from "lucide-react";
 import {
   generateMonthlyData,
@@ -123,8 +122,7 @@ const AdminOverview = () => {
 
   return (
     <div className="space-y-6">
-      <SEOHead title="Admin Dashboard" />
-
+ 
       {/* HEADER */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Dashboard</h1>

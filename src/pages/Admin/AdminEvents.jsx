@@ -1,5 +1,4 @@
 import { useState } from "react";
-import SEOHead from "../../components/SEOHead";
 import { HiTrash } from "react-icons/hi";
 import { Eye, Plus, Edit, Edit2 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -53,12 +52,7 @@ const AdminEvents = () => {
 
   return (
     <div className="flex flex-col space-y-6">
-      <SEOHead
-        title="Event Management"
-        description="Manage events."
-        path="/admin/events"
-      />
-
+     
       <div className="flex justify-between items-center">
         <h1 className=" text-lg md:text-2xl font-bold">
           Events Management ({events.length})

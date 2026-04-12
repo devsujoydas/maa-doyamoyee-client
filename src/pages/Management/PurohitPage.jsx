@@ -4,6 +4,7 @@ import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import SEO from "../../components/SEO";
 
 const PurohitPage = () => {
   const { t } = useTranslation();
@@ -17,6 +18,13 @@ const PurohitPage = () => {
 
   return (
     <div className="relative">
+      <SEO
+        title="Temple Purohit | Maa Doyamoyee Temple"
+        description="Meet the purohits of Maa Doyamoyee Temple. Learn about their roles, rituals and religious responsibilities."
+        url="https://maa-doyamoyee.vercel.app/purohit"
+        image={"https://maa-doyamoyee.vercel.app/purohit/sajal.webp"}
+        keywords="purohit, temple priest Bangladesh, Hindu priest Jamalpur, পূজারী"
+      />
       {/* BG Effects */}
       <div className="absolute top-10 left-4 w-32 h-32 sm:w-40 sm:h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full animate-pulse"></div>
       <div className="absolute bottom-10 right-4 w-40 h-40 sm:w-52 sm:h-52 bg-red-600 blur-3xl opacity-20 rounded-full animate-pulse"></div>
@@ -41,14 +49,13 @@ const PurohitPage = () => {
               <div className="absolute top-0 left-0 w-full h-0.75 bg-linear-to-r from-yellow-400 via-orange-500 to-red-500"></div>
 
               <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 group-active:opacity-100 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 group-active:opacity-100 
                   bg-linear-to-r from-yellow-400/10 to-red-600/10 
                   transition duration-500"
-                ></div>
+              ></div>
 
               {/* MAIN CONTENT */}
               <div className="relative p-6 flex flex-col md:flex-row gap-6 items-stretch  h-full">
-                
                 {/* LEFT IMAGE FULL HEIGHT */}
                 <div className="relative overflow-hidden rounded-lg shrink-0 md:w-[40%] w-full h-72 md:h-full ">
                   <a
@@ -70,7 +77,6 @@ const PurohitPage = () => {
 
                 {/* RIGHT CONTENT */}
                 <div className="flex-1 text-center md:text-left">
-                  
                   {/* NAME */}
                   <h2 className="text-2xl font-bold text-gray-800">
                     {pandit.name}
@@ -131,7 +137,6 @@ const PurohitPage = () => {
                       </a>
                     )}
                   </div>
-
                 </div>
               </div>
             </motion.div>

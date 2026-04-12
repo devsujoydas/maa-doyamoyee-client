@@ -5,6 +5,7 @@ import PageHeading from "../../shared/PageHeading";
 import { useTranslation } from "react-i18next";
 import { createMessage } from "../../services/messageService";
 import toast from "react-hot-toast";
+import SEO from "../../components/SEO";
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -50,6 +51,13 @@ const Contact = () => {
 
   return (
     <section className="relative">
+      <SEO
+        title="Contact Maa Doyamoyee Temple | যোগাযোগ"
+        description="Get in touch with Maa Doyamoyee Temple. Find location, phone number and contact details."
+        url="https://maa-doyamoyee.vercel.app/contact"
+        keywords="contact temple, Jamalpur temple contact, Maa Doyamoyee contact, যোগাযোগ"
+      />
+
       <div className="custom-container">
         <PageHeading section="contact" />
 
@@ -189,7 +197,8 @@ const Contact = () => {
                 <textarea
                   name="message"
                   value={form.message}
-                  onChange={handleChange}j
+                  onChange={handleChange}
+                  j
                   placeholder={t("message_placeholder")}
                   rows={5}
                   className="input-field resize-y"

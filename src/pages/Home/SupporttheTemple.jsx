@@ -36,7 +36,7 @@ const SupporttheTemple = () => {
           transition={{ delay: 0.3 }}
           className="flex justify-center items-center"
         >
-          <Link to="/donate">
+          <Link to="/donation">
             <button className="btn-primary">
               {t("supportTemple_button")}
             </button>

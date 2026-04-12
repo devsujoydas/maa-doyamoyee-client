@@ -6,6 +6,7 @@ import EventCard from "./EventCard";
 import useEvents from "../../hooks/useEvents";
 import DataNotFound from "../../components/resuable/DataNotFound";
 import { useTranslation } from "react-i18next";
+import SEO from "../../components/SEO";
 
 const EventsPage = () => {
   const { events, isLoading } = useEvents();
@@ -26,7 +27,16 @@ const EventsPage = () => {
     <div className="relative">
       {/* Decorative blobs */}
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
-      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+           <div className="absolute hidden xl:block bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+
+
+
+      <SEO
+        title="Temple Events & Puja | Maa Doyamoyee Temple"
+        description="Discover all upcoming and past puja events of Maa Doyamoyee Temple. জানুন সকল পূজা, উৎসব ও ধর্মীয় অনুষ্ঠান সম্পর্কে।"
+        url="https://maa-doyamoyee.vercel.app/events"
+        keywords="temple events, puja schedule Bangladesh, Maa Doyamoyee puja, Hindu festival Jamalpur, পূজা উৎসব"
+      />
 
       <div className="custom-container">
         <PageHeading section="events" />

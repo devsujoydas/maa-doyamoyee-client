@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maa-doyamoyee-server.vercel.app/sitemap.xml

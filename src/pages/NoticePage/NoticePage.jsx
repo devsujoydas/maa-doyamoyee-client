@@ -6,6 +6,7 @@ import PreviewModal from "./PreviewModal";
 import NoticeCard from "./NoticeCard";
 import useNotices from "../../hooks/useNotices";
 import DataNotFound from "../../components/resuable/DataNotFound";
+import SEO from "../../components/SEO";
 
 const NoticePage = () => {
   const { t } = useTranslation();
@@ -17,9 +18,17 @@ const NoticePage = () => {
 
   return (
     <div className="relative min-h-[50vh]">
+      <SEO
+        title="Temple Notices | Maa Doyamoyee Temple"
+        description="Stay updated with all official notices, announcements and temple updates."
+        url="https://maa-doyamoyee.vercel.app/notices"
+        keywords="temple notice, announcement, Maa Doyamoyee notice, বিজ্ঞপ্তি"
+      />
       {/* Background Glow */}
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
-      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+           <div className="absolute hidden xl:block bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+
+
 
       <div className="custom-container">
         <PageHeading section="notice" />

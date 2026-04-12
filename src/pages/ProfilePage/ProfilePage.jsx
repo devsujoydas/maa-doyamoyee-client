@@ -17,7 +17,9 @@ const ProfilePage = () => {
     <div className="relative bg-gray-50">
 
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
-      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+           <div className="absolute hidden xl:block bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+
+
 
       <div className="custom-container">
         <div className="flex flex-col xl:flex-row gap-6 ">

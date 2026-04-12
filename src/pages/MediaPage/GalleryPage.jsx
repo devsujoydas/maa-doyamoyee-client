@@ -6,6 +6,7 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import GalleryCard from "./GalleryCard";
 import { useTranslation } from "react-i18next";
 import DataNotFound from "../../components/resuable/DataNotFound";
+import SEO from "../../components/SEO";
 
 const GalleryPage = () => {
   const { gallery, isLoading } = useGallery();
@@ -25,7 +26,16 @@ const GalleryPage = () => {
     <div className="relative">
       {/* Background blobs */}
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
-      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+           <div className="absolute hidden xl:block bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
+
+
+
+      <SEO
+        title="Temple Gallery | Maa Doyamoyee Temple Photos"
+        description="Explore photo gallery of Maa Doyamoyee Temple. View all old and new temple images, puja moments and events ছবি গ্যালারি।"
+        url="https://maa-doyamoyee.vercel.app/gallery"
+        keywords="temple gallery, puja photos Bangladesh, Maa Doyamoyee images, মন্দির ছবি"
+      />
 
       <div className="custom-container">
         <PageHeading section="gallery" />

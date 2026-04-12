@@ -3,6 +3,7 @@ import PageHeading from "../../shared/PageHeading";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import DonationForm from "./DonationForm";
+import SEO from "../../components/SEO";
 
 /* ------------------ DATA ------------------ */
 const bankAccounts = [
@@ -70,15 +71,19 @@ const Donation = () => {
 
   return (
     <div className="relative">
+      <SEO
+        title="Donate to Maa Doyamoyee Temple | Support Temple"
+        description="Support Maa Doyamoyee Temple by donating. Help maintain temple activities, puja আয়োজন and community services. আপনার অনুদান মা দয়াময়ী মন্দিরের সেবা, পূজা এবং আধ্যাত্মিক কার্যক্রম পরিচালনায় সহায়তা করে।"
+        url="https://maa-doyamoyee.vercel.app/donation"
+        keywords="donate temple, temple donation Bangladesh, Maa Doyamoyee donation, দান,অনুদান,ব্যাংক অ্যাকাউন্ট,মোবাইল ব্যাংকিং"
+      />
       {/* Background Glow */}
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400/30 blur-3xl rounded-full"></div>
-      <div className="absolute bottom-10 right-10 w-52 h-52 bg-red-500/30 blur-3xl rounded-full"></div>
 
       <div className="custom-container">
         <PageHeading section="donation" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
           {/* ---------------- BANK ---------------- */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
