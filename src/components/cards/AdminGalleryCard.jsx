@@ -50,7 +50,7 @@ const AdminGalleryCard = ({ item, setSelected, setOpen, setDeleteOpen }) => {
         </a>
       </div>
 
-      <p className="mt-2">{item.title}</p>
+      <p className="mt-2 line-clamp-1">{item.title}</p>
 
       <div className="flex gap-2 mt-2">
         <button

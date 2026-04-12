@@ -200,11 +200,13 @@ const BlogCard = ({ blog, type }) => {
       </div>
 
       {/* 🔹 Modal */}
-      <UserViewModal
-        isOpen={viewModalOpen}
-        setOpen={setViewModalOpen}
-        user={author}
-      />
+      {viewModalOpen && (
+        <UserViewModal
+          isOpen={viewModalOpen}
+          setOpen={setViewModalOpen}
+          user={author}
+        />
+      )}
     </motion.div>
   );
 };
