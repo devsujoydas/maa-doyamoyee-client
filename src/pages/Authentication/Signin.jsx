@@ -13,9 +13,11 @@ const Signin = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const logInHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -24,10 +26,12 @@ const Signin = () => {
       localStorage.setItem("accessToken", res.data.accessToken);
 
       setUser(res.data.user);
-      toast.success(res.data.message || "Login successful!");
+      toast.success(res.data.message || "Sign In successful!");
+      setLoading(false);
       navigate("/profile");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Login failed!");
+      toast.error(err.response?.data?.message || "Sign In failed!");
+      setLoading(false);
     }
   };
 
@@ -98,7 +102,7 @@ const Signin = () => {
                   onClick={() => setShow(!show)}
                   className="absolute right-4 top-3.5 cursor-pointer "
                 >
-                  {show? <Eye size={18} /> : <EyeClosed size={18} />}
+                  {show ? <Eye size={18} /> : <EyeClosed size={18} />}
                 </button>
               </div>
             </div>
@@ -117,9 +121,15 @@ const Signin = () => {
             </div>
 
             {/* Button */}
-            <button className="btn-primary">
-              {t("auth.login_btn")}
-            </button>
+             <button
+              type="submit"
+              disabled={loading}
+              className="btn-primary disabled:opacity-60"
+            >
+              {loading
+                ? `${t("auth.login_loading")}`
+                : `${t("auth.login_btn")}`}
+            </button> 
           </form>
         </div>
       </motion.div>

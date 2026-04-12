@@ -135,7 +135,7 @@ const MusicPlayer = ({ open, setOpen }) => {
           className="fixed bottom-20 right-4 md:right-6
                w-[92vw] sm:w-80 md:w-96
                backdrop-blur-xl bg-white/70
-               border border-white/40
+               border border-zinc-200
                shadow-2xl rounded-3xl p-5 z-50
                overflow-hidden"
         >

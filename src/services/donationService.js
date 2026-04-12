@@ -1,6 +1,6 @@
 import api from "../utils/api";
 
-// GET ALL
+// GET ALL (admin only)
 export const getAllDonations = async () => {
   const res = await api.get("/donation");
   return res.data.donations;
@@ -21,7 +21,7 @@ export const deleteDonation = async (id) => {
   return res.data;
 };
 
-// STATUS
+// STATUS UPDATE
 export const updateDonationStatus = async ({ id, status }) => {
   const res = await api.patch(`/donation/${id}/status`, { status });
   return res.data;

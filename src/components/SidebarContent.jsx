@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "../AuthProvider/authProvider";
 
-const SidebarContent = ({ collapsed, toggleCollapsed }) => {
+const SidebarContent = ({ collapsed, toggleCollapsed, setLogoutOpen }) => {
   const location = useLocation();
 
   const { user, logout } = useAuth();
@@ -67,7 +67,7 @@ const SidebarContent = ({ collapsed, toggleCollapsed }) => {
           {!collapsed && "Users"}
         </Link>
 
-        {user.role == "admin" && (
+        {user.role == "ceo" && (
           <>
             <Link
               to={"/admin/blogs"}
@@ -169,7 +169,7 @@ const SidebarContent = ({ collapsed, toggleCollapsed }) => {
           <p className="text-xs text-black truncate px-2">{user.email}</p>
         )}
         <button
-          onClick={logout}
+          onClick={() => setLogoutOpen(true)}
           className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm cursor-pointer font-medium text-red-400 hover:bg-red-500/10 transition ${
             collapsed ? "justify-center" : ""
           }`}

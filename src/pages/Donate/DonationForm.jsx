@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTranslation } from "react-i18next";
-import useDonations from "../../hooks/useDonations";
+import { useTranslation } from "react-i18next"; 
 import ImageUpload from "../../components/resuable/ImageUpload";
 import toast from "react-hot-toast";
+import useDonationActions from "../../hooks/useDonationActions";
 
 const DonationForm = () => {
   const { t } = useTranslation();
-  const { createDonation, isCreating } = useDonations();
+ const { createDonation, isCreating } = useDonationActions();
 
   const [preview, setPreview] = useState(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);

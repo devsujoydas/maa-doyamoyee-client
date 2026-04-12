@@ -68,7 +68,7 @@ const LogoutModal = ({ isOpen, onClose }) => {
           >
             <LogOut size={16} />
             {loading
-              ? "..."
+              ? t("logout_modal.loading")
               : t("logout_modal.confirm")}
           </button>
         </div>

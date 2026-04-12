@@ -18,7 +18,7 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
   const [verifying, setVerifying] = useState(false);
   const [photoType, setPhotoType] = useState("profile");
   const [photoModalOpen, setPhotoModalOpen] = useState(false);
-  const { logout } = useAuth();
+  
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [logoutOpen, setLogoutOpen] = useState(false);
 

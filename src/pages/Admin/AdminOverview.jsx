@@ -13,7 +13,7 @@ import useUsers from "../../hooks/useUsers";
 import useEvents from "../../hooks/useEvents";
 import useNotices from "../../hooks/useNotices";
 import useMessages from "../../hooks/useMessages";
-import useDonations from "../../hooks/useDonations"; 
+import useDonationQuery from "../../hooks/useDonationQuery";
 
 const ChartCard = lazy(() => import("../../components/admin/ChartCard"));
 const PieChartCard = lazy(() => import("../../components/admin/PieChartCard"));
@@ -28,7 +28,7 @@ const AdminOverview = () => {
   const { events = [] } = useEvents();
   const { notices = [] } = useNotices();
   const { messages = [] } = useMessages();
-  const { donations = [] } = useDonations();
+  const { donations } = useDonationQuery();
 
   const [year, setYear] = useState(2026);
 
@@ -132,7 +132,7 @@ const AdminOverview = () => {
         <select
           value={year}
           onChange={(e) => setYear(Number(e.target.value))}
-          className="border border-zinc-200 px-3 rounded"
+          className="border border-zinc-200 px-3 rounded outline-none"
         >
           <option value={2025}>2025</option>
           <option value={2026}>2026</option>

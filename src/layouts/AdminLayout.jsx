@@ -4,14 +4,15 @@ import { Outlet } from "react-router-dom";
 import SidebarContent from "../components/SidebarContent";
 import { motion } from "framer-motion";
 import { HiMenu } from "react-icons/hi";
-import { Toaster } from "react-hot-toast"; 
+import { Toaster } from "react-hot-toast";
+import LogoutModal from "../components/modals/LogoutModal";
 
 const AdminLayout = () => {
- 
   const [collapsed, setCollapsed] = useState(
-    localStorage.getItem("sidebar-collapsed") === "true"
+    localStorage.getItem("sidebar-collapsed") === "true",
   );
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [logoutOpen, setLogoutOpen] = useState(false);
 
   const toggleCollapsed = () => {
     setCollapsed((prev) => {
@@ -20,14 +21,17 @@ const AdminLayout = () => {
     });
   };
 
-
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden lang-bn-BD">
       <Toaster position="top-right" />
 
       {/* Desktop Sidebar */}
       <div className="hidden lg:block">
-        <SidebarContent collapsed={collapsed} toggleCollapsed={toggleCollapsed} />
+        <SidebarContent
+          setLogoutOpen={setLogoutOpen}
+          collapsed={collapsed}
+          toggleCollapsed={toggleCollapsed}
+        />
       </div>
 
       {/* Mobile Sidebar */}
@@ -45,6 +49,7 @@ const AdminLayout = () => {
             className="relative w-64 h-full bg-white shadow-xl"
           >
             <SidebarContent
+              setLogoutOpen={setLogoutOpen}
               collapsed={false}
               toggleCollapsed={() => setSidebarOpen(false)}
             />
@@ -69,6 +74,7 @@ const AdminLayout = () => {
         <main className="flex-1 overflow-y-auto p-4 md:p-8">
           <Outlet />
         </main>
+        <LogoutModal isOpen={logoutOpen} onClose={() => setLogoutOpen(false)} />
       </div>
     </div>
   );

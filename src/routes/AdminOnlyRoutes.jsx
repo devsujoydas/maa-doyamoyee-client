@@ -6,7 +6,7 @@ const AdminOnlyRoutes = () => {
 
   if (loading) return <div>Loading...</div>;
 
-  if (!user || user.role !== "admin") {
+  if (!user || user.role !== "ceo") {
     return <Navigate to="/admin" replace />;
   }
 

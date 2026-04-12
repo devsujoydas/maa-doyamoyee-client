@@ -266,6 +266,9 @@
     "login_btn": "Sign In",
     "signup_btn": "Sign Up",
 
+    "login_loading": "Signing in...",
+    "signup_loading": "Signing up...",
+
     "no_account": "Don't have an account?",
     "have_account": "Already have an account?",
 
@@ -442,7 +445,9 @@
     "cancel": "Cancel",
     "confirm": "Logout",
     "success": "Logged out successfully",
-    "error": "Logout failed"
+    "error": "Logout failed",
+
+    "loading": "Logging out..."
   },
 
   "loading": "Loading...",
@@ -453,7 +458,7 @@
     "notices": "No notices available at the moment.",
     "gallery": "No images available in the gallery at the moment."
   },
-   "event_filters": {
+  "event_filters": {
     "all": "All",
     "upcoming": "Upcoming",
     "past": "Past Events"

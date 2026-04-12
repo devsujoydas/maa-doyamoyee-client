@@ -69,37 +69,51 @@ const Contact = () => {
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* PHONE */}
-                <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
-                  <PhoneCall className="w-6 h-6 text-yellow-600" />
-                  <div>
-                    <h4 className="text-sm text-gray-600">
-                      {t("contact_phone")}
-                    </h4>
-                    <p className="text-gray-900 font-medium">
-                      +880 1711-975862
-                    </p>
-                    <p className="text-gray-900 font-medium">
-                      শ্রী সিদ্ধার্থ শংকর রায় (সভাপতি)
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
-                  <PhoneCall className="w-6 h-6 text-yellow-600" />
-                  <div>
-                    <h4 className="text-sm text-gray-600">
-                      {t("contact_phone")}
-                    </h4>
-                    <p className="text-gray-900 font-medium">
-                      +880 1711-645044
-                    </p>
-                    <p className="text-gray-900 font-medium">
-                      শ্রী রঞ্জন কুমার সিংহ (সাধারণ সম্পাদক)
-                    </p>
-                  </div>
+              {/* PHONE */}
+              <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
+                <PhoneCall className="w-6 h-6 text-yellow-600" />
+                <div>
+                  <h4 className="text-sm text-gray-600">
+                    {t("contact_phone")}
+                  </h4>
+                  <p className="text-gray-900 font-medium">+880 1234-567890</p>
+                  <p className="text-gray-900 font-medium">
+                    শ্রী শ্রীঁ রী দয়াময়ী মন্দির পরিচালনা পরিষদ, জামালপুর
+                  </p>
                 </div>
               </div>
+              <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
+                <PhoneCall className="w-6 h-6 text-yellow-600" />
+                <div>
+                  <h4 className="text-sm text-gray-600">
+                    {t("contact_phone")}
+                  </h4>
+                  <p className="text-gray-900 font-medium">+880 1711-975862</p>
+                  <p className="text-gray-900 font-medium">
+                    শ্রী সিদ্ধার্থ শংকর রায়
+                  </p>
+                  <p className="text-gray-900 font-medium">
+                    সভাপতি, শ্রী শ্রীঁ রী দয়াময়ী মন্দির পরিচালনা পরিষদ, জামালপুর
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
+                <PhoneCall className="w-6 h-6 text-yellow-600" />
+                <div>
+                  <h4 className="text-sm text-gray-600">
+                    {t("contact_phone")}
+                  </h4>
+                  <p className="text-gray-900 font-medium">+880 1711-645044</p>
+                  <p className="text-gray-900 font-medium">
+                    শ্রী রঞ্জন কুমার সিংহ
+                  </p>
+                  <p className="text-gray-900 font-medium">
+                    সাধারণ সম্পাদক, শ্রী শ্রীঁ রী দয়াময়ী মন্দির পরিচালনা পরিষদ,
+                    জামালপুর
+                  </p>
+                </div>
+              </div>
+
               {/* ADDRESS */}
               <div className="flex items-center border border-zinc-100 gap-4 bg-white/30 backdrop-blur-lg p-5 rounded-2xl shadow-md hover:shadow-lg transition">
                 <MapPin className="w-6 h-6 text-yellow-600" />
@@ -115,16 +129,6 @@ const Contact = () => {
             </motion.div>
 
             {/* MAP */}
-            <div className="w-full h-64 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d443.1118780753955!2d89.94966128738012!3d24.92327856258347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fd7f6c3dfab4c3%3A0xb69912834310fba9!2sDoyamoyee%20Temple!5e1!3m2!1sbn!2sbd!4v1772283605228!5m2!1sbn!2sbd"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                title="Location Map"
-              />
-            </div>
           </div>
 
           {/* RIGHT FORM */}
@@ -144,7 +148,7 @@ const Contact = () => {
                   value={form.name}
                   onChange={handleChange}
                   placeholder={t("enter_name")}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition"
+                  className="input-field"
                 />
               </div>
 
@@ -159,7 +163,7 @@ const Contact = () => {
                   value={form.email}
                   onChange={handleChange}
                   placeholder={t("email_placeholder")}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition"
+                  className="input-field"
                 />
               </div>
 
@@ -173,7 +177,7 @@ const Contact = () => {
                   value={form.phone}
                   onChange={handleChange}
                   placeholder={t("phone_placeholder")}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition"
+                  className="input-field"
                 />
               </div>
 
@@ -185,10 +189,10 @@ const Contact = () => {
                 <textarea
                   name="message"
                   value={form.message}
-                  onChange={handleChange}
+                  onChange={handleChange}j
                   placeholder={t("message_placeholder")}
                   rows={5}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition resize-none"
+                  className="input-field resize-y"
                 />
               </div>
 
@@ -202,6 +206,17 @@ const Contact = () => {
               </button>
             </form>
           </motion.div>
+        </div>
+
+        <div className="max-w-352.5 mx-auto mt-10 h-120 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d443.1118780753955!2d89.94966128738012!3d24.92327856258347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fd7f6c3dfab4c3%3A0xb69912834310fba9!2sDoyamoyee%20Temple!5e1!3m2!1sbn!2sbd!4v1772283605228!5m2!1sbn!2sbd"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            loading="lazy"
+            title="Location Map"
+          />
         </div>
       </div>
     </section>

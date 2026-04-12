@@ -14,14 +14,15 @@ const Signup = () => {
   const navigate = useNavigate();
   const { setUser } = useAuth();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const signUpHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const name = e.target.fullname.value;
     const phone = e.target.phone.value;
     const email = e.target.email.value;
     const pwd = e.target.password.value;
-
     try {
       const res = await api.post("/auth/signup", {
         name,
@@ -33,9 +34,11 @@ const Signup = () => {
       setUser(res.data.user);
       localStorage.setItem("accessToken", res.data.accessToken);
       toast.success(res.data.message || "Signup successful!");
+      setLoading(false);
       navigate("/");
     } catch (err) {
       toast.error(err.response?.data?.message || "Signup failed!");
+      setLoading(false); // <-- MUST ADD
     }
   };
 
@@ -133,7 +136,7 @@ const Signup = () => {
                 <button
                   type="button"
                   onClick={() => setShow(!show)}
-                  className="absolute right-4 cursor-pointer"
+                  className="absolute right-4 top-3 cursor-pointer"
                 >
                   {show ? <Eye size={18} /> : <EyeClosed size={18} />}
                 </button>
@@ -150,8 +153,14 @@ const Signup = () => {
             </label>
 
             {/* Button */}
-            <button className="btn-primary">
-              {t("auth.signup_btn")}
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn-primary disabled:opacity-60"
+            >
+              {loading
+                ? `${t("auth.signup_loading")}`
+                : `${t("auth.signup_btn")}`}
             </button>
           </form>
         </div>

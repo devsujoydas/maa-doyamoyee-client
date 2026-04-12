@@ -7,7 +7,7 @@ const AdminPrivateRoutes = ({children}) => {
 
   if (loading) return <div>Loading...</div>;
 
-  if (!user || !["admin", "moderator"].includes(user.role)) {
+  if (!user || !["admin", "ceo"].includes(user.role)) {
     return <Navigate to="/" replace />;
   }
 

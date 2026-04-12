@@ -1,12 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../utils/api";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   // 🔥 fetch user
   const fetchUser = async (token) => {
@@ -62,11 +64,12 @@ export const AuthProvider = ({ children }) => {
 
   const deleteProfile = async () => {
     try {
-      const res = await api.delete("/profile");
+      const res = await api.delete("/users/profile");
 
-      toast.success(res.data.message);
+      toast.success(t("delete_account.success"));
     } catch (err) {
       console.error("Delete Proile:", err);
+      toast.error(t("delete_account.error"));
     } finally {
       setUser(null);
       localStorage.removeItem("accessToken");

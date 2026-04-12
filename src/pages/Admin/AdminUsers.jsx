@@ -15,7 +15,7 @@ import { deleteUserByAdmin, changeUserRole } from "../../services/userService";
 
 import { useAuth } from "../../AuthProvider/authProvider";
 import LoadingSpinner from "../../components/LoadingSpinner";
- 
+
 const AdminUsers = () => {
   const { user: loggedInUser } = useAuth();
 
@@ -26,9 +26,6 @@ const AdminUsers = () => {
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
 
-  // =====================
-  // DELETE USER
-  // =====================
   const deleteMutation = useMutation({
     mutationFn: deleteUserByAdmin,
 
@@ -44,9 +41,6 @@ const AdminUsers = () => {
     },
   });
 
-  // =====================
-  // CHANGE ROLE
-  // =====================
   const roleMutation = useMutation({
     mutationFn: changeUserRole,
 
@@ -80,16 +74,17 @@ const AdminUsers = () => {
     setSelectedUser(user);
     setViewOpen(true);
   };
-
-  console.log(users);
+ 
   // =====================
   // RULES
   // =====================
-  const canChangeRole = loggedInUser?.role === "admin";
+  const canChangeRole = ["admin", "ceo"].includes(loggedInUser?.role);
 
   return (
     <div className="flex flex-col space-y-6">
-      <h1 className="text-lg md:text-2xl  font-bold">Users Management ({users.length})</h1>
+      <h1 className="text-lg md:text-2xl  font-bold">
+        Users Management ({users.length})
+      </h1>
 
       {/* TABLE */}
       <motion.div
@@ -161,11 +156,14 @@ const AdminUsers = () => {
                           onChange={(e) =>
                             handleRoleChange(u._id, e.target.value)
                           }
-                          className="border border-zinc-200 px-2 py-1 rounded outline-none"
+                          className="border border-zinc-200 px-2  rounded outline-none"
                           disabled={roleMutation.isLoading}
                         >
                           <option value="user">User</option>
-                          <option value="moderator">Moderator</option>
+
+                          {loggedInUser.role == "ceo" && (
+                            <option value="ceo">CEO</option>
+                          )}
                           <option value="admin">Admin</option>
                         </select>
                       ) : (

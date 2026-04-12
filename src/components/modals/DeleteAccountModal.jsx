@@ -16,13 +16,9 @@ const DeleteAccountModal = ({ isOpen, onClose }) => {
     try {
       setLoading(true);
       await deleteProfile();
-
-      toast.success(t("delete_account.success"));
       onClose();
     } catch (err) {
-      toast.error(
-        err?.response?.data?.message || t("delete_account.error")
-      );
+      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -36,7 +32,6 @@ const DeleteAccountModal = ({ isOpen, onClose }) => {
         exit={{ opacity: 0, scale: 0.9 }}
         className="p-6 text-center"
       >
-
         {/* Icon */}
         <div className="flex justify-center mb-3">
           <div className="bg-red-100 p-3 rounded-full">
@@ -50,9 +45,7 @@ const DeleteAccountModal = ({ isOpen, onClose }) => {
         </h2>
 
         {/* Description */}
-        <p className="text-gray-600 mt-2">
-          {t("delete_account.description")}
-        </p>
+        <p className="text-gray-600 mt-2">{t("delete_account.description")}</p>
 
         <p className="text-xs text-red-500 mt-2">
           {t("delete_account.warning")}
@@ -73,9 +66,7 @@ const DeleteAccountModal = ({ isOpen, onClose }) => {
             className="px-4 py-2 cursor-pointer rounded-lg bg-red-600 text-white hover:bg-red-700 flex items-center gap-2"
           >
             <Trash2 size={16} />
-            {loading
-              ? "Deleting..."
-              : t("delete_account.confirm")}
+            {loading ? "Deleting..." : t("delete_account.confirm")}
           </button>
         </div>
       </motion.div>

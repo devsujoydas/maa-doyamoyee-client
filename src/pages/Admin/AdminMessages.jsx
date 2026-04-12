@@ -9,8 +9,8 @@ import {
   Send,
   Mail,
 } from "lucide-react";
- 
-import Button from "../../components/ui/Button"; 
+
+import Button from "../../components/ui/Button";
 import useMessages from "../../hooks/useMessages";
 import toast from "react-hot-toast";
 
@@ -45,7 +45,7 @@ const AdminMessages = () => {
     toast.success("Reply send successfully");
     setReplyTexts((prev) => ({ ...prev, [id]: "" }));
   };
- 
+
   const filtered = messages.filter((m) => {
     if (filter === "read") return m.isRead;
     if (filter === "unread") return !m.isRead;
@@ -58,14 +58,11 @@ const AdminMessages = () => {
 
       {/* Search + Filter */}
       <div className="flex gap-3 mb-6">
-        <div className="relative flex-1 flex items-center px-4 border rounded-md border-zinc-300 ">
-          <Search
-            className=" "
-            size={16}
-          />
+        <div className="relative flex-1 flex items-center px-4  border rounded-md border-zinc-300 ">
+          <Search className=" " size={16} />
           <input
             placeholder="Search messages..."
-            className="pl-3 h-full outline-none w-full"
+            className="pl-3 py-2 h-full outline-none w-full"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -73,7 +70,9 @@ const AdminMessages = () => {
 
         {["all", "read", "unread"].map((f) => (
           <button
-            className="btn-primary"
+            className={`px-3 py-1 rounded-full border border-zinc-200 cursor-pointer ${
+              filter === f ? "bg-black text-white" : ""
+            }`}
             key={f}
             size="sm"
             onClick={() => setFilter(f)}

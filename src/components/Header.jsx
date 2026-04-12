@@ -199,7 +199,7 @@ const Header = ({ setLogoutOpen }) => {
                 >
                   {user ? (
                     <>
-                      {(user.role === "admin" || user.role === "moderator") && (
+                      {(user.role === "admin" || user.role === "ceo") && (
                         <Link
                           to="/admin"
                           className="block px-4 py-2 hover:bg-yellow-100 hover:text-black transition-colors"
@@ -411,7 +411,7 @@ const Header = ({ setLogoutOpen }) => {
                     <>
                       <p className=" text-gray-500">Account</p>
 
-                      {(user.role === "admin" || user.role === "moderator") && (
+                      {(user.role === "admin" || user.role === "ceo") && (
                         <Link
                           to="/admin"
                           onClick={() => setMenuOpen(false)}

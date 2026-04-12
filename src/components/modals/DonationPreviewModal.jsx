@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import Modal from "../ui/Modal";
 
 const DonationPreviewModal = ({ isOpen, onClose, donation }) => {
   useEffect(() => {
@@ -38,6 +39,7 @@ Status: ${status}
 `.trim();
 
   return (
+    // <Modal wClass="max-w-2xl" isOpen={isOpen} onClose={onClose}>
     <AnimatePresence>
       <motion.div
         className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
@@ -45,6 +47,14 @@ Status: ${status}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
+        <motion.div
+          className="fixed h-screen inset-0 bg-black/40 "
+          onClick={onClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        />
+
         <motion.div
           className="bg-white w-full max-w-2xl rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto"
           initial={{ scale: 0.8 }}
@@ -59,39 +69,57 @@ Status: ${status}
             ✖
           </button>
 
-          <h2 className="text-xl font-bold mb-4">Donation Details</h2>
-
           <div className="space-y-3 text-sm">
-
             {/* BASIC INFO */}
-            <div className="space-y-1">
-              <p><b>Name:</b> {accountName}</p>
-              <p><b>Email:</b> {email}</p>
-              <p><b>Phone:</b> {phone}</p>
-              <p><b>Amount:</b> ৳{paymentAmount}</p>
-              <p><b>Status:</b> {status}</p>
-              <p><b>Method:</b> {paymentMethod}</p>
+
+            <h2 className="text-xl font-bold mb-2 md:mb-5">
+              Donation Transaction Details
+            </h2>
+
+            {/* TOP INFO (BANK STYLE) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-0.5 md:gap-3 bg-gray-50 p-2 md:p-4 rounded-xl border border-zinc-200 mb-2 md:mb-5 text-sm">
+              <div>
+                <b>Name:</b> {accountName}
+              </div>
+              <div>
+                <b>Email:</b> {email}
+              </div>
+              <div>
+                <b>Phone:</b> {phone}
+              </div>
+              <div>
+                <b>Amount:</b> ৳{paymentAmount}
+              </div>
+              <div>
+                <b>Status:</b> {status}
+              </div>
+              <div>
+                <b>Method:</b> {paymentMethod}
+              </div>
             </div>
 
-            {/* BANK */}
+            {/* BANK DETAILS */}
             {paymentMethod === "Bank" && bankPayment && (
-              <div className="bg-gray-50 p-3 rounded-lg">
+              <div className="bg-blue-50 border border-zinc-200 p-3 rounded-lg mb-4 text-sm">
                 <p><b>Bank:</b> {bankPayment.bankName}</p>
                 <p><b>Account:</b> {bankPayment.accountNumber}</p>
+                <p><b>Branch:</b> {bankPayment.branchName}</p>
               </div>
             )}
 
-            {/* MOBILE */}
+             {/* MOBILE DETAILS */}
             {paymentMethod === "MobileBanking" && mobilePayment && (
-              <div className="bg-gray-50 p-3 rounded-lg">
+              <div className="bg-green-50 border border-zinc-200 p-2 md:p-3 rounded-lg mb-2 md:mb-4 text-sm">
                 <p><b>Provider:</b> {mobilePayment.provider}</p>
-                <p><b>Transaction ID:</b> {mobilePayment.transactionId}</p>
                 <p><b>Sender:</b> {mobilePayment.senderNumber}</p>
+                <p><b>Transaction ID:</b> {mobilePayment.transactionId}</p>
               </div>
             )}
+
+            
 
             {/* IMAGE PREVIEW */}
-            <div className="mt-4">
+            <div className="md:mt-4 mt-2">
               <p className="font-semibold mb-2">Payment Proof</p>
 
               {proofImage ? (
@@ -102,10 +130,10 @@ Status: ${status}
                   className="block overflow-hidden rounded-lg border border-zinc-300 hover:opacity-90 transition"
                 >
                   <img
-                  loading="lazy"
+                    loading="lazy"
                     src={proofImage}
                     alt="payment proof"
-                    className="w-full max-h-80 object-contain"
+                    className="w-full max-h-65 object-contain"
                   />
                 </a>
               ) : (
@@ -113,18 +141,18 @@ Status: ${status}
               )}
             </div>
 
-            {/* MESSAGE */}
+           {/* MESSAGE */}
             {message && (
-              <div className="mt-3 bg-yellow-50 p-3 rounded">
+              <div className="bg-yellow-50 border border-zinc-200 p-2 md:p-3 rounded-lg text-sm">
                 <b>Message:</b>
-                <p className="mt-1 text-gray-700">{message}</p>
+                <p className="md:mt-1 text-gray-700">{message}</p>
               </div>
             )}
-
           </div>
         </motion.div>
       </motion.div>
     </AnimatePresence>
+    // </Modal>
   );
 };
 
