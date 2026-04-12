@@ -11,6 +11,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import AuthPrivateRoutes from "./AuthPrivateRoutes";
 import AdminPrivateRoutes from "./AdminPrivateRoutes"; 
 import ModeratorPrivateRoutes from "./AdminOnlyRoutes";
+import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 
 /* ---------------- Lazy Pages ---------------- */
 const Home = lazy(() => import("../pages/Home/Home"));
@@ -98,6 +99,7 @@ export const router = createBrowserRouter([
       { path: "/events/:id", element: withSuspense(<EventDetailsPage />) },
 
       { path: "/notices", element: withSuspense(<NoticePage />) },
+      { path: "/terms-and-conditions", element: withSuspense(<TermsAndConditions />) },
 
       { path: "/blogs", element: withSuspense(<BlogsPage />) },
       { path: "/blogs/:id", element: withSuspense(<BlogsDetails />) },

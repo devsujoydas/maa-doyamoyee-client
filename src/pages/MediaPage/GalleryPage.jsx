@@ -47,7 +47,7 @@ const GalleryPage = () => {
             <h2 className="text-xl font-bold mb-3">
               {t("gallery.newImages.title")}
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
               {newImages.map((img) => (
                 <GalleryCard key={img._id} img={img} />
               ))}
@@ -57,7 +57,7 @@ const GalleryPage = () => {
             <h2 className="text-xl font-bold mt-8 mb-3">
               {t("gallery.oldImages.title")}
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
               {oldImages.map((img) => (
                 <GalleryCard key={img._id} img={img} />
               ))}

@@ -33,11 +33,11 @@ const Signup = () => {
 
       setUser(res.data.user);
       localStorage.setItem("accessToken", res.data.accessToken);
-      toast.success(res.data.message || "Signup successful!");
+      toast.success(t("auth.signUpSuccess"));
       setLoading(false);
       navigate("/");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Signup failed!");
+      toast.error(t("auth.signUpFailed"));
       setLoading(false); // <-- MUST ADD
     }
   };
@@ -146,10 +146,16 @@ const Signup = () => {
             </div>
 
             {/* Terms */}
+
             <label className="flex items-center gap-2 text-sm">
               <input type="checkbox" required />
               {t("auth.agree_terms")}{" "}
-              <span className="font-semibold">{t("auth.terms")}</span>
+              <Link
+                to="/terms-and-conditions"
+                className="font-semibold  hover:underline"
+              >
+                {t("auth.terms")}
+              </Link>
             </label>
 
             {/* Button */}

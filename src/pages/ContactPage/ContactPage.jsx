@@ -197,8 +197,7 @@ const Contact = () => {
                 <textarea
                   name="message"
                   value={form.message}
-                  onChange={handleChange}
-                  j
+                  onChange={handleChange}                  
                   placeholder={t("message_placeholder")}
                   rows={5}
                   className="input-field resize-y"

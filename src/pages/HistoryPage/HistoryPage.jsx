@@ -76,13 +76,13 @@ const HistoryPage = () => {
       {sections.map((section, idx) => (
         <motion.div
           key={idx}
-          className="mb-9 last:mb-0"
+          className=" mb-6 md:mb-9 last:mb-0"
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <p className="text-justify leading-relaxed whitespace-pre-line text-lg">
+          <p className="text-justify leading-relaxed whitespace-pre-line text-sm md:text-lg">
             {section.content}
           </p>
         </motion.div>

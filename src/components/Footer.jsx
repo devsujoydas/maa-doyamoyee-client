@@ -52,7 +52,7 @@ const Footer = () => {
 
           {/* About */}
           <div className="lg:w-1/3">
-            <h3 className="text-2xl font-bold text-yellow-600 mb-4 ">{t("site_name")}</h3>
+            <h3 className="text-xl md:text-2xl font-bold text-gradient mb-4 ">{t("site_name")}</h3>
             <p className="text-sm leading-relaxed mb-4">{t("footer_about_text")}</p>
             <div className="space-y-2 text-sm">
               <p className="flex items-center gap-2">
@@ -71,25 +71,25 @@ const Footer = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10">
             {/* Temple */}
             <div>
-              <h3 className="text-xl font-bold text-yellow-600 mb-4 ">{t("nav_temple_title")}</h3>
+              <h3 className="text-xl font-bold text-gradient mb-4 ">{t("nav_temple_title")}</h3>
               <ul className="space-y-2">{renderLinks(templeLinks)}</ul>
             </div>
 
             {/* Media */}
             <div>
-              <h3 className="text-xl font-bold text-yellow-600 mb-4 ">{t("nav_media")}</h3>
+              <h3 className="text-xl font-bold text-gradient mb-4 ">{t("nav_media")}</h3>
               <ul className="space-y-2">{renderLinks(mediaLinks)}</ul>
             </div>
 
             {/* Management */}
             <div>
-              <h3 className="text-xl font-bold text-yellow-600 mb-4 ">{t("nav_management")}</h3>
+              <h3 className="text-xl font-bold text-gradient mb-4 ">{t("nav_management")}</h3>
               <ul className="space-y-2">{renderLinks(managementLinks)}</ul>
             </div>
 
             {/* Others */}
             <div>
-              <h3 className="text-xl font-bold text-yellow-600 mb-4 ">{t("nav_media")}</h3>
+              <h3 className="text-xl font-bold text-gradient mb-4 ">{t("nav_media")}</h3>
               <ul className="space-y-2">{renderLinks(otherLinks)}</ul>
             </div>
           </div>
@@ -98,7 +98,7 @@ const Footer = () => {
 
         {/* Right Column: Map */}
         <div className="lg:w-1/3">
-          <h3 className="text-xl font-bold text-yellow-600 mb-4 ">{t("footer_location_title")}</h3>
+          <h3 className="text-xl font-bold text-gradient mb-4 ">{t("footer_location_title")}</h3>
           <div className="w-full h-64 rounded-lg overflow-hidden border border-gray-200 ">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d443.1118780753955!2d89.94966128738012!3d24.92327856258347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fd7f6c3dfab4c3%3A0xb69912834310fba9!2sDoyamoyee%20Temple!5e1!3m2!1sbn!2sbd!4v1772283605228!5m2!1sbn!2sbd"

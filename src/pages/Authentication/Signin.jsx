@@ -26,11 +26,11 @@ const Signin = () => {
       localStorage.setItem("accessToken", res.data.accessToken);
 
       setUser(res.data.user);
-      toast.success(res.data.message || "Sign In successful!");
+      toast.success(t("auth.signInSuccess"));
       setLoading(false);
       navigate("/profile");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Sign In failed!");
+      toast.error(t("auth.signInFailed"));
       setLoading(false);
     }
   };
@@ -109,10 +109,15 @@ const Signin = () => {
 
             {/* Terms + Forgot */}
             <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-sm">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" required className="w-4 h-4" />
+              <label className="flex items-center gap-2 text-sm">
+                <input type="checkbox" required />
                 {t("auth.agree_terms")}{" "}
-                <span className="font-semibold">{t("auth.terms")}</span>
+                <Link
+                  to="/terms-and-conditions"
+                  className="font-semibold  hover:underline"
+                >
+                  {t("auth.terms")}
+                </Link>
               </label>
 
               <Link to="/forgot-password" className="hover:underline">
@@ -121,7 +126,7 @@ const Signin = () => {
             </div>
 
             {/* Button */}
-             <button
+            <button
               type="submit"
               disabled={loading}
               className="btn-primary disabled:opacity-60"
@@ -129,7 +134,7 @@ const Signin = () => {
               {loading
                 ? `${t("auth.login_loading")}`
                 : `${t("auth.login_btn")}`}
-            </button> 
+            </button>
           </form>
         </div>
       </motion.div>

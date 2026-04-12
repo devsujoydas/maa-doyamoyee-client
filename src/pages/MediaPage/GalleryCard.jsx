@@ -37,7 +37,7 @@ const GalleryCard = ({ img }) => {
           href={img.img.url}
           data-fancybox="gallery-public"
           data-caption={img.title}
-          className="block h-70 overflow-hidden rounded-lg border border-zinc-200 shadow-lg"
+          className="block h-40 md:h-70 overflow-hidden rounded-lg border border-zinc-200 shadow-lg"
         >
           <img
             src={img800}

@@ -110,12 +110,12 @@
 
   "gallery": {
     "newImages": {
-      "title": "New Images – Shree Shree Ri Doyamoyee Mandir",
-      "description": "The new images of Shree Shree Ri Doyamoyee Mandir offer devotees and visitors a fresh experience. These images showcase recent renovations, mandap, main gate, and modern architectural beauty of the temple. The new visuals reflect the spiritual charm and grandeur of Shree Shree Ri Doyamoyee Mandir."
+      "title": "New Images",
+      "description": "The new images of Shree Shree Ri Doyamoyee Temple offer devotees and visitors a fresh experience. These images showcase recent renovations, mandap, main gate, and modern architectural beauty of the temple. The new visuals reflect the spiritual charm and grandeur of Shree Shree Ri Doyamoyee Temple."
     },
     "oldImages": {
-      "title": "Old Images – Shree Shree Ri Doyamoyee Mandir",
-      "description": "The old images of Shree Shree Ri Doyamoyee Mandir capture its heritage, ancient architecture, and memorable moments of devotees. These images preserve the history and timeless beauty of Shree Shree Ri Doyamoyee Mandir, allowing visitors to experience its spiritual legacy."
+      "title": "Old Images",
+      "description": "The old images of Shree Shree Ri Doyamoyee Temple capture its heritage, ancient architecture, and memorable moments of devotees. These images preserve the history and timeless beauty of Shree Shree Ri Doyamoyee Temple, allowing visitors to experience its spiritual legacy."
     }
   },
 
@@ -268,6 +268,11 @@
 
     "login_loading": "Signing in...",
     "signup_loading": "Signing up...",
+
+    "signInSuccess": "Sign in successful",
+    "signUpSuccess": "Sign up successful",
+    "signInFailed": "Sign in failed",
+    "signUpFailed": "Sign up failed",
 
     "no_account": "Don't have an account?",
     "have_account": "Already have an account?",
@@ -462,5 +467,25 @@
     "all": "All",
     "upcoming": "Upcoming",
     "past": "Past Events"
+  },
+
+   "terms": {
+    "title": "Terms & Conditions",
+    "intro": "By using this website, you agree to follow these Terms & Conditions. If you do not agree, please do not use the site.",
+    "purposeTitle": "Purpose of the Website",
+    "purpose": "This website provides information about Shri Shri Ri Doyamoyee Temple, including religious events, festivals, and donation activities.",
+    "donationTitle": "Donations",
+    "donation1": "All donations are voluntary.",
+    "donation2": "Donations are used for temple maintenance, religious events, and community service.",
+    "donation3": "No personal benefit or return is guaranteed in exchange for donations.",
+    "userTitle": "User Conduct",
+    "user1": "Users can visit and browse the website.",
+    "user2": "Users can like and comment on posts.",
+    "user3": "Users must not post offensive, abusive, or disrespectful comments.",
+    "user4": "Users must not spam, hack, or misuse the system.",
+    "infoTitle": "Information Accuracy",
+    "info": "We try to keep all information accurate, but we do not guarantee complete accuracy at all times.",
+    "changeTitle": "Changes to Terms",
+    "change": "We may update these Terms & Conditions at any time without prior notice."
   }
 }

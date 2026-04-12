@@ -269,13 +269,14 @@ const Header = ({ setLogoutOpen }) => {
       </div>
 
       {/* Mobile Menu */}
+
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="lg:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
+            className="lg:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm text-"
             onClick={() => setMenuOpen(false)}
           >
             <div className=" bg-black/40 backdrop-blur-sm p-5 h-dvh"></div>
@@ -306,13 +307,10 @@ const Header = ({ setLogoutOpen }) => {
                 </div>
 
                 {/* NAV ITEMS - ECOMMERCE STYLE ACCORDION */}
-                <div className="space-y-2">
+                <div className="space-y-1">
                   {navItems.map((item, idx) =>
                     item.dropdown ? (
-                      <div
-                        key={idx}
-                        className=" rounded-lg overflow-hidden text-sm"
-                      >
+                      <div key={idx} className=" rounded-lg overflow-hidden">
                         {/* CATEGORY BUTTON */}
                         <button
                           onClick={() => toggleMobileDropdown(idx)}
@@ -335,7 +333,7 @@ const Header = ({ setLogoutOpen }) => {
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: "auto", opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              className="bg-white text-xs"
+                              className="bg-white text-sm"
                             >
                               {item.dropdown.map((sub, i) => (
                                 <NavLink
@@ -363,7 +361,7 @@ const Header = ({ setLogoutOpen }) => {
                         to={item.to}
                         onClick={() => setMenuOpen(false)}
                         className={({ isActive }) =>
-                          `block px-4 py-1.5 rounded-sm  transition text-sm ${
+                          `block px-4 py-1.5 rounded-sm  transition  ${
                             isActive
                               ? "bg-yellow-400 text-black font-semibold"
                               : "hover:bg-gray-100 "
@@ -377,7 +375,7 @@ const Header = ({ setLogoutOpen }) => {
                 </div>
 
                 {/* LANGUAGE (ecommerce style box) */}
-                <div className="border border-zinc-200 rounded-lg p-3 space-y-2 text-xs">
+                <div className="border border-zinc-200 rounded-lg p-3 space-y-2 ">
                   <p className=" text-gray-500">Language</p>
 
                   <div className="flex gap-2">
@@ -406,7 +404,7 @@ const Header = ({ setLogoutOpen }) => {
                 </div>
 
                 {/* AUTH SECTION (ecommerce account box style) */}
-                <div className="border border-zinc-200  rounded-lg p-3 space-y-2 text-xs">
+                <div className="border border-zinc-200  rounded-lg p-3 space-y-2 ">
                   {user ? (
                     <>
                       <p className=" text-gray-500">Account</p>
@@ -425,7 +423,7 @@ const Header = ({ setLogoutOpen }) => {
                         to="/profile"
                         onClick={() => setMenuOpen(false)}
                         className={({ isActive }) =>
-                          `block px-4 py-1.5 rounded-sm  transition text-sm ${
+                          `block px-4 py-1.5 rounded-sm  transition  ${
                             isActive
                               ? "bg-yellow-400 text-black font-semibold"
                               : "hover:bg-gray-100 "
@@ -447,35 +445,36 @@ const Header = ({ setLogoutOpen }) => {
                     </>
                   ) : (
                     <>
-                      <p className="text-sm text-gray-500">Account</p>
+                      <p className=" text-gray-500">Account</p>
+                      <div className="grid grid-cols-2 gap-3 text-center">
+                        <NavLink
+                          to="/signin"
+                          onClick={() => setMenuOpen(false)}
+                          className={({ isActive }) =>
+                            `block px-4 py-1.5 rounded-sm  transition  ${
+                              isActive
+                                ? "bg-yellow-400 text-black font-semibold"
+                                : "hover:bg-gray-100 border border-zinc-200"
+                            }`
+                          }
+                        >
+                          {t("auth_signin")}
+                        </NavLink>
 
-                      <NavLink
-                        to="/signin"
-                        onClick={() => setMenuOpen(false)}
-                        className={({ isActive }) =>
-                          `block px-4 py-1.5 rounded-sm  transition text-sm ${
-                            isActive
-                              ? "bg-yellow-400 text-black font-semibold"
-                              : "hover:bg-gray-100 "
-                          }`
-                        }
-                      >
-                        {t("auth_signin")}
-                      </NavLink>
-
-                      <NavLink
-                        to="/signup"
-                        onClick={() => setMenuOpen(false)}
-                        className={({ isActive }) =>
-                          `block px-4 py-1.5 rounded-sm  transition text-sm ${
-                            isActive
-                              ? "bg-yellow-400 text-black font-semibold"
-                              : "hover:bg-gray-100 "
-                          }`
-                        }
-                      >
-                        {t("auth_signup")}
-                      </NavLink>
+                        <NavLink
+                          to="/signup"
+                          onClick={() => setMenuOpen(false)}
+                          className={({ isActive }) =>
+                            `block px-4 py-1.5 rounded-sm  transition ${
+                              isActive
+                                ? "bg-yellow-400 text-black font-semibold"
+                                : "hover:bg-gray-100 border border-zinc-200"
+                            }`
+                          }
+                        >
+                          {t("auth_signup")}
+                        </NavLink>
+                      </div>
                     </>
                   )}
                 </div>
