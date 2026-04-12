@@ -108,7 +108,7 @@ const Signin = () => {
             </div>
 
             {/* Terms + Forgot */}
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-sm">
+            <div className="flex flex-row justify-between gap-2 text-sm">
               <label className="flex items-center gap-2 text-sm">
                 <input type="checkbox" required />
                 {t("auth.agree_terms")}{" "}

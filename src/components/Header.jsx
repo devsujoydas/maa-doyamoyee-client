@@ -202,7 +202,7 @@ const Header = ({ setLogoutOpen }) => {
                       {(user.role === "admin" || user.role === "ceo") && (
                         <Link
                           to="/admin"
-                          className="block px-4 py-2 hover:bg-yellow-100 hover:text-black transition-colors"
+                          className="block px-4 py-2 hover:bg-yellow-100 hover:text-black transition-colors border border-zinc-100"
                         >
                           {t("auth_dashboard")}
                         </Link>
@@ -210,7 +210,7 @@ const Header = ({ setLogoutOpen }) => {
                       <Link
                         to="/profile"
                         onClick={() => setUserMenuOpen(!userMenuOpen)}
-                        className="block px-4 py-2  hover:bg-yellow-100 hover:text-black  transition-colors"
+                        className="block px-4 py-2  hover:bg-yellow-100 hover:text-black  transition-colors border border-zinc-100"
                       >
                         {t("auth_profile")}
                       </Link>
@@ -409,30 +409,37 @@ const Header = ({ setLogoutOpen }) => {
                     <>
                       <p className=" text-gray-500">Account</p>
 
-                      {(user.role === "admin" || user.role === "ceo") && (
-                        <Link
-                          to="/admin"
+                      <div className="flex gap-3 ">
+                        {(user.role === "admin" || user.role === "ceo") && (
+                          <NavLink
+                            to="/admin"
+                            onClick={() => setMenuOpen(false)}
+                            className={({ isActive }) =>
+                              `block px-4 py-1.5 rounded-sm  transition flex-1  ${
+                                isActive
+                                  ? "bg-yellow-400 text-black font-semibold"
+                                  : "hover:bg-gray-100 border border-zinc-200"
+                              }`
+                            }
+                          >
+                            {t("auth_dashboard")}
+                          </NavLink>
+                        )}
+
+                        <NavLink
+                          to="/profile"
                           onClick={() => setMenuOpen(false)}
-                          className="block py-2 px-3 rounded-md hover:bg-gray-100"
+                          className={({ isActive }) =>
+                            `block px-4 py-1.5 rounded-sm  transition flex-1  ${
+                              isActive
+                                ? "bg-yellow-400 text-black font-semibold"
+                                : "hover:bg-gray-100 border border-zinc-200"
+                            }`
+                          }
                         >
-                          {t("auth_dashboard")}
-                        </Link>
-                      )}
-
-                      <NavLink
-                        to="/profile"
-                        onClick={() => setMenuOpen(false)}
-                        className={({ isActive }) =>
-                          `block px-4 py-1.5 rounded-sm  transition  ${
-                            isActive
-                              ? "bg-yellow-400 text-black font-semibold"
-                              : "hover:bg-gray-100 "
-                          }`
-                        }
-                      >
-                        {t("auth_profile")}
-                      </NavLink>
-
+                          {t("auth_profile")}
+                        </NavLink>
+                      </div>
                       <button
                         onClick={() => {
                           setLogoutOpen(true);

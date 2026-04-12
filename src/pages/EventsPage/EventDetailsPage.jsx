@@ -10,6 +10,8 @@ import { formatDateDynamic } from "../../utils/formatDateDynamic";
 import { useTranslation } from "react-i18next";
 import useEvents from "../../hooks/useEvents";
 import api from "../../utils/api";
+import SEO from "../../components/SEO";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const EventDetailsPage = () => {
   const { t } = useTranslation();
@@ -39,8 +41,7 @@ const EventDetailsPage = () => {
     return () => Fancybox.unbind("[data-fancybox='event-gallery']");
   }, [id]);
 
-  if (loading)
-    return <p className="text-center py-20 text-gray-500">Loading...</p>;
+  if (loading) return <LoadingSpinner />;
 
   if (!event)
     return <p className="text-center py-20 text-gray-500">Event not found.</p>;
@@ -58,9 +59,7 @@ const EventDetailsPage = () => {
 
       {/* Decorative blobs */}
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>
-           <div className="absolute hidden xl:block bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
-
-
+      <div className="absolute hidden xl:block bottom-10 right-10 w-52 h-52 bg-red-600 blur-3xl opacity-20 rounded-full"></div>
 
       <div className="custom-container">
         <button

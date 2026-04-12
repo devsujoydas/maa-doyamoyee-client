@@ -20,7 +20,6 @@ const BlogCard = ({ blog, type }) => {
   const { user } = useAuth();
   const [reacts, setReacts] = useState(blog?.reacts || []);
   const [loading, setLoading] = useState(false);
-  const [shareOpen, setShareOpen] = useState(false);
 
   useEffect(() => {
     setReacts(blog?.reacts || []);
@@ -34,7 +33,7 @@ const BlogCard = ({ blog, type }) => {
 
       const res = await api.get(`/users/profile/${blog?.author?._id}`);
 
-      setAuthor(res.data.user);
+      setAuthor(res.data);
       setViewModalOpen(true);
     } catch (error) {
       console.error("Author fetch error:", error);
@@ -72,8 +71,7 @@ const BlogCard = ({ blog, type }) => {
 
   const handleShare = async () => {
     await navigator.clipboard.writeText(shareUrl);
-    toast.success("Link copied! Share it anywhere 🚀");
-    setShareOpen(true);
+    toast.success(`${t("link_copied")}`);
   };
 
   return (
@@ -83,7 +81,7 @@ const BlogCard = ({ blog, type }) => {
       transition={{ duration: 0.3 }}
       className="shadow hover:shadow-lg transition-all border border-zinc-200 rounded-lg overflow-hidden"
     >
-      <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl p-3 transition-all duration-300 flex flex-col lang-bn-BD">
+      <div className="p-3 transition-all duration-300 flex flex-col lang-bn-BD">
         {/* 🔹 Blog Image */}
         <div className="h-70 w-full overflow-hidden rounded-lg">
           <Link to={`/blogs/${blog?._id}`}>
@@ -152,8 +150,6 @@ const BlogCard = ({ blog, type }) => {
                   </span>
                 </div>
               </Link>
-
-        
             </div>
 
             <button
@@ -166,7 +162,7 @@ const BlogCard = ({ blog, type }) => {
           </div>
 
           {/* Author */}
-          {user?.role === "admin" && (
+          {(user?.role === "admin" || user?.role === "ceo") && (
             <div className="flex items-center gap-3 mt-4">
               <img
                 src={blog?.author?.profileImage.url}

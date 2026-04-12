@@ -140,7 +140,7 @@ const AdminDonations = () => {
 
                   <td className="px-6 py-3 text-gray-500">{d.phone}</td>
 
-                  <td className="px-6 py-3 text-gray-500">
+                  <td className="px-6 py-3 text-gray-500 text-nowrap">
                     {formatDateEnglish(d.createdAt)}
                   </td>
 
@@ -148,7 +148,7 @@ const AdminDonations = () => {
                     ৳{d.paymentAmount}
                   </td>
 
-                  <td className="px-6 py-3 text-gray-500">
+                  <td className="px-6 py-3 text-gray-500 text-nowrap">
                     {d.paymentMethod === "Bank"
                       ? d.bankPayment?.bankName
                       : d.mobilePayment?.provider}

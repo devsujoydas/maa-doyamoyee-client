@@ -7,6 +7,7 @@ import BlogPostComment from "./BlogPostComment";
 import BlogLeaveAComment from "./BlogLeaveAComment";
 import BlogPostCard from "./BlogPostCard";
 import SEO from "../../components/SEO";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const BlogsDetails = () => {
   const { t } = useTranslation();
@@ -40,19 +41,12 @@ const BlogsDetails = () => {
     if (id) fetchData();
   }, [id]);
 
-  if (loading) {
-    return (
-      <div className="h-[50vh] flex items-center justify-center text-gray-500">
-        Loading...
-      </div>
-    );
-  }
+  if (loading) return <LoadingSpinner />;
 
   if (!blog) return null;
 
   return (
     <div className="bg-white">
-    
       <SEO
         title={`${blog?.title} | Maa Doyamoyee Blog`}
         description={blog?.content}

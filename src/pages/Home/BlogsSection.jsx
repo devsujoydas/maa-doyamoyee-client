@@ -24,7 +24,7 @@ const BlogsSection = () => {
           textcolor={"text-black"}
         />
 
-        <div className="mt-10">
+        <div className="md:mt-10 ">
           {!approvedBlogs.length > 0 ? (
             <DataNotFound name={"blogs"} isLoading={isLoading} />
           ) : (

@@ -3,11 +3,15 @@ import { Link2, MessageCircle, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { FaFacebook } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const ShareModal = ({ isOpen, onClose, url, title }) => {
+  const { t } = useTranslation();
+
+
   const copyLink = async () => {
     await navigator.clipboard.writeText(url);
-    toast.success("Link copied! Share it anywhere 🚀");
+    toast.success(`${t("link_copied")}`);
   };
 
   const shareFacebook = () => {
