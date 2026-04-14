@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const res = await api.post("/auth/logout");
+      await api.post("/auth/logout");
     } catch (err) {
       console.error("Logout error:", err);
     } finally {
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
 
   const deleteProfile = async () => {
     try {
-      const res = await api.delete("/users/profile");
+      await api.delete("/users/profile");
 
       toast.success(t("delete_account.success"));
     } catch (err) {

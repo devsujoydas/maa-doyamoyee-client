@@ -10,7 +10,7 @@ const NoticeCard = ({ notice, onPreview }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 5 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       className="border w-full h-full border-zinc-100 rounded-2xl p-5 shadow-md hover:shadow-xl transition bg-white lang-bn-BD flex flex-col"
     >

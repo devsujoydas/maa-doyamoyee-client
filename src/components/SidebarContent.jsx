@@ -96,6 +96,19 @@ const SidebarContent = ({ collapsed, toggleCollapsed, setLogoutOpen }) => {
             </Link>
 
             <Link
+              to={"/admin/events"}
+              title={"Event"}
+              className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+                location.pathname === "/admin/events"
+                  ? "bg-black text-white"
+                  : " hover:bg-black/10"
+              } ${collapsed ? "justify-center" : ""}`}
+            >
+              <Calendar size={18} />
+              {!collapsed && "Event"}
+            </Link>
+
+            <Link
               to={"/admin/gallery"}
               title={"Gallery"}
               className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
@@ -109,19 +122,6 @@ const SidebarContent = ({ collapsed, toggleCollapsed, setLogoutOpen }) => {
             </Link>
           </>
         )}
-
-        <Link
-          to={"/admin/events"}
-          title={"Event"}
-          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
-            location.pathname === "/admin/events"
-              ? "bg-black text-white"
-              : " hover:bg-black/10"
-          } ${collapsed ? "justify-center" : ""}`}
-        >
-          <Calendar size={18} />
-          {!collapsed && "Event"}
-        </Link>
 
         <Link
           to={"/admin/messages"}

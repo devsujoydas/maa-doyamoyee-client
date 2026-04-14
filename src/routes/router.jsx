@@ -149,9 +149,8 @@ export const router = createBrowserRouter([
       { path: "", element: withSuspense(<AdminOverview />) },
       { path: "users", element: withSuspense(<AdminUsers />) },
       { path: "messages", element: withSuspense(<AdminMessages />) },
-      { path: "events", element: withSuspense(<AdminEvents />) },
       { path: "donations", element: withSuspense(<AdminDonations />) },
-
+      
       // 🔒 CEO Restricted Routes
       {
         element: <ModeratorPrivateRoutes />,
@@ -159,6 +158,7 @@ export const router = createBrowserRouter([
           { path: "gallery", element: withSuspense(<AdminGallary />) },
           { path: "blogs", element: withSuspense(<AdminBlogs />) },
           { path: "notices", element: withSuspense(<AdminNotices />) },
+          { path: "events", element: withSuspense(<AdminEvents />) },
         ],
       },
     ],

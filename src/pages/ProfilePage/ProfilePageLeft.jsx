@@ -167,9 +167,9 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
         {user?.bio && (
           <div className="mt-4 w-full ">
             <div className="relative py-2 px-3 rounded-2xl bg-linear-to-br from-gray-50 to-white border border-gray-100 shadow-sm text-sm">
-              <p className=" text-gray-500 ">
+              <div className=" text-gray-500 ">
                 Bio: <p className=" text-gray-700 ">{user.bio}</p>
-              </p>
+              </div>
             </div>
           </div>
         )}

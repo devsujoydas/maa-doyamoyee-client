@@ -51,13 +51,13 @@ const Hero = () => {
                 <div className="md:h-212.5 min-h-[95vh] w-full flex justify-center items-center">
                   <motion.div
                     initial={{ opacity: 0, y: 5 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                     className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white px-4"
                   >
                     <motion.h1
                       initial={{ opacity: 0, y: -50 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3, duration: 0.8 }}
                       className="font-bold  tracking-tight text-[clamp(2rem,8vw,6rem)] text-gradient"
                     >
@@ -66,7 +66,7 @@ const Hero = () => {
 
                     <motion.p
                       initial={{ opacity: 0, y: 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
                       className="max-w-xl -mt-2 text-base md:text-lg text-white/80 leading-relaxed"
                     >
@@ -76,7 +76,7 @@ const Hero = () => {
                     <div className=" flex gap-2 sm:gap-4 mt-5">
                       <motion.button
                         initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
                       >
                         <Link to={"/history"} className="btn-primary">
@@ -85,7 +85,7 @@ const Hero = () => {
                       </motion.button>
                       <motion.button
                         initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
                       >
                         <Link to={"/puja-schedule"} className="btn-primary">
@@ -147,7 +147,7 @@ const Hero = () => {
                     <div className=" flex gap-2 sm:gap-4 mt-5">
                       <motion.button
                         initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 }}
                       >
                         <Link to={"/history"} className="btn-primary">
@@ -156,7 +156,7 @@ const Hero = () => {
                       </motion.button>
                       <motion.button
                         initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 }}
                       >
                         <Link to={"/puja-schedule"} className="btn-primary">

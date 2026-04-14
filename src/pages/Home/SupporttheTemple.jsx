@@ -12,7 +12,7 @@ const SupporttheTemple = () => {
         {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }} 
           className="text-2xl md:text-5xl font-bold  mb-6 text-gradient"
         >
@@ -22,7 +22,7 @@ const SupporttheTemple = () => {
         {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className=" max-w-2xl mx-auto text-sm md:text-lg mb-10"
         >
@@ -32,7 +32,7 @@ const SupporttheTemple = () => {
         {/* Button */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
           className="flex justify-center items-center"
         >

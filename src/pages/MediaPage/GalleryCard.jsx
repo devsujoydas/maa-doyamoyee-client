@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const GalleryCard = ({ img }) => {
   const [loaded, setLoaded] = useState(false);
-  console.log(img);
+ 
   // Cloudinary optimized images
   const img400 = img.img.url.replace("/upload/", "/upload/w_400,f_auto,q_85/");
 

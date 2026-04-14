@@ -2,7 +2,7 @@ import ProfileCard from "../cards/ProfileCard";
 import Modal from "../ui/Modal";
 
 const UserViewModal = ({ isOpen, setOpen, user }) => {
-  console.log(user)
+ 
   return (
     <div>
       <Modal
