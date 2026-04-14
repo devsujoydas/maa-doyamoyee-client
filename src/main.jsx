@@ -2,12 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 
-import { RouterProvider } from "react-router-dom";
-import { router } from "./routes/router";
+import { RouterProvider } from "react-router-dom"; 
 import { HelmetProvider } from "react-helmet-async";
 import "../src/i18n/i18n";
 import { AuthProvider } from "./AuthProvider/authProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { modifyRouter } from "./routes/modifyRouters";
 
 // 🔥 Query Client config (optional but recommended)
 const queryClient = new QueryClient({
@@ -24,7 +24,7 @@ createRoot(document.getElementById("root")).render(
     <HelmetProvider>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <RouterProvider router={modifyRouter} />
         </QueryClientProvider>
       </AuthProvider>
     </HelmetProvider>

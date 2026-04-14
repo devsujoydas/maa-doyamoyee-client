@@ -26,7 +26,7 @@ export default defineConfig({
             if (id.includes("swiper")) return "slider";
             if (id.includes("@fancyapps/ui")) return "gallery";
             if (id.includes("i18next") || id.includes("react-i18next")) return "i18n";
-            return "vendor"; // baki sob node_modules একত্রে
+            return "vendor"; 
           }
         },
       },
