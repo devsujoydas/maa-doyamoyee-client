@@ -8,6 +8,7 @@ import ShareModal from "./ShareModal";
 import api from "../../utils/api";
 import { useAuth } from "../../AuthProvider/authProvider";
 import toast from "react-hot-toast";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 const BlogPostCard = ({ blog, profile }) => {
   const { t } = useTranslation();
@@ -83,8 +84,8 @@ const BlogPostCard = ({ blog, profile }) => {
         <h2 className="text-xl sm:text-2xl font-bold mb-2 text-gray-900">
           {blog?.title}
         </h2>
-        <div className="text-gray-500 text-xs sm:text-sm mb-4">
-          📅 {formatDateDynamic(blog?.createdAt)}
+        <div className="text-gray-500 text-xs sm:text-sm mb-4  flex items-center gap-1">
+           <FaRegCalendarAlt className="" size={14} /> {formatDateDynamic(blog?.createdAt)}
         </div>
         <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
           {profile === "true"

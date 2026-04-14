@@ -178,7 +178,7 @@ const Contact = () => {
               {/* PHONE */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">
-                  {t("phone")}
+                  {t("phone")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   name="phone"

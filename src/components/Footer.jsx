@@ -51,7 +51,7 @@ const Footer = () => {
             <h3 className="text-xl md:text-2xl font-bold text-gradient mb-4 ">
               {t("site_name")}
             </h3>
-            <p className="text-sm leading-relaxed mb-4">
+            <p className="desc-text leading-relaxed mb-4">
               {t("footer_about_text")}
             </p>
             <div className="space-y-2 text-sm">
@@ -77,7 +77,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold text-gradient mb-4 ">
                 {t("nav_temple_title")}
               </h3>
-              <ul className="space-y-2">{renderLinks(templeLinks)}</ul>
+              <ul className="space-y-2 text-sm md:text-base">{renderLinks(templeLinks)}</ul>
             </div>
 
             {/* Media */}
@@ -85,7 +85,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold text-gradient mb-4 ">
                 {t("nav_media")}
               </h3>
-              <ul className="space-y-2">{renderLinks(mediaLinks)}</ul>
+              <ul className="space-y-2 text-sm md:text-base">{renderLinks(mediaLinks)}</ul>
             </div>
 
             {/* Management */}
@@ -93,7 +93,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold text-gradient mb-4 ">
                 {t("nav_management")}
               </h3>
-              <ul className="space-y-2">{renderLinks(managementLinks)}</ul>
+              <ul className="space-y-2 text-sm md:text-base">{renderLinks(managementLinks)}</ul>
             </div>
 
             {/* Others */}
@@ -101,7 +101,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold text-gradient mb-4 ">
                 {t("nav_media")}
               </h3>
-              <ul className="space-y-2">{renderLinks(otherLinks)}</ul>
+              <ul className="space-y-2 text-sm md:text-base">{renderLinks(otherLinks)}</ul>
             </div>
           </div>
         </div>

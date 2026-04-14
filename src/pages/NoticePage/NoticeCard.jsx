@@ -1,6 +1,7 @@
 import { formatDateDynamic } from "../../utils/formatDateDynamic";
 import { motion } from "framer-motion";
-import { FileText, Download, Eye, MapPin, Pin, Calendar } from "lucide-react";
+import { FileText, Download, Eye, MapPin, Pin, Calendar, Clock } from "lucide-react";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 const NoticeCard = ({ notice, onPreview }) => {
   const handlePreview = () => {
@@ -31,13 +32,13 @@ const NoticeCard = ({ notice, onPreview }) => {
         <div className="flex flex-wrap gap-2">
           {notice.eventDate && (
             <span className="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full flex items-center gap-1">
-              📅 {formatDateDynamic(notice.eventDate)}
+               <FaRegCalendarAlt className="" size={14} /> {formatDateDynamic(notice.eventDate)}
             </span>
           )}
 
           {notice.eventTime && (
-            <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full">
-              ⏰ {notice.eventTime}
+            <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full flex items-center gap-1">
+               <Clock className="" size={14} /> {notice.eventTime}
             </span>
           )}
         </div>
@@ -60,8 +61,8 @@ const NoticeCard = ({ notice, onPreview }) => {
 
         {/* Footer: Publish Date + Buttons */}
         <div className="flex justify-between items-center mt-2">
-          <span className="text-xs text-gray-500">
-            📅 প্রকাশিত: {formatDateDynamic(notice.createdAt)}
+          <span className="text-xs text-gray-500 flex items-center gap-1">
+           <FaRegCalendarAlt className="" size={13} /> প্রকাশিত: {formatDateDynamic(notice.createdAt)}
           </span>
 
           <div className="flex gap-2">

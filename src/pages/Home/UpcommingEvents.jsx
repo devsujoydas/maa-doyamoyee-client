@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { formatDateDynamic } from "../../utils/formatDateDynamic";
 import useEvents from "../../hooks/useEvents";
 import DataNotFound from "../../components/resuable/DataNotFound";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 const UpcomingEvents = () => {
   const { t } = useTranslation();
@@ -63,12 +64,12 @@ const UpcomingEvents = () => {
                     {/* Info */}
                     <div className="absolute bottom-0 left-0 right-0 p-5 z-10 bg-linear-to-t from-black/70 to-transparent">
                       <div className="flex items-center gap-2 text-white text-sm mb-2">
-                        📅 {formatDateDynamic(item.eventDate)}
+                         <FaRegCalendarAlt className="text-white" size={14} /> {formatDateDynamic(item.eventDate)}
                       </div>
-                      <h5 className="text-xl md:text-2xl font-semibold text-white line-clamp-2">
+                      <h5 className="heading-text font-semibold text-white line-clamp-2">
                         {item.title}
                       </h5>
-                      <p className="text-sm text-white line-clamp-3">
+                      <p className="desc-text text-white line-clamp-3 mt-2">
                         {item.description}
                       </p>
                     </div>

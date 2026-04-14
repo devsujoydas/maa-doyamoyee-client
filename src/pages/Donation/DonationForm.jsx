@@ -110,7 +110,7 @@ const DonationForm = () => {
           {/* NAME */}
           <div>
             <label className="block mb-1 text-sm font-medium">
-              {t("donation.name.label")}
+              {t("donation.name.label")} <span className="text-red-500">*</span>
             </label>
             <input
               name="accountName"
@@ -124,7 +124,7 @@ const DonationForm = () => {
           {/* EMAIL */}
           <div>
             <label className="block mb-1 text-sm font-medium">
-              {t("donation.email.label")}
+              {t("donation.email.label")} <span className="text-red-500"> *</span>
             </label>
             <input
               name="email"
@@ -138,7 +138,7 @@ const DonationForm = () => {
           {/* PHONE */}
           <div>
             <label className="block mb-1 text-sm font-medium">
-              {t("donation.phone.label")}
+              {t("donation.phone.label")} <span className="text-red-500"> *</span>
             </label>
             <input
               name="phone"
@@ -152,7 +152,7 @@ const DonationForm = () => {
           {/* AMOUNT */}
           <div>
             <label className="block mb-1 text-sm font-medium">
-              {t("donation.amount.label")}
+              {t("donation.amount.label")} <span className="text-red-500"> *</span>
             </label>
             <input
               name="paymentAmount"
@@ -167,7 +167,7 @@ const DonationForm = () => {
           {/* PAYMENT METHOD */}
           <div>
             <label className="block mb-1 text-sm font-medium">
-              {t("donation.paymentMethod.label")}
+              {t("donation.paymentMethod.label")} <span className="text-red-500"> *</span>
             </label>
             <select
               name="paymentMethod"
@@ -176,7 +176,7 @@ const DonationForm = () => {
             >
               <option value="Bank">{t("donation.paymentMethod.bank")}</option>
               <option value="MobileBanking">
-                {t("donation.paymentMethod.mobile")}
+                {t("donation.paymentMethod.mobile")} 
               </option>
             </select>
           </div>
@@ -186,7 +186,7 @@ const DonationForm = () => {
             <>
               <div>
                 <label className="block mb-1 text-sm font-medium">
-                  {t("donation.accountNumber.label")}
+                  {t("donation.accountNumber.label")} <span className="text-red-500"> *</span>
                 </label>
                 <input
                   name="accountNumber"
@@ -198,7 +198,7 @@ const DonationForm = () => {
               </div>
               <div>
                 <label className="block mb-1 text-sm font-medium">
-                  {t("donation.bankName.label")}
+                  {t("donation.bankName.label")}  <span className="text-red-500"> *</span>
                 </label>
                 <input
                   name="bankName"
@@ -211,7 +211,7 @@ const DonationForm = () => {
 
               <div>
                 <label className="block mb-1 text-sm font-medium">
-                  {t("donation.branchName.label")}
+                  {t("donation.branchName.label")} <span className="text-red-500"> *</span>
                 </label>
                 <input
                   name="branchName"
@@ -224,7 +224,7 @@ const DonationForm = () => {
 
               <div>
                 <label className="block mb-1 text-sm font-medium">
-                  {t("donation.branchCode.label")}
+                  {t("donation.branchCode.label")} <span className="text-red-500"> *</span>
                 </label>
                 <input
                   name="branchCode"
@@ -237,7 +237,7 @@ const DonationForm = () => {
 
               <div>
                 <label className="block mb-1 text-sm font-medium">
-                  {t("donation.swiftCode.label")}
+                  {t("donation.swiftCode.label")} <span className="text-red-500"> *</span>
                 </label>
                 <input
                   name="swiftCode"
@@ -248,7 +248,7 @@ const DonationForm = () => {
               </div>
               <div>
                 <label className="block mb-1 text-sm font-medium">
-                  {t("donation.routingNumber.label")}
+                  {t("donation.routingNumber.label")} <span className="text-red-500"> *</span>
                 </label>
                 <input
                   name="routingNumber"
@@ -265,7 +265,7 @@ const DonationForm = () => {
             <>
               <div>
                 <label className="block mb-1 text-sm font-medium">
-                  {t("donation.mobileBank.label")}
+                  {t("donation.mobileBank.label")} <span className="text-red-500"> *</span>
                 </label>
                 <select
                   name="mobileBankName"
@@ -287,7 +287,7 @@ const DonationForm = () => {
 
               <div>
                 <label className="block mb-1 text-sm font-medium">
-                  {t("donation.senderNumber.label")}
+                  {t("donation.senderNumber.label")} <span className="text-red-500"> *</span>
                 </label>
                 <input
                   name="senderNumber"
@@ -300,7 +300,7 @@ const DonationForm = () => {
 
               <div>
                 <label className="block mb-1 text-sm font-medium">
-                  {t("donation.transactionId.label")}
+                  {t("donation.transactionId.label")} <span className="text-red-500"> *</span>
                 </label>
                 <input
                   name="transactionID"
@@ -316,7 +316,7 @@ const DonationForm = () => {
           {/* IMAGE */}
           <div className="sm:col-span-2">
             <label className="block mb-2 text-sm font-medium">
-              {t("donation.screenshot.label")}
+              {t("donation.screenshot.label")} <span className="text-red-500"> *</span>
             </label>
             <ImageUpload
               value={formData.screenshot}
@@ -331,7 +331,7 @@ const DonationForm = () => {
           {/* MESSAGE */}
           <div className="sm:col-span-2">
             <label className="block mb-1 text-sm font-medium">
-              {t("donation.message.label")}
+              {t("donation.message.label")} <span className="text-red-500"> *</span>
             </label>
             <textarea
               name="message"

@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaCalendarAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaRegCalendarAlt } from "react-icons/fa";
 
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
@@ -85,8 +85,8 @@ const EventDetailsPage = () => {
 
               {/* Date */}
               {event.eventDate && (
-                <p className=" space-x-1 mb-2">
-                  📅
+                <p className=" space-x-1 mb-2 flex items-center gap-1">
+                  <FaRegCalendarAlt className="" size={14} />
                   {formatDateDynamic(event.eventDate)}
                 </p>
               )}
