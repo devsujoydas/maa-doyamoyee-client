@@ -75,21 +75,21 @@ const Hero = () => {
 
                     <div className=" flex gap-2 sm:gap-4 mt-5">
                       <motion.button
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        <Link to={"/events"} className="btn-primary">
-                          {t("hero_cta_donation")}
-                        </Link>
-                      </motion.button>
-                      <motion.button
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
                       >
                         <Link to={"/history"} className="btn-primary">
                           {t("hero_cta_history")}
+                        </Link>
+                      </motion.button>
+                      <motion.button
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <Link to={"/puja-schedule"} className="btn-primary">
+                          {t("nav_puja_schedule")}
                         </Link>
                       </motion.button>
                     </div>
@@ -150,8 +150,8 @@ const Hero = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 }}
                       >
-                        <Link to={"/events"} className="btn-primary">
-                          {t("hero_cta_donation")}
+                        <Link to={"/history"} className="btn-primary">
+                          {t("hero_cta_history")}
                         </Link>
                       </motion.button>
                       <motion.button
@@ -159,8 +159,8 @@ const Hero = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 }}
                       >
-                        <Link to={"/history"} className="btn-primary">
-                          {t("hero_cta_history")}
+                        <Link to={"/puja-schedule"} className="btn-primary">
+                          {t("nav_puja_schedule")}
                         </Link>
                       </motion.button>
                     </div>

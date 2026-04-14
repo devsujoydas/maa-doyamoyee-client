@@ -26,7 +26,7 @@ const MembersPage = () => {
           shortdesc={t("member_shortdesc", { count: membersData.length })}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lang-bn-BD">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 lang-bn-BD">
           {membersData.map((member, index) => (
             <motion.div
               key={member.sl_no}
@@ -34,7 +34,7 @@ const MembersPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.001 }}
               viewport={{ once: true }}
-              className="relative group cursor-pointer  bg-white/80 backdrop-blur border border-yellow-500/30 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-5 text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 active:-translate-y-2 transition-all "
+              className="relative group cursor-pointer  bg-white/80 backdrop-blur border border-yellow-500/30 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-5 text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 active:-translate-y-2 transition-all "
             >
               {/* Glow Hover Effect */}
               <div

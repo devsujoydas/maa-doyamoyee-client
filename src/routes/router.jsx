@@ -12,6 +12,7 @@ import AuthPrivateRoutes from "./AuthPrivateRoutes";
 import AdminPrivateRoutes from "./AdminPrivateRoutes"; 
 import ModeratorPrivateRoutes from "./AdminOnlyRoutes";
 import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
+import PujaSchedule from "../pages/PujaSchedule/PujaSchedule";
 
 /* ---------------- Lazy Pages ---------------- */
 const Home = lazy(() => import("../pages/Home/Home"));
@@ -99,6 +100,7 @@ export const router = createBrowserRouter([
       { path: "/events/:id", element: withSuspense(<EventDetailsPage />) },
 
       { path: "/notices", element: withSuspense(<NoticePage />) },
+      { path: "/puja-schedule", element: withSuspense(<PujaSchedule />) },
       { path: "/terms-and-conditions", element: withSuspense(<TermsAndConditions />) },
 
       { path: "/blogs", element: withSuspense(<BlogsPage />) },

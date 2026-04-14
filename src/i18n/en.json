@@ -3,7 +3,8 @@
 
   "nav_home": "Home",
   "nav_history": "History",
-  "nav_events": "Puja",
+  "nav_events": "Festival",
+  "nav_puja_schedule": "Puja Schedule",
 
   "nav_media": "Media",
   "nav_gallery": "Gallery",
@@ -72,7 +73,7 @@
         "id": 1,
         "name": "Sree Niranjan Bhaduri",
         "designation": "Head Priest",
-        "phone": "+8801950308824",
+        "phone": "01950-308824",
         "email": "niranjan@gmail.com",
         "image": "/purohit/nironjon.webp",
         "bio": "Poetry & Grammar Certificate (Kabya Tirtha & Byakaran Tirtha), Bangladesh Sanskrit and Pali Education Board, Dhaka"
@@ -81,10 +82,11 @@
         "id": 2,
         "name": "Sree Sajal Chakraborty",
         "designation": "Head Priest",
-        "phone": "+8801911286849",
+        "phone": "01911-286849",
         "email": "sajal@gmail.com",
         "image": "/purohit/sajal.webp",
-        "bio": "General Secretary, Bangladesh Brahman Parishad, Jamalpur District Branch"
+        "bio": "Smrititirtha, Kabyatirtha and Byakaran Tirtha, Bangladesh Sanskrit and Pali Education Board, Dhaka",
+        "bio2": "General Secretary, Bangladesh Brahman Parishad, Jamalpur District Branch"
       }
     ]
   },
@@ -488,5 +490,29 @@
     "info": "We try to keep all information accurate, but we do not guarantee complete accuracy at all times.",
     "changeTitle": "Changes to Terms",
     "change": "We may update these Terms & Conditions at any time without prior notice."
+  },
+
+  "puja": {
+    "title": "Puja Schedule",
+    "desc": "Daily worship schedule and important temple information",
+
+    "morning": "Morning",
+    "evening": "Evening",
+    "closed": "Temple Closed",
+    "notes": "Special Notes",
+
+    "wake": "Idol awakening at sunrise",
+    "shiv": "Shiva Puja at 10:30 AM",
+    "annapurna": "Annapurna Puja at 11:00 AM",
+    "anjali": "Anjali from 12:00 PM to 1:00 PM",
+    "bhog": "Bhog Raag at 2:00 PM",
+
+    "arati": "Evening Arati 40 minutes after sunset",
+
+    "closed_desc": "Temple remains closed from 9th of Chaitra to 8th of Ashwin",
+    "closed_time": "In special cases, temple closes at 8:30 PM",
+
+    "note1": "Bottle gourd with boal fish is the main offering",
+    "note2": "Atap rice is used for bhog"
   }
 }

@@ -43,19 +43,18 @@ const PurohitPage = () => {
               className="relative group rounded-3xl border border-zinc-200 overflow-hidden shadow-xl  bg-white"
             >
               {/* BACKGROUND */}
-              <div className="absolute inset-0 bg-linear-to-br from-yellow-50 via-white to-orange-50"></div>
 
               {/* TOP BORDER */}
-              <div className="absolute top-0 left-0 w-full h-0.75 bg-linear-to-r from-yellow-400 via-orange-500 to-red-500"></div>
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-linear-to-r from-yellow-400 via-orange-500 to-red-500"></div>
 
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 group-active:opacity-100 
-                  bg-linear-to-r from-yellow-400/10 to-red-600/10 
+                  bg-linear-to-r from-yellow-400/5 to-red-600/5 
                   transition duration-500"
               ></div>
 
               {/* MAIN CONTENT */}
-              <div className="relative p-6 flex flex-col md:flex-row gap-6 items-stretch  h-full">
+              <div className="relative p-5 flex flex-col md:flex-row gap-6 items-stretch  h-full">
                 {/* LEFT IMAGE FULL HEIGHT */}
                 <div className="relative overflow-hidden rounded-lg shrink-0 md:w-[40%] w-full h-72 md:h-full ">
                   <a
@@ -88,11 +87,16 @@ const PurohitPage = () => {
                   </span>
 
                   {/* DIVIDER */}
-                  <div className="w-20 h-[2px] bg-linear-to-r from-yellow-400 to-red-400 mt-4 mx-auto md:mx-0"></div>
+                  <div className="w-20 h-0.5 bg-linear-to-r from-yellow-400 to-red-400 mt-4 mx-auto md:mx-0"></div>
 
+                  {pandit?.bio2 && (
+                    <p className="mt-1 text-sm text-gray-600 leading-relaxed max-w-lg">
+                      {pandit?.bio2}
+                    </p>
+                  )}
                   {/* BIO */}
                   {pandit.bio && (
-                    <p className="mt-4 text-sm text-gray-600 leading-relaxed max-w-lg">
+                    <p className="mt-1 text-sm text-gray-600 leading-relaxed max-w-lg">
                       {pandit.bio}
                     </p>
                   )}
@@ -102,7 +106,7 @@ const PurohitPage = () => {
                     <div className="bg-white/70 border border-zinc-100 rounded-xl p-3">
                       <p className="font-semibold">{t("purohit.phone")}</p>
                       <a href={`tel:${pandit.phone}`} className="text-blue-600">
-                        {pandit.phone}
+                       +88 {pandit.phone}
                       </a>
                     </div>
 

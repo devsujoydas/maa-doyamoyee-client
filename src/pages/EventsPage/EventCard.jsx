@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { formatDateDynamic, formatDynamicDate } from "../../utils/formatDateDynamic";
 import { HiCalendar } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 
 
@@ -27,10 +28,10 @@ const EventCard = ({ item }) => {
 
                 <div className="absolute bottom-0 left-0 right-0 p-5 duration-300 z-10">
                     <div className="flex items-center gap-2 text-white text-sm text-primary mb-2">
-                        📅 {formatDateDynamic(item.eventDate)}
+                         <FaRegCalendarAlt className="text-white" size={14} /> {formatDateDynamic(item.eventDate)}
                     </div>
                     <h5 className="text-xl md:text-2xl font-semibold text-white ">{item.title}</h5>
-                    <p className="text-sm text-white line-clamp-3">{item.description}</p>
+                    <p className="text-sm text-white/90 line-clamp-3 mt-2">{item.description}</p>
                 </div>
             </Link>
         </motion.div>

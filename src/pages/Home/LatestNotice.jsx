@@ -46,7 +46,7 @@ const LatestNotice = () => {
             className="rounded-md h-full"
           >
             {activeNotices.map((notice) => (
-              <SwiperSlide key={notice._id} className="my- h-auto! flex">
+              <SwiperSlide key={notice._id} className="my-3 h-auto! flex">
                 <NoticeCard
                   notice={notice}
                   onPreview={(n) => setPreviewNotice(n)}

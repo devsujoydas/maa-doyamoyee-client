@@ -53,14 +53,14 @@ const CommitteePage = () => {
                   সভাপতি
                 </div>
 
-                <h3 className="mt-3 text-xl md:text-2xl font-bold ">
+                <h3 className="mt-3 text-sm sm:text-base md:text-lg font-semibold  ">
                   {president.name}
                 </h3>
               </motion.div>
             )}
 
             {/* Vice Presidents */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 ">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 ">
               {vicePresidents.map((m, i) => (
                 <motion.div
                   key={m.id}
@@ -81,7 +81,7 @@ const CommitteePage = () => {
                     {m.designation}
                   </div>
 
-                  <h3 className="mt-2 text-lg font-semibold text-gray-800 ">
+                  <h3 className="mt-3 text-sm sm:text-base md:text-lg font-semibold text-gray-800 ">
                     {m.name}
                   </h3>
                 </motion.div>
@@ -104,14 +104,14 @@ const CommitteePage = () => {
                   সাধারণ সম্পাদক
                 </div>
 
-                <h3 className="mt-3 text-xl md:text-2xl font-bold ">
+                <h3 className="mt-3 text-sm sm:text-base md:text-lg font-semibold  ">
                   {generalSecretary.name}
                 </h3>
               </motion.div>
             )}
 
             {/* Other Secretaries */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 ">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 ">
               {secretaries.map((m, i) => (
                 <motion.div
                   key={m.id}
@@ -132,7 +132,7 @@ const CommitteePage = () => {
                     {m.designation}
                   </div>
 
-                  <h3 className="mt-2 text-lg font-semibold text-gray-800 ">
+                  <h3 className="mt-3 text-sm sm:text-base md:text-lg font-semibold text-gray-800 ">
                     {m.name}
                   </h3>
                 </motion.div>
@@ -148,7 +148,7 @@ const CommitteePage = () => {
             সদস্যবৃন্দ
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {members.map((m, i) => (
               <motion.div
                 key={m.id}
@@ -169,7 +169,7 @@ const CommitteePage = () => {
                   {m.designation}
                 </div>
 
-                <h3 className="mt-2 text-base font-semibold text-gray-800 ">
+                <h3 className="mt-3 text-sm sm:text-base md:text-lg font-semibold text-gray-800 ">
                   {m.name}
                 </h3>
               </motion.div>

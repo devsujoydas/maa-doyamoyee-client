@@ -38,7 +38,7 @@ const About = () => {
 
           {/* Text Content */}
           <motion.div
-            className="lg:w-1/2 w-full space-y-4 md:space-y-8"
+            className="lg:w-1/2 w-full space-y-4 md:space-y-6"
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -72,7 +72,7 @@ const About = () => {
                 {t("establishment_title")}
               </h4>
 
-              <ul className=" space-y-1 md:space-y-2 text-gray-700 text-sm list-disc list-inside">
+              <ul className=" space-y-1 md:space-y-2 text-gray-700 text-sm md:text-base list-disc list-inside">
                 <li>{t("established")}</li>
                 <li>{t("founder")}</li>
                 <li className="">{t("estate_founder")}</li>

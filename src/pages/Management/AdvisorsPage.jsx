@@ -19,7 +19,7 @@ const AdvisorsPage = () => {
       <div className="custom-container">
         <PageHeading section="advisors" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 ">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 ">
           {advisorsData.map((advisor, index) => (
             <motion.div
               key={advisor.id}
@@ -28,14 +28,14 @@ const AdvisorsPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.03 }}
               className="relative group bg-white/80 backdrop-blur border border-yellow-500/30 
-              rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 
+              rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 
               transition-all duration-500 lang-bn-BD"
             >
               {/* Top Badge */}
               <div
                 className="absolute -top-3 left-1/2 -translate-x-1/2 
               bg-linear-to-r from-yellow-500 to-red-700 text-white 
-              px-3 py-1 rounded-full text-xs shadow-md"
+              px-3 py-1 rounded-full text-xs shadow-md "
               >
                 উপদেষ্টা
               </div>
@@ -48,9 +48,9 @@ const AdvisorsPage = () => {
               ></div>
 
               {/* Content */}
-              <div className="relative border-l-4 border-yellow-600 pl-4 space-y-2">
+              <div className="relative border-l-4 border-yellow-600 pl-4 space-y-1 md:space-y-2">
                 <h3
-                  className="text-lg font-semibold text-gray-900 
+                  className="mt-3  sm:text-base md:text-lg font-semibold text-gray-900 
                  leading-snug"
                 >
                   {advisor.name}
