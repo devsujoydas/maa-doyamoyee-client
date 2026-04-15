@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteComment, fetchComments } from "../services/commentService";
- 
+
 const useComments = () => {
   const queryClient = useQueryClient();
 
@@ -8,8 +8,6 @@ const useComments = () => {
     queryKey: ["comments"],
     queryFn: fetchComments,
   });
-
-  
 
   const deleteMutation = useMutation({
     mutationFn: deleteComment,
@@ -19,7 +17,7 @@ const useComments = () => {
   return {
     comments,
     isLoading,
-    deleteBlog: deleteMutation.mutateAsync,
+    deleteComment: deleteMutation.mutateAsync,
   };
 };
 

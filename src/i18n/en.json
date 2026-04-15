@@ -170,6 +170,16 @@
   "cancel": "Cancel",
   "no_comments_yet": "No comments yet. Be the first to comment!",
 
+  "comment_empty_error": "Comment cannot be empty",
+
+  "comment_updated_success": "Comment updated successfully",
+  "comment_deleted_success": "Comment deleted successfully",
+
+  "saving": "Saving...", 
+
+
+
+
   "contact_title": "Contact",
   "contact_desc": "Use the address below for information or to contact our temple.",
   "contact_shortdesc": "You can reach us by phone, email, or by visiting the temple directly.",
@@ -515,4 +525,6 @@
     "note1": "Bottle gourd with boal fish is the main offering",
     "note2": "Atap rice is used for bhog"
   }
+
+
 }

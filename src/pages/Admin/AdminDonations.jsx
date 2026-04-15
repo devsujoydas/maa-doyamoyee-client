@@ -78,7 +78,9 @@ const AdminDonations = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-xl font-bold">Donation Dashboard</h1>
+      <h1 className="text-lg md:text-2xl font-bold flex-1">
+        Donation Dashboard
+      </h1>
 
       {/* STATS */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -177,7 +179,7 @@ const AdminDonations = () => {
                     </motion.button>
 
                     {/* 🗑️ Delete */}
-                    {user.role !== "ceo" && (
+                    {user.role === "ceo" && (
                       <motion.button
                         whileHover={{ scale: 1.2 }}
                         onClick={() => handleDelete(d)}

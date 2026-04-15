@@ -9,38 +9,60 @@ import { useTranslation } from "react-i18next";
 const BlogPostComment = ({ comments, setComments }) => {
   const { t } = useTranslation();
   const { user } = useAuth();
+
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [menuOpenId, setMenuOpenId] = useState(null);
   const [textMap, setTextMap] = useState({});
   const [loading, setLoading] = useState(false);
+
   const menuRef = useRef(null);
 
-  // Close menu if clicked outside
+  // ---------------------------
+  // CLOSE MENU OUTSIDE CLICK
+  // ---------------------------
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMenuOpenId(null);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // ---------------------------
+  // UPDATE COMMENT
+  // ---------------------------
   const handleUpdate = async (comment) => {
-    if (!textMap[comment?._id]?.trim())
-      return toast.error("Comment cannot be empty");
+    if (!textMap[comment?._id]?.trim()) {
+      return toast.error(t("comment_empty_error") || "Comment cannot be empty");
+    }
 
     try {
       setLoading(true);
+
       const { data } = await api.put(
         `/posts/${comment?.post}/comments/${comment?._id}`,
-        { text: textMap[comment._id] },
+        { text: textMap[comment._id] }
       );
-      toast.success(data.message);
+
+      toast.success(
+        data?.message || t("comment_updated_success")
+      );
+
       setEditingCommentId(null);
-      setTextMap((prev) => ({ ...prev, [comment?._id]: data.comment?.text }));
+
+      setTextMap((prev) => ({
+        ...prev,
+        [comment._id]: data.comment?.text,
+      }));
+
       setComments((prev) =>
-        prev.map((c) => (c._id === data.comment?._id ? data?.comment : c)),
+        prev.map((c) =>
+          c._id === data.comment?._id ? data.comment : c
+        )
       );
     } catch (err) {
       toast.error(err.response?.data?.message || err.message);
@@ -49,14 +71,24 @@ const BlogPostComment = ({ comments, setComments }) => {
     }
   };
 
+  // ---------------------------
+  // DELETE COMMENT
+  // ---------------------------
   const handleDelete = async (comment) => {
     try {
       setLoading(true);
+
       const { data } = await api.delete(
-        `/posts/${comment.post}/comments/${comment._id}`,
+        `/posts/${comment.post}/comments/${comment._id}`
       );
-      toast.success(data.message);
-      setComments((prev) => prev.filter((c) => c._id !== comment._id));
+
+      toast.success(
+        data?.message || t("comment_deleted_success")
+      );
+
+      setComments((prev) =>
+        prev.filter((c) => c._id !== comment._id)
+      );
     } catch (err) {
       toast.error(err.response?.data?.message || err.message);
     } finally {
@@ -64,87 +96,107 @@ const BlogPostComment = ({ comments, setComments }) => {
     }
   };
 
-  if (!comments || comments.length === 0)
-    return <p className="text-gray-500 pt-4 pb-8 text-center">{t("no_comments_yet")}</p>;
+  // ---------------------------
+  // EMPTY STATE
+  // ---------------------------
+  if (!comments || comments.length === 0) {
+    return (
+      <p className="text-gray-500 pt-6 pb-8 text-center">
+        {t("no_comments_yet")}
+      </p>
+    );
+  }
 
   return (
-    <div className="md:max-h-162 max-h-100  overflow-y-auto overflow-x-hidden ">
+    // 🔥 FIXED HEIGHT SCROLL CONTAINER
+    <div className="space-y-4 py-2 max-h-[500px] overflow-y-auto pr-2">
       {comments.map((comment) => {
         const isOwner = user?._id === comment?.author?._id;
         const isEditing = editingCommentId === comment._id;
 
+        // init textMap safely
         if (textMap[comment._id] === undefined) {
-          setTextMap((prev) => ({ ...prev, [comment._id]: comment.text }));
+          setTextMap((prev) => ({
+            ...prev,
+            [comment._id]: comment.text,
+          }));
         }
 
         return (
           <div
             key={comment._id}
-            className="flex items-center gap-2.5 p-2 sm:p-3 bg-white rounded-lg shadow-md border border-gray-100 mb-4 lang-bn-BD relative"
+            className="flex gap-3 p-3 bg-white border border-zinc-100 rounded-xl shadow-sm hover:shadow-md transition relative"
           >
-            {/* Author Photo */}
-            <div className="w-10 h-10  rounded-full border border-zinc-100 overflow-hidden shadow-inner shrink-0">
+            {/* ---------------- AVATAR ---------------- */}
+            <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-zinc-200">
               {comment.author?.profileImage?.url && (
                 <img
-                  loading="lazy"
                   src={comment.author?.profileImage?.url}
-                  alt={comment?.author?.name}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  alt={comment.author?.name}
+                  className="w-full h-full object-cover"
                 />
               )}
             </div>
 
-            {/* Comment Content */}
+            {/* ---------------- CONTENT ---------------- */}
             <div className="flex-1">
-              <div className="flex items-center justify-between">
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">
-                  {comment?.author?.name}
-                </h4>
+              {/* HEADER */}
+              <div className="flex items-start justify-between">
+                <div>
+                  <h4 className="font-semibold text-sm text-gray-800">
+                    {comment.author?.name}
+                  </h4>
+                  <p className="text-xs text-gray-500">
+                    @{comment.author?.username}
+                  </p>
+                </div>
+
+                {/* RIGHT SIDE */}
                 <div className="flex items-center gap-2 relative">
-                  <span className="text-gray-400 text-sm">
+                  <span className="text-[11px] text-gray-400 whitespace-nowrap">
                     {formatDynamicDate(comment?.createdAt)}
                   </span>
 
-                  {/* 3-dot menu for owner: show on hover */}
+                  {/* MENU */}
                   {isOwner && !isEditing && (
-                    <div ref={menuRef} className="relative group">
+                    <div ref={menuRef}>
                       <button
-                        className="text-black hover:text-gray-600 px-1  cursor-pointer"
-                        title="Options"
                         onClick={() =>
                           setMenuOpenId(
-                            menuOpenId === comment._id ? null : comment._id,
+                            menuOpenId === comment._id
+                              ? null
+                              : comment._id
                           )
                         }
+                        className="text-gray-500 hover:text-black px-1"
                       >
                         ⋮
                       </button>
 
-                      {/* Animated Dropdown */}
                       <AnimatePresence>
                         {menuOpenId === comment._id && (
                           <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.15 }}
-                            className="absolute right-0 mt-2 w-28 bg-white overflow-hidden border-zinc-200 border rounded-md shadow-lg z-10 flex flex-col"
+                            className="absolute right-0 mt-2 w-28 bg-white border border-zinc-200 rounded-md shadow-lg z-20 overflow-hidden"
                           >
                             <button
-                              className="px-4 py-2 text-left text-gray-700 hover:bg-gray-100 border-b border-zinc-200"
                               onClick={() => {
                                 setEditingCommentId(comment._id);
                                 setMenuOpenId(null);
                               }}
+                              className="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 border-b border-zinc-200"
                             >
-                              Edit
+                              {t("edit")}
                             </button>
+
                             <button
-                              className="px-4 py-2 text-left text-red-600 hover:bg-gray-100"
                               onClick={() => handleDelete(comment)}
                               disabled={loading}
+                              className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-100"
                             >
-                              Delete
+                              {t("delete")}
                             </button>
                           </motion.div>
                         )}
@@ -154,9 +206,9 @@ const BlogPostComment = ({ comments, setComments }) => {
                 </div>
               </div>
 
-              {/* Comment Text / Edit */}
+              {/* ---------------- BODY ---------------- */}
               {isEditing ? (
-                <div className="flex flex-col gap-2 mt-2">
+                <div className="mt-2 space-y-2">
                   <textarea
                     value={textMap[comment._id]}
                     onChange={(e) =>
@@ -165,28 +217,33 @@ const BlogPostComment = ({ comments, setComments }) => {
                         [comment._id]: e.target.value,
                       }))
                     }
-                    className="w-full border border-gray-300 outline-none rounded-md p-2 text-sm sm:text-base resize-none"
-                    rows={2}
+                    className="w-full border border-gray-300 rounded-md p-2 text-sm outline-none resize-none"
+                    rows={3}
                   />
+
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleUpdate(comment)}
                       disabled={loading}
-                      className="btn-primary"
-                      style={{ paddingTop: "5px", paddingBottom: "5px" }}
+                      className="btn-primary text-sm"
                     >
-                      {loading ? "Saving..." : "Save"}
+                      {loading
+                        ? t("saving")
+                        : t("save") || "Save"}
                     </button>
+
                     <button
-                      onClick={() => setEditingCommentId(null)}
-                      className="px-4 cursor-pointer bg-gray-200 text-gray-700 rounded-md text-sm hover:bg-gray-300"
+                      onClick={() =>
+                        setEditingCommentId(null)
+                      }
+                      className="px-3 py-1 text-sm bg-gray-200 rounded-lg hover:bg-gray-300"
                     >
-                      Cancel
+                      {t("cancel")}
                     </button>
                   </div>
                 </div>
               ) : (
-                <p className="text-gray-700 leading-relaxed text-sm sm:text-base ">
+                <p className="mt-2 text-sm text-gray-700 leading-relaxed break-words">
                   {comment.text}
                 </p>
               )}
