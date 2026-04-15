@@ -11,6 +11,8 @@ import {
   LayoutDashboard,
   LogOut,
   Mail,
+  MessageCircle,
+  MessageCircleCheck,
   Users,
 } from "lucide-react";
 import { useAuth } from "../AuthProvider/authProvider";
@@ -65,6 +67,18 @@ const SidebarContent = ({ collapsed, toggleCollapsed, setLogoutOpen }) => {
         >
           <Users size={18} />
           {!collapsed && "Users"}
+        </Link>
+        <Link
+          to={"/admin/comments"}
+          title={"Users"}
+          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+            location.pathname === "/admin/comments"
+              ? "bg-black text-white"
+              : " hover:bg-black/10"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <Bell size={18} />
+          {!collapsed && "Comments"}
         </Link>
 
         {user.role == "ceo" && (
@@ -132,7 +146,7 @@ const SidebarContent = ({ collapsed, toggleCollapsed, setLogoutOpen }) => {
               : " hover:bg-black/10"
           } ${collapsed ? "justify-center" : ""}`}
         >
-          <Bell size={18} />
+          <MessageCircleCheck size={18} />
           {!collapsed && "Messages"}
         </Link>
 

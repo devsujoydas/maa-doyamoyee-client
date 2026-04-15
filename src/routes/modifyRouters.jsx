@@ -51,6 +51,7 @@ import MembersPage from "../pages/Management/MembersPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import VideoPage from "../pages/MediaPage/VideoPage";
 import GalleryPage from "../pages/MediaPage/GalleryPage";
+import AdminComments from "../pages/Admin/AdminComments";
 
 /* ---------------- Suspense Wrapper ---------------- */
 const withSuspense = (Component) => (
@@ -147,6 +148,7 @@ export const modifyRouter = createBrowserRouter([
       { path: "users", element: withSuspense(<AdminUsers />) },
       { path: "messages", element: withSuspense(<AdminMessages />) },
       { path: "donations", element: withSuspense(<AdminDonations />) },
+       { path: "comments", element: withSuspense(<AdminComments />) },
 
       // 🔒 CEO Restricted Routes
       {
