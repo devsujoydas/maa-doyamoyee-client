@@ -5,20 +5,21 @@ import DeleteModal from "../../components/modals/DeleteModal";
 import CommentViewModal from "../../components/modals/CommentViewModal";
 import { Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 const AdminComments = () => {
   const { comments = [], deleteComment, isLoading } = useComments();
   const { t } = useTranslation();
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedComment, setSelectedComment] = useState(null);
 
   const [viewOpen, setViewOpen] = useState(false);
   const [viewComment, setViewComment] = useState(null);
 
-  // 🔍 SEARCH STATE
   const [search, setSearch] = useState("");
 
-  // ---------------- DELETE MODAL ----------------
+  // ---------------- DELETE ----------------
   const openDeleteModal = (comment) => {
     setSelectedComment(comment);
     setIsOpen(true);
@@ -29,7 +30,7 @@ const AdminComments = () => {
     setSelectedComment(null);
   };
 
-  // ---------------- VIEW MODAL ----------------
+  // ---------------- VIEW ----------------
   const openViewModal = (comment) => {
     setViewComment(comment);
     setViewOpen(true);
@@ -40,7 +41,7 @@ const AdminComments = () => {
     setViewComment(null);
   };
 
-  // ---------------- DELETE ----------------
+  // ---------------- DELETE CONFIRM ----------------
   const confirmDelete = async () => {
     try {
       await deleteComment({
@@ -51,12 +52,11 @@ const AdminComments = () => {
       toast.success("Comment deleted successfully 🔥");
       closeDeleteModal();
     } catch (err) {
-      console.error(err);
       toast.error("Failed to delete comment ❌");
     }
   };
 
-  // ---------------- FILTERED COMMENTS ----------------
+  // ---------------- FILTER ----------------
   const filteredComments = useMemo(() => {
     if (!search.trim()) return comments;
 
@@ -75,40 +75,54 @@ const AdminComments = () => {
 
   // ---------------- LOADING ----------------
   if (isLoading) {
-    return <p className="text-center py-10">Loading comments...</p>;
+    return (
+      <p className="text-center py-10">Loading comments...</p>
+    );
   }
 
-  
-
   return (
-    <div className="">
-      {/* 🔥 TITLE + SEARCH */}
-      <div className="flex flex-col  gap-3 mb-5">
-        <h1 className="text-lg md:text-2xl font-bold flex-1">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      {/* HEADER */}
+      <div className="flex flex-col gap-3 mb-5">
+        <h1 className="text-lg md:text-2xl font-bold">
           Comments ({filteredComments.length})
         </h1>
 
-        {/* SEARCH BAR */}
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search comments..."
-          className="input-field flex-1"
+          className="input-field mt-2"
         />
       </div>
 
-      {/* GRID */}
-
+      {/* EMPTY */}
       {!comments?.length ? (
         <div className="min-h-[50vh] flex justify-center items-center">
-          <p className="text-center  py-10">{t("no_comments_yet")}</p>
+          <p className="text-center py-10">
+            {t("no_comments_yet")}
+          </p>
         </div>
       ) : (
+        // GRID
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
-          {filteredComments.map((comment) => (
-            <div
+          {filteredComments.map((comment, index) => (
+            <motion.div
               key={comment._id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.25,
+                delay: index * 0.03,
+              }}
+              whileHover={{
+                scale: 1.02,
+              }}
               className="border border-zinc-200 rounded-xl p-4 flex flex-col justify-between h-full hover:shadow-lg transition"
             >
               {/* TOP */}
@@ -123,7 +137,7 @@ const AdminComments = () => {
                     className="w-10 h-10 rounded-full object-cover shrink-0"
                   />
 
-                  <div className="w-full">
+                  <div>
                     <h4 className="font-semibold text-sm">
                       {comment.author?.name}
                     </h4>
@@ -132,14 +146,13 @@ const AdminComments = () => {
                       @{comment.author?.username}
                     </p>
 
-                    {/* PREVIEW */}
                     <p className="mt-2 text-sm text-gray-700 line-clamp-2 break-words">
                       {comment.text}
                     </p>
                   </div>
                 </div>
 
-                {/* RIGHT DATE */}
+                {/* DATE */}
                 <div className="text-xs text-gray-400 whitespace-nowrap">
                   {new Date(comment.createdAt).toLocaleString()}
                 </div>
@@ -147,17 +160,19 @@ const AdminComments = () => {
 
               {/* DELETE */}
               <div className="mt-4 flex justify-end">
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
                   onClick={() => openDeleteModal(comment)}
-                  className="bg-red-500 hover:bg-red-600 cursor-pointer text-white px-4 py-2 rounded-lg flex items-center gap-1"
+                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg flex items-center gap-1"
                 >
                   <Trash2 size={14} />
-                </button>
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}
+
       {/* DELETE MODAL */}
       <DeleteModal
         isOpen={isOpen}
@@ -165,7 +180,8 @@ const AdminComments = () => {
         confirmDelete={confirmDelete}
         selected={{
           ...selectedComment,
-          title: selectedComment?.text?.slice(0, 20) + "...",
+          title:
+            selectedComment?.text?.slice(0, 20) + "...",
         }}
         isUser={false}
       />
@@ -176,7 +192,7 @@ const AdminComments = () => {
         onClose={closeViewModal}
         comment={viewComment}
       />
-    </div>
+    </motion.div>
   );
 };
 
