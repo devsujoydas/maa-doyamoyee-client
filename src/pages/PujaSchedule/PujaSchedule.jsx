@@ -10,7 +10,7 @@ const PujaSchedule = () => {
   const morningItems = ["wake", "shiv", "annapurna", "anjali", "bhog"];
 
   return (
-    <div className="custom-container">
+    <div className="custom-container py-8 md:py-12">
       <SEO
         title="পূজার সময়সূচী | Maa Doyamoyee Temple"
         description="মা দয়াময়ী মন্দিরের দৈনিক পূজার সময়সূচী, অঞ্জলি, আরতি ও ভোগের সময় বিস্তারিত জানুন।"
@@ -20,7 +20,7 @@ const PujaSchedule = () => {
 
       <PageHeading title={t("puja.title")} desc={t("puja.desc")} />
 
-      {/* Grid Layout Design */}
+      {/* Grid Layout */}
       <div className="grid md:grid-cols-2 gap-6">
 
         {/* Morning Card */}
@@ -66,7 +66,7 @@ const PujaSchedule = () => {
           </div>
         </motion.div>
 
-        {/* Closed Card */}
+        {/* Special Schedule Card */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -76,11 +76,8 @@ const PujaSchedule = () => {
             <AlertCircle size={18} /> {t("puja.closed")}
           </h2>
 
-          <p className="text-gray-700 text-sm md:text-base mb-2">
-            {t("puja.closed_desc")}
-          </p>
           <p className="text-gray-700 text-sm md:text-base">
-            {t("puja.closed_time")}
+            {t("puja.special_time")}
           </p>
         </motion.div>
 

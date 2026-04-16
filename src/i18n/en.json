@@ -502,29 +502,27 @@
     "change": "We may update these Terms & Conditions at any time without prior notice."
   },
 
-  "puja": {
-    "title": "Puja Schedule",
-    "desc": "Daily worship schedule and important temple information",
+ "puja": {
+  "title": "Puja Schedule",
+  "desc": "Daily worship schedule and important temple information",
 
-    "morning": "Morning",
-    "evening": "Evening",
-    "closed": "Temple Closed",
-    "notes": "Special Notes",
+  "morning": "Morning",
+  "evening": "Evening",
+  "closed": "Special Schedule",
+  "notes": "Special Notes",
 
-    "wake": "Idol awakening at sunrise",
-    "shiv": "Shiva Puja at 10:30 AM",
-    "annapurna": "Annapurna Puja at 11:00 AM",
-    "anjali": "Anjali from 12:00 PM to 1:00 PM",
-    "bhog": "Bhog Raag at 2:00 PM",
+  "wake": "Idol awakening at sunrise",
+  "shiv": "Shiva Puja at 10:30 AM",
+  "annapurna": "Annapurna Puja at 11:00 AM",
+  "anjali": "Anjali from 12:00 PM to 1:00 PM",
+  "bhog": "Bhog Raag at 2:00 PM",
 
-    "arati": "Evening Arati 40 minutes after sunset",
+  "arati": "Evening Arati 40 minutes after sunset",
 
-    "closed_desc": "Temple remains closed from 9th of Chaitra to 8th of Ashwin",
-    "closed_time": "In special cases, temple closes at 8:30 PM",
+  "special_time": "From 9th of Chaitra to 8th of Ashwin, the temple remains open until 8:30 PM",
 
-    "note1": "Bottle gourd with boal fish is the main offering",
-    "note2": "Atap rice is used for bhog"
-  }
-
+  "note1": "Bottle gourd with boal fish is the main offering",
+  "note2": "Atap rice is used for bhog"
+}
 
 }
