@@ -14,11 +14,13 @@ const CommitteePage = () => {
     (m) => m.designation === "সাধারণ সম্পাদক",
   );
 
-  const secretaries = committeeData.filter(
-    (m) =>
-      m.designation.includes("সম্পাদক") && m.designation !== "সাধারণ সম্পাদক",
-  );
-
+  const secretaries  = committeeData.filter(
+  (m) =>
+    m.designation !== "সভাপতি" &&
+    m.designation !== "সহ-সভাপতি" &&
+    m.designation !== "সাধারণ সম্পাদক" &&
+    m.designation !== "সদস্য"
+);
   const members = committeeData.filter((m) => m.designation === "সদস্য");
 
   return (

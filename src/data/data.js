@@ -5,6 +5,7 @@ export const committeeData = [
   { id: 4, name: "শ্রী বিধান চন্দ্র সাহা", designation: "সহ-সভাপতি" },
   { id: 5, name: "শ্রী নারায়ণ চন্দ্র ভাদুড়ী", designation: "সহ-সভাপতি" },
   { id: 6, name: "শ্রী পরিতোষ কুমার পণ্ডিত", designation: "সহ-সভাপতি" },
+  
   { id: 7, name: "শ্রী রঞ্জন কুমার সিংহ", designation: "সাধারণ সম্পাদক" },
   { id: 8, name: "শ্রী রাজন সাহা রাজু", designation: "সহ-সাধারণ সম্পাদক" },
   { id: 9, name: "শ্রী সুজন কুমার দত্ত", designation: "সহ-সাধারণ সম্পাদক" },
