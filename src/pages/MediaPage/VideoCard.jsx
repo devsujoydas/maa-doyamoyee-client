@@ -17,7 +17,7 @@ const VideoCard = ({ video }) => {
         >
             {/* Skeleton */}
             {!loaded && (
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-pulse rounded-2xl"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-gray-200 via-gray-300 to-gray-200 animate-pulse rounded-2xl"></div>
             )}
 
             <iframe

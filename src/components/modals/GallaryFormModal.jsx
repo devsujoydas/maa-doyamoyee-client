@@ -41,7 +41,7 @@ const GalleryFormModal = ({ isOpen, onClose, onSubmit, editData, loading }) => {
   if (!isOpen) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={loading ? null : onClose} wClass="max-w-md">
+    <Modal isOpen={isOpen} onClose={loading ? null : onClose} wClass="max-w-xl">
       <div className="p-4 bg-white rounded-xl">
         <h2 className="mb-4">{editData ? "Update" : "Add"} Image</h2>
 
