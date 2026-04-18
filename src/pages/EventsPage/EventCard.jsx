@@ -17,7 +17,7 @@ const EventCard = ({ item }) => {
             transition={{ duration: 0.3 }}
             className="relative group rounded-lg overflow-hidden shadow-lg cursor-pointer lang-bn-BD "
         >
-            <Link to={`/events/${item._id}`}>
+            <Link to={`/festival/${item._id}`}>
                 <img loading="lazy"
                     src={item.image.url}
                     alt={item.title}

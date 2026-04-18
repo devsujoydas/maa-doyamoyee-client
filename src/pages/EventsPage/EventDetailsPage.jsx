@@ -51,7 +51,7 @@ const EventDetailsPage = () => {
       <SEO
         title={`${event.title} | Maa Doyamoyee Temple Event`}
         description={event.description}
-        url={`https://www.maa-doyamoyee.com/events/${event._id}`}
+        url={`https://www.maa-doyamoyee.com/festival/${event._id}`}
         image={event.image.url}
         type="article"
         keywords="puja event, temple festival Bangladesh, Maa Doyamoyee event"
@@ -63,7 +63,7 @@ const EventDetailsPage = () => {
 
       <div className="custom-container">
         <button
-          onClick={() => navigate("/events")}
+          onClick={() => navigate("/festival")}
           className="inline-block cursor-pointer mb-8 text-indigo-600 hover:underline"
         >
           ← {t("back_to_all_posts")}

@@ -91,8 +91,8 @@ export const modifyRouter = createBrowserRouter([
       { path: "/contact", element: withSuspense(<ContactPage />) },
       { path: "/donation", element: withSuspense(<Donation />) },
 
-      { path: "/events", element: withSuspense(<EventsPage />) },
-      { path: "/events/:id", element: withSuspense(<EventDetailsPage />) },
+      { path: "/festival", element: withSuspense(<EventsPage />) },
+      { path: "/festival/:id", element: withSuspense(<EventDetailsPage />) },
 
       { path: "/notices", element: withSuspense(<NoticePage />) },
       { path: "/puja-schedule", element: withSuspense(<PujaSchedule />) },

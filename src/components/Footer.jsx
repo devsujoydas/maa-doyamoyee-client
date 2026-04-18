@@ -9,7 +9,7 @@ const Footer = () => {
 
   const templeLinks = [
     { to: "/history", label: t("nav_history") },
-    { to: "/events", label: t("nav_events") },
+    { to: "/festival", label: t("nav_events") },
     { to: "/puja-schedule", label: t("nav_puja_schedule") },
   ];
 

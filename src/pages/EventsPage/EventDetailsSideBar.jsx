@@ -9,7 +9,7 @@ const EventDetailsSideBar = ({ events = [] }) => {
     <div className="w-full lg:w-1/3 space-y-8 rounded-xl">
       <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
         <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-900">
-          All Events
+          All Festival
         </h3>
 
         <div className="space-y-3">
@@ -21,7 +21,7 @@ const EventDetailsSideBar = ({ events = [] }) => {
               animate={{ opacity: 1, y: 0 }}
               className="flex gap-3 items-center pb-3 border-b border-gray-200 last:border-b-0 last:pb-0"
             >
-              <Link to={`/events/${event._id}`}>
+              <Link to={`/festival/${event._id}`}>
                 <img
                   loading="lazy"
                   src={event.image?.url || event.image}
@@ -30,7 +30,7 @@ const EventDetailsSideBar = ({ events = [] }) => {
                 />
               </Link>
               <div className="flex flex-col">
-                <Link to={`/events/${event._id}`}>
+                <Link to={`/festival/${event._id}`}>
                   <h4 className="text-gray-800 hover:text-red-500 font-semibold text-xs sm:text-base line-clamp-2">
                     {event.title}
                   </h4>

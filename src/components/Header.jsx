@@ -35,7 +35,7 @@ const Header = ({ setLogoutOpen }) => {
     { label: t("nav_home"), to: "/" },
     { label: t("nav_history"), to: "/history" },
     { label: t("nav_puja_schedule"), to: "/puja-schedule" },
-    { label: t("nav_events"), to: "/events" },
+    { label: t("nav_events"), to: "/festival" },
     {
       label: t("nav_media"),
       dropdown: [

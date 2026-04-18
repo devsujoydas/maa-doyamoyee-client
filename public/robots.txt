@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://maa-doyamoyee.com/sitemap.xml
+Sitemap: https://www.maa-doyamoyee.com/sitemap.xml
