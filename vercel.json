@@ -21,6 +21,19 @@
       "destination": "/index.html"
     }
   ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "maa-doyamoyee.com"
+        }
+      ],
+      "destination": "https://www.maa-doyamoyee.com/$1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/sitemap.xml",
