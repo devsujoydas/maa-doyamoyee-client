@@ -50,7 +50,7 @@ const BlogsDetails = () => {
       <SEO
         title={`${blog?.title} | Maa Doyamoyee Blog`}
         description={blog?.content}
-        url={`https://maa-doyamoyee.vercel.app/blogs/${blog._id}`}
+        url={`https://www.maa-doyamoyee.com/blogs/${blog._id}`}
         image={blog.postImg?.url}
         type="article"
         publishedTime={blog.createdAt}

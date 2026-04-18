@@ -67,7 +67,7 @@ const HistoryPage = () => {
       <SEO
         title="History of Maa Doyamoyee Temple | মন্দিরের ইতিহাস"
         description="শ্রী শ্রীঁ রী দয়াময়ী মন্দিরের ইতিহাস, প্রতিষ্ঠা, ঐতিহ্য ও ধর্মীয় গুরুত্ব সম্পর্কে বিস্তারিত জানুন। Learn about Maa Doyamoyee Temple history in Jamalpur."
-        url="https://maa-doyamoyee.vercel.app/history"
+        url="https://www.maa-doyamoyee.com/history"
         keywords="Maa Doyamoyee history, temple history Bangladesh, Jamalpur temple history, মন্দিরের ইতিহাস, Hindu temple history"
       />
 

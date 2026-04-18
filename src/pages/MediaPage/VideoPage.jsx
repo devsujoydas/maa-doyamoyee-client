@@ -33,7 +33,7 @@ const VideoPage = () => {
       <SEO
         title="Temple Videos | Maa Doyamoyee Temple"
         description="Watch all temple related videos, puja অনুষ্ঠান, ধর্মীয় কার্যক্রম ও বিশেষ মুহূর্তের ভিডিও।"
-        url="https://maa-doyamoyee.vercel.app/videos"
+        url="https://www.maa-doyamoyee.com/videos"
         keywords="temple videos, puja video Bangladesh, Maa Doyamoyee video, ধর্মীয় ভিডিও"
       />
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>

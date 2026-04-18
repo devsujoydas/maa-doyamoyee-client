@@ -103,7 +103,6 @@ Status: ${status}
               <div className="bg-blue-50 border border-zinc-200 p-3 rounded-lg mb-4 text-sm">
                 <p><b>Bank:</b> {bankPayment.bankName}</p>
                 <p><b>Account:</b> {bankPayment.accountNumber}</p>
-                <p><b>Branch:</b> {bankPayment.branchName}</p>
               </div>
             )}
 
@@ -115,7 +114,6 @@ Status: ${status}
                 <p><b>Transaction ID:</b> {mobilePayment.transactionId}</p>
               </div>
             )}
-
             
 
             {/* IMAGE PREVIEW */}

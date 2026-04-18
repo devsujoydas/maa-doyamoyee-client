@@ -51,7 +51,7 @@ const EventDetailsPage = () => {
       <SEO
         title={`${event.title} | Maa Doyamoyee Temple Event`}
         description={event.description}
-        url={`https://maa-doyamoyee.vercel.app/events/${event._id}`}
+        url={`https://www.maa-doyamoyee.com/events/${event._id}`}
         image={event.image.url}
         type="article"
         keywords="puja event, temple festival Bangladesh, Maa Doyamoyee event"

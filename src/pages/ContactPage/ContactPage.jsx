@@ -54,7 +54,7 @@ const Contact = () => {
       <SEO
         title="Contact Maa Doyamoyee Temple | যোগাযোগ"
         description="Get in touch with Maa Doyamoyee Temple. Find location, phone number and contact details."
-        url="https://maa-doyamoyee.vercel.app/contact"
+        url="https://www.maa-doyamoyee.com/contact"
         keywords="contact temple, Jamalpur temple contact, Maa Doyamoyee contact, যোগাযোগ"
       />
 

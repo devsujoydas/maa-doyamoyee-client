@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTranslation } from "react-i18next"; 
+import { useTranslation } from "react-i18next";
 import ImageUpload from "../../components/resuable/ImageUpload";
 import toast from "react-hot-toast";
 import useDonationActions from "../../hooks/useDonationActions";
 
 const DonationForm = () => {
   const { t } = useTranslation();
- const { createDonation, isCreating } = useDonationActions();
+  const { createDonation, isCreating } = useDonationActions();
 
   const [preview, setPreview] = useState(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
@@ -18,6 +18,17 @@ const DonationForm = () => {
     phone: "",
     paymentAmount: "",
     paymentMethod: "Bank",
+
+    // bank
+    bankName: "",
+    accountNumber: "",
+
+    // mobile
+    mobileBankName: "",
+    senderNumber: "",
+    transactionID: "",
+
+    message: "",
     screenshot: null,
   });
 
@@ -48,19 +59,19 @@ const DonationForm = () => {
       data.append("message", formData.message || "");
       data.append("paymentMethod", formData.paymentMethod);
 
+      // BANK PAYMENT
       if (formData.paymentMethod === "Bank") {
         data.append(
           "bankPayment",
           JSON.stringify({
             bankName: formData.bankName,
-            branchName: formData.branchName,
-            branchCode: formData.branchCode,
-            swiftCode: formData.swiftCode,
-            routingNumber: formData.routingNumber,
             accountNumber: formData.accountNumber,
           }),
         );
-      } else {
+      }
+
+      // MOBILE PAYMENT
+      if (formData.paymentMethod === "MobileBanking") {
         data.append(
           "mobilePayment",
           JSON.stringify({
@@ -77,14 +88,18 @@ const DonationForm = () => {
 
       await createDonation(data);
 
-      toast.success("Donation submitted successfully 🎉");
-
       setFormData({
         accountName: "",
         email: "",
         phone: "",
         paymentAmount: "",
         paymentMethod: "Bank",
+        bankName: "",
+        accountNumber: "",
+        mobileBankName: "",
+        senderNumber: "",
+        transactionID: "",
+        message: "",
         screenshot: null,
       });
 
@@ -97,77 +112,79 @@ const DonationForm = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center md:px-3 md:py-10 ">
-      <motion.div className="w-full max-w-5xl bg-white shadow-xl rounded-2xl p-3 md:p-8  border border-zinc-200">
-        {/* TITLE */}
+      <motion.div className="w-full max-w-5xl bg-white shadow-xl rounded-2xl p-3 md:p-8 border border-zinc-200">
         <h2 className="text-xl font-bold text-center mb-6">
           {t("donation.title")}
         </h2>
 
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4 "
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm"
         >
           {/* NAME */}
           <div>
-            <label className="block mb-1 text-sm font-medium">
+            <label className="block mb-1   font-medium">
               {t("donation.name.label")} <span className="text-red-500">*</span>
             </label>
             <input
               name="accountName"
               onChange={handleChange}
-              placeholder={t("donation.name.placeholder")}
               className="input-field"
+              placeholder={t("donation.name.placeholder")}
               required
             />
           </div>
 
           {/* EMAIL */}
           <div>
-            <label className="block mb-1 text-sm font-medium">
-              {t("donation.email.label")} <span className="text-red-500"> *</span>
+            <label className="block mb-1   font-medium">
+              {t("donation.email.label")}{" "}
+              <span className="text-red-500">*</span>
             </label>
             <input
               name="email"
               onChange={handleChange}
-              placeholder={t("donation.email.placeholder")}
               className="input-field"
+              placeholder={t("donation.email.placeholder")}
               required
             />
           </div>
 
           {/* PHONE */}
           <div>
-            <label className="block mb-1 text-sm font-medium">
-              {t("donation.phone.label")} <span className="text-red-500"> *</span>
+            <label className="block mb-1   font-medium">
+              {t("donation.phone.label")}{" "}
+              <span className="text-red-500">*</span>
             </label>
             <input
               name="phone"
               onChange={handleChange}
-              placeholder={t("donation.phone.placeholder")}
               className="input-field"
+              placeholder={t("donation.phone.placeholder")}
               required
             />
           </div>
 
           {/* AMOUNT */}
           <div>
-            <label className="block mb-1 text-sm font-medium">
-              {t("donation.amount.label")} <span className="text-red-500"> *</span>
+            <label className="block mb-1   font-medium">
+              {t("donation.amount.label")}{" "}
+              <span className="text-red-500">*</span>
             </label>
             <input
               name="paymentAmount"
               type="number"
               onChange={handleChange}
-              placeholder={t("donation.amount.placeholder")}
               className="input-field"
+              placeholder={t("donation.amount.placeholder")}
               required
             />
           </div>
 
           {/* PAYMENT METHOD */}
           <div>
-            <label className="block mb-1 text-sm font-medium">
-              {t("donation.paymentMethod.label")} <span className="text-red-500"> *</span>
+            <label className="block mb-1   font-medium">
+              {t("donation.paymentMethod.label")}
             </label>
             <select
               name="paymentMethod"
@@ -176,85 +193,37 @@ const DonationForm = () => {
             >
               <option value="Bank">{t("donation.paymentMethod.bank")}</option>
               <option value="MobileBanking">
-                {t("donation.paymentMethod.mobile")} 
+                {t("donation.paymentMethod.mobile")}
               </option>
             </select>
           </div>
 
-          {/* BANK FIELDS */}
+          {/* BANK */}
           {formData.paymentMethod === "Bank" && (
             <>
               <div>
-                <label className="block mb-1 text-sm font-medium">
-                  {t("donation.accountNumber.label")} <span className="text-red-500"> *</span>
-                </label>
-                <input
-                  name="accountNumber"
-                  onChange={handleChange}
-                  placeholder={t("donation.accountNumber.placeholder")}
-                  className="input-field"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block mb-1 text-sm font-medium">
-                  {t("donation.bankName.label")}  <span className="text-red-500"> *</span>
+                <label className="block mb-1   font-medium">
+                  {t("donation.bankName.label")}
                 </label>
                 <input
                   name="bankName"
                   onChange={handleChange}
+                  className="input-field"
                   placeholder={t("donation.bankName.placeholder")}
-                  className="input-field"
                   required
                 />
               </div>
 
               <div>
-                <label className="block mb-1 text-sm font-medium">
-                  {t("donation.branchName.label")} <span className="text-red-500"> *</span>
+                <label className="block mb-1   font-medium">
+                  {t("donation.accountNumber.label")}
                 </label>
                 <input
-                  name="branchName"
+                  name="accountNumber"
                   onChange={handleChange}
-                  placeholder={t("donation.branchName.placeholder")}
                   className="input-field"
+                  placeholder={t("donation.accountNumber.placeholder")}
                   required
-                />
-              </div>
-
-              <div>
-                <label className="block mb-1 text-sm font-medium">
-                  {t("donation.branchCode.label")} <span className="text-red-500"> *</span>
-                </label>
-                <input
-                  name="branchCode"
-                  onChange={handleChange}
-                  placeholder={t("donation.branchCode.placeholder")}
-                  className="input-field"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block mb-1 text-sm font-medium">
-                  {t("donation.swiftCode.label")} <span className="text-red-500"> *</span>
-                </label>
-                <input
-                  name="swiftCode"
-                  onChange={handleChange}
-                  placeholder={t("donation.swiftCode.placeholder")}
-                  className="input-field"
-                />
-              </div>
-              <div>
-                <label className="block mb-1 text-sm font-medium">
-                  {t("donation.routingNumber.label")} <span className="text-red-500"> *</span>
-                </label>
-                <input
-                  name="routingNumber"
-                  onChange={handleChange}
-                  placeholder={t("donation.routingNumber.placeholder")}
-                  className="input-field"
                 />
               </div>
             </>
@@ -264,13 +233,14 @@ const DonationForm = () => {
           {formData.paymentMethod === "MobileBanking" && (
             <>
               <div>
-                <label className="block mb-1 text-sm font-medium">
-                  {t("donation.mobileBank.label")} <span className="text-red-500"> *</span>
+                <label className="block mb-1   font-medium">
+                  {t("donation.mobileBank.label")}
                 </label>
                 <select
                   name="mobileBankName"
                   onChange={handleChange}
                   className="input-field"
+                  required
                 >
                   <option value="">{t("donation.mobileBank.select")}</option>
                   <option value="Bkash">
@@ -286,8 +256,8 @@ const DonationForm = () => {
               </div>
 
               <div>
-                <label className="block mb-1 text-sm font-medium">
-                  {t("donation.senderNumber.label")} <span className="text-red-500"> *</span>
+                <label className="block mb-1   font-medium">
+                  {t("donation.senderNumber.label")}
                 </label>
                 <input
                   name="senderNumber"
@@ -299,25 +269,26 @@ const DonationForm = () => {
               </div>
 
               <div>
-                <label className="block mb-1 text-sm font-medium">
-                  {t("donation.transactionId.label")} <span className="text-red-500"> *</span>
+                <label className="block mb-1   font-medium">
+                  {t("donation.transactionId.label")}
                 </label>
                 <input
                   name="transactionID"
                   onChange={handleChange}
-                  placeholder={t("donation.transactionId.placeholder")}
                   className="input-field"
+                  placeholder={t("donation.transactionId.placeholder")}
                   required
                 />
               </div>
             </>
           )}
 
-          {/* IMAGE */}
+          {/* SCREENSHOT */}
           <div className="sm:col-span-2">
-            <label className="block mb-2 text-sm font-medium">
-              {t("donation.screenshot.label")} <span className="text-red-500"> *</span>
+            <label className="block mb-2   font-medium">
+              {t("donation.screenshot.label")}
             </label>
+
             <ImageUpload
               value={formData.screenshot}
               onChange={(file) =>
@@ -328,16 +299,16 @@ const DonationForm = () => {
             />
           </div>
 
-          {/* MESSAGE */}
+          {/* MESSAGE (optional now) */}
           <div className="sm:col-span-2">
-            <label className="block mb-1 text-sm font-medium">
-              {t("donation.message.label")} <span className="text-red-500"> *</span>
+            <label className="block mb-1   font-medium">
+              {t("donation.message.label")}
             </label>
             <textarea
               name="message"
               onChange={handleChange}
-              placeholder={t("donation.message.placeholder")}
               className="input-field"
+              placeholder={t("donation.message.placeholder")}
             />
           </div>
 
@@ -358,27 +329,22 @@ const DonationForm = () => {
               exit={{ scale: 0.8, opacity: 0 }}
               className="bg-white p-6 rounded-xl text-center max-w-sm w-full"
             >
-              {/* ICON */}
               <div className="text-5xl mb-2">🎉</div>
 
-              {/* TITLE */}
               <h2 className="text-xl font-bold">
                 {t("donationSuccess.title")}
               </h2>
 
-              {/* MESSAGE */}
-              <p className="text-gray-600 mt-2 text-sm">
+              <p className="text-gray-600 mt-2  ">
                 {t("donationSuccess.messageLine1")}
                 <br />
                 {t("donationSuccess.messageLine2")}
               </p>
 
-              {/* PROCESSING */}
-              <p className="mt-3 text-sm font-medium text-green-600">
+              <p className="mt-3   font-medium text-green-600">
                 {t("donationSuccess.processing")}
               </p>
 
-              {/* BUTTON */}
               <button
                 onClick={() => setIsSuccessModalOpen(false)}
                 className="btn-primary mt-5 w-full"

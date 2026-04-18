@@ -12,7 +12,7 @@ const MembersPage = () => {
       <SEO
         title="Temple Members | Maa Doyamoyee Temple"
         description="List of all List of Lifetime Members associated with Maa Doyamoyee Temple and their contributions."
-        url="https://maa-doyamoyee.vercel.app/members"
+        url="https://www.maa-doyamoyee.com/members"
         keywords="temple members, community members, Hindu temple members, সদস্য তালিকা"
       />
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>

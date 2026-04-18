@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet-async";
 const SEO = ({
   title = "Shri Shri Ri Doyamoyee Temple",
   description = "Official website of Shri Shri Ri Doyamoyee Temple organization",
-  url = "https://maa-doyamoyee.vercel.app/",
-  image = "https://maa-doyamoyee.vercel.app/banner/newbanner1.webp",
+  url = "https://www.maa-doyamoyee.com/",
+  image = "https://www.maa-doyamoyee.com/banner/newbanner1.webp",
   keywords = "maa doyamoyee temple, hindu temple bangladesh, spiritual blog, temple events",
   author = "Maa Doyamoyee Temple",
   type = "website", // website | article
@@ -79,7 +79,7 @@ const SEO = ({
                   name: "Maa Doyamoyee Temple",
                   logo: {
                     "@type": "ImageObject",
-                    url: "https://maa-doyamoyee.vercel.app/omsymboll.jpg",
+                    url: "www.maa-doyamoyee.com/omsymboll.jpg",
                   },
                 },
                 datePublished: publishedTime,
@@ -90,7 +90,7 @@ const SEO = ({
                 "@type": "Organization",
                 name: "Maa Doyamoyee Temple",
                 url: url,
-                logo: "https://maa-doyamoyee.vercel.app/omsymboll.jpg",
+                logo: "https://www.maa-doyamoyee.com/omsymboll.jpg",
                 description: description,
               },
         )}

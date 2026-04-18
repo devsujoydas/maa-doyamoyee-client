@@ -28,7 +28,7 @@ const CommitteePage = () => {
       <SEO
         title="Temple Committee | Maa Doyamoyee Temple"
         description="Temple management committee members of Maa Doyamoyee Temple and their responsibilities."
-        url="https://maa-doyamoyee.vercel.app/committee"
+        url="https://www.maa-doyamoyee.com/committee"
         keywords="temple committee, management committee, Hindu temple management, মন্দির কমিটি"
       />
       

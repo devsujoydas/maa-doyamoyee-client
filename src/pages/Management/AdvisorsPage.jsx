@@ -9,7 +9,7 @@ const AdvisorsPage = () => {
       <SEO
         title="Temple Advisors | Maa Doyamoyee Temple"
         description="Meet the respected advisors of Maa Doyamoyee Temple who guide its development and activities."
-        url="https://maa-doyamoyee.vercel.app/advisors"
+        url="https://www.maa-doyamoyee.com/advisors"
         keywords="temple advisors, Hindu advisors Bangladesh, মন্দির উপদেষ্টা"
       />
       <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 blur-3xl opacity-20 rounded-full"></div>

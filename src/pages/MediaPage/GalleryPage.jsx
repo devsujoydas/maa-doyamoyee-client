@@ -33,7 +33,7 @@ const GalleryPage = () => {
       <SEO
         title="Temple Gallery | Maa Doyamoyee Temple Photos"
         description="Explore photo gallery of Maa Doyamoyee Temple. View all old and new temple images, puja moments and events ছবি গ্যালারি।"
-        url="https://maa-doyamoyee.vercel.app/gallery"
+        url="https://www.maa-doyamoyee.com/gallery"
         keywords="temple gallery, puja photos Bangladesh, Maa Doyamoyee images, মন্দির ছবি"
       />
 

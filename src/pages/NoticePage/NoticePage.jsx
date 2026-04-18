@@ -21,7 +21,7 @@ const NoticePage = () => {
       <SEO
         title="Temple Notices | Maa Doyamoyee Temple"
         description="Stay updated with all official notices, announcements and temple updates."
-        url="https://maa-doyamoyee.vercel.app/notices"
+        url="https://www.maa-doyamoyee.com/notices"
         keywords="temple notice, announcement, Maa Doyamoyee notice, বিজ্ঞপ্তি"
       />
       {/* Background Glow */}

@@ -34,7 +34,7 @@ const EventsPage = () => {
       <SEO
         title="Temple Events & Puja | Maa Doyamoyee Temple"
         description="Discover all upcoming and past puja events of Maa Doyamoyee Temple. জানুন সকল পূজা, উৎসব ও ধর্মীয় অনুষ্ঠান সম্পর্কে।"
-        url="https://maa-doyamoyee.vercel.app/events"
+        url="https://www.maa-doyamoyee.com/events"
         keywords="temple events, puja schedule Bangladesh, Maa Doyamoyee puja, Hindu festival Jamalpur, পূজা উৎসব"
       />
 

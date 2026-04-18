@@ -14,7 +14,7 @@ const PujaSchedule = () => {
       <SEO
         title="পূজার সময়সূচী | Maa Doyamoyee Temple"
         description="মা দয়াময়ী মন্দিরের দৈনিক পূজার সময়সূচী, অঞ্জলি, আরতি ও ভোগের সময় বিস্তারিত জানুন।"
-        url="https://maa-doyamoyee.vercel.app/puja-schedule"
+        url="https://www.maa-doyamoyee.com/puja-schedule"
         keywords="puja schedule Bangladesh, temple puja time"
       />
 

@@ -21,8 +21,8 @@ const PurohitPage = () => {
       <SEO
         title="Temple Purohit | Maa Doyamoyee Temple"
         description="Meet the purohits of Maa Doyamoyee Temple. Learn about their roles, rituals and religious responsibilities."
-        url="https://maa-doyamoyee.vercel.app/purohit"
-        image={"https://maa-doyamoyee.vercel.app/purohit/sajal.webp"}
+        url="https://www.maa-doyamoyee.com/purohit"
+        image={"https://www.maa-doyamoyee.com/purohit/sajal.webp"}
         keywords="purohit, temple priest Bangladesh, Hindu priest Jamalpur, পূজারী"
       />
       {/* BG Effects */}

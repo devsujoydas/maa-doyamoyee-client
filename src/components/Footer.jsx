@@ -124,23 +124,27 @@ const Footer = () => {
         </div>
       </div>
 
+
+
       {/* Bottom */}
-      <div className="mt-12 pt-6 border-t border-gray-200 ">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-center items-center gap-4 text-sm">
+      <div className="mt-12 container mx-auto pt-6 border-t border-gray-200 ">
+        <div className=" px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
           <p>
             © {new Date().getFullYear()} {t("site_name")}. {t("footer_rights")}
           </p>
-          {/* <p className="flex items-center gap-1">
+
+
+          <p className="flex items-center gap-1">
             {t("footer_developed")} {t("footer_by")}{" "}
             <a
-              href="https://devsujoydas.vercel.app"
+              href="https://xenvance-agency.lovable.app/"
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="text-yellow-600  font-semibold hover:underline"
+              className="text-purple-600  font-semibold hover:underline"
             >
-              Sujoy Das
+              Xenvance Agency
             </a>
-          </p> */}
+          </p>
         </div>
       </div>
     </footer>

@@ -17,7 +17,7 @@ const BlogsPage = () => {
       <SEO
         title="Temple Blog | Maa Doyamoyee Temple"
         description="Read blogs, spiritual articles, temple updates and religious knowledge from Maa Doyamoyee Temple."
-        url="https://maa-doyamoyee.vercel.app/blogs"
+        url="https://www.maa-doyamoyee.com/blogs"
         keywords="temple blog, spiritual blog Bangladesh, Maa Doyamoyee blog, ধর্মীয় ব্লগ"
       />
 

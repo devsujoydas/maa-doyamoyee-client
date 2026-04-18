@@ -156,7 +156,7 @@ npm run build
 
 ## 🌐 Deployment & Links
 
-- **Live Demo:** [https://maa-doyamoyee.vercel.app](https://maa-doyamoyee.vercel.app)  
+- **Live Demo:** [www.maa-doyamoyee.com](https://www.maa-doyamoyee.com)  
 - **GitHub Repository:** [https://github.com/devsujoydas/maa-doyamoyee-client](https://github.com/devsujoydas/maa-doyamoyee-client)
 
 ---

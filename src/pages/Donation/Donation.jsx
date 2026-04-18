@@ -74,7 +74,7 @@ const Donation = () => {
       <SEO
         title="Donate to Maa Doyamoyee Temple | Support Temple"
         description="Support Maa Doyamoyee Temple by donating. Help maintain temple activities, puja আয়োজন and community services. আপনার অনুদান মা দয়াময়ী মন্দিরের সেবা, পূজা এবং আধ্যাত্মিক কার্যক্রম পরিচালনায় সহায়তা করে।"
-        url="https://maa-doyamoyee.vercel.app/donation"
+        url="https://www.maa-doyamoyee.com/donation"
         keywords="donate temple, temple donation Bangladesh, Maa Doyamoyee donation, দান,অনুদান,ব্যাংক অ্যাকাউন্ট,মোবাইল ব্যাংকিং"
       />
       {/* Background Glow */}
