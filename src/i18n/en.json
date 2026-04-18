@@ -23,8 +23,8 @@
 
   "nav_temple_title": "Temple",
 
-  "auth_signin": "Signin",
-  "auth_signup": "Signup",
+  "auth_signin": "Sign In",
+  "auth_signup": "Sign Up",
   "auth_dashboard": "Dashboard",
   "auth_profile": "Profile",
   "auth_logout": "Logout",
@@ -259,6 +259,8 @@
   "footer_rights": "All Rights Reserved.",
   "footer_developed": "Developed ",
   "footer_by": "by",
+"footer_credit": "UI/UX Consultation, Planning & Structuring",
+  "sourav_das": "Sourav Das",
 
   "auth": {
     "login_title": "Sign In",

@@ -95,107 +95,114 @@ const BlogCard = ({ blog, type }) => {
         </div>
 
         {/* 🔹 Blog Content */}
-        <div className="px-3 pt-4 pb-2 flex flex-col flex-1">
+        <div className="px-3 pt-4 pb-2 flex flex-col jube flex-1">
           {/* Category + Date */}
-          <div className="flex items-center gap-5 mb-3">
-            <div className="flex gap-1 items-center">
-              <img className="w-3 h-3" src={omSymbolsvg} alt="" />
-              <span className="text-[13px] font-semibold text-[#44233B]">
-                {blog?.category || blog?.tag}
-              </span>
-            </div>
-
-            <div className="flex gap-2 items-center">
-              <FaRegCalendarAlt className="text-[#DB4242]" size={14} />
-              <span className="text-[13px] font-semibold text-[#44233B]">
-                {formatDateDynamic(blog?.createdAt)}
-              </span>
-            </div>
-          </div>
-
-          {/* Title */}
-          <h3 className=" hover:text-[#DB4242] heading-text font-bold mb-2 text-gray-900">
-            <Link to={`/blogs/${blog?._id}`}>{blog?.title}</Link>
-          </h3>
-
-          {/* Description */}
-          <p className="text-gray-700 desc-text leading-relaxed line-clamp-3  mb-4">
-            {blog?.content}
-          </p>
-
-          {/* Views & Comments */}
-          <div className="flex items-center justify-between gap-4 text-gray-500 text-lg ">
-            <div className="flex items-center gap-4 text-gray-500 ">
-              <button
-                onClick={handleReact}
-                className={`flex items-center  gap-1 text-sm font-medium transition cursor-pointer ${
-                  isLiked
-                    ? "text-blue-600"
-                    : "text-gray-600 hover:text-blue-600"
-                }`}
-              >
-                <ThumbsUp size={16} fill={isLiked ? "currentColor" : "none"} />
-                <span className="flex justify-center items-center gap-1">
-                  {reacts?.length || 0}
-                  <span className="sm:flex hidden"> {t("likes")}</span>
+          <div>
+            <div className="flex items-center gap-5 mb-3">
+              <div className="flex gap-1 items-center">
+                <img className="w-3 h-3" src={omSymbolsvg} alt="" />
+                <span className="text-[13px] font-semibold text-[#44233B]">
+                  {blog?.category || blog?.tag}
                 </span>
-              </button>
+              </div>
 
-              <Link to={`/blogs/${blog?._id}`}>
-                <div className="flex items-center gap-1 text-gray-600 text-sm hover:text-blue-600 cursor-pointer">
-                  <MessageCircle size={16} />
-                  <span className="flex justify-center items-center gap-1">
-                    {blog?.commentCount || 0}
-                    <span className="sm:block hidden"> {t("comments")}</span>
-                  </span>
-                </div>
-              </Link>
-            </div>
-
-            <button
-              onClick={handleShare}
-              className="flex items-center gap-1 text-gray-600 hover:text-blue-600 text-sm font-medium cursor-pointer"
-            >
-              <Share2 size={18} />
-              <span className="sm:block hidden"> {t("share")}</span>
-            </button>
-          </div>
-
-          {/* Author */}
-          {(user?.role === "admin" || user?.role === "ceo") && (
-            <div className="flex items-center gap-3 mt-4">
-              <img
-                src={blog?.author?.profileImage.url}
-                alt={blog?.author?.name}
-                className="w-8 h-8 rounded-full object-cover"
-              />
-
-              <div className="text-[16px] text-gray-600">
-                <p>
-                  by{" "}
-                  {type == "blog-page" ? (
-                    <span
-                      onClick={handleView}
-                      className="text-[#DB4242] hover:text-[#44233B] transition-all cursor-pointer font-medium"
-                    >
-                      {blog?.author?.name}
-                    </span>
-                  ) : (
-                    <span className="text-[#DB4242] hover:text-[#44233B] transition-all cursor-pointer font-medium">
-                      {blog?.author?.name}
-                    </span>
-                  )}
-                </p>
-
-                {/* Loading text */}
-                {loadingAuthor && (
-                  <span className="text-xs text-gray-400">
-                    Loading author...
-                  </span>
-                )}
+              <div className="flex gap-2 items-center">
+                <FaRegCalendarAlt className="text-[#DB4242]" size={14} />
+                <span className="text-[13px] font-semibold text-[#44233B]">
+                  {formatDateDynamic(blog?.createdAt)}
+                </span>
               </div>
             </div>
-          )}
+
+            {/* Title */}
+            <h3 className=" hover:text-[#DB4242] heading-text font-bold mb-2 text-gray-900">
+              <Link to={`/blogs/${blog?._id}`}>{blog?.title}</Link>
+            </h3>
+
+            {/* Description */}
+            <p className="text-gray-700 desc-text leading-relaxed line-clamp-3  mb-4">
+              {blog?.content}
+            </p>
+          </div>
+
+          <div>
+            {/* Views & Comments */}
+            <div className="flex items-center justify-between gap-4 text-gray-500 text-lg ">
+              <div className="flex items-center gap-4 text-gray-500 ">
+                <button
+                  onClick={handleReact}
+                  className={`flex items-center  gap-1 text-sm font-medium transition cursor-pointer ${
+                    isLiked
+                      ? "text-blue-600"
+                      : "text-gray-600 hover:text-blue-600"
+                  }`}
+                >
+                  <ThumbsUp
+                    size={16}
+                    fill={isLiked ? "currentColor" : "none"}
+                  />
+                  <span className="flex justify-center items-center gap-1">
+                    {reacts?.length || 0}
+                    <span className="sm:flex hidden"> {t("likes")}</span>
+                  </span>
+                </button>
+
+                <Link to={`/blogs/${blog?._id}`}>
+                  <div className="flex items-center gap-1 text-gray-600 text-sm hover:text-blue-600 cursor-pointer">
+                    <MessageCircle size={16} />
+                    <span className="flex justify-center items-center gap-1">
+                      {blog?.commentCount || 0}
+                      <span className="sm:block hidden"> {t("comments")}</span>
+                    </span>
+                  </div>
+                </Link>
+              </div>
+
+              <button
+                onClick={handleShare}
+                className="flex items-center gap-1 text-gray-600 hover:text-blue-600 text-sm font-medium cursor-pointer"
+              >
+                <Share2 size={18} />
+                <span className="sm:block hidden"> {t("share")}</span>
+              </button>
+            </div>
+
+            {/* Author */}
+            {user?.role === "ceo" && (
+              <div className="flex items-center gap-3 mt-4">
+                <img
+                  src={blog?.author?.profileImage.url}
+                  alt={blog?.author?.name}
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+
+                <div className="text-[16px] text-gray-600">
+                  <p>
+                    by{" "}
+                    {type == "blog-page" ? (
+                      <span
+                        onClick={handleView}
+                        className="text-[#DB4242] hover:text-[#44233B] transition-all cursor-pointer font-medium"
+                      >
+                        {blog?.author?.name}
+                      </span>
+                    ) : (
+                      <span className="text-[#DB4242] hover:text-[#44233B] transition-all cursor-pointer font-medium">
+                        {blog?.author?.name}
+                      </span>
+                    )}
+                  </p>
+
+                  {/* Loading text */}
+                  {loadingAuthor && (
+                    <span className="text-xs text-gray-400">
+                      Loading author...
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
