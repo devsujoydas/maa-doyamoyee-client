@@ -56,10 +56,9 @@ const ProfilePageLeft = ({ user, setUser, activeTab, setActiveTab }) => {
     const verifyToken = async () => {
       try {
         const res = await api.get(`/users/verify?token=${token}`);
-        toast.success(res.data.message);
-        // Update user state immediately
+        toast.success(res.data.message); 
         setUser((prev) => ({ ...prev, isVerified: true }));
-        // Remove token from URL
+        
         window.history.replaceState(
           {},
           document.title,
