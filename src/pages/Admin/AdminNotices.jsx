@@ -11,8 +11,8 @@ import { Edit2, Eye, Plus } from "lucide-react";
 import { formatDateEnglish } from "../../utils/formatDateDynamic";
 import PreviewModal from "../NoticePage/PreviewModal";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { useAuth } from "../../AuthProvider/authProvider";
-import TotalCredit from "../../components/totalCredit";
+import { useAuth } from "../../AuthProvider/authProvider"; 
+import TotalCredit from "../../components/TotalCredit";
 
 const AdminNotices = () => {
   const {

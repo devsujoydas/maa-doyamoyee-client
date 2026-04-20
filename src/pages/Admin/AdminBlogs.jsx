@@ -10,8 +10,8 @@ import DeleteModal from "../../components/modals/DeleteModal";
 import BlogFormModal from "../../components/modals/BlogFormModal";
 import useBlogs from "../../hooks/useBlogs";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { useAuth } from "../../AuthProvider/authProvider";
-import TotalCredit from "../../components/totalCredit";
+import { useAuth } from "../../AuthProvider/authProvider";  
+import TotalCredit from "../../components/TotalCredit";
 
 const AdminBlogs = () => {
   const { blogs = [], deleteBlog, isLoading } = useBlogs();
