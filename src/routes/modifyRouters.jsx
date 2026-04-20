@@ -94,7 +94,7 @@ export const modifyRouter = createBrowserRouter([
       { path: "/blogs", element: withSuspense(<BlogsPage />) },
       { path: "/blogs/:id", element: withSuspense(<BlogsDetails />) },
 
-      // 🔒 Protected User Profile
+
       {
         path: "/profile",
         element: withSuspense(
@@ -104,7 +104,7 @@ export const modifyRouter = createBrowserRouter([
         ),
       },
 
-      // 🔑 Auth pages (redirect if already logged in)
+   
       {
         path: "signin",
         element: withSuspense(
@@ -143,7 +143,6 @@ export const modifyRouter = createBrowserRouter([
       { path: "notices", element: withSuspense(<AdminNotices />) },
       { path: "events", element: withSuspense(<AdminEvents />) },
 
-      // 🔒 CEO Restricted Routes
       {
         element: <ModeratorPrivateRoutes />,
         children: [

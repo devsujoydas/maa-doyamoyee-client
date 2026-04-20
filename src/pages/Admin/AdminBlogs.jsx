@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { HiTrash } from "react-icons/hi";
 import { Eye, Plus, Edit2 } from "lucide-react";
-
 import { formatDateEnglish } from "../../utils/formatDateDynamic";
-
 import BlogViewModal from "../../components/modals/BlogViewModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import BlogFormModal from "../../components/modals/BlogFormModal";
