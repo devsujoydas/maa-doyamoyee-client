@@ -94,7 +94,7 @@
   "latest_notices": "Latest Notices",
   "upcoming_festivals": "Upcoming Festivals",
   "blogs": "Blogs",
-   "link_copied": "Link copied!🚀",
+  "link_copied": "Link copied!🚀",
   "read_more": "Read More",
   "view_all": "View All",
 
@@ -175,10 +175,7 @@
   "comment_updated_success": "Comment updated successfully",
   "comment_deleted_success": "Comment deleted successfully",
 
-  "saving": "Saving...", 
-
-
-
+  "saving": "Saving...",
 
   "contact_title": "Contact",
   "contact_desc": "Use the address below for information or to contact our temple.",
@@ -259,7 +256,7 @@
   "footer_rights": "All Rights Reserved.",
   "footer_developed": "Developed ",
   "footer_by": "by",
-"footer_credit": "UI/UX Consultation, Planning & Structuring",
+  "footer_credit": "UI/UX Consultation, Planning & Structuring",
   "sourav_das": "Sourav Das",
 
   "auth": {
@@ -484,7 +481,7 @@
     "past": "Past Events"
   },
 
-   "terms": {
+  "terms": {
     "title": "Terms & Conditions",
     "intro": "By using this website, you agree to follow these Terms & Conditions. If you do not agree, please do not use the site.",
     "purposeTitle": "Purpose of the Website",
@@ -504,29 +501,42 @@
     "change": "We may update these Terms & Conditions at any time without prior notice."
   },
 
- "puja": {
-  "title": "Puja Schedule",
-  "desc": "Daily worship schedule and important temple information",
+  "puja": {
+    "title": "Puja Schedule",
+    "desc": "Daily puja timings and important temple instructions",
 
-  "morning": "Morning",
-  "evening": "Evening",
-  "closed": "Special Schedule",
-  "notes": "Special Notes",
+    "morning": {
+      "title": "Morning Schedule",
+      "wake": "The deity is awakened at sunrise",
+      "shiv": "Shiva Puja at 10:30 AM",
+      "annapurna": "Annapurna Puja at 11:00 AM"
+    },
 
-  "wake": "Idol awakening at sunrise",
-  "shiv": "Shiva Puja at 10:30 AM",
-  "annapurna": "Annapurna Puja at 11:00 AM",
-  "anjali": "Puja of Maa Doyamoyee starts from 12:00 PM.",
-  "anjoli_start": "Anjoli starts by 1:00 PM.",
-  "bhog": "Bhog Raag at 2:00 PM",
-  "arati": "Evening Arati 40 minutes after sunset",
+    "afternoon": {
+      "title": "Afternoon Schedule",
+      "anjali": "Puja of Maa Doyamoyee starts from 12:00 PM.",
+      "anjoli_start": "Anjoli starts by 1:00 PM.",
+      "bhog": {
+        "title": "Bhog Time",
+        "time": "Bhog offering at 2:00 PM",
+        "details": [
+          "Boal fish cooked with bottle gourd is the main offering",
+          "Atap rice is used as bhog"
+        ],
+        "pera_vog": "Devotees can offer Pera Bhog during puja."
+      }
+    },
 
-  "special_time": "From 9th of Chaitra to 8th of Ashwin, the temple remains open until 8:30 PM",
+    "evening": {
+      "title": "Evening Schedule",
+      "evening_arati": "Evening Arati starts 40 minutes after sunset.",
+      "evening_puja": "Evening puja begins after that."
+    },
 
-  "note1": "Bottle gourd with boal fish is the main offering",
-  "note2": "Atap rice is used for bhog"
-
-  
-}
-
+    "closing": {
+      "title": "Temple Closing Schedule",
+      "summer": "From 9th Choitro to 8th Ashwin, the temple closes at 9:00 PM.",
+      "winter": "From 9th Ashwin to 8th Choitro, the temple closes at 8:30 PM."
+    }
+  }
 }
