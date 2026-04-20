@@ -516,15 +516,17 @@
   "wake": "Idol awakening at sunrise",
   "shiv": "Shiva Puja at 10:30 AM",
   "annapurna": "Annapurna Puja at 11:00 AM",
-  "anjali": "Anjali from 12:00 PM to 1:00 PM",
+  "anjali": "Puja of Maa Doyamoyee starts from 12:00 PM.",
+  "anjoli_start": "Anjoli starts by 1:00 PM.",
   "bhog": "Bhog Raag at 2:00 PM",
-
   "arati": "Evening Arati 40 minutes after sunset",
 
   "special_time": "From 9th of Chaitra to 8th of Ashwin, the temple remains open until 8:30 PM",
 
   "note1": "Bottle gourd with boal fish is the main offering",
   "note2": "Atap rice is used for bhog"
+
+  
 }
 
 }

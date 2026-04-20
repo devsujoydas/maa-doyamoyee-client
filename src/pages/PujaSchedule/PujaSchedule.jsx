@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 const PujaSchedule = () => {
   const { t } = useTranslation();
 
-  const morningItems = ["wake", "shiv", "annapurna", "anjali", "bhog"];
+  const morningItems = ["wake", "shiv", "annapurna", "anjali","anjoli_start", "bhog"];
 
   return (
     <div className="custom-container py-8 md:py-12">
@@ -48,6 +48,23 @@ const PujaSchedule = () => {
           </div>
         </motion.div>
 
+        {/* Dupur Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white border border-zinc-100 rounded-xl md:rounded-3xl shadow-lg p-5 md:p-6"
+        >
+          <h2 className="flex items-center gap-2 text-purple-600 font-semibold text-lg mb-4">
+            <Moon size={18} /> {t("puja.evening")}
+          </h2>
+
+          <div className="bg-purple-50 p-4 rounded-xl flex items-center gap-2">
+            <Clock size={16} />
+            <p className="text-gray-700 text-sm md:text-base">
+              {t("puja.arati")}
+            </p>
+          </div>
+        </motion.div>
         {/* Evening Card */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
