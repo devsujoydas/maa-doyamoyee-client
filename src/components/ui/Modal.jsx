@@ -16,7 +16,7 @@ const Modal = ({ isOpen, onClose, children, wClass }) => {
 
           {/* Modal Box */}
           <motion.div
-            className={`fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-lg w-11/12  p-6 ${wClass}`}
+            className={`fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-lg w-11/12  p-3 md:p-6 ${wClass}`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}

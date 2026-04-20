@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Lock, Eye, EyeClosed } from "lucide-react";
+import { Lock, Eye, EyeOff } from "lucide-react";
 import toast from "react-hot-toast";
 import api from "../../utils/api";
 import { motion } from "framer-motion";
@@ -143,7 +143,7 @@ const SecuritySettings = () => {
               {show.current ? (
                 <Eye size={18} />
               ) : (
-                <EyeClosed size={18} />
+                <EyeOff size={18} />
               )}
             </span>
           </div>
@@ -175,7 +175,7 @@ const SecuritySettings = () => {
               {show.new ? (
                 <Eye size={18} />
               ) : (
-                <EyeClosed size={18} />
+                <EyeOff size={18} />
               )}
             </span>
           </div>
@@ -210,7 +210,7 @@ const SecuritySettings = () => {
               {show.confirm ? (
                 <Eye size={18} />
               ) : (
-                <EyeClosed size={18} />
+                <EyeOff size={18} />
               )}
             </span>
           </div>

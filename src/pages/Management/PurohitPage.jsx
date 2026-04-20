@@ -32,7 +32,7 @@ const PurohitPage = () => {
       <div className="custom-container">
         <PageHeading section="purohit" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mx-auto">
           {purohitsData.map((pandit, index) => (
             <motion.div
               key={pandit.id}

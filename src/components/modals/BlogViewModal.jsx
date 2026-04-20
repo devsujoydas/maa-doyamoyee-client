@@ -31,7 +31,7 @@ const BlogViewModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} wClass="max-w-4xl">
+    <Modal isOpen={isOpen} onClose={onClose} wClass="max-w-3xl ">
       <div className="bg-white rounded-xl p-4 relative">
         <button
           onClick={onClose}
@@ -39,22 +39,22 @@ const BlogViewModal = ({
         >
           <FaTimes size={18} />
         </button>
-        <h2 className="text-2xl font-semibold mb-2">{selectedBlog.title}</h2>
+        <h2 className=" text-base md:text-2xl font-semibold mb-2">{selectedBlog.title}</h2>
         <p className="text-gray-400 flex items-center gap-1 mb-2">
           By
-          <span className="text-[#44233B] transition-all cursor-pointer font-medium ">
+          <span className="text-[#44233B] transition-all cursor-pointer font-medium text-xs md:text-sm">
             {selectedBlog.author.name}
           </span>
         </p>
-        <div className="max-h-100 overflow-hidden rounded-lg object-cover my-3">
+        <div className="max-h-80 overflow-hidden rounded-lg object-cover my-3">
           {selectedBlog.postImg?.url && (
             <img src={selectedBlog.postImg.url} loading="lazy" alt="" className="w-full" />
           )}
         </div>
-        <p className="mb-4 whitespace-pre-line">{selectedBlog.content}</p>
+        <p className="mb-4 whitespace-pre-line text-xs md:text-sm">{selectedBlog.content}</p>
 
         <div className="flex items-center justify-between mt-4">
-          <div className="flex space-x-2">
+          <div className=" flex flex-wrap gap-3 text-xs md:text-sm">
             <button
               className={`px-3 py-1 rounded ${selectedBlog.status === "pending" ? "bg-yellow-400 text-white" : "bg-gray-200 text-gray-700"} cursor-pointer`}
               onClick={() => handleStatusChange("pending")}
@@ -76,7 +76,6 @@ const BlogViewModal = ({
             >
               Rejected
             </button>
-          </div>
 
           <button
             className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
@@ -87,6 +86,7 @@ const BlogViewModal = ({
           >
             Delete
           </button>
+          </div>
         </div>
       </div>
     </Modal>

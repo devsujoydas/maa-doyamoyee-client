@@ -8,18 +8,19 @@ import EventViewModal from "../../components/modals/EventViewModal";
 import EventFormModal from "../../components/modals/EventFormModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import useEvents from "../../hooks/useEvents";
-import { formatDateDynamic } from "../../utils/formatDateDynamic"; 
+import { formatDateDynamic } from "../../utils/formatDateDynamic";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { useAuth } from "../../AuthProvider/authProvider";
 
 const AdminEvents = () => {
-  const { events, deleteEvent,isLoading } = useEvents();
+  const { events, deleteEvent, isLoading } = useEvents();
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [formModalOpen, setFormModalOpen] = useState(false);
   const [editData, setEditData] = useState(null);
-
+  const { user } = useAuth();
   // Open view modal
   const openViewModal = (event) => {
     setSelectedEvent(event);
@@ -52,21 +53,22 @@ const AdminEvents = () => {
 
   return (
     <div className="flex flex-col space-y-6">
-     
       <div className="flex justify-between items-center">
-        <h1 className=" text-lg md:text-2xl font-bold">
-          Events Management ({events.length})
+          
+         <h1 className="text-lg md:text-2xl flex items-center gap-2 font-bold">
+          Events <span className="md:block hidden">Management</span> ({events.length})
         </h1>
-
-        <button
-          onClick={() => {
-            setEditData(null);
-            setFormModalOpen(true);
-          }}
-          className="btn-primary flex items-center gap-2"
-        >
-          <Plus size={16} /> Add Event
-        </button>
+        {user.role == "ceo" && (
+          <button
+            onClick={() => {
+              setEditData(null);
+              setFormModalOpen(true);
+            }}
+            className="btn-primary flex items-center gap-2"
+          >
+            <Plus size={16} /> Add Event
+          </button>
+        )}
       </div>
 
       <motion.div
@@ -133,20 +135,24 @@ const AdminEvents = () => {
                     >
                       <Eye size={18} />
                     </motion.button>
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      className="text-yellow-600 hover:text-yellow-800 cursor-pointer"
-                      onClick={() => openEditModal(event)}
-                    >
-                      <Edit2 size={18} />
-                    </motion.button>
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      className="text-red-600 hover:text-red-800 cursor-pointer"
-                      onClick={() => openDeleteModal(event)}
-                    >
-                      <HiTrash size={18} />
-                    </motion.button>
+                    {user.role == "ceo" && (
+                      <>
+                        <motion.button
+                          whileHover={{ scale: 1.2 }}
+                          className="text-yellow-600 hover:text-yellow-800 cursor-pointer"
+                          onClick={() => openEditModal(event)}
+                        >
+                          <Edit2 size={18} />
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.2 }}
+                          className="text-red-600 hover:text-red-800 cursor-pointer"
+                          onClick={() => openDeleteModal(event)}
+                        >
+                          <HiTrash size={18} />
+                        </motion.button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}

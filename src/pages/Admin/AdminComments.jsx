@@ -75,9 +75,7 @@ const AdminComments = () => {
 
   // ---------------- LOADING ----------------
   if (isLoading) {
-    return (
-      <p className="text-center py-10">Loading comments...</p>
-    );
+    return <p className="text-center py-10">Loading comments...</p>;
   }
 
   return (
@@ -104,9 +102,7 @@ const AdminComments = () => {
       {/* EMPTY */}
       {!comments?.length ? (
         <div className="min-h-[50vh] flex justify-center items-center">
-          <p className="text-center py-10">
-            {t("no_comments_yet")}
-          </p>
+          <p className="text-center py-10">{t("no_comments_yet")}</p>
         </div>
       ) : (
         // GRID
@@ -127,11 +123,11 @@ const AdminComments = () => {
             >
               {/* TOP */}
               <div
-                onClick={() => openViewModal(comment)}
-                className="flex items-start justify-between gap-3 cursor-pointer"
+                
+                className="flex items-start justify-between gap-3 cursor-pointer h-full"
               >
                 {/* LEFT */}
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 h-full " onClick={() => openViewModal(comment)}  >
                   <img
                     src={comment.author?.profileImage?.url}
                     className="w-10 h-10 rounded-full object-cover shrink-0"
@@ -146,28 +142,28 @@ const AdminComments = () => {
                       @{comment.author?.username}
                     </p>
 
-                    <p className="mt-2 text-sm text-gray-700 line-clamp-2 break-words">
+                    <p className="mt-2 text-sm text-gray-700 line-clamp-2 wrap-break-word">
                       {comment.text}
                     </p>
                   </div>
                 </div>
 
                 {/* DATE */}
-                <div className="text-xs text-gray-400 whitespace-nowrap">
+                <div className="text-xs text-gray-400 whitespace-nowrap h-full flex flex-col justify-between  ">
                   {new Date(comment.createdAt).toLocaleString()}
+                  <div className="mt-4 flex justify-end">
+                    <motion.button
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => openDeleteModal(comment)}
+                      className="bg-red-500 cursor-pointer hover:bg-red-600 text-white px-4 py-2 rounded-lg flex items-center gap-1"
+                    >
+                      <Trash2 size={14} />
+                    </motion.button>
+                  </div>
                 </div>
               </div>
 
               {/* DELETE */}
-              <div className="mt-4 flex justify-end">
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => openDeleteModal(comment)}
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg flex items-center gap-1"
-                >
-                  <Trash2 size={14} />
-                </motion.button>
-              </div>
             </motion.div>
           ))}
         </div>
@@ -180,8 +176,7 @@ const AdminComments = () => {
         confirmDelete={confirmDelete}
         selected={{
           ...selectedComment,
-          title:
-            selectedComment?.text?.slice(0, 20) + "...",
+          title: selectedComment?.text?.slice(0, 20) + "...",
         }}
         isUser={false}
       />

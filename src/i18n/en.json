@@ -11,7 +11,7 @@
   "nav_video": "Video",
 
   "nav_management": "Management",
-  "nav_purohit": "Purohit",
+  "nav_purohit": "Priests",
   "nav_committee": "Committee",
   "nav_members": "Members",
   "nav_advisor": "Advisor",
@@ -492,7 +492,7 @@
     "donation3": "No personal benefit or return is guaranteed in exchange for donations.",
     "userTitle": "User Conduct",
     "user1": "Users can visit and browse the website.",
-    "user2": "Users can like and comment on posts.",
+    "user2": "Users can like comment and share on posts.",
     "user3": "Users must not post offensive, abusive, or disrespectful comments.",
     "user4": "Users must not spam, hack, or misuse the system.",
     "infoTitle": "Information Accuracy",

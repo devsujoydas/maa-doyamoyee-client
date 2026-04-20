@@ -55,7 +55,7 @@ const GalleryCard = ({ img }) => {
         <figcaption className="mt-1">
           <h3 className="text-sm font-medium">{img.title}</h3>
           {img.description && (
-            <p className="text-xs text-gray-500 line-clamp-2">
+            <p className="text-xs text-gray-500 line-clamp-1 md:line-clamp-2">
               {img.description}
             </p>
           )}

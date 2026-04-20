@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowLeft, Eye, EyeClosed, EyeOff } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
@@ -155,7 +155,7 @@ const ResetPassword = () => {
                   onClick={() => setShow(!show)}
                   className="absolute right-4 top-3.5 cursor-pointer text-zinc-500"
                 >
-                  {show ? <Eye size={18} /> : <EyeClosed size={18} />}
+                  {show ? <Eye size={18} /> : <EyeOff size={18} />}
                 </button>
               </div>
             </div>
@@ -179,7 +179,7 @@ const ResetPassword = () => {
                   onClick={() => setShow(!show)}
                   className="absolute right-4 top-3.5 cursor-pointer text-zinc-500"
                 >
-                  {show ? <Eye size={18} /> : <EyeClosed size={18} />}
+                  {show ? <Eye size={18} /> : <EyeOff size={18} />}
                 </button>
               </div>
             </div>

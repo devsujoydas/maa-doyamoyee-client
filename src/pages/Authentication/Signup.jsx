@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Eye, EyeClosed } from "lucide-react";
-import toast from "react-hot-toast";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import toast from "react-hot-toast"; 
 import api from "../../utils/api";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
@@ -138,7 +138,7 @@ const Signup = () => {
                   onClick={() => setShow(!show)}
                   className="absolute right-4 top-3 cursor-pointer"
                 >
-                  {show ? <Eye size={18} /> : <EyeClosed size={18} />}
+                  {show ? <Eye size={18} /> : <EyeOff size={18} />}
                 </button>
               </div>
 

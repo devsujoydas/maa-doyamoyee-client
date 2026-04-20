@@ -8,11 +8,11 @@ import NoticeViewModal from "../../components/modals/NoticeViewModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import { HiTrash } from "react-icons/hi";
 import { Edit2, Eye, Plus } from "lucide-react";
-import { 
-  formatDateEnglish,
-} from "../../utils/formatDateDynamic";
+import { formatDateEnglish } from "../../utils/formatDateDynamic";
 import PreviewModal from "../NoticePage/PreviewModal";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { useAuth } from "../../AuthProvider/authProvider";
+import TotalCredit from "../../components/totalCredit";
 
 const AdminNotices = () => {
   const {
@@ -29,6 +29,7 @@ const AdminNotices = () => {
   const [viewOpen, setViewOpen] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const { user } = useAuth();
 
   const togglePinHandler = (n) => {
     togglePin(n._id);
@@ -54,20 +55,26 @@ const AdminNotices = () => {
   return (
     <div className="flex flex-col space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center">
-        <h1 className="text-lg md:text-2xl  font-bold">
-          Notices Management ({notices.length})
-        </h1>
+     
 
-        <button
-          className="btn-primary"
-          onClick={() => {
-            setFormOpen(true);
-            setSelectedNotice(null);
-          }}
-        >
-          <Plus size={16} /> Add Notice
-        </button>
+      <div className="flex justify-between items-center">
+        <h1 className="text-lg md:text-2xl flex items-center gap-2 font-bold">
+          Notices <span className="md:block hidden">Management</span> ({notices.length})
+        </h1>
+        <div className="flex gap-2 fleco">
+          <TotalCredit />
+           {user.role == "ceo" && (
+          <button
+            className="btn-primary"
+            onClick={() => {
+              setFormOpen(true);
+              setSelectedNotice(null);
+            }}
+          >
+            <Plus size={16} /> Add Notice
+          </button>
+          )}
+        </div>
       </div>
 
       {/* Table */}
@@ -143,27 +150,31 @@ const AdminNotices = () => {
                       <Eye size={18} />
                     </motion.button>
 
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      className="text-yellow-600 hover:text-yellow-800 cursor-pointer"
-                      onClick={() => {
-                        setSelectedNotice(n);
-                        setFormOpen(true);
-                      }}
-                    >
-                      <Edit2 size={18} />
-                    </motion.button>
+                    {user.role == "ceo" && (
+                      <>
+                        <motion.button
+                          whileHover={{ scale: 1.2 }}
+                          className="text-yellow-600 hover:text-yellow-800 cursor-pointer"
+                          onClick={() => {
+                            setSelectedNotice(n);
+                            setFormOpen(true);
+                          }}
+                        >
+                          <Edit2 size={18} />
+                        </motion.button>
 
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      className="text-red-600 hover:text-red-800 cursor-pointer"
-                      onClick={() => {
-                        setSelectedNotice(n);
-                        setDeleteOpen(true);
-                      }}
-                    >
-                      <HiTrash size={18} />
-                    </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.2 }}
+                          className="text-red-600 hover:text-red-800 cursor-pointer"
+                          onClick={() => {
+                            setSelectedNotice(n);
+                            setDeleteOpen(true);
+                          }}
+                        >
+                          <HiTrash size={18} />
+                        </motion.button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}

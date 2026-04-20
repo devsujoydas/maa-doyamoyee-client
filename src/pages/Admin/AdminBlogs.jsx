@@ -5,19 +5,20 @@ import toast from "react-hot-toast";
 import { HiTrash } from "react-icons/hi";
 import { Eye, Plus, Edit2 } from "lucide-react";
 
-import {
-  formatDateEnglish,
-} from "../../utils/formatDateDynamic";
+import { formatDateEnglish } from "../../utils/formatDateDynamic";
 
 import BlogViewModal from "../../components/modals/BlogViewModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import BlogFormModal from "../../components/modals/BlogFormModal";
 import useBlogs from "../../hooks/useBlogs";
 import LoadingSpinner from "../../components/LoadingSpinner";
- 
+import { useAuth } from "../../AuthProvider/authProvider";
+import TotalCredit from "../../components/totalCredit";
+
 const AdminBlogs = () => {
   const { blogs = [], deleteBlog, isLoading } = useBlogs();
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const { user } = useAuth();
 
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -49,16 +50,18 @@ const AdminBlogs = () => {
 
   return (
     <div className="flex flex-col space-y-6 ">
-   
-
       <div className="flex justify-between items-center">
-        <h1 className="text-lg md:text-2xl  font-bold">
-          Blogs Management ({blogs.length})
+        <h1 className="text-lg md:text-2xl flex items-center gap-2 font-bold">
+          Blogs <span className="md:block hidden">Management</span> ({blogs.length})
         </h1>
-
-        <button className="btn-primary" onClick={() => openFormModal(null)}>
-          <Plus size={16} /> Add Blog
-        </button>
+        <div className="flex gap-2 fleco">
+          <TotalCredit />
+          {user.role == "ceo" && (
+            <button className="btn-primary" onClick={() => openFormModal(null)}>
+              <Plus size={16} /> Add  
+            </button>
+          )}
+        </div>
       </div>
 
       <motion.div
@@ -115,7 +118,7 @@ const AdminBlogs = () => {
                       {post.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-center flex justify-center space-x-3">
+                  <td className="px-6 py-4 text-center flex  justify-center space-x-3">
                     <motion.button
                       whileHover={{ scale: 1.2 }}
                       className="text-blue-600 hover:text-blue-800 cursor-pointer"
@@ -123,20 +126,25 @@ const AdminBlogs = () => {
                     >
                       <Eye size={18} />
                     </motion.button>
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      className="text-yellow-600 hover:text-yellow-800 cursor-pointer"
-                      onClick={() => openFormModal(post)}
-                    >
-                      <Edit2 size={18} />
-                    </motion.button>
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      className="text-red-600 hover:text-red-800 cursor-pointer"
-                      onClick={() => openDeleteModal(post)}
-                    >
-                      <HiTrash size={18} />
-                    </motion.button>
+
+                    {user.role == "ceo" && (
+                      <>
+                        <motion.button
+                          whileHover={{ scale: 1.2 }}
+                          className="text-yellow-600 hover:text-yellow-800 cursor-pointer"
+                          onClick={() => openFormModal(post)}
+                        >
+                          <Edit2 size={18} />
+                        </motion.button>
+                      </>
+                    )}
+                        <motion.button
+                          whileHover={{ scale: 1.2 }}
+                          className="text-red-600 hover:text-red-800 cursor-pointer"
+                          onClick={() => openDeleteModal(post)}
+                        >
+                          <HiTrash size={18} />
+                        </motion.button>
                   </td>
                 </tr>
               ))}

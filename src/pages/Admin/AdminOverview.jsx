@@ -83,13 +83,7 @@ const AdminOverview = () => {
       path: "/admin/users",
       color: "bg-gradient-to-br from-orange-100 to-orange-200 text-orange-700",
     },
-    {
-      label: "Total Messages",
-      value: messages.length,
-      icon: Mail,
-      path: "/admin/messages",
-      color: "bg-gradient-to-br from-yellow-100 to-yellow-200 text-yellow-800",
-    },
+    
     {
       label: "Total Blogs",
       value: blogs.length,
@@ -110,6 +104,13 @@ const AdminOverview = () => {
       icon: Calendar,
       path: "/admin/events",
       color: "bg-gradient-to-br from-red-100 to-red-200 text-red-700",
+    },
+    {
+      label: "Total Messages",
+      value: messages.length,
+      icon: Mail,
+      path: "/admin/messages",
+      color: "bg-gradient-to-br from-yellow-100 to-yellow-200 text-yellow-800",
     },
     {
       label: "Total Donations",

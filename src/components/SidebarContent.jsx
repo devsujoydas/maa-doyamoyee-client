@@ -17,10 +17,15 @@ import {
 } from "lucide-react";
 import { useAuth } from "../AuthProvider/authProvider";
 
-const SidebarContent = ({ collapsed, toggleCollapsed, setLogoutOpen }) => {
+const SidebarContent = ({
+  collapsed,
+  toggleCollapsed,
+  setLogoutOpen,
+  setSidebarOpen,
+}) => {
   const location = useLocation();
 
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   return (
     <motion.aside
@@ -42,7 +47,10 @@ const SidebarContent = ({ collapsed, toggleCollapsed, setLogoutOpen }) => {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 p-2 space-y-1">
+      <nav
+        className="flex-1 p-2 space-y-1 "
+        onClick={() => setSidebarOpen(false)}
+      >
         <Link
           to={"/admin"}
           title={"Dashboard"}
@@ -69,8 +77,21 @@ const SidebarContent = ({ collapsed, toggleCollapsed, setLogoutOpen }) => {
           {!collapsed && "Users"}
         </Link>
         <Link
+          to={"/admin/blogs"}
+          title={"Blog"}
+          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+            location.pathname === "/admin/blogs"
+              ? "bg-black text-white"
+              : " hover:bg-black/10"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <FileText size={18} />
+          {!collapsed && "Blog"}
+        </Link>
+
+        <Link
           to={"/admin/comments"}
-          title={"Users"}
+          title={"Comments"}
           className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
             location.pathname === "/admin/comments"
               ? "bg-black text-white"
@@ -80,48 +101,34 @@ const SidebarContent = ({ collapsed, toggleCollapsed, setLogoutOpen }) => {
           <Bell size={18} />
           {!collapsed && "Comments"}
         </Link>
+        <Link
+          to={"/admin/notices"}
+          title={"Notice"}
+          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+            location.pathname === "/admin/notices"
+              ? "bg-black text-white"
+              : " hover:bg-black/10"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <Bell size={18} />
+          {!collapsed && "Notice"}
+        </Link>
+
+        <Link
+          to={"/admin/events"}
+          title={"Event"}
+          className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
+            location.pathname === "/admin/events"
+              ? "bg-black text-white"
+              : " hover:bg-black/10"
+          } ${collapsed ? "justify-center" : ""}`}
+        >
+          <Calendar size={18} />
+          {!collapsed && "Event"}
+        </Link>
 
         {user.role == "ceo" && (
           <>
-            <Link
-              to={"/admin/blogs"}
-              title={"Blog"}
-              className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
-                location.pathname === "/admin/blogs"
-                  ? "bg-black text-white"
-                  : " hover:bg-black/10"
-              } ${collapsed ? "justify-center" : ""}`}
-            >
-              <FileText size={18} />
-              {!collapsed && "Blog"}
-            </Link>
-
-            <Link
-              to={"/admin/notices"}
-              title={"Notice"}
-              className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
-                location.pathname === "/admin/notices"
-                  ? "bg-black text-white"
-                  : " hover:bg-black/10"
-              } ${collapsed ? "justify-center" : ""}`}
-            >
-              <Bell size={18} />
-              {!collapsed && "Notice"}
-            </Link>
-
-            <Link
-              to={"/admin/events"}
-              title={"Event"}
-              className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition ${
-                location.pathname === "/admin/events"
-                  ? "bg-black text-white"
-                  : " hover:bg-black/10"
-              } ${collapsed ? "justify-center" : ""}`}
-            >
-              <Calendar size={18} />
-              {!collapsed && "Event"}
-            </Link>
-
             <Link
               to={"/admin/gallery"}
               title={"Gallery"}

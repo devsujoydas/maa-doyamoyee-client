@@ -101,6 +101,7 @@ const AdminUsers = () => {
                 <th className="px-6 py-4 text-left">SL</th>
                 <th className="px-6 py-4 text-left">User</th>
                 <th className="px-6 py-4 text-left">Email</th>
+                <th className="px-6 py-4 text-left">Phone</th>
                 <th className="px-6 py-4 text-left">Role</th>
                 <th className="px-6 py-4 text-left">Joined</th>
                 <th className="px-6 py-4 text-center">Actions</th>
@@ -148,6 +149,7 @@ const AdminUsers = () => {
                     {/* EMAIL */}
                     <td className="px-6 py-4">{u.email}</td>
 
+                    <td className="px-6 py-4">{u.phone}</td>
                     {/* ROLE */}
                     <td className="px-6 py-4">
                       {canChangeRole && !isSelf ? (

@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import MusicPlayer from "../components/MusicPlayer";
 import { useTranslation } from "react-i18next";
 import LogoutModal from "../components/modals/LogoutModal";
+import ScrollToTop from "../components/resuable/ScrollToTop";
 
 const MainLayout = () => {
   const { i18n } = useTranslation();
@@ -21,9 +22,10 @@ const MainLayout = () => {
 
   return (
     <div className="">
-      <MusicPlayer open={open} setOpen={setOpen} />
-      <LogoutModal isOpen={logoutOpen} onClose={() => setLogoutOpen(false)} />
       <Header setLogoutOpen={setLogoutOpen}/>
+      <MusicPlayer open={open} setOpen={setOpen} />
+      <ScrollToTop />
+      <LogoutModal isOpen={logoutOpen} onClose={() => setLogoutOpen(false)} />
       <Toaster position="bottom-center" />
       <Outlet />
       <Footer />

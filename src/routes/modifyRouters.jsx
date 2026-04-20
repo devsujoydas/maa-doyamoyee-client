@@ -1,7 +1,7 @@
 // src/router/router.jsx
 /* eslint-disable react-refresh/only-export-components */
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { lazy, Suspense, useEffect } from "react";
+import { Suspense, } from "react";
 import LoadingPage from "../components/LoadingPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import { HelmetProvider } from "react-helmet-async";
@@ -51,24 +51,14 @@ import MembersPage from "../pages/Management/MembersPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import VideoPage from "../pages/MediaPage/VideoPage";
 import GalleryPage from "../pages/MediaPage/GalleryPage";
-import AdminComments from "../pages/Admin/AdminComments";
+import AdminComments from "../pages/Admin/AdminComments"; 
 
 /* ---------------- Suspense Wrapper ---------------- */
 const withSuspense = (Component) => (
   <Suspense fallback={<LoadingPage />}>{Component}</Suspense>
 );
 
-// /* ---------------- Preload Critical Pages ---------------- */
-// const PreloadCritical = () => {
-//   useEffect(() => {
-//     import("../pages/EventsPage/EventsPage");
-//     import("../pages/BlogsPage/BlogsPage");
-//     import("../pages/NoticePage/NoticePage");
-//   }, []);
-//   return null;
-// };
 
-/* ---------------- Router ---------------- */
 export const modifyRouter = createBrowserRouter([
   {
     path: "/",
@@ -148,16 +138,16 @@ export const modifyRouter = createBrowserRouter([
       { path: "users", element: withSuspense(<AdminUsers />) },
       { path: "messages", element: withSuspense(<AdminMessages />) },
       { path: "donations", element: withSuspense(<AdminDonations />) },
-       { path: "comments", element: withSuspense(<AdminComments />) },
+      { path: "comments", element: withSuspense(<AdminComments />) },
+      { path: "blogs", element: withSuspense(<AdminBlogs />) },
+      { path: "notices", element: withSuspense(<AdminNotices />) },
+      { path: "events", element: withSuspense(<AdminEvents />) },
 
       // 🔒 CEO Restricted Routes
       {
         element: <ModeratorPrivateRoutes />,
         children: [
           { path: "gallery", element: withSuspense(<AdminGallary />) },
-          { path: "blogs", element: withSuspense(<AdminBlogs />) },
-          { path: "notices", element: withSuspense(<AdminNotices />) },
-          { path: "events", element: withSuspense(<AdminEvents />) },
         ],
       },
     ],

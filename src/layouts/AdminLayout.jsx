@@ -52,6 +52,7 @@ const AdminLayout = () => {
               setLogoutOpen={setLogoutOpen}
               collapsed={false}
               toggleCollapsed={() => setSidebarOpen(false)}
+              setSidebarOpen={setSidebarOpen}
             />
           </motion.aside>
         </div>

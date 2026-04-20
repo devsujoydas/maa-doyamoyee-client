@@ -381,7 +381,7 @@ const Header = ({ setLogoutOpen }) => {
 
                   <div className="flex gap-2">
                     <button
-                      onClick={() => changeLang("bn-BD")}
+                      onClick={() => {changeLang("bn-BD");setMenuOpen(false)}}
                       className={`flex-1 py-1.5 rounded-md  border border-zinc-200 ${
                         i18n.language === "bn-BD"
                           ? "bg-yellow-400 text-black font-semibold"
@@ -392,7 +392,7 @@ const Header = ({ setLogoutOpen }) => {
                     </button>
 
                     <button
-                      onClick={() => changeLang("en-US")}
+                      onClick={() => {changeLang("en-US");setMenuOpen(false)}}
                       className={`flex-1 py-1.5 rounded-md border border-zinc-200  ${
                         i18n.language === "en-US"
                           ? "bg-yellow-400 text-black font-semibold"
