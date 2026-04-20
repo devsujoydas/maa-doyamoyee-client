@@ -35,8 +35,7 @@ const PersonalInfo = () => {
       website: "",
       facebook: "",
       instagram: "",
-      youtube: "",
-      github: "",
+      youtube: "", 
     },
   });
 
@@ -60,7 +59,6 @@ const PersonalInfo = () => {
           facebook: user.contactDetails?.facebook || "",
           instagram: user.contactDetails?.instagram || "",
           youtube: user.contactDetails?.youtube || "",
-          github: user.contactDetails?.github || "",
         },
       });
     }
@@ -294,7 +292,7 @@ const PersonalInfo = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
               <div>
                 <label className={labelClass}>{t("instagram")}</label>
                 <input
@@ -325,24 +323,6 @@ const PersonalInfo = () => {
                     handleNestedChange(
                       "contactDetails",
                       "youtube",
-                      e.target.value,
-                    )
-                  }
-                  className={inputClass}
-                />
-              </div>
-
-              <div>
-                <label className={labelClass}>{t("github")}</label>
-                <input
-                  name="github"
-                  placeholder={t("github")}
-                  value={formData.contactDetails.github}
-                  disabled={!editing}
-                  onChange={(e) =>
-                    handleNestedChange(
-                      "contactDetails",
-                      "github",
                       e.target.value,
                     )
                   }
